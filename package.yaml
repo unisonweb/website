@@ -1,0 +1,15 @@
+name: unison-website
+github: unisonweb/website
+copyright: Copyright (C) 2021 Unison Computing, PBC and contributors
+
+dependencies:
+  - base
+  - scotty
+  - mustache
+  - text
+  - wai-middleware-static
+  - wai-extra
+
+executable:
+  main: Main.hs
+  source-dirs: src
