@@ -1,0 +1,31 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+
+name:           unison-website
+version:        0.0.0
+homepage:       https://github.com/unisonweb/website#readme
+bug-reports:    https://github.com/unisonweb/website/issues
+copyright:      Copyright (C) 2021 Unison Computing, PBC and contributors
+build-type:     Simple
+
+source-repository head
+  type: git
+  location: https://github.com/unisonweb/website
+
+executable unison-website
+  main-is: Main.hs
+  other-modules:
+      Paths_unison_website
+  hs-source-dirs:
+      src
+  build-depends:
+      base
+    , mustache
+    , scotty
+    , text
+    , wai-extra
+    , wai-middleware-static
+  default-language: Haskell2010
