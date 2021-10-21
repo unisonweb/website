@@ -1,0 +1,22 @@
+{
+  "name": "unison-website",
+  "version": "1.0.0",
+  "description": "Unison Website ==============",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unisonweb/website.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/unisonweb/website/issues"
+  },
+  "homepage": "https://github.com/unisonweb/website#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1"
+  }
+}

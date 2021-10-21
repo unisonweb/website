@@ -1,16 +1,7 @@
-# Haskell
-*.hi
-*.o
-.stack-work/
-.cabal-sandbox
-.ghci
-cabal.sandbox.config
-.DS_Store
-*.swp
-*.keter
-
-# Elm
-dist
-elm-stuff
-repl-temp-*
 node_modules
+.DS_Store
+dist
+.unison/v2/unison.sqlite3-shm
+.unison/v2/unison.sqlite3-wal
+.unisonHistory
+scratch.u
