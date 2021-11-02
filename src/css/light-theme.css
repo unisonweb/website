@@ -1,0 +1,217 @@
+:root {
+  --color-base-fg: var(--color-gray-darken-30);
+  --color-base-mg: var(--color-gray-base);
+  --color-base-bg: var(--color-gray-lighten-100);
+  --color-base-subtle-fg: var(--color-gray-lighten-30);
+  --color-base-subtle-fg-em: var(--color-gray-lighten-20);
+  --color-base-subtle-bg: var(--color-gray-lighten-60);
+  --color-base-border: var(--color-gray-lighten-40);
+  --color-base-subtle-border: var(--color-gray-lighten-50);
+  --color-base-divider: var(--color-gray-lighten-55);
+  --color-base-focus-fg: var(--color-blue-2);
+  --color-base-focus-bg: var(--color-blue-2);
+  --color-base-alert: var(--color-pink-1);
+  --color-base-mark-fg: var(--color-blue-2);
+  --color-base-mark-bg: var(--color-transparent);
+
+  /* Layout */
+  --color-main-header-fg: var(--color-gray-lighten-100);
+  --color-main-header-bg: var(--color-gray-darken-10);
+  --color-main-header-subtle-fg: var(--color-gray-lighten-20);
+  --color-main-header-subtle-fg-em: var(--color-gray-lighten-50);
+  --color-main-header-context-unison-share-fg: var(--color-purple-4);
+  --color-main-header-context-ucm-fg: var(--color-pink-3);
+  --color-main-header-border: var(--color-gray-base);
+
+  --color-main-sidebar-fg: var(--color-gray-lighten-50);
+  --color-main-sidebar-fg-em: var(--color-gray-lighten-100);
+  --color-main-sidebar-bg: var(--color-gray-darken-20);
+  /* see color files for why this is needed */
+  --color-main-sidebar-bg-transparent: var(--color-gray-darken-20-transparent);
+  --color-main-sidebar-border: var(--color-transparent);
+  --color-main-sidebar-subtle-fg: var(--color-gray-lighten-20);
+  --color-main-sidebar-subtle-fg-em: var(--color-gray-lighten-30);
+  --color-main-sidebar-subtle-bg: var(--color-transparent);
+  --color-main-sidebar-focus-fg: var(--color-gray-lighten-60);
+  --color-main-sidebar-focus-bg: var(--color-gray-darken-10);
+  --color-main-sidebar-keyboard-shortcut-key-fg: var(--color-gray-lighten-30);
+  --color-main-sidebar-keyboard-shortcut-key-bg: var(--color-gray-base);
+  --color-main-sidebar-keyboard-shortcut-then: var(--color-gray-lighten-20);
+  --color-main-sidebar-keyboard-shortcut-separator: var(--color-gray-base);
+  --color-main-sidebar-keyboard-shortcut-hover-key-fg: var(
+    --color-gray-lighten-50
+  );
+  --color-main-sidebar-keyboard-shortcut-hover-key-bg: var(--color-gray-base);
+  --color-main-sidebar-keyboard-shortcut-hover-then: var(
+    --color-gray-lighten-20
+  );
+  --color-main-sidebar-keyboard-shortcut-hover-separator: var(
+    --color-gray-base
+  );
+  --color-main-sidebar-button-default-fg: var(--color-gray-lighten-30);
+  --color-main-sidebar-button-default-bg: var(--color-gray-base);
+  --color-main-sidebar-button-default-hover-fg: var(--color-gray-lighten-50);
+  --color-main-sidebar-button-default-hover-bg: var(--color-gray-base);
+
+  --color-main-sidebar-tooltip-fg: var(--color-gray-lighten-60);
+  --color-main-sidebar-tooltip-bg: var(--color-gray-darken-30);
+  --color-main-sidebar-tooltip-border: var(--color-gray-darken-10);
+
+  --color-main-content-fg: var(--color-gray-darken-30);
+  --color-main-content-mg: var(--color-gray-base);
+  --color-main-content-bg: var(--color-gray-lighten-100);
+
+  /* Doc */
+  --color-doc-fg: var(--color-gray-darken-30);
+  --color-doc-bg: var(--color-gray-lighten-100);
+  --color-doc-aside-bg: var(--color-gray-lighten-60);
+  --color-doc-aside-source-bg: var(--color-gray-lighten-55);
+  --color-doc-callout-bg: var(--color-blue-5);
+  --color-doc-subtle-fg: var(--color-gray-lighten-30);
+  --color-doc-source-bg: var(--color-gray-lighten-60);
+  --color-doc-source-mg: var(--color-gray-lighten-45);
+  --color-doc-fold-hover-fg: var(--color-gray-base);
+  --color-doc-fold-hover-bg: var(--color-gray-lighten-45);
+  --color-doc-link: var(--color-blue-1);
+  --color-doc-link-active: var(--color-pink-1);
+  --color-doc-link-hover: var(--color-pink-2);
+  --color-doc-content-border: var(--color-gray-lighten-50);
+
+  /* Modal */
+  --color-modal-fg: var(--color-main-fg);
+  --color-modal-mg: var(--color-gray-lighten-60);
+  --color-modal-bg: var(--color-gray-lighten-100);
+  --color-modal-inner-border: var(--color-gray-lighten-50);
+  --color-modal-separator: var(--color-gray-lighten-55);
+  --color-modal-shadow: rgba(24, 24, 28, 0.2); /* 20% gray-darken-30 */
+  --color-modal-overlay: rgba(24, 24, 28, 0.5); /* 50% gray-darken-30 */
+  --color-modal-border: var(--color-transparent);
+  --color-modal-subtle-fg: var(--color-main-subtle-fg);
+  --color-modal-subtle-fg-em: var(--color-gray-lighten-20);
+  --color-modal-subtle-mg: var(--color-gray-lighten-55);
+  --color-modal-subtle-bg: var(--color-gray-lighten-60);
+  --color-modal-focus-fg: var(--color-main-fg);
+  --color-modal-focus-bg: var(--color-gray-lighten-55);
+  --color-modal-focus-subtle-fg: var(--color-gray-base);
+  --color-modal-focus-subtle-bg: var(--color-gray-lighten-50);
+  --color-modal-title-fg: var(--color-gray-lighten-20);
+  --color-modal-title-bg: var(--color-transparent);
+  --color-modal-mark-fg: var(--color-blue-2);
+  --color-modal-mark-bg: var(--color-transparent);
+  --color-modal-error-fg: var(--color-pink-1);
+
+  /* Keyboard shortcut */
+  --color-keyboard-shortcut-key-fg: var(--color-gray-base);
+  --color-keyboard-shortcut-key-bg: var(--color-gray-lighten-50);
+  --color-keyboard-shortcut-then: var(--color-gray-lighten-20);
+  --color-keyboard-shortcut-separator: var(--color-gray-lighten-30);
+
+  /* Icons */
+  --color-icon-type: var(--color-orange-1);
+  --color-icon-data-constructor: var(--color-orange-1);
+  --color-icon-test: var(--color-green-1);
+  --color-icon-term: var(--color-purple-3);
+  --color-icon-ability: var(--color-pink-1);
+  --color-icon-ability-constructor: var(--color-pink-1);
+  --color-icon-doc: var(--color-orange-2);
+  --color-icon-patch: var(--color-blue-2);
+
+  /* FoldToggle */
+
+  --color-fold-toggle-fg: var(--color-gray-lighten-30);
+  --color-fold-toggle-bg: var(--color-transparent);
+  --color-fold-toggle-hover-fg: var(--color-gray-base);
+  --color-fold-toggle-hover-bg: var(--color-gray-lighten-45);
+
+  /* Buttons */
+
+  --color-button-default-fg: var(--color-main-fg);
+  --color-button-default-bg: var(--color-gray-lighten-50);
+  --color-button-default-hover-fg: var(--color-main-fg);
+  --color-button-default-hover-bg: var(--color-gray-lighten-40);
+
+  --color-button-primary-mono-fg: var(--color-gray-lighten-60);
+  --color-button-primary-mono-bg: var(--color-gray-darken-20);
+  --color-button-primary-mono-hover-fg: var(--color-gray-lighten-60);
+  --color-button-primary-mono-hover-bg: var(--color-gray-darken-10);
+
+  --color-button-primary-fg: var(--color-gray-lighten-60);
+  --color-button-primary-bg: var(--color-blue-2);
+  --color-button-primary-hover-fg: var(--color-gray-lighten-60);
+  --color-button-primary-hover-bg: var(--color-blue-1);
+
+  --color-button-share-fg: var(--color-purple-1);
+  --color-button-share-bg: var(--color-purple-4);
+  --color-button-share-hover-fg: var(--color-purple-2);
+  --color-button-share-hover-bg: var(--color-purple-4);
+
+  --color-button-danger-fg: var(--color-gray-lighten-100);
+  --color-button-danger-bg: var(--color-pink-1);
+  --color-button-danger-hover-fg: var(--color-gray-lighten-100);
+  --color-button-danger-hover-bg: var(--color-pink-2);
+
+  /* Badges */
+  --color-badge-fg: var(--color-gray-base);
+  --color-badge-bg: var(--color-gray-lighten-60);
+  --color-badge-border: var(--color-gray-lighten-50);
+
+  --color-option-badge-fg: var(--color-gray-lighten-40);
+  --color-option-badge-subtle-fg: var(--color-gray-lighten-20);
+  --color-option-badge-icon: var(--color-gray-lighten-30);
+  --color-option-badge-hover-icon: var(--color-gray-100);
+  --color-option-badge-bg: var(--color-gray-darken-30);
+  --color-option-badge-border: var(--color-transparent);
+
+  /* Tooltips */
+  --color-tooltip-fg: var(--color-gray-lighten-60);
+  --color-tooltip-subtle-fg: var(--color-gray-lighten-20);
+  --color-tooltip-bg: var(--color-gray-darken-30);
+  --color-tooltip-source-bg: var(--color-gray-darken-20);
+  --color-tooltip-source-mg: var(--color-gray-darken-10);
+  --color-tooltip-fold-hover-bg: var(--color-gray-darken-10);
+  --color-tooltip-link: var(--color-blue-3);
+  --color-tooltip-link-active: var(--color-pink-2);
+  --color-tooltip-link-hover: var(--color-pink-3);
+  --color-tooltip-syntax-base: var(--color-gray-lighten-60);
+  --color-tooltip-syntax-subtle: var(--color-gray-lighten-20);
+  --color-tooltip-syntax-subtle-em: var(--color-gray-lighten-30);
+  --color-tooltip-syntax-keyword: var(--color-pink-3);
+  --color-tooltip-syntax-operator: var(--color-gray-lighten-20);
+  --color-tooltip-syntax-term: var(--color-purple-3);
+  --color-tooltip-syntax-term-namespace: var(--color-purple-4);
+  --color-tooltip-syntax-ability: var(--color-pink-2);
+  --color-tooltip-syntax-type: var(--color-blue-2);
+  --color-tooltip-syntax-type-namespace: var(--color-blue-3);
+  --color-tooltip-syntax-constructor: var(--color-blue-2);
+  --color-tooltip-syntax-constructor-namespace: var(--color-blue-3);
+  --color-tooltip-syntax-text: var(--color-green-2);
+
+  /* ActionMenu (should probably be moved out of tooltip) */
+  --color-tooltip-item-fg: var(--color-gray-lighten-60);
+  --color-tooltip-item-subtle-fg: var(--color-gray-lighten-20);
+  --color-tooltip-item-bg: var(--color-transparent);
+  --color-tooltip-item-hover-fg: var(--color-gray-lighten-60);
+  --color-tooltip-item-hover-subtle-fg: var(--color-gray-lighten-30);
+  --color-tooltip-item-hover-bg: var(--color-gray-darken-10);
+
+  /* Syntax */
+  --color-syntax-base: var(--color-main-fg);
+  --color-syntax-subtle: var(--color-gray-lighten-20);
+  --color-syntax-subtle-em: var(--color-gray-base);
+  --color-syntax-keyword: var(--color-pink-2);
+  --color-syntax-operator: var(--color-gray-lighten-30);
+  --color-syntax-term: var(--color-purple-2);
+  --color-syntax-term-namespace: var(--color-purple-3);
+  --color-syntax-ability: var(--color-pink-1);
+  --color-syntax-type: var(--color-blue-1);
+  --color-syntax-type-namespace: var(--color-blue-2);
+  --color-syntax-constructor: var(--color-blue-1);
+  --color-syntax-constructor-namespace: var(--color-blue-2);
+  --color-syntax-text: var(--color-green-1);
+
+  --color-syntax-monochrome-subtle: var(--color-main-subtle-fg);
+  --color-syntax-monochrome-base: var(--color-gray-base);
+  --color-syntax-monochrome-em: var(--color-main-fg);
+
+  --color-syntax-plain: var(--color-main-fg);
+}

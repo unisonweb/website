@@ -4,4 +4,10 @@ dist
 .unison/v2/unison.sqlite3-shm
 .unison/v2/unison.sqlite3-wal
 .unisonHistory
+reflog
 scratch.u
+
+# Running the build-docs.md transcript puts the html docs in src/docs.
+# This shouldn't be part of the repository as they basically are a
+# pre-build artificat.
+src/docs
