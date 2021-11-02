@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Unison language website",
   "scripts": {
-    "start": "eleventy --serve",
+    "start": "eleventy --serve --port 2345",
     "build": "eleventy"
   },
   "repository": {
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/unisonweb/website#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^0.12.1"
+    "@11ty/eleventy": "^0.12.1",
+    "eleventy-plugin-transformdom": "^1.0.1"
   }
 }

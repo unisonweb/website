@@ -1,0 +1,8 @@
+node_modules
+.DS_Store
+dist
+.unison/v2/unison.sqlite3-shm
+.unison/v2/unison.sqlite3-wal
+.unisonHistory
+reflog
+scratch.u

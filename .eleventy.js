@@ -1,4 +1,9 @@
+const transformDomPlugin = require("eleventy-plugin-transformdom");
+
 module.exports = function (config) {
+  // Exclusively use .eleventyignore, to make sure src/docs are used as source
+  config.setUseGitIgnore(false);
+
   // Layouts
   config.addLayoutAlias("base", "base.njk");
 
@@ -14,6 +19,30 @@ module.exports = function (config) {
 
   // Shortcodes
   config.addShortcode("currentYear", () => `${new Date().getFullYear()}`);
+
+  // Replace references to Unison Share link
+  config.addPlugin(transformDomPlugin, [
+    {
+      selector: "span[data-ref]",
+      transform: ({ document, elements }) => {
+        elements.forEach((span) => {
+          const ref = span.dataset.ref;
+          const refType = span.dataset.refType;
+
+          if (ref && refType) {
+            let link = document.createElement("a");
+            link.classNames = span.classNames;
+
+            link.href = `https://share.unison-lang.org/latest/namespaces/unison/website/${refType}s/${ref}`;
+            link.target = "_blank";
+            link.innerHTML = span.innerHTML;
+
+            span.replaceWith(link);
+          }
+        });
+      },
+    },
+  ]);
 
   return {
     dir: {
