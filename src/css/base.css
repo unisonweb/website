@@ -111,13 +111,6 @@ main {
   color: var(--color-main-header-fg);
 }
 
-#main-sidebar {
-  grid-area: main-sidebar;
-  height: calc(100vh - var(--main-header-height));
-  background: var(--color-main-sidebar-bg);
-  color: var(--color-main-sidebar-fg);
-}
-
 #main-content {
   grid-area: main-content;
   height: var(--main-content-height);

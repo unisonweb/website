@@ -28,11 +28,11 @@
 
   <body>
     <main>
-      {% include "header.njk" %}
-      {% include "sidebar.njk" %}
+      {% include "_header.njk" %}
+      {% include "_sidebar.njk" %}
       <div id="main-content">
         {{content | safe}}
-        {% include "footer.njk" %}
+        {% include "_footer.njk" %}
       </div>
     </main>
   </body>

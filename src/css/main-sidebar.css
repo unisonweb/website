@@ -1,0 +1,17 @@
+#main-sidebar {
+  grid-area: main-sidebar;
+  height: calc(100vh - var(--main-header-height));
+  background: var(--color-main-sidebar-bg);
+  color: var(--color-main-sidebar-fg);
+  padding: 1.5rem;
+
+  --color-doc-fg: var(--color-main-sidebar-fg);
+  --color-doc-bg: var(--color-main-sidebar-bg);
+}
+
+#main-sidebar h1 {
+  color: var(--color-main-sidebar-subtle-fg);
+  font-size: var(--font-size-medium);
+  font-weight: normal;
+  text-transform: uppercase;
+}

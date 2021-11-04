@@ -23,7 +23,7 @@ module.exports = function (config) {
   config.addPlugin(transformDomPlugin, [
     // Replace references to Unison Share link
     {
-      selector: "span[data-ref]",
+      selector: ".unison-doc span[data-ref]",
       transform: ({ document, elements }) => {
         elements.forEach((span) => {
           const ref = span.dataset.ref;
@@ -45,11 +45,18 @@ module.exports = function (config) {
     // Doc links by default link to .html files, but eleventy links worth
     // without the file extension
     {
-      selector: "a",
+      selector: ".unison-doc a",
       transform: ({ elements }) => {
         elements.forEach((anchor) => {
           if (anchor.href.endsWith(".html")) {
             anchor.href = anchor.href.replace(/\.html$/, "");
+          }
+
+          if (
+            !anchor.href.startsWith("/docs") &&
+            !anchor.href.startsWith("http")
+          ) {
+            anchor.href = "/docs" + anchor.href;
           }
         });
       },
@@ -59,7 +66,7 @@ module.exports = function (config) {
   return {
     dir: {
       input: "src",
-      output: "dist",
+      output: "build/site",
       includes: "_includes",
       layouts: "_layouts",
       data: "_data",

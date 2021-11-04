@@ -1,5 +1,5 @@
 # Build docs transcript
 
 ```ucm
-docs.to-html docs src/docs
+docs.to-html docs build/docs
 ```
