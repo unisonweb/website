@@ -20,8 +20,8 @@ module.exports = function (config) {
   // Shortcodes
   config.addShortcode("currentYear", () => `${new Date().getFullYear()}`);
 
-  // Replace references to Unison Share link
   config.addPlugin(transformDomPlugin, [
+    // Replace references to Unison Share link
     {
       selector: "span[data-ref]",
       transform: ({ document, elements }) => {
@@ -42,15 +42,27 @@ module.exports = function (config) {
         });
       },
     },
+    // Doc links by default link to .html files, but eleventy links worth
+    // without the file extension
+    {
+      selector: "a",
+      transform: ({ elements }) => {
+        elements.forEach((anchor) => {
+          if (anchor.href.endsWith(".html")) {
+            anchor.href = anchor.href.replace(/\.html$/, "");
+          }
+        });
+      },
+    },
   ]);
 
   return {
     dir: {
       input: "src",
       output: "dist",
-      includes: "includes",
-      layouts: "layouts",
-      data: "data",
+      includes: "_includes",
+      layouts: "_layouts",
+      data: "_data",
     },
     passthroughFileCopy: true,
   };
