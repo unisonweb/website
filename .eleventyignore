@@ -1,6 +1,6 @@
 node_modules
 .DS_Store
-dist
+build
 .unison/v2/unison.sqlite3-shm
 .unison/v2/unison.sqlite3-wal
 .unisonHistory

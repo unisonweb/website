@@ -19,6 +19,6 @@
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
     "eleventy-plugin-transformdom": "^1.0.1",
-    "ncp": "^2.0.0"
+    "recursive-copy": "^2.0.13"
   }
 }

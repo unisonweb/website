@@ -7,9 +7,9 @@ build
 reflog
 scratch.u
 
-# Docs and sidebar content are pre-built in
-# build/docs and copied into src/docs. They do
-# not belong in the git repository as files,
-# since their source exists in the codebase0
+# Docs, articles, and sidebar content are pre-built in build/docs and copied
+# into src/docs. They do not belong in the git repository as files, since their
+# source exists in the codebase
 src/docs
+src/articles
 src/_includes/_docs-sidebar-content.njk
