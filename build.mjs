@@ -3,19 +3,20 @@
 import fs from "fs/promises";
 import copy from "recursive-copy";
 import { JSDOM } from "jsdom";
+import through from "through2";
+import { last } from "ramda";
 
-// Pre-build steps
-// 0. Remove any previous artifacts
-// 1. Copy build/docs/_sidebar.html to src/_includes/_doc-sidebar-content.njk
-// 2. Copy files from build/docs to src/docs and cleanup html
-// 3. Create layout data file in src/docs
-// 4. Copy files from build/articles to src/articles and cleanup html
-// 5. Create layout data file in src/articles
 fs.rmdir("./src/docs", { recursive: true, force: true })
   // Remove old artifacts
   .then(() => fs.rmdir("./src/articles", { recursive: true, force: true }))
   .then(() => fs.rm("./src/_includes/_doc-sidebar-content.njk"))
-  // -- Docs --
+  // -- Docs ------------------------------------------------------------------
+  // * Copy build/docs/_sidebar.html to src/_includes/_doc-sidebar-content.njk
+  // * Copy files from build/docs to src/docs and cleanup html
+  // * Create frontmatter for each doc: tags + layout
+  // TODO:
+  // * Remove transclusions
+  // * indicate current
   .then(() =>
     copy(
       "./build/docs/_sidebar.html",
@@ -24,36 +25,85 @@ fs.rmdir("./src/docs", { recursive: true, force: true })
   )
   .then(() =>
     copy("./build/docs", "./src/docs", {
-      transform: cleanHtml("/docs"),
+      transform: transformFile("doc"),
     })
   )
-  .then(() => addLayout("doc"))
-  // -- Articles --
+  // -- Articles --------------------------------------------------------------
+  // * Copy files from build/articles to src/articles and cleanup html
+  // * Create layout data file in src/articles
+  // * Create frontmatter for each article:
+  //     tags + layout + title (title from a _title.html file)
+  // TODO:
+  // * Remove transclusions
+  // * Move build/articles/*/_sidebar to data file or to includes?
+  // * indicate current
   .then(() =>
     copy("./build/articles", "./src/articles", {
-      transform: cleanHtml("/articles"),
+      transform: transformFile("article"),
     })
   )
-  .then(() => addLayout("article"))
   .catch((ex) => console.error(ex));
 
 // -- Helpers -----------------------------------------------------------------
 
-function addLayout(name) {
-  return fs.writeFile(
-    `./src/${name}s/${name}s.json`,
-    `{ "layout": "${name}.njk" }`
-  );
+let articleTitles = {};
+
+function transformFile(type) {
+  return function (src, _dest, _stats) {
+    const srcParts = src.split("/");
+    const fileName = last(srcParts);
+
+    let frontmatter = {
+      tags: type,
+      layout: type + ".njk",
+    };
+
+    let articleKey;
+    if (type === "article") {
+      articleKey = srcParts[1];
+
+      if (!(articleKey in articleTitles)) {
+        const titleFile = `${srcParts[0]}/${srcParts[1]}/_title.html`;
+
+        articleTitles[articleKey] = articleKey;
+
+        try {
+          frontmatter.title = new JSDOM(
+            fs.readFileSync(titleFile, { encoding: "utf-8" })
+          ).window.document.querySelector("h1").textContent;
+        } catch (ex) {
+          console.error(`Error getting title for article ${articleKey}`, ex);
+        }
+      }
+    }
+
+    return through(function (chunk, _enc, done) {
+      const content = chunk.toString();
+
+      let dom = new JSDOM(content);
+      dom = convertRefsToUnisonShareLinks(dom);
+      dom = fixInternalLinks("/" + type + "s", dom);
+
+      // don't add front matter to partials
+      if (!fileName.startsWith("_")) {
+        done(null, frontMatterToString(frontmatter) + dom.toString());
+      } else {
+        done(null, dom.toString());
+      }
+    });
+  };
 }
 
-function cleanHtml(linkPrefix) {
-  return function (fileContents) {
-    console.log("cleaning html");
-    let dom = new JSDOM(fileContents);
-    dom = convertRefsToUnisonShareLinks(dom);
-    dom = fixInternalLinks(linkPrefix, dom);
-    return dom.toString();
-  };
+function frontMatterToString(frontmatter) {
+  const f = Object.keys(frontmatter).reduce((acc, k) => {
+    return acc.concat(`${k}: ${frontmatter[k]}`);
+  }, []);
+
+  return `
+---
+${f.join("\n")}
+---
+  `;
 }
 
 function convertRefsToUnisonShareLinks(dom) {
