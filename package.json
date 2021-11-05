@@ -19,6 +19,8 @@
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
     "jsdom": "^16.7.0",
-    "recursive-copy": "^2.0.13"
+    "ramda": "^0.27.1",
+    "recursive-copy": "^2.0.13",
+    "through2": "^4.0.2"
   }
 }
