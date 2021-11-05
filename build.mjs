@@ -4,7 +4,17 @@ import fs from "fs/promises";
 import copy from "recursive-copy";
 import { JSDOM } from "jsdom";
 import through from "through2";
-import { last } from "ramda";
+import {
+  fromPairs,
+  reduce,
+  join,
+  has,
+  append,
+  keys,
+  pipe,
+  map,
+  last,
+} from "ramda";
 
 fs.rmdir("./src/docs", { recursive: true, force: true })
   // Remove old artifacts
@@ -24,9 +34,7 @@ fs.rmdir("./src/docs", { recursive: true, force: true })
     )
   )
   .then(() =>
-    copy("./build/docs", "./src/docs", {
-      transform: transformFile("doc"),
-    })
+    copy("./build/docs", "./src/docs", { transform: transformFile("doc") })
   )
   // -- Articles --------------------------------------------------------------
   // * Copy files from build/articles to src/articles and cleanup html
@@ -46,7 +54,7 @@ fs.rmdir("./src/docs", { recursive: true, force: true })
 
 // -- Helpers -----------------------------------------------------------------
 
-let articleTitles = {};
+let articles = {};
 
 function transformFile(type) {
   return function (src, _dest, _stats) {
@@ -62,15 +70,37 @@ function transformFile(type) {
     if (type === "article") {
       articleKey = srcParts[1];
 
-      if (!(articleKey in articleTitles)) {
+      if (!has(articleKey, articles)) {
+        let article = {};
         const titleFile = `${srcParts[0]}/${srcParts[1]}/_title.html`;
-
-        articleTitles[articleKey] = articleKey;
+        const sidebarFile = `${srcParts[0]}/${srcParts[1]}/_sidebar.html`;
 
         try {
-          frontmatter.title = new JSDOM(
+          article.title = new JSDOM(
             fs.readFileSync(titleFile, { encoding: "utf-8" })
           ).window.document.querySelector("h1").textContent;
+
+          // Convert _sidebar.html to sidebar.json
+          try {
+            const sidebarLinks = new JSDOM(
+              fs.readFileSync(sidebarFile, { encoding: "utf-8" })
+            ).window.document.querySelector("a");
+
+            article.sidebar = pipe(
+              map((a) => [a.href, a.textContent]),
+              fromPairs
+            )(...sidebarLinks);
+
+            fs.writeFileSync(
+              `src/articles/${articleKey}/sidebar.json`,
+              JSON.stringify(article.sidebar)
+            );
+          } catch (_ex) {
+            // Not all articles have sidebars
+          }
+
+          articles[articleKey] = article;
+          frontmatter.title = title;
         } catch (ex) {
           console.error(`Error getting title for article ${articleKey}`, ex);
         }
@@ -95,15 +125,12 @@ function transformFile(type) {
 }
 
 function frontMatterToString(frontmatter) {
-  const f = Object.keys(frontmatter).reduce((acc, k) => {
-    return acc.concat(`${k}: ${frontmatter[k]}`);
-  }, []);
-
-  return `
----
-${f.join("\n")}
----
-  `;
+  return pipe(
+    keys,
+    reduce((acc, k) => append(`${k}: ${frontmatter[k]}`, acc), []),
+    join("\n"),
+    (f) => `---\n${f}---\n`
+  )(frontmatter);
 }
 
 function convertRefsToUnisonShareLinks(dom) {
@@ -140,4 +167,11 @@ function fixInternalLinks(prefix, dom) {
   });
 
   return dom;
+}
+
+function trace(key) {
+  return (x) => {
+    console.log(key, x);
+    return x;
+  };
 }
