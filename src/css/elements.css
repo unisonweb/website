@@ -1,0 +1,82 @@
+a,
+a:visited {
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--color-main-fg);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+input {
+  border: 0;
+  border-radius: 0;
+  font-family: var(--font-sans-serif);
+  caret-color: var(--color-main-focus-fg);
+}
+
+::placeholder {
+  color: var(--color-main-subtle-fg);
+}
+
+li::marker {
+  color: var(--color-main-subtle-fg-em);
+}
+
+h1 {
+  font-size: var(--font-size-large);
+}
+
+h2 {
+  font-size: var(--font-size-base);
+}
+
+h3 {
+  font-size: var(--font-size-medium);
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+hr {
+  background: var(--color-main-divider);
+  border: 0;
+  margin: 1.5rem 0;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.loading-placeholder {
+  display: inline-block;
+  height: calc(var(--font-size-base) * 0.65);
+  border-radius: calc(var(--font-size-base) / 2);
+  background: var(--main-subtle-fg);
+  min-width: calc(var(--font-size-base) * 3);
+}
+
+.loading-placeholder-row {
+  margin-bottom: 0.5rem;
+}
+
+.error-message {
+  color: var(--color-pink-1);
+}
+
+.subtle {
+  color: var(--color-main-subtle-fg);
+}
+
+.badge {
+  color: var(--color-badge-fg);
+  background: var(--color-badge-bg);
+  border: 1px solid var(--color-badge-border);
+  font-size: var(--font-size-small);
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  border-radius: var(--border-radius-base);
+}

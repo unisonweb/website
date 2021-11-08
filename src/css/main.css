@@ -68,17 +68,6 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-a,
-a:visited {
-  text-decoration: none;
-  color: var(--color-base-fg);
-  transition: all 0.2s;
-}
-
-a:hover {
-  color: var(--color-base-focus-fg);
-}
-
 /* -- Website -------------------------------------------------------------- */
 
 main {
