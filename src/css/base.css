@@ -68,8 +68,15 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-a {
+a,
+a:visited {
   text-decoration: none;
+  color: var(--color-base-fg);
+  transition: all 0.2s;
+}
+
+a:hover {
+  color: var(--color-base-focus-fg);
 }
 
 /* -- Website -------------------------------------------------------------- */
@@ -77,12 +84,19 @@ a {
 main {
   display: grid;
   grid-template-rows: var(--app-header-height) auto;
+  transition: grid-template-columns 0.3s;
+}
+
+main#doc {
   grid-template-columns: var(--main-sidebar-width) auto;
   grid-template-areas:
     "main-header main-header"
     "main-sidebar main-content";
-  transition: grid-template-columns var(--transition-sidebar-collapse-time);
-  --transition-sidebar-collapse-time: 0.3s;
+}
+
+main#article {
+  grid-template-columns: auto;
+  grid-template-areas: "main-header" "main-content";
 }
 
 #main-header {
@@ -93,6 +107,8 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 1px solid var(--color-main-header-border);
+  font-size: var(--font-size-medium);
 }
 
 #main-header nav {
@@ -104,11 +120,34 @@ main {
 
 #main-header nav section {
   display: flex;
-  gap: 0.5rem;
+  gap: 1.5rem;
 }
 
 #main-header nav section a {
   color: var(--color-main-header-fg);
+  line-height: 1.5rem;
+}
+
+#main-header nav section a:hover {
+  color: var(--color-main-header-current-fg);
+}
+
+#main-header nav section a#logo {
+  margin-right: 2.5rem;
+  font-weight: bold;
+  color: var(--color-main-header-current-fg);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--font-size-base);
+}
+
+#main-header nav section a#logo:hover {
+  color: var(--color-main-header-logo-hover);
+}
+#main-header nav section #logo-icon {
+  width: var(--font-size-base);
+  height: var(--font-size-base);
 }
 
 #main-content {
@@ -117,12 +156,9 @@ main {
   background: var(--color-main-bg);
   color: var(--color-main-fg);
   overflow: auto;
-}
-
-#main-content article {
-  margin: auto;
-  padding: 4rem 2rem;
   width: var(--main-content-width);
+  margin: auto;
+  padding: 8rem 2rem 2rem 2rem;
 }
 
 #main-footer {
@@ -133,4 +169,6 @@ main {
   height: var(--main-footer-height);
   font-size: var(--font-size-small);
   color: var(--color-base-subtle-fg);
+  justify-content: center;
+  gap: 0.5rem;
 }

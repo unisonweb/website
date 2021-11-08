@@ -2,32 +2,12 @@
 
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-
+    {% include "_head.njk" %}
     <title>{{ title }} &middot; the Unison language</title>
-
-    <meta name="description" content="A friendly programming language from the future.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="theme-color" content="#41424B">
-
-    <meta property="og:title" content="The Unison language">
-    <meta property="og:type" content="blog">
-    <meta property="og:url" content="https://unison-lang.org">
-    <meta property="og:image" content="https://unison-lang-org/logo.png">
-
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="alternate icon" href="/favicon.ico">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="/css/main.css">
   </head>
 
   <body>
-    <main>
+    <main id='doc'>
       {% include "_header.njk" %}
       {% include "_sidebar.njk" %}
       <div id="main-content">

@@ -15,13 +15,13 @@
   --color-base-mark-bg: var(--color-transparent);
 
   /* Layout */
-  --color-main-header-fg: var(--color-gray-lighten-100);
-  --color-main-header-bg: var(--color-gray-darken-10);
-  --color-main-header-subtle-fg: var(--color-gray-lighten-20);
-  --color-main-header-subtle-fg-em: var(--color-gray-lighten-50);
-  --color-main-header-context-unison-share-fg: var(--color-purple-4);
-  --color-main-header-context-ucm-fg: var(--color-pink-3);
-  --color-main-header-border: var(--color-gray-base);
+  --color-main-header-fg: var(--color-gray-lighten-20);
+  --color-main-header-bg: var(--color-gray-lighten-100);
+  --color-main-header-subtle-fg: var(--color-gray-lighten-40);
+  --color-main-header-subtle-fg-em: var(--color-gray-lighten-30);
+  --color-main-header-border: var(--color-transparent);
+  --color-main-header-current-fg: var(--color-gray-darken-30);
+  --color-main-header-logo-hover: var(--color-pink-1);
 
   --color-main-sidebar-fg: var(--color-gray-lighten-50);
   --color-main-sidebar-fg-em: var(--color-gray-lighten-100);
@@ -76,6 +76,9 @@
   --color-doc-link-active: var(--color-pink-1);
   --color-doc-link-hover: var(--color-pink-2);
   --color-doc-content-border: var(--color-gray-lighten-50);
+  --color-doc-index-fg: var(--color-gray-lighten-20);
+  --color-doc-index-current-fg: var(--color-gray-dark-20);
+  --color-doc-index-hover-fg: var(--color-pink-2);
 
   /* Modal */
   --color-modal-fg: var(--color-main-fg);
