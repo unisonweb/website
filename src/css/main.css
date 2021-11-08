@@ -63,8 +63,8 @@ html {
 body {
   font-size: 1rem;
   line-height: 1.4;
-  background: var(--color-base-bg);
-  color: var(--color-base-fg);
+  background: var(--color-main-bg);
+  color: var(--color-main-fg);
   -webkit-text-size-adjust: 100%;
 }
 
@@ -125,6 +125,7 @@ main#article {
 
 #main-header nav section a:hover {
   color: var(--color-main-header-current-fg);
+  text-decoration: none;
 }
 
 #main-header nav section a#logo {
@@ -163,7 +164,7 @@ main#article {
   padding: 0 2rem;
   height: var(--main-footer-height);
   font-size: var(--font-size-small);
-  color: var(--color-base-subtle-fg);
+  color: var(--color-main-subtle-fg);
   justify-content: center;
   gap: 0.5rem;
 }

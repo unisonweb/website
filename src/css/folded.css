@@ -1,0 +1,11 @@
+details.folded {
+  display: flex;
+  padding-left: 10.5rem;
+}
+
+details.folded summary {
+  display: inline-flex;
+}
+details.folded [open] summary {
+  display: none;
+}

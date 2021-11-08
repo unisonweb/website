@@ -179,7 +179,7 @@
   position: absolute;
   right: -16rem;
   width: 15rem;
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-medium);
   background: var(--color-doc-aside-bg);
   padding: 0.5rem 0.75rem;
   margin-left: 1rem;
@@ -223,7 +223,7 @@
 
 .unison-doc .callout .callout-icon {
   margin-right: 0.5rem;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
 }
 
 .unison-doc table {
@@ -305,7 +305,7 @@
 }
 
 .unison-doc h1 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
 }
@@ -315,31 +315,31 @@
 }
 
 .unison-doc h2 {
-  font-size: 1rem;
+  font-size: 1.25rem;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
 .unison-doc h3 {
-  font-size: 0.875rem;
+  font-size: 1rem;
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
 }
 
 .unison-doc h4 {
-  font-size: 0.875rem;
+  font-size: 1rem;
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
 }
 
 .unison-doc h5 {
-  font-size: 0.875rem;
+  font-size: 1rem;
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
 }
 
 .unison-doc h6 {
-  font-size: 0.875rem;
+  font-size: 1rem;
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
 }

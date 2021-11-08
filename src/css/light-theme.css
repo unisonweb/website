@@ -1,18 +1,18 @@
 :root {
-  --color-base-fg: var(--color-gray-darken-30);
-  --color-base-mg: var(--color-gray-base);
-  --color-base-bg: var(--color-gray-lighten-100);
-  --color-base-subtle-fg: var(--color-gray-lighten-30);
-  --color-base-subtle-fg-em: var(--color-gray-lighten-20);
-  --color-base-subtle-bg: var(--color-gray-lighten-60);
-  --color-base-border: var(--color-gray-lighten-40);
-  --color-base-subtle-border: var(--color-gray-lighten-50);
-  --color-base-divider: var(--color-gray-lighten-55);
-  --color-base-focus-fg: var(--color-blue-2);
-  --color-base-focus-bg: var(--color-blue-2);
-  --color-base-alert: var(--color-pink-1);
-  --color-base-mark-fg: var(--color-blue-2);
-  --color-base-mark-bg: var(--color-transparent);
+  --color-main-fg: var(--color-gray-darken-30);
+  --color-main-mg: var(--color-gray-base);
+  --color-main-bg: var(--color-gray-lighten-100);
+  --color-main-subtle-fg: var(--color-gray-lighten-30);
+  --color-main-subtle-fg-em: var(--color-gray-lighten-20);
+  --color-main-subtle-bg: var(--color-gray-lighten-60);
+  --color-main-border: var(--color-gray-lighten-40);
+  --color-main-subtle-border: var(--color-gray-lighten-50);
+  --color-main-divider: var(--color-gray-lighten-55);
+  --color-main-focus-fg: var(--color-blue-2);
+  --color-main-focus-bg: var(--color-blue-2);
+  --color-main-alert: var(--color-pink-1);
+  --color-main-mark-fg: var(--color-blue-2);
+  --color-main-mark-bg: var(--color-transparent);
 
   /* Layout */
   --color-main-header-fg: var(--color-gray-lighten-20);
