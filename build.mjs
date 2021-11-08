@@ -10,6 +10,7 @@ import { reduce, join, has, append, keys, pipe, map, last } from "ramda";
 rmdir("./src/docs", { recursive: true, force: true })
   // Remove old artifacts
   .then(() => rmdir("./src/articles", { recursive: true, force: true }))
+  /*
   .then(() => rm("./src/_includes/_doc-sidebar-content.njk"))
   // -- Docs ------------------------------------------------------------------
   // * Copy build/docs/_sidebar.html to src/_includes/_doc-sidebar-content.njk
@@ -24,6 +25,7 @@ rmdir("./src/docs", { recursive: true, force: true })
   .then(() =>
     copy("./build/docs", "./src/docs", { transform: transformFile("doc") })
   )
+  */
   // -- Articles --------------------------------------------------------------
   // * Copy files from build/articles to src/articles and cleanup html
   // * Create layout data file in src/articles
@@ -50,9 +52,13 @@ function transformFile(type) {
       layout: type + ".njk",
     };
 
+    let prefix = "/docs";
+
     let articleKey;
     if (type === "article") {
       articleKey = srcParts[2];
+
+      prefix = `/articles/${articleKey}`;
 
       if (!has(articleKey, articles)) {
         let article = {};
@@ -60,9 +66,13 @@ function transformFile(type) {
         const sidebarFile = `build/articles/${articleKey}/_sidebar.html`;
 
         try {
+          const titleFileContent = fs.readFileSync(titleFile, {
+            encoding: "utf-8",
+          });
+
           article.title = new JSDOM(
-            fs.readFileSync(titleFile, { encoding: "utf-8" })
-          ).window.document.querySelector("h1").textContent;
+            titleFileContent
+          ).window.document.querySelector("article").textContent;
 
           // Convert _sidebar.html to <artickeKey>.json with a sidebar key
           try {
@@ -71,9 +81,13 @@ function transformFile(type) {
             ).window.document.querySelectorAll("a");
 
             article.sidebar = {
-              sidebar: map((a) => ({ href: a.href, label: a.textContent }), [
-                ...links,
-              ]),
+              sidebar: map(
+                (a) => ({
+                  href: fixInternalLinks_(prefix, a.href),
+                  label: a.textContent,
+                }),
+                [...links]
+              ),
             };
 
             fs.writeFileSync(
@@ -100,7 +114,7 @@ function transformFile(type) {
 
       let dom = new JSDOM(content);
       dom = convertRefsToUnisonShareLinks(dom);
-      dom = fixInternalLinks("/" + type + "s", dom);
+      dom = fixInternalLinks(prefix, dom);
 
       // don't add front matter to partials
       if (!fileName.startsWith("_")) {
@@ -123,16 +137,16 @@ function frontMatterToString(frontmatter) {
 
 function convertRefsToUnisonShareLinks(dom) {
   dom.window.document
-    .querySelectorAll(".unison-doc span[data-refs]")
+    .querySelectorAll(".unison-doc span[data-ref]")
     .forEach((span) => {
       const ref = span.dataset.ref;
       const refType = span.dataset.refType;
 
       if (ref && refType) {
-        let link = document.createElement("a");
+        let link = dom.window.document.createElement("a");
         link.classNames = span.classNames;
 
-        link.href = `https://share.unison-lang.org/latest/namespaces/unison/website/${refType}s/${ref}`;
+        link.href = `https://share.unison-lang.org/latest/namespaces/unison/website/;/${refType}s/${ref}`;
         link.target = "_blank";
         link.innerHTML = span.innerHTML;
 
@@ -143,15 +157,23 @@ function convertRefsToUnisonShareLinks(dom) {
   return dom;
 }
 
+function fixInternalLinks_(prefix, href) {
+  let href_ = href;
+
+  if (href.endsWith(".html")) {
+    href_ = href.replace(/\.html$/, "");
+  }
+
+  if (!href_.startsWith(prefix) && !href_.startsWith("http")) {
+    href_ = prefix + href_;
+  }
+
+  return href_;
+}
+
 function fixInternalLinks(prefix, dom) {
   dom.window.document.querySelectorAll(".unison-doc a").forEach((anchor) => {
-    if (anchor.href.endsWith(".html")) {
-      anchor.href = anchor.href.replace(/\.html$/, "");
-    }
-
-    if (!anchor.href.startsWith(prefix) && !anchor.href.startsWith("http")) {
-      anchor.href = prefix + anchor.href;
-    }
+    anchor.href = fixInternalLinks_(prefix, anchor.href);
   });
 
   return dom;

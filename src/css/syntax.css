@@ -6,6 +6,10 @@ pre.inline-code {
   display: inline-block;
 }
 
+.source {
+  font-family: var(--font-monospace);
+}
+
 code {
   display: inline-block;
   font-family: var(--font-monospace);
