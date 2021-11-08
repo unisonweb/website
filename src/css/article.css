@@ -62,3 +62,19 @@ main#article nav#index a[aria-current]:after {
   width: 5px;
   content: " ";
 }
+
+@media only screen and (max-width: 1024px) {
+  main#article nav#index {
+    position: static;
+    border: none;
+    padding-left: 0;
+    margin-bottom: 2rem;;w
+  }
+
+  main#article nav#index a {
+    justify-content: flex-start;
+  }
+  main#article nav#index a[aria-current]:after {
+    display: none;
+  }
+}

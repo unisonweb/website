@@ -4,7 +4,7 @@
   "description": "Unison language website",
   "scripts": {
     "start": "eleventy --serve --port 2345",
-    "build": "eleventy"
+    "build": "./build.mjs && eleventy"
   },
   "repository": {
     "type": "git",
