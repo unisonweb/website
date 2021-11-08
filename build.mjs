@@ -5,17 +5,7 @@ import fs from "fs";
 import copy from "recursive-copy";
 import { JSDOM } from "jsdom";
 import through from "through2";
-import {
-  fromPairs,
-  reduce,
-  join,
-  has,
-  append,
-  keys,
-  pipe,
-  map,
-  last,
-} from "ramda";
+import { reduce, join, has, append, keys, pipe, map, last } from "ramda";
 
 rmdir("./src/docs", { recursive: true, force: true })
   // Remove old artifacts
@@ -25,9 +15,6 @@ rmdir("./src/docs", { recursive: true, force: true })
   // * Copy build/docs/_sidebar.html to src/_includes/_doc-sidebar-content.njk
   // * Copy files from build/docs to src/docs and cleanup html
   // * Create frontmatter for each doc: tags + layout
-  // TODO:
-  // * Remove transclusions
-  // * indicate current
   .then(() =>
     copy(
       "./build/docs/_sidebar.html",
@@ -42,10 +29,6 @@ rmdir("./src/docs", { recursive: true, force: true })
   // * Create layout data file in src/articles
   // * Create frontmatter for each article:
   //     tags + layout + title (title from a _title.html file)
-  // TODO:
-  // * Remove transclusions
-  // * Move build/articles/*/_sidebar to data file or to includes?
-  // * indicate current
   .then(() =>
     copy("./build/articles", "./src/articles", {
       transform: transformFile("article"),
@@ -81,7 +64,7 @@ function transformFile(type) {
             fs.readFileSync(titleFile, { encoding: "utf-8" })
           ).window.document.querySelector("h1").textContent;
 
-          // Convert _sidebar.html to sidebar.json
+          // Convert _sidebar.html to <artickeKey>.json with a sidebar key
           try {
             const links = new JSDOM(
               fs.readFileSync(sidebarFile, { encoding: "utf-8" })
