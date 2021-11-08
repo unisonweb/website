@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import fs from "fs/promises";
+import { rm, rmdir } from "fs/promises";
+import fs from "fs";
 import copy from "recursive-copy";
 import { JSDOM } from "jsdom";
 import through from "through2";
@@ -16,10 +17,10 @@ import {
   last,
 } from "ramda";
 
-fs.rmdir("./src/docs", { recursive: true, force: true })
+rmdir("./src/docs", { recursive: true, force: true })
   // Remove old artifacts
-  .then(() => fs.rmdir("./src/articles", { recursive: true, force: true }))
-  .then(() => fs.rm("./src/_includes/_doc-sidebar-content.njk"))
+  .then(() => rmdir("./src/articles", { recursive: true, force: true }))
+  .then(() => rm("./src/_includes/_doc-sidebar-content.njk"))
   // -- Docs ------------------------------------------------------------------
   // * Copy build/docs/_sidebar.html to src/_includes/_doc-sidebar-content.njk
   // * Copy files from build/docs to src/docs and cleanup html
@@ -68,12 +69,12 @@ function transformFile(type) {
 
     let articleKey;
     if (type === "article") {
-      articleKey = srcParts[1];
+      articleKey = srcParts[2];
 
       if (!has(articleKey, articles)) {
         let article = {};
-        const titleFile = `${srcParts[0]}/${srcParts[1]}/_title.html`;
-        const sidebarFile = `${srcParts[0]}/${srcParts[1]}/_sidebar.html`;
+        const titleFile = `build/articles/${articleKey}/_title.html`;
+        const sidebarFile = `build/articles/${articleKey}/_sidebar.html`;
 
         try {
           article.title = new JSDOM(
@@ -82,17 +83,18 @@ function transformFile(type) {
 
           // Convert _sidebar.html to sidebar.json
           try {
-            const sidebarLinks = new JSDOM(
+            const links = new JSDOM(
               fs.readFileSync(sidebarFile, { encoding: "utf-8" })
-            ).window.document.querySelector("a");
+            ).window.document.querySelectorAll("a");
 
-            article.sidebar = pipe(
-              map((a) => [a.href, a.textContent]),
-              fromPairs
-            )(...sidebarLinks);
+            article.sidebar = {
+              sidebar: map((a) => ({ href: a.href, label: a.textContent }), [
+                ...links,
+              ]),
+            };
 
             fs.writeFileSync(
-              `src/articles/${articleKey}/sidebar.json`,
+              `src/articles/${articleKey}/${articleKey}.json`,
               JSON.stringify(article.sidebar)
             );
           } catch (_ex) {
@@ -100,11 +102,14 @@ function transformFile(type) {
           }
 
           articles[articleKey] = article;
-          frontmatter.title = title;
         } catch (ex) {
           console.error(`Error getting title for article ${articleKey}`, ex);
         }
       }
+
+      const article = articles[articleKey];
+
+      frontmatter.title = article.title;
     }
 
     return through(function (chunk, _enc, done) {
@@ -116,9 +121,9 @@ function transformFile(type) {
 
       // don't add front matter to partials
       if (!fileName.startsWith("_")) {
-        done(null, frontMatterToString(frontmatter) + dom.toString());
+        done(null, frontMatterToString(frontmatter) + dom.serialize());
       } else {
-        done(null, dom.toString());
+        done(null, dom.serialize());
       }
     });
   };
@@ -129,7 +134,7 @@ function frontMatterToString(frontmatter) {
     keys,
     reduce((acc, k) => append(`${k}: ${frontmatter[k]}`, acc), []),
     join("\n"),
-    (f) => `---\n${f}---\n`
+    (f) => `---\n${f}\n---\n`
   )(frontmatter);
 }
 

@@ -1,0 +1,28 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    {% include "_head.njk" %}
+    <title>{{ title }} &middot; the Unison language</title>
+  </head>
+
+  <body>
+    <main id='article'>
+      {% include "_header.njk" %}
+      <div id="main-content">
+        <h2 id="overall-title">{{ title }}</h2>
+
+        <nav id="index">
+          {%- for link in sidebar -%}
+            <a title="{{link.label}}" href="{{link.href}}"{% if page.url == link.href + "/" %} aria-current="page"{% endif %}>
+              {{ link.label }}
+            </a>
+          {%- endfor -%}
+        </nav>
+
+        {{content | safe}}
+        {% include "_footer.njk" %}
+      </div>
+    </main>
+  </body>
+</html>

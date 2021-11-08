@@ -1,0 +1,64 @@
+main#article #main-content {
+  position: relative;
+  overflow: visible;
+}
+
+main#article h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+}
+
+main#article #overall-title {
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: normal;
+  color: var(--color-doc-subtle-fg);
+  margin-bottom: 1rem;
+}
+
+main#article nav#index {
+  position: absolute;
+  left: -20rem;
+  width: 20rem;
+  font-size: var(--font-size-medium);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-right: 1px solid var(--color-doc-content-border);
+}
+
+main#article nav#index a {
+  display: flex;
+  flex: 1;
+  height: 1.5rem;
+  align-items: center;
+  justify-content: right;
+  position: relative;
+  color: var(--color-doc-index-fg);
+}
+
+main#article nav#index a:hover {
+  color: var(--color-doc-index-hover-fg);
+}
+
+main#article nav#index a[aria-current] {
+  font-weight: bold;
+  color: var(--color-doc-index--current-fg);
+}
+main#article nav#index a[aria-current]:hover {
+  color: var(--color-doc-index--current-fg);
+}
+
+main#article nav#index a[aria-current]:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -1.5rem;
+  margin-right: -3px;
+  background: var(--color-pink-1);
+  box-shadow: 0 0 0 4px #fff;
+  border-radius: 4px;
+  width: 5px;
+  content: " ";
+}
