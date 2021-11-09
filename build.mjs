@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { rm, rmdir } from "fs/promises";
+import { rmdir } from "fs/promises";
 import fs from "fs";
 import copy from "recursive-copy";
 import { JSDOM } from "jsdom";
