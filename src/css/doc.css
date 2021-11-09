@@ -105,8 +105,8 @@
   margin-right: 0;
 }
 
-.unison-doc .eval .result .icon,
-.unison-doc .eval-inline .result .icon {
+.unison-doc .eval .result,
+.unison-doc .eval-inline .result {
   color: var(--color-doc-subtle-fg);
 }
 

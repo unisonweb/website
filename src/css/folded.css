@@ -37,13 +37,6 @@ details.folded summary::-webkit-details-marker {
   display: none;
 }
 
-details.folded[open] summary {
-  overflow: none;
-}
-details.folded[open] summary * {
-  position: absolute;
-  top: -3rem;
-}
 details.folded[open] summary:before {
   transform: rotate(90deg);
 }
