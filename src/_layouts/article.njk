@@ -21,6 +21,9 @@
         </nav>
 
         {{content | safe}}
+
+        {% articlePagination sidebar, page.url %}
+
         {% include "_footer.njk" %}
       </div>
     </main>
