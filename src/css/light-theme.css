@@ -63,6 +63,7 @@
 
   /* Doc */
   --color-doc-fg: var(--color-gray-darken-20);
+  --color-doc-heading-fg: var(--color-gray-darken-10);
   --color-doc-bg: var(--color-gray-lighten-100);
   --color-doc-aside-bg: var(--color-gray-lighten-60);
   --color-doc-aside-source-bg: var(--color-gray-lighten-55);
