@@ -1,5 +1,5 @@
 :root {
-  --color-main-fg: var(--color-gray-darken-30);
+  --color-main-fg: var(--color-gray-darken-20);
   --color-main-mg: var(--color-gray-base);
   --color-main-bg: var(--color-gray-lighten-100);
   --color-main-subtle-fg: var(--color-gray-lighten-30);
@@ -20,7 +20,7 @@
   --color-main-header-subtle-fg: var(--color-gray-lighten-40);
   --color-main-header-subtle-fg-em: var(--color-gray-lighten-30);
   --color-main-header-border: var(--color-transparent);
-  --color-main-header-current-fg: var(--color-gray-darken-30);
+  --color-main-header-current-fg: var(--color-gray-darken-10);
   --color-main-header-logo-hover: var(--color-pink-1);
 
   --color-main-sidebar-fg: var(--color-gray-lighten-50);
@@ -57,12 +57,12 @@
   --color-main-sidebar-tooltip-bg: var(--color-gray-darken-30);
   --color-main-sidebar-tooltip-border: var(--color-gray-darken-10);
 
-  --color-main-content-fg: var(--color-gray-darken-30);
+  --color-main-content-fg: var(--color-gray-darken-20);
   --color-main-content-mg: var(--color-gray-base);
   --color-main-content-bg: var(--color-gray-lighten-100);
 
   /* Doc */
-  --color-doc-fg: var(--color-gray-darken-30);
+  --color-doc-fg: var(--color-gray-darken-20);
   --color-doc-bg: var(--color-gray-lighten-100);
   --color-doc-aside-bg: var(--color-gray-lighten-60);
   --color-doc-aside-source-bg: var(--color-gray-lighten-55);
@@ -77,7 +77,7 @@
   --color-doc-link-hover: var(--color-pink-2);
   --color-doc-content-border: var(--color-gray-lighten-50);
   --color-doc-index-fg: var(--color-gray-lighten-20);
-  --color-doc-index-current-fg: var(--color-gray-dark-20);
+  --color-doc-index-current-fg: var(--color-gray-base);
   --color-doc-index-hover-fg: var(--color-pink-2);
 
   /* Modal */

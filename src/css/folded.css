@@ -37,7 +37,7 @@ details.folded summary::-webkit-details-marker {
   display: none;
 }
 
-details.folded[open] summary:before {
+details.folded[open] > summary:before {
   transform: rotate(90deg);
 }
 

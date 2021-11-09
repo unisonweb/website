@@ -47,10 +47,10 @@ main#article nav#index a:hover {
 
 main#article nav#index a[aria-current] {
   font-weight: bold;
-  color: var(--color-doc-index--current-fg);
+  color: var(--color-doc-index-current-fg);
 }
 main#article nav#index a[aria-current]:hover {
-  color: var(--color-doc-index--current-fg);
+  color: var(--color-doc-index-current-fg);
 }
 
 main#article nav#index a[aria-current]:after {
