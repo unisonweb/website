@@ -2,8 +2,6 @@ details.folded {
   position: relative;
   display: flex;
   flex: 1;
-  flex-direction: row;
-  padding-left: 10.5rem;
 }
 
 details.folded summary:before {
