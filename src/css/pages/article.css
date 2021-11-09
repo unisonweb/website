@@ -97,6 +97,10 @@ main#article footer.article-pagination a {
 main#article footer.article-pagination a.prev {
   align-items: flex-end;
 }
+main#article footer.article-pagination a.next {
+  align-self: flex-end;
+  margin-left: auto;
+}
 main#article footer.article-pagination a .direction {
   color: var(--color-doc-subtle-fg);
   text-transform: uppercase;
