@@ -3,14 +3,14 @@
 <html lang="en">
   <head>
     {% include "_head.njk" %}
-    <title>{{ title }} &middot; the Unison language</title>
+    <title>{{overallTitle}} | {{ title }} &middot; the Unison language</title>
   </head>
 
   <body>
     <main id='article'>
       {% include "_header.njk" %}
       <div id="main-content">
-        <h2 id="overall-title">{{ title }}</h2>
+        <h2 id="overall-title">{{ overallTitle }}</h2>
 
         <nav id="index">
           {%- for link in sidebar -%}
@@ -18,11 +18,27 @@
               {{ link.label }}
             </a>
           {%- endfor -%}
+
+          <div class="compositional-distributed-systems-cta">
+            <p>This article is part of a series of compositional distributed systems</p>
+            <a class="button uncontained small default" style="display: inline-flex; justify-self: flex-end" href="https://github.com/unisonweb/unison/discussions/2605" rel="noopener" class="named-link" target="_blank">
+              Vote on or propose topics
+            </a>
+          </div>
         </nav>
 
         {{content | safe}}
 
         {% articlePagination sidebar, page.url %}
+
+        <div class="unison-at-work-cta">
+          <p>If you're interested in using <strong>Unison at work</strong> for this sort
+          of thing, we'd love to chat with you.</p>
+
+          <a href="https://unisonweb.org/at-work" rel="noopener" class="button contained share medium" target="_blank">
+            Get in touch
+          </a>
+        </div>
 
         {% include "_footer.njk" %}
       </div>

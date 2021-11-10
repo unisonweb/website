@@ -74,7 +74,7 @@ function transformFile(type) {
             encoding: "utf-8",
           });
 
-          article.title = new JSDOM(
+          article.overallTitle = new JSDOM(
             titleFileContent
           ).window.document.querySelector("article").textContent;
 
@@ -110,7 +110,7 @@ function transformFile(type) {
 
       const article = articles[articleKey];
 
-      frontmatter.title = article.title;
+      frontmatter.overallTitle = article.overallTitle;
     }
 
     return through(function (chunk, _enc, done) {
@@ -122,10 +122,13 @@ function transformFile(type) {
       // HACK: run fixFolded twice because folds are sometimes nested...
       dom = fixFolded(dom);
       dom = fixInternalLinks(prefix, dom);
+      const title = dom.window.document.querySelector("h1")?.textContent || "";
+
+      const pageFrontmatter = { ...frontmatter, title };
 
       // don't add front matter to partials
       if (!fileName.startsWith("_")) {
-        done(null, frontMatterToString(frontmatter) + dom.serialize());
+        done(null, frontMatterToString(pageFrontmatter) + dom.serialize());
       } else {
         done(null, dom.serialize());
       }
@@ -136,7 +139,7 @@ function transformFile(type) {
 function frontMatterToString(frontmatter) {
   return pipe(
     keys,
-    reduce((acc, k) => append(`${k}: ${frontmatter[k]}`, acc), []),
+    reduce((acc, k) => append(`${k}: '${frontmatter[k]}'`, acc), []),
     join("\n"),
     (f) => `---\n${f}\n---\n`
   )(frontmatter);

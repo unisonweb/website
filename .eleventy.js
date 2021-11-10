@@ -1,4 +1,40 @@
 const R = require("ramda");
+const fs = require("fs");
+
+const leftArrow = fs.readFileSync("./src/img/icon-arrow-left.svg");
+const rightArrow = fs.readFileSync("./src/img/icon-arrow-right.svg");
+
+function paginationItem(direction, link) {
+  let directionIndicator;
+  if (direction === "prev") {
+    directionIndicator = `
+      <div class="direction">
+        <div class="icon">${leftArrow}</div>Prev
+      </div>
+    `;
+  } else {
+    directionIndicator = `
+      <div class="direction">
+        Next<div class="icon">${rightArrow}</div>
+      </div>
+      `;
+  }
+
+  return `
+    <a href="${link.href}" class="${direction}">
+      ${directionIndicator}
+      <div class="article-title">${link.label}</div>
+    </a>
+  `;
+}
+
+function prev(link) {
+  return paginationItem("prev", link);
+}
+
+function next(link) {
+  return paginationItem("next", link);
+}
 
 module.exports = function (config) {
   // Exclusively use .eleventyignore, to make sure src/docs are used as source
@@ -30,17 +66,13 @@ module.exports = function (config) {
     let links = [];
 
     if (c > first) {
-      const prev = sidebar[c - 1];
-      links.push(
-        `<a href="${prev.href}" class="prev"><div class="direction">← Prev</div><div>${prev.label}</div></a>`
-      );
+      const p = sidebar[c - 1];
+      links.push(prev(p));
     }
 
     if (c < last) {
-      const next = sidebar[c + 1];
-      links.push(
-        `<a href="${next.href}" class="next"><div class="direction">Next →</div><div>${next.label}</div></a>`
-      );
+      const n = sidebar[c + 1];
+      links.push(next(n));
     }
 
     if (links.length > 0) {
