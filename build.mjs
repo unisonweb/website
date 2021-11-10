@@ -42,6 +42,10 @@ rmdir("./src/docs", { recursive: true, force: true })
 
 let articles = {};
 
+const iconCaretRight = fs.readFileSync("./src/img/icon-caret-right.svg", {
+  encoding: "utf-8",
+});
+
 function transformFile(type) {
   return function (src, _dest, _stats) {
     const srcParts = src.split("/");
@@ -114,6 +118,9 @@ function transformFile(type) {
 
       let dom = new JSDOM(content);
       dom = convertRefsToUnisonShareLinks(dom);
+      dom = fixFolded(dom);
+      // HACK: run fixFolded twice because folds are sometimes nested...
+      dom = fixFolded(dom);
       dom = fixInternalLinks(prefix, dom);
 
       // don't add front matter to partials
@@ -152,6 +159,44 @@ function convertRefsToUnisonShareLinks(dom) {
 
         span.replaceWith(link);
       }
+    });
+
+  return dom;
+}
+
+function fixFolded(dom) {
+  let document = dom.window.document;
+
+  dom.window.document
+    .querySelectorAll("details.folded")
+    .forEach((oldDetails) => {
+      const folded = document.createElement("div");
+      folded.classList = oldDetails.classList;
+      if (!oldDetails.open) {
+        folded.classList.add("is-folded");
+      }
+
+      const summary = document.createElement("div");
+      summary.classList.add("folded-summary");
+      summary.innerHTML = oldDetails.querySelector(".folded-summary").innerHTML;
+
+      const details = document.createElement("div");
+      details.classList.add("folded-details");
+      details.innerHTML = oldDetails.querySelector(".folded-details").innerHTML;
+
+      const foldedContent = document.createElement("div");
+      foldedContent.classList.add("folded-content");
+      foldedContent.appendChild(summary);
+      foldedContent.appendChild(details);
+
+      let foldToggle = document.createElement("div");
+      foldToggle.classList = ["fold-toggle"];
+      foldToggle.innerHTML = `<div class="icon icon-caret-right">${iconCaretRight}</div>`;
+
+      folded.appendChild(foldToggle);
+      folded.appendChild(foldedContent);
+
+      oldDetails.replaceWith(folded);
     });
 
   return dom;

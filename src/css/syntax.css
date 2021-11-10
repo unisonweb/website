@@ -2,7 +2,7 @@ pre {
   margin: 0;
 }
 
-pre.inline-code {
+.inline-code {
   display: inline-block;
 }
 
@@ -16,7 +16,7 @@ code {
   line-height: 1.6;
 }
 
-pre.inline-code code {
+.inline-code code {
   line-height: 1.4;
 }
 

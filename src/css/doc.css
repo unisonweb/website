@@ -50,6 +50,9 @@
 .unison-doc .folded-sources .source {
   padding: 0.5rem;
 }
+.unison-doc .folded-sources .fold-toggle {
+  margin-top: 1px;
+}
 
 .unison-doc .source.code::-webkit-scrollbar,
 .unison-doc .sources .source::-webkit-scrollbar,
@@ -242,6 +245,14 @@
   margin-bottom: 1rem;
   display: flex;
   flex-direction: row;
+}
+
+.unison-doc .folded.is-folded > .folded-content > .folded-details {
+  display: none;
+}
+
+.unison-doc .folded:not(.is-folded) > .folded-content > .folded-summary {
+  display: none;
 }
 
 .unison-doc .folded .folded-content {

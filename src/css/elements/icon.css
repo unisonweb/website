@@ -1,0 +1,34 @@
+.icon {
+  display: inline-block;
+  font-size: 0.875rem;
+  width: 1em;
+  height: 1em;
+  color: var(--color-main-fg);
+  transition: all 0.2s;
+}
+
+.icon.type,
+.icon.data-constructor {
+  color: var(--color-icon-type);
+}
+
+.icon.test {
+  color: var(--color-icon-test);
+}
+
+.icon.term {
+  color: var(--color-icon-term);
+}
+
+.icon.ability,
+.icon.ability-constructor {
+  color: var(--color-icon-ability);
+}
+
+.icon.doc {
+  color: var(--color-icon-doc);
+}
+
+.icon.patch {
+  color: var(--color-icon-patch);
+}
