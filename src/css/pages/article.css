@@ -40,6 +40,7 @@ main#article nav#index a {
   height: 1.5rem;
   align-items: center;
   justify-content: right;
+  text-align: right;
   position: relative;
   color: var(--color-doc-index-fg);
 }

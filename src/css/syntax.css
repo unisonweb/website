@@ -4,6 +4,7 @@ pre {
 
 .inline-code {
   display: inline-block;
+  line-height: 1.4;
 }
 
 .source {
@@ -14,10 +15,6 @@ code {
   display: inline-block;
   font-family: var(--font-monospace);
   line-height: 1.6;
-}
-
-.inline-code code {
-  line-height: 1.4;
 }
 
 code a {
