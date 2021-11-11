@@ -122,7 +122,14 @@ function transformFile(type) {
       // HACK: run fixFolded twice because folds are sometimes nested...
       dom = fixFolded(dom);
       dom = fixInternalLinks(prefix, dom);
-      const title = dom.window.document.querySelector("h1")?.textContent || "";
+
+      let title = "";
+      const h1 = dom.window.document.querySelector("h1");
+
+      if (h1) {
+        title = h1.textContent;
+        h1.remove();
+      }
 
       const pageFrontmatter = { ...frontmatter, title };
 

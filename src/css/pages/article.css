@@ -3,28 +3,26 @@ main#article #main-content {
   overflow: visible;
 }
 
-main#article
-  .unison-doc
-  > section:first-child
-  > section:first-child
-  > h1:first-child,
-main#article .unison-doc > section:first-child > h1:first-child {
-  font-size: 3.5rem;
-  font-weight: 900;
-  margin: 1.5rem 0;
-}
-
 main#article #overall-title {
-  font-size: 1rem;
+  font-size: var(--font-size-medium);
   text-transform: uppercase;
   font-weight: normal;
-  color: var(--color-pink-2);
+  color: var(--color-pink-3);
   text-align: center;
+  letter-spacing: 0.1rem;
+}
+
+main#article #title {
+  font-size: 4rem;
+  font-weight: 700;
+  margin: 1.5rem 0 4rem 0;
+  line-height: 1.1;
+  text-align: center;
+  font-family: "Playfair Display", serif;
 }
 
 main#article nav#index {
   position: absolute;
-  top: 20rem;
   left: 0;
   width: 20.5rem;
   transform: translateX(-100%);

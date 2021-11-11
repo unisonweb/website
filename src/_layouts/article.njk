@@ -12,6 +12,8 @@
       <div id="main-content">
         <h2 id="overall-title">{{ overallTitle }}</h2>
 
+        <h1 id="title">{{title}}</h1>
+
         <nav id="index">
           {%- for link in sidebar -%}
             <a title="{{link.label}}" href="{{link.href}}"{% if page.url == link.href + "/" %} aria-current="page"{% endif %}>
