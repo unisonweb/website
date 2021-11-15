@@ -324,7 +324,7 @@
 .unison-doc section:last-child {
   margin-bottom: 0;
 }
-.unison-doc section:last-child .source {
+.unison-doc section:last-child .source:last-child {
   margin-bottom: 0;
 }
 
