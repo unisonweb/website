@@ -2,10 +2,12 @@
 
 import { rmdir } from "fs/promises";
 import fs from "fs";
+import path from "path";
 import copy from "recursive-copy";
 import { JSDOM } from "jsdom";
 import through from "through2";
-import { reduce, join, has, append, keys, pipe, map, last } from "ramda";
+import kebabCase from "kebab-case";
+import { reduce, join, has, append, keys, pipe, map } from "ramda";
 
 rmdir("./src/docs", { recursive: true, force: true })
   // Remove old artifacts
@@ -33,7 +35,12 @@ rmdir("./src/docs", { recursive: true, force: true })
   //     tags + layout + title (title from a _title.html file)
   .then(() =>
     copy("./build/articles", "./src/articles", {
-      transform: transformFile("article"),
+      rename: kebabCase,
+    }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
+      const fileName = path.basename(dest);
+      if (!fileName.startsWith("_")) {
+        transformFile("article", src, dest);
+      }
     })
   )
   .catch((ex) => console.error(ex));
@@ -46,101 +53,100 @@ const iconCaretRight = fs.readFileSync("./src/img/icon-caret-right.svg", {
   encoding: "utf-8",
 });
 
-function transformFile(type) {
-  return function (src, _dest, _stats) {
-    const srcParts = src.split("/");
-    const fileName = last(srcParts);
+function transformFile(type, src, dest) {
+  const srcParts = src.split("/");
 
-    let frontmatter = {
-      tags: type,
-      layout: type + ".njk",
-    };
+  let frontmatter = {
+    tags: type,
+    layout: type + ".njk",
+  };
 
-    let prefix = "/docs";
+  let prefix = "/docs";
 
-    let articleKey;
-    if (type === "article") {
-      articleKey = srcParts[2];
+  let articleKey;
+  if (type === "article") {
+    articleKey = srcParts[2];
 
-      prefix = `/articles/${articleKey}`;
+    prefix = `/articles/${articleKey}`;
 
-      if (!has(articleKey, articles)) {
-        let article = {};
-        const titleFile = `build/articles/${articleKey}/_title.html`;
-        const sidebarFile = `build/articles/${articleKey}/_sidebar.html`;
+    if (!has(articleKey, articles)) {
+      let article = {};
+      const titleFile = `build/articles/${articleKey}/_title.html`;
+      const sidebarFile = `build/articles/${articleKey}/_sidebar.html`;
 
+      try {
+        const titleFileContent = fs.readFileSync(titleFile, {
+          encoding: "utf-8",
+        });
+
+        article.overallTitle = new JSDOM(
+          titleFileContent
+        ).window.document.querySelector("article").textContent;
+
+        // Convert _sidebar.html to <artickeKey>.json with a sidebar key
         try {
-          const titleFileContent = fs.readFileSync(titleFile, {
-            encoding: "utf-8",
-          });
+          const links = new JSDOM(
+            fs.readFileSync(sidebarFile, { encoding: "utf-8" })
+          ).window.document.querySelectorAll("a");
 
-          article.overallTitle = new JSDOM(
-            titleFileContent
-          ).window.document.querySelector("article").textContent;
+          article.sidebar = {
+            sidebar: map(
+              (a) => ({
+                href: kebabCase(fixInternalLinks_(prefix, a.href)),
+                label: a.textContent,
+              }),
+              [...links]
+            ),
+          };
 
-          // Convert _sidebar.html to <artickeKey>.json with a sidebar key
-          try {
-            const links = new JSDOM(
-              fs.readFileSync(sidebarFile, { encoding: "utf-8" })
-            ).window.document.querySelectorAll("a");
-
-            article.sidebar = {
-              sidebar: map(
-                (a) => ({
-                  href: fixInternalLinks_(prefix, a.href),
-                  label: a.textContent,
-                }),
-                [...links]
-              ),
-            };
-
-            fs.writeFileSync(
-              `src/articles/${articleKey}/${articleKey}.json`,
-              JSON.stringify(article.sidebar)
-            );
-          } catch (_ex) {
-            // Not all articles have sidebars
-          }
-
-          articles[articleKey] = article;
-        } catch (ex) {
-          console.error(`Error getting title for article ${articleKey}`, ex);
+          fs.writeFileSync(
+            `src/articles/${kebabCase(articleKey)}/${kebabCase(
+              articleKey
+            )}.json`,
+            JSON.stringify(article.sidebar)
+          );
+        } catch (_ex) {
+          // Not all articles have sidebars
         }
+
+        articles[articleKey] = article;
+      } catch (ex) {
+        console.error(`Error getting title for article ${articleKey}`, ex);
       }
-
-      const article = articles[articleKey];
-
-      frontmatter.overallTitle = article.overallTitle;
     }
 
-    return through(function (chunk, _enc, done) {
-      const content = chunk.toString();
+    const article = articles[articleKey];
 
-      let dom = new JSDOM(content);
-      dom = convertRefsToUnisonShareLinks(dom);
-      dom = fixFolded(dom);
-      // HACK: run fixFolded twice because folds are sometimes nested...
-      dom = fixFolded(dom);
-      dom = fixInternalLinks(prefix, dom);
+    frontmatter.overallTitle = article.overallTitle;
+  }
 
-      let title = "";
-      const h1 = dom.window.document.querySelector("h1");
+  const content = updateContent(
+    frontmatter,
+    prefix,
+    fs.readFileSync(dest, { encoding: "utf-8" })
+  );
+  fs.writeFileSync(dest, content);
+}
 
-      if (h1) {
-        title = h1.textContent;
-        h1.remove();
-      }
+function updateContent(frontmatter, prefix, content) {
+  let dom = new JSDOM(content);
+  dom = convertRefsToUnisonShareLinks(dom);
+  dom = fixFolded(dom);
+  dom = fixInternalLinks(prefix, dom);
 
-      const pageFrontmatter = { ...frontmatter, title };
+  let title = "";
+  const h1 = dom.window.document.querySelector("h1");
 
-      // don't add front matter to partials
-      if (!fileName.startsWith("_")) {
-        done(null, frontMatterToString(pageFrontmatter) + dom.serialize());
-      } else {
-        done(null, dom.serialize());
-      }
-    });
-  };
+  if (h1) {
+    title = h1.textContent;
+    h1.remove();
+  }
+
+  const pageFrontmatter = { ...frontmatter, title };
+
+  const page = dom.window.document.querySelector("body").innerHTML;
+
+  return frontMatterToString(pageFrontmatter) + page;
 }
 
 function frontMatterToString(frontmatter) {
@@ -177,11 +183,11 @@ function convertRefsToUnisonShareLinks(dom) {
 function fixFolded(dom) {
   let document = dom.window.document;
 
-  dom.window.document
-    .querySelectorAll("details.folded")
-    .forEach((oldDetails) => {
+  function go() {
+    document.querySelectorAll("details.folded").forEach((oldDetails) => {
       const folded = document.createElement("div");
       folded.classList = oldDetails.classList;
+
       if (!oldDetails.open) {
         folded.classList.add("is-folded");
       }
@@ -192,6 +198,7 @@ function fixFolded(dom) {
 
       const details = document.createElement("div");
       details.classList.add("folded-details");
+
       details.innerHTML = oldDetails.querySelector(".folded-details").innerHTML;
 
       const foldedContent = document.createElement("div");
@@ -208,6 +215,14 @@ function fixFolded(dom) {
 
       oldDetails.replaceWith(folded);
     });
+
+    // Keep replacing details until there are no more left.
+    if (document.querySelectorAll("details.folded").length) {
+      go();
+    }
+  }
+
+  go();
 
   return dom;
 }
@@ -228,7 +243,7 @@ function fixInternalLinks_(prefix, href) {
 
 function fixInternalLinks(prefix, dom) {
   dom.window.document.querySelectorAll(".unison-doc a").forEach((anchor) => {
-    anchor.href = fixInternalLinks_(prefix, anchor.href);
+    anchor.href = kebabCase(fixInternalLinks_(prefix, anchor.href));
   });
 
   return dom;
