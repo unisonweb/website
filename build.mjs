@@ -175,7 +175,7 @@ function convertRefsToUnisonShareLinks(dom) {
   dom.window.document
     .querySelectorAll(".unison-doc span[data-ref]")
     .forEach((span) => {
-      const ref = span.dataset.ref;
+      const ref = span.dataset.ref.replace(/#/g, "@");
       const refType = span.dataset.refType;
 
       if (ref && refType) {
