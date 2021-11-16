@@ -21,7 +21,6 @@
     "jsdom": "^16.7.0",
     "kebab-case": "^1.0.1",
     "ramda": "^0.27.1",
-    "recursive-copy": "^2.0.13",
-    "through2": "^4.0.2"
+    "recursive-copy": "^2.0.13"
   }
 }

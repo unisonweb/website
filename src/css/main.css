@@ -170,8 +170,8 @@ main#article {
 }
 
 @media only screen and (max-width: 1024px) {
-  #main-header nav {
-    width: 100vw;
-    max-width: var(--main-content-width);
+  #main-header nav,
+  #main-content {
+    width: auto;
   }
 }

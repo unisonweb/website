@@ -15,11 +15,13 @@
         <h1 id="title">{{title}}</h1>
 
         <nav id="index">
-          {%- for link in sidebar -%}
-            <a title="{{link.label}}" href="{{link.href}}"{% if page.url == link.href + "/" %} aria-current="page"{% endif %}>
-              {{ link.label }}
-            </a>
-          {%- endfor -%}
+          <div class="links">
+            {%- for link in sidebar -%}
+              <a title="{{link.label}}" href="{{link.href}}"{% if page.url == link.href + "/" %} aria-current="page"{% endif %}>
+                {{ link.label }}
+              </a>
+            {%- endfor -%}
+          </div>
 
           <div class="compositional-distributed-systems-cta">
             <p>This article is part of a series of compositional distributed systems</p>

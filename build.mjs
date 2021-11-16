@@ -5,7 +5,6 @@ import fs from "fs";
 import path from "path";
 import copy from "recursive-copy";
 import { JSDOM } from "jsdom";
-import through from "through2";
 import kebabCase from "kebab-case";
 import { reduce, join, has, append, keys, pipe, map } from "ramda";
 
@@ -72,6 +71,7 @@ function transformFile(type, src, dest) {
     if (!has(articleKey, articles)) {
       let article = {};
       const titleFile = `build/articles/${articleKey}/_title.html`;
+      const summaryFile = `build/articles/${articleKey}/_summary.html`;
       const sidebarFile = `build/articles/${articleKey}/_sidebar.html`;
 
       try {
@@ -82,6 +82,18 @@ function transformFile(type, src, dest) {
         article.overallTitle = new JSDOM(
           titleFileContent
         ).window.document.querySelector("article").textContent;
+
+        try {
+          const summaryFileContent = fs.readFileSync(summaryFile, {
+            encoding: "utf-8",
+          });
+
+          article.summary = new JSDOM(
+            summaryFileContent
+          ).window.document.querySelector("article").textContent;
+        } catch (_ex) {
+          // Not all articles have summaries
+        }
 
         // Convert _sidebar.html to <artickeKey>.json with a sidebar key
         try {
@@ -118,6 +130,7 @@ function transformFile(type, src, dest) {
     const article = articles[articleKey];
 
     frontmatter.overallTitle = article.overallTitle;
+    frontmatter.summary = article.summary;
   }
 
   const content = updateContent(

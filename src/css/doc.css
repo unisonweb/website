@@ -8,25 +8,6 @@
   background: var(--color-doc-bg);
 }
 
-/* When the parent wrapper (typically .workspace-item is focused and has a
- * slightly darker background, we want to use focus colors */
-.focused .unison-doc {
-  --color-doc-fg: var(--color-doc-focus-fg);
-  --color-doc-bg: var(--color-doc-focus-bg);
-  --color-doc-aside-bg: var(--color-doc-focus-aside-bg);
-  --color-doc-aside-source-bg: var(--color-doc-focus-aside-source-bg);
-  --color-doc-callout-bg: var(--color-doc-focus-callout-bg);
-  --color-doc-subtle-fg: var(--color-doc-focus-subtle-fg);
-  --color-doc-source-bg: var(--color-doc-focus-source-bg);
-  --color-doc-source-mg: var(--color-doc-focus-source-mg);
-  --color-doc-fold-hover-fg: var(--color-doc-focus-fold-hover-fg);
-  --color-doc-fold-hover-bg: var(--color-doc-focus-fold-hover-bg);
-  --color-doc-link: var(--color-doc-focus-link);
-  --color-doc-link-active: var(--color-doc-focus-link-active);
-  --color-doc-link-hover: var(--color-doc-focus-link-hover);
-  --color-doc-content-border: var(--color-doc-focus-content-border);
-}
-
 .unison-doc .word {
   margin-right: 0.5ch;
 }
@@ -247,6 +228,17 @@
   margin-right: 0.5rem;
   font-size: var(--font-size-base);
 }
+.unison-doc .callout .source.code,
+.unison-doc .callout .sources .source,
+.unison-doc .callout .folded-sources .source,
+.unison-doc .callout .source.example,
+.unison-doc .callout .source.eval,
+.unison-doc .callout .source.signatures .signature,
+.unison-doc
+  .callout
+  .source:is(.inline-code, .example-inline, .eval-inline, .signature-inline) {
+  background: var(--color-doc-callout-source-bg);
+}
 
 .unison-doc table {
   margin-bottom: 1rem;
@@ -407,17 +399,7 @@
 .unison-doc .group {
 }
 
-@media only screen and (max-width: 1024px) {
-  .unison-doc .source.code,
-  .unison-doc .sources .source,
-  .unison-doc .folded-sources .source,
-  .unison-doc .source.example,
-  .unison-doc .source.eval,
-  .unison-doc .source.signatures .signature {
-    width: calc(100vw - 2rem);
-    overflow: auto;
-  }
-
+@media only screen and (max-width: 1440px) {
   .unison-doc aside {
     position: relative;
     right: auto;
@@ -433,5 +415,17 @@
   .unison-doc aside .source.signatures .signature {
     max-width: none;
     width: min(40rem, calc(calc(100vw - 2rem)) - 3rem);
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .unison-doc .source.code,
+  .unison-doc .sources .source,
+  .unison-doc .folded-sources .source,
+  .unison-doc .source.example,
+  .unison-doc .source.eval,
+  .unison-doc .source.signatures .signature {
+    max-width: calc(100vw - 2rem);
+    overflow: auto;
   }
 }
