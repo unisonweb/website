@@ -243,8 +243,13 @@ function fixFolded(dom) {
 function fixInternalLinks_(prefix, href) {
   let href_ = href;
 
-  if (href.endsWith(".html")) {
-    href_ = href.replace(/\.html$/, "");
+  // JSDOM randonly adds about:blank to fragment links...
+  if (href_.startsWith("about:blank#")) {
+    return href_.replace("about:blank", "");
+  }
+
+  if (href_.endsWith(".html")) {
+    href_ = href_.replace(/\.html$/, "");
   }
 
   if (href_.endsWith("/index")) {
