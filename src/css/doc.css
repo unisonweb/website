@@ -213,15 +213,24 @@
 
 .unison-doc .callout {
   background: var(--color-doc-callout-bg);
-  padding: 0.5rem 0.75rem;
+  padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   border-radius: var(--border-radius-base);
   display: flex;
   flex-direction: row;
 }
 
+.unison-doc .callout .callout-content section .folded:last-child {
+  margin-bottom: 0.25rem;
+}
+
+.unison-doc .folded-details .callout:nth-child(2) {
+  margin-top: 1rem;
+}
+
 .unison-doc .callout.callout-with-icon .callout-content {
   padding-top: 1px;
+  width: 100%;
 }
 
 .unison-doc .callout .callout-icon {
@@ -314,9 +323,6 @@
   margin-top: 0;
 }
 .unison-doc section:last-child {
-  margin-bottom: 0;
-}
-.unison-doc section:last-child .source:last-child {
   margin-bottom: 0;
 }
 
@@ -414,7 +420,7 @@
   .unison-doc aside .source.eval,
   .unison-doc aside .source.signatures .signature {
     max-width: none;
-    width: min(40rem, calc(calc(100vw - 2rem)) - 3rem);
+    width: min(40rem, calc(calc(100vw - 5rem)) - 3rem);
   }
 }
 
@@ -425,7 +431,24 @@
   .unison-doc .source.example,
   .unison-doc .source.eval,
   .unison-doc .source.signatures .signature {
-    max-width: calc(100vw - 2rem);
+    width: calc(100vw - 5rem);
     overflow: auto;
+  }
+
+  .unison-doc .callout .source.code,
+  .unison-doc .callout .sources .source,
+  .unison-doc .callout .folded-sources .source,
+  .unison-doc .callout .source.example,
+  .unison-doc .callout .source.eval,
+  .unison-doc .callout .source.signatures .signature {
+    width: calc(100vw - 10.5rem);
+  }
+  .unison-doc .callout .folded .source.code,
+  .unison-doc .callout .folded .sources .source,
+  .unison-doc .callout .folded .folded-sources .source,
+  .unison-doc .callout .folded .source.example,
+  .unison-doc .callout .folded .source.eval,
+  .unison-doc .callout .folded .source.signatures .signature {
+    width: calc(100vw - 12.25rem);
   }
 }
