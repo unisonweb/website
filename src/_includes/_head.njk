@@ -1,10 +1,14 @@
 <meta charset="utf-8">
-<meta name="description" content="A friendly programming language from the future.">
+{% if summary %}
+  <meta name="description" content="{{summary}}">
+{% else %}
+  <meta name="description" content="A friendly programming language from the future.">
+{% endif %}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="theme-color" content="#41424B">
 
-<meta property="og:title" content="The Unison language">
+<meta property="og:title" content="{{overallTitle}} | {{ title }} &middot; the Unison language">
 <meta property="og:type" content="blog">
 <meta property="og:url" content="https://unison-lang.org">
 <meta property="og:image" content="https://unison-lang-org/logo.png">

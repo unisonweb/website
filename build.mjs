@@ -165,7 +165,7 @@ function updateContent(frontmatter, prefix, content) {
 function frontMatterToString(frontmatter) {
   return pipe(
     keys,
-    reduce((acc, k) => append(`${k}: '${frontmatter[k]}'`, acc), []),
+    reduce((acc, k) => append(`${k}: "${frontmatter[k]}"`, acc), []),
     join("\n"),
     (f) => `---\n${f}\n---\n`
   )(frontmatter);
