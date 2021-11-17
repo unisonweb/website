@@ -27,10 +27,18 @@
   border-radius: var(--border-radius-base);
   margin-bottom: 1rem;
   scrollbar-width: auto;
-  scrollbar-color: var(--color-workspace-item-subtle-fg)
-    var(--color-transparent);
+  scrollbar-color: var(--color-doc-subtle-fg) var(--color-transparent);
   overflow: auto;
-  max-width: var(--main-content-width);
+  max-width: calc(var(--main-content-width) - 4rem);
+}
+
+.unison-doc .folded .source.code,
+.unison-doc .folded .sources .source,
+.unison-doc .folded .folded-sources .source,
+.unison-doc .folded .source.example,
+.unison-doc .folded .source.eval,
+.unison-doc .folded .source.signatures .signature {
+  max-width: calc(calc(var(--main-content-width) - 4rem) - 1.5rem);
 }
 
 .unison-doc .folded-sources .source {
@@ -62,7 +70,7 @@
 .unison-doc .source.example::-webkit-scrollbar-thumb,
 .unison-doc .source.eval::-webkit-scrollbar-thumb,
 .unison-doc .source.signatures .signature::-webkit-scrollbar-thumb {
-  background-color: var(--color-workspace-item-subtle-fg);
+  background-color: var(--color-doc-subtle-fg);
   border-radius: var(--border-radius-base);
 }
 
