@@ -30,6 +30,7 @@
   scrollbar-color: var(--color-workspace-item-subtle-fg)
     var(--color-transparent);
   overflow: auto;
+  max-width: var(--main-content-width);
 }
 
 .unison-doc .folded-sources .source {
