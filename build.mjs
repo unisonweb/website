@@ -102,7 +102,7 @@ function transformFile(type, src, dest) {
             fs.readFileSync(authorsFile, { encoding: "utf-8" })
           ).window.document.querySelectorAll("li");
 
-          article.authors = [...authors].map((a) => a.textContent);
+          article.authors = [...authors].map((a) => ({ name: a.textContent }));
         } catch (_ex) {
           // Not all articles have authors
           article.authors = [];
@@ -177,12 +177,8 @@ function updateContent(frontmatter, prefix, content) {
 }
 
 function frontMatterToString(frontmatter) {
-  console.log(frontmatter);
-  return `
-  ---
-  ${yaml.stringify(frontmatter)}
-  ---
-  `;
+  return `---
+${yaml.stringify(frontmatter)}---`;
 }
 
 function convertRefsToUnisonShareLinks(dom) {

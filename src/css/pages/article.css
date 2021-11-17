@@ -21,6 +21,47 @@ main#article #title {
   font-family: "Playfair Display", serif;
 }
 
+main#article #byline {
+  text-align: center;
+  color: var(--color-main-subtle-fg);
+  font-size: var(--font-size-small);
+  margin-bottom: 2rem;
+  margin-top: -1rem;
+}
+
+main#article #byline .by {
+  margin-right: 0.2ch;
+}
+main#article #byline .authors {
+  display: inline;
+  list-style: none;
+}
+
+main#article #byline .author {
+  color: var(--color-main-subtle-fg-em);
+  display: inline;
+}
+
+main#article #byline .author:after {
+  color: var(--color-main-subtle-fg);
+  content: ", ";
+}
+
+main#article #byline .author:last-child:after {
+  content: "";
+}
+
+main#article
+  #byline
+  .authors
+  .author:nth-last-child(3)
+  ~ main#article
+  #byline
+  .author:nth-last-child(2):after {
+  color: var(--color-main-subtle-fg);
+  content: ", and ";
+}
+
 main#article nav#index {
   position: absolute;
   left: 0;

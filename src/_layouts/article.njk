@@ -14,6 +14,17 @@
 
         <h1 id="title">{{ title }}</h1>
 
+        {% if authors.length %}
+          <div id="byline">
+            <span class="by">By</span>
+            <ul class="authors">
+            {%- for author in authors -%}
+              <li class="author">{{ author.name }}</li>
+            {%- endfor -%}
+            </ul>
+          </div>
+        {% endif %}
+
         <nav id="index">
           <div class="links">
             {%- for link in sidebar -%}
