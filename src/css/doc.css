@@ -6,6 +6,8 @@
   font-size: var(--font-size-base);
   color: var(--color-doc-fg);
   background: var(--color-doc-bg);
+
+  --fold-toggle-column-width: 1.75rem;
 }
 
 .unison-doc .word {
@@ -38,7 +40,9 @@
 .unison-doc .folded .source.example,
 .unison-doc .folded .source.eval,
 .unison-doc .folded .source.signatures .signature {
-  max-width: calc(calc(var(--main-content-width) - 4rem) - 1.5rem);
+  max-width: calc(
+    calc(var(--main-content-width) - 4rem) - var(--fold-toggle-column-width)
+  );
 }
 
 .unison-doc .folded-sources .source {
