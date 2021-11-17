@@ -471,3 +471,17 @@
     width: calc(100vw - 12.25rem);
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .unison-doc {
+    width: calc(200vw - 11.5rem);
+  }
+  .unison-doc .source.code,
+  .unison-doc .sources .source,
+  .unison-doc .folded-sources .source,
+  .unison-doc .source.example,
+  .unison-doc .source.eval,
+  .unison-doc .source.signatures .signature {
+    width: auto;
+  }
+}
