@@ -175,18 +175,21 @@ function convertRefsToUnisonShareLinks(dom) {
   dom.window.document
     .querySelectorAll(".unison-doc span[data-ref]")
     .forEach((span) => {
-      const ref = span.dataset.ref.replace(/#/g, "@");
-      const refType = span.dataset.refType;
+      // Don't link refs if they are within an <a> element
+      if (!span.closest("a")) {
+        const ref = span.dataset.ref.replace(/#/g, "@");
+        const refType = span.dataset.refType;
 
-      if (ref && refType) {
-        let link = dom.window.document.createElement("a");
+        if (ref && refType) {
+          let link = dom.window.document.createElement("a");
 
-        link.href = `https://share.unison-lang.org/latest/namespaces/unison/website/;/${refType}s/${ref}`;
-        link.target = "_blank";
-        link.innerHTML = span.innerHTML;
-        link.classList = span.classList;
+          link.href = `https://share.unison-lang.org/latest/namespaces/unison/website/;/${refType}s/${ref}`;
+          link.target = "_blank";
+          link.innerHTML = span.innerHTML;
+          link.classList = span.classList;
 
-        span.replaceWith(link);
+          span.replaceWith(link);
+        }
       }
     });
 
