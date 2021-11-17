@@ -26,7 +26,7 @@ main#article #byline {
   color: var(--color-main-subtle-fg);
   font-size: var(--font-size-small);
   margin-bottom: 2rem;
-  margin-top: -1rem;
+  margin-top: -2rem;
 }
 
 main#article #byline .by {
