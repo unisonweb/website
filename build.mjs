@@ -6,6 +6,7 @@ import path from "path";
 import copy from "recursive-copy";
 import { JSDOM } from "jsdom";
 import kebabCase from "kebab-case";
+import yaml from "yaml";
 import { reduce, join, has, append, keys, pipe, map } from "ramda";
 
 rmdir("./src/docs", { recursive: true, force: true })
@@ -72,6 +73,7 @@ function transformFile(type, src, dest) {
       let article = {};
       const titleFile = `build/articles/${articleKey}/_title.html`;
       const summaryFile = `build/articles/${articleKey}/_summary.html`;
+      const authorsFile = `build/articles/${articleKey}/_authors.html`;
       const sidebarFile = `build/articles/${articleKey}/_sidebar.html`;
 
       try {
@@ -93,6 +95,17 @@ function transformFile(type, src, dest) {
           ).window.document.querySelector("article").textContent;
         } catch (_ex) {
           // Not all articles have summaries
+        }
+
+        try {
+          const authors = new JSDOM(
+            fs.readFileSync(authorsFile, { encoding: "utf-8" })
+          ).window.document.querySelectorAll("li");
+
+          article.authors = [...authors].map((a) => a.textContent);
+        } catch (_ex) {
+          // Not all articles have authors
+          article.authors = [];
         }
 
         // Convert _sidebar.html to <artickeKey>.json with a sidebar key
@@ -131,6 +144,7 @@ function transformFile(type, src, dest) {
 
     frontmatter.overallTitle = article.overallTitle;
     frontmatter.summary = article.summary;
+    frontmatter.authors = article.authors;
   }
 
   const content = updateContent(
@@ -163,12 +177,12 @@ function updateContent(frontmatter, prefix, content) {
 }
 
 function frontMatterToString(frontmatter) {
-  return pipe(
-    keys,
-    reduce((acc, k) => append(`${k}: "${frontmatter[k]}"`, acc), []),
-    join("\n"),
-    (f) => `---\n${f}\n---\n`
-  )(frontmatter);
+  console.log(frontmatter);
+  return `
+  ---
+  ${yaml.stringify(frontmatter)}
+  ---
+  `;
 }
 
 function convertRefsToUnisonShareLinks(dom) {
