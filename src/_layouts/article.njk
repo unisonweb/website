@@ -27,6 +27,7 @@
 
         <nav id="index">
           <div class="links">
+            <h3 class="in-this-article">In this article</h3>
             {%- for link in sidebar -%}
               <a title="{{link.label}}" href="{{link.href}}"{% if page.url == link.href + "/" %} aria-current="page"{% endif %}>
                 {{ link.label }}

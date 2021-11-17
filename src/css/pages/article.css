@@ -80,6 +80,14 @@ main#article nav#index .links {
   gap: 1rem;
 }
 
+main#article nav#index .links .in-this-article {
+  display: none;
+  font-weight: normal;
+  font-size: var(--font-size-small);
+  text-align: right;
+  color: var(--color-doc-subtle-fg);
+}
+
 main#article nav#index .links a {
   display: flex;
   flex: 1;
@@ -256,6 +264,11 @@ main#article .unison-at-work-cta .button {
     justify-self: flex-start;
   }
 
+  main#article nav#index .links .in-this-article {
+    display: block;
+  }
+
+  main#article nav#index .links .in-this-article,
   main#article nav#index .links a {
     justify-content: flex-start;
     text-align: left;
