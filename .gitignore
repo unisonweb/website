@@ -13,3 +13,6 @@ scratch.u
 src/docs
 src/articles
 src/_includes/_docs-sidebar-content.njk
+
+# Local Netlify folder
+.netlify
