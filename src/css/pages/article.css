@@ -155,7 +155,7 @@ main#article footer.article-pagination a {
   border-radius: var(--border-radius-base);
   background: var(--color-doc-aside-bg);
   padding: 0.75rem;
-  width: 50%;
+  max-width: 50%;
 }
 
 main#article footer.article-pagination .article-title {
@@ -273,6 +273,9 @@ main#article .unison-at-work-cta .button {
 
   main#article footer.article-pagination {
     flex-direction: column;
+  }
+  main#article footer.article-pagination a {
+    max-width: none;
   }
 
   main#article footer.article-pagination a.prev {
