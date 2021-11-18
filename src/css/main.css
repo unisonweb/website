@@ -147,6 +147,14 @@ main#article {
 }
 
 #main-content {
+  --main-content-top-padding: 4rem;
+  --main-content-padding: 2rem;
+  --main-content-padding: 2rem;
+  /* used to query width further down in page */
+  --main-inner-content-width: calc(
+    var(--main-content-width) - calc(var(--main-content-side-padding) * 2)
+  );
+
   grid-area: main-content;
   height: var(--main-content-height);
   background: var(--color-main-bg);
@@ -154,7 +162,8 @@ main#article {
   overflow: auto;
   width: var(--main-content-width);
   margin: auto;
-  padding: 4rem 2rem 2rem 2rem;
+  padding: var(--main-content-padding);
+  padding-top: var(--main-content-top-padding);
 }
 
 #main-footer {
@@ -169,21 +178,31 @@ main#article {
   gap: 0.25rem;
 }
 
-@media only screen and (max-width: 70rem) {
+@media only screen and (max-width: 1264px) {
+  #main-content {
+    margin-left: 2rem;
+  }
+}
+
+@media only screen and (max-width: 1110px) {
   :root {
     --main-footer-height: 6rem;
+    --main-content-width: 100vw;
   }
 
-  #main-header nav,
   #main-content {
-    width: 100vw;
+    margin-left: 0;
   }
+
   #main-header nav {
+    width: var(--main-content-width);
     padding: 0 2rem;
   }
+
   #main-header nav .logo {
     margin-right: 0;
   }
+
   #main-header nav section {
     gap: 0.5rem;
   }

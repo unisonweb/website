@@ -8,6 +8,8 @@
   background: var(--color-doc-bg);
 
   --fold-toggle-column-width: 1.75rem;
+  --doc-aside-width: 15rem;
+  --doc-aside-margin: 1rem;
 }
 
 .unison-doc .word {
@@ -193,8 +195,8 @@
 
 .unison-doc aside {
   position: absolute;
-  right: -16rem;
-  width: 15rem;
+  right: calc(calc(var(--doc-aside-width) + var(--doc-aside-margin)) * -1);
+  width: var(--doc-aside-width);
   font-size: var(--font-size-medium);
   background: var(--color-doc-aside-bg);
   padding: 0.5rem 0.75rem;
@@ -424,7 +426,7 @@
 .unison-doc .group {
 }
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1024px) {
   .unison-doc aside {
     position: relative;
     right: auto;
@@ -441,9 +443,7 @@
     max-width: none;
     width: min(40rem, calc(calc(100vw - 5rem)) - 3rem);
   }
-}
 
-@media only screen and (max-width: 1024px) {
   .unison-doc {
     width: calc(100vw - 4rem);
   }
