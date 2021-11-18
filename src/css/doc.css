@@ -237,6 +237,12 @@
   margin-bottom: 0.25rem;
 }
 
+.unison-doc .folded-details .callout {
+  width: calc(
+    calc(var(--main-content-width) - 4rem) - var(--fold-toggle-column-width)
+  );
+}
+
 .unison-doc .folded-details .callout:nth-child(2) {
   margin-top: 1rem;
 }
@@ -430,6 +436,10 @@
     right: auto;
     width: auto;
     margin: 1.5rem 1.5rem 1.5rem 1.5rem;
+  }
+
+  .unison-doc .group .join {
+    white-space: normal;
   }
 
   .unison-doc aside .source.code,

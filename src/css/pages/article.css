@@ -310,7 +310,7 @@ main#article .unison-at-work-cta .button {
   }
 }
 
-@media only screen and (max-width: 25rem) {
+@media only screen and (max-width: 480px) {
   main#article #title {
     font-size: 3rem;
   }
