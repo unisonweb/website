@@ -142,6 +142,7 @@ function transformFile(type, src, dest) {
 
     const article = articles[articleKey];
 
+    frontmatter.articleIndex = `/articles/${kebabCase(articleKey)}`;
     frontmatter.overallTitle = article.overallTitle;
     frontmatter.summary = article.summary;
     frontmatter.authors = article.authors;

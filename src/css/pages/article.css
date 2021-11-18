@@ -7,9 +7,15 @@ main#article #overall-title {
   font-size: var(--font-size-medium);
   text-transform: uppercase;
   font-weight: normal;
-  color: var(--color-pink-3);
   text-align: center;
   letter-spacing: 0.1rem;
+}
+main#article #overall-title a {
+  color: var(--color-pink-3);
+}
+main#article #overall-title a:hover {
+  color: var(--color-pink-1);
+  text-decoration: none;
 }
 
 main#article #title {
