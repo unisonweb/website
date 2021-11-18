@@ -14,7 +14,7 @@ main#article #overall-title a {
   color: var(--color-gray-lighten-30);
 }
 main#article #overall-title a:hover {
-  color: var(--color-pink-1);
+  color: var(--color-gray-base);
   text-decoration: none;
 }
 
