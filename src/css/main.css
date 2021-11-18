@@ -160,16 +160,20 @@ main#article {
 #main-footer {
   display: flex;
   align-items: center;
-  margin-top: 2rem;
+  margin: 2rem 0;
   padding: 0 2rem;
   height: var(--main-footer-height);
   font-size: var(--font-size-small);
   color: var(--color-main-subtle-fg);
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
 @media only screen and (max-width: 70rem) {
+  :root {
+    --main-footer-height: 6rem;
+  }
+
   #main-header nav,
   #main-content {
     width: 100vw;
@@ -182,5 +186,9 @@ main#article {
   }
   #main-header nav section {
     gap: 0.5rem;
+  }
+
+  #main-footer {
+    flex-direction: column;
   }
 }
