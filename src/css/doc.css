@@ -16,8 +16,8 @@
   margin-right: 0.5ch;
 }
 
-.unison-doc .group .join :nth-last-child(2) .word {
-  margin-right: 0;
+.unison-doc .group .join .word:last-child {
+  margin-left: -0.5ch;
 }
 
 .unison-doc .source.code,
@@ -94,12 +94,6 @@
   background: var(--color-doc-source-bg);
   border-radius: var(--border-radius-base);
   white-space: nowrap;
-}
-.unison-doc
-  .group
-  .join
-  .source:is(.inline-code, .example-inline, .eval-inline, .signature-inline) {
-  margin-right: 0;
 }
 
 .unison-doc
