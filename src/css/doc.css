@@ -37,7 +37,7 @@
   scrollbar-width: auto;
   scrollbar-color: var(--color-doc-subtle-fg) var(--color-transparent);
   overflow: auto;
-  max-width: calc(var(--main-content-width) - 4rem);
+  max-width: 100%;
 }
 
 .unison-doc .folded .source.code,
@@ -47,7 +47,21 @@
 .unison-doc .folded .source.eval,
 .unison-doc .folded .source.signatures .signature {
   max-width: calc(
-    calc(var(--main-content-width) - 4rem) - var(--fold-toggle-column-width)
+    var(--main-inner-content-width) - var(--fold-toggle-column-width)
+  );
+}
+
+.unison-doc .folded .callout .folded .source.code,
+.unison-doc .folded .callout .folded .sources .source,
+.unison-doc .folded .callout .folded .folded-sources .source,
+.unison-doc .folded .callout .folded .source.example,
+.unison-doc .folded .callout .folded .source.eval,
+.unison-doc .folded .callout .folded .source.signatures .signature {
+  max-width: calc(
+    calc(
+        var(--main-inner-content-width) -
+          calc(var(--fold-toggle-column-width) * 2)
+      ) - 3.75rem
   );
 }
 
@@ -92,19 +106,14 @@
 
 .unison-doc
   .source:is(.inline-code, .example-inline, .eval-inline, .signature-inline) {
-  display: inline-block;
+  display: inline-flex;
   padding: 0 0.25rem;
   margin-right: 0.5ch;
   background: var(--color-doc-source-bg);
   border-radius: var(--border-radius-base);
   white-space: nowrap;
-}
-
-.unison-doc
-  .source:is(.inline-code, .example-inline, .eval-inline, .signature-inline)
-  :is(.inline-code, code) {
-  display: inline-flex;
-  white-space: nowrap;
+  overflow: auto;
+  max-width: 100%;
 }
 
 .unison-doc
@@ -153,6 +162,7 @@
 .unison-doc blockquote {
   position: relative;
   padding: 0.5rem 1.25rem;
+  padding-right: 0;
   margin-left: 0rem;
   margin-bottom: 1rem;
 }
@@ -239,7 +249,7 @@
 
 .unison-doc .folded-details .callout {
   width: calc(
-    calc(var(--main-content-width) - 4rem) - var(--fold-toggle-column-width)
+    var(--main-inner-content-width) - var(--fold-toggle-column-width)
   );
 }
 
