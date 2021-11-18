@@ -172,6 +172,15 @@ main#article {
 @media only screen and (max-width: 70rem) {
   #main-header nav,
   #main-content {
-    width: auto;
+    width: 100vw;
+  }
+  #main-header nav {
+    padding: 0 2rem;
+  }
+  #main-header nav .logo {
+    margin-right: 0;
+  }
+  #main-header nav section {
+    gap: 0.5rem;
   }
 }

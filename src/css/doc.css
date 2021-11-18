@@ -444,37 +444,15 @@
 }
 
 @media only screen and (max-width: 1024px) {
+  .unison-doc {
+    width: calc(100vw - 4rem);
+  }
   .unison-doc .source.code,
   .unison-doc .sources .source,
   .unison-doc .folded-sources .source,
   .unison-doc .source.example,
   .unison-doc .source.eval,
   .unison-doc .source.signatures .signature {
-    width: calc(100vw - 5rem);
-    overflow: auto;
-  }
-
-  .unison-doc .callout .source.code,
-  .unison-doc .callout .sources .source,
-  .unison-doc .callout .folded-sources .source,
-  .unison-doc .callout .source.example,
-  .unison-doc .callout .source.eval,
-  .unison-doc .callout .source.signatures .signature {
-    width: calc(100vw - 10.5rem);
-  }
-  .unison-doc .callout .folded .source.code,
-  .unison-doc .callout .folded .sources .source,
-  .unison-doc .callout .folded .folded-sources .source,
-  .unison-doc .callout .folded .source.example,
-  .unison-doc .callout .folded .source.eval,
-  .unison-doc .callout .folded .source.signatures .signature {
-    width: calc(100vw - 12.25rem);
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .unison-doc {
-    width: calc(100vw - 11.5rem);
   }
   .unison-doc .source.code,
   .unison-doc .sources .source,

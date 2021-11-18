@@ -305,6 +305,10 @@ main#article .unison-at-work-cta .button {
 }
 
 @media only screen and (max-width: 400px) {
+  main#article #title {
+    font-size: 3rem;
+  }
+
   main#article nav#index {
     flex-direction: column;
     align-items: flex-start;
