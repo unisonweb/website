@@ -474,7 +474,7 @@
 
 @media only screen and (max-width: 600px) {
   .unison-doc {
-    width: calc(200vw - 11.5rem);
+    width: calc(100vw - 11.5rem);
   }
   .unison-doc .source.code,
   .unison-doc .sources .source,
