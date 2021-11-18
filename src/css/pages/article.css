@@ -83,6 +83,7 @@ main#article nav#index {
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
+  padding-top: 0.2rem;
   border-right: 1px solid var(--color-doc-content-border);
 }
 
@@ -138,7 +139,7 @@ main#article nav#index .links a[aria-current]:after {
 }
 
 main#article nav#index .compositional-distributed-systems-cta {
-  margin-top: 3rem;
+  margin-top: 6rem;
   text-align: right;
   color: var(--color-doc-subtle-fg);
   font-size: var(--font-size-small);
@@ -146,7 +147,11 @@ main#article nav#index .compositional-distributed-systems-cta {
   align-self: flex-end;
 }
 
-main#article nav#index .compositional-distributed-systems-cta .button {
+main#article nav#index .compositional-distributed-systems-cta a {
+  color: var(--color-gray-base);
+  display: inline-flex;
+  justify-self: flex-end;
+  text-align: right;
   margin-top: 1rem;
 }
 
