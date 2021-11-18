@@ -20,6 +20,10 @@
   margin-left: -0.5ch;
 }
 
+.unison-doc .group .join {
+  white-space: nowrap;
+}
+
 .unison-doc .source.code,
 .unison-doc .sources .source,
 .unison-doc .folded-sources .source,
