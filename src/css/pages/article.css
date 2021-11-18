@@ -206,8 +206,8 @@ main#article footer.article-pagination a:hover {
 }
 
 main#article .unison-at-work-cta {
-  background: var(--color-gray-darken-10);
-  color: var(--color-gray-lighten-60);
+  background: var(--color-blue-5);
+  color: var(--color-gray-darken-20);
   padding: 1rem;
   border-radius: var(--border-radius-base);
   font-size: 1rem;
