@@ -11,7 +11,7 @@ main#article #overall-title {
   letter-spacing: 0.1rem;
 }
 main#article #overall-title a {
-  color: var(--color-pink-3);
+  color: var(--color-gray-lighten-30);
 }
 main#article #overall-title a:hover {
   color: var(--color-pink-1);
@@ -20,11 +20,17 @@ main#article #overall-title a:hover {
 
 main#article #title {
   font-size: 4rem;
-  font-weight: 700;
   margin: 1.5rem 0 4rem 0;
   line-height: 1.1;
   text-align: center;
-  font-family: "Playfair Display", serif;
+  font-family: "Palanquin Dark", sans-serif;
+  font-weight: 900;
+  letter-spacing: -2px;
+  color: var(--color-pink-2);
+}
+
+main#article #title::first-letter {
+  letter-spacing: -3px;
 }
 
 main#article #byline {
@@ -234,7 +240,7 @@ main#article .unison-at-work-cta .button {
   margin-left: auto;
 }
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1439px) {
   main#article nav#index {
     position: static;
     transform: none;
