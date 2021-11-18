@@ -16,7 +16,7 @@
   margin-right: 0.5ch;
 }
 
-.unison-doc .group .join .word:last-child {
+.unison-doc .group .join > :last-child {
   margin-left: -0.5ch;
 }
 
