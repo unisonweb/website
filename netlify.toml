@@ -1,0 +1,7 @@
+[build]
+  publish = "build/site"
+  command = "npm run build"
+
+[redirects]]
+ from = "/"
+ to = "https://unisonweb.org"
