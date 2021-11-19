@@ -7,7 +7,7 @@ import copy from "recursive-copy";
 import { JSDOM } from "jsdom";
 import kebabCase from "kebab-case";
 import yaml from "yaml";
-import { reduce, join, has, append, keys, pipe, map } from "ramda";
+import { has, map } from "ramda";
 
 rmdir("./src/docs", { recursive: true, force: true })
   // Remove old artifacts
