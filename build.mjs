@@ -35,6 +35,7 @@ function build() {
     // * Copy files from build/docs to src/docs and cleanup html
     // * Create frontmatter for each doc: tags + layout
     .then(() => console.log(" - Building /docs"))
+    .then(() => mkdir("./src/docs"))
     .then(() =>
       copy(
         "./build/docs/_sidebar.html",
@@ -57,6 +58,7 @@ function build() {
     // * Create frontmatter for each article:
     //     tags + layout + title (title from a _title.html file)
     .then(() => console.log(" - Building /articles"))
+    .then(() => mkdir("./src/articles"))
     .then(() =>
       copy("./build/articles", "./src/articles", {
         rename: kebabCase,
