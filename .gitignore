@@ -12,7 +12,7 @@ scratch.u
 # source exists in the codebase
 src/docs
 src/articles
-src/_includes/_docs-sidebar-content.njk
+src/_includes/_doc-sidebar-content.njk
 
 # Local Netlify folder
 .netlify

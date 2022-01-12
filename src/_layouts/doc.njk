@@ -9,8 +9,9 @@
   <body>
     <main id='doc'>
       {% include "_header.njk" %}
-      {% include "_sidebar.njk" %}
+      <aside id='main-sidebar'>{% include "_doc-sidebar-content.njk" %}</aside>
       <div id="main-content">
+        <h1 id="title">{{ title }}</h1>
         {{content | safe}}
         {% include "_footer.njk" %}
       </div>

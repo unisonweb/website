@@ -1,0 +1,27 @@
+main#doc #main-content {
+  position: relative;
+  overflow: visible;
+}
+
+main#doc #title {
+  letter-spacing: 0.1rem;
+  font-size: 2.5rem;
+  margin: 1.5rem 0 2rem 0;
+  line-height: 1.1;
+  font-family: "Palanquin Dark", sans-serif;
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: var(--color-pink-2);
+}
+
+main#doc #main-sidebar ul {
+  list-style-type: none;
+  margin-left: 0;
+}
+main#doc #main-sidebar ul > li > ul {
+  margin-left: 1rem;
+}
+
+main#doc #main-sidebar a {
+  color: var(--color-main-sidebar-fg);
+}

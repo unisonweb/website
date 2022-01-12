@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { rmdir } from "fs/promises";
+import { rmdir, rm } from "fs/promises";
 import fs from "fs";
 import path from "path";
 import copy from "recursive-copy";
@@ -12,8 +12,8 @@ import { has, map } from "ramda";
 rmdir("./src/docs", { recursive: true, force: true })
   // Remove old artifacts
   .then(() => rmdir("./src/articles", { recursive: true, force: true }))
-  /*
-  .then(() => rm("./src/_includes/_doc-sidebar-content.njk"))
+  .then(() => rmdir("./src/docs", { recursive: true, force: true }))
+  .then(() => rm("./src/_includes/_doc-sidebar-content.njk", { force: true }))
   // -- Docs ------------------------------------------------------------------
   // * Copy build/docs/_sidebar.html to src/_includes/_doc-sidebar-content.njk
   // * Copy files from build/docs to src/docs and cleanup html
@@ -25,9 +25,15 @@ rmdir("./src/docs", { recursive: true, force: true })
     )
   )
   .then(() =>
-    copy("./build/docs", "./src/docs", { transform: transformFile("doc") })
+    copy("./build/docs", "./src/docs", {
+      rename: kebabCase,
+    }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
+      const fileName = path.basename(dest);
+      if (!fileName.startsWith("_")) {
+        transformFile("doc", src, dest);
+      }
+    })
   )
-  */
   // -- Articles --------------------------------------------------------------
   // * Copy files from build/articles to src/articles and cleanup html
   // * Create layout data file in src/articles
