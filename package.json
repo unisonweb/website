@@ -4,6 +4,8 @@
   "description": "Unison language website",
   "scripts": {
     "start": "./build.mjs && eleventy --serve --port 2345",
+    "dev": "eleventy --serve --port 2345",
+    "preBuild": "./build.mjs",
     "build": "./build.mjs && eleventy"
   },
   "repository": {
