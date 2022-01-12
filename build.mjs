@@ -23,7 +23,6 @@ function build() {
   rmdir("./build", { recursive: true, force: true })
     .then(() => rmdir("./src/docs", { recursive: true, force: true }))
     .then(() => rmdir("./src/articles", { recursive: true, force: true }))
-    .then(() => rmdir("./src/docs", { recursive: true, force: true }))
     .then(() => rm("./src/_includes/_doc-sidebar-content.njk", { force: true }))
     .then(() => console.log(" - Running transcript"))
     .then(() => mkdir("./build"))
