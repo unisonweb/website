@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import { rmdir, rm } from "fs/promises";
+import { mkdir, rm } from "fs/promises";
+import { exec } from "child_process";
 import fs from "fs";
 import path from "path";
 import copy from "recursive-copy";
@@ -9,47 +10,66 @@ import kebabCase from "kebab-case";
 import yaml from "yaml";
 import { has, map } from "ramda";
 
-rmdir("./src/docs", { recursive: true, force: true })
-  // Remove old artifacts
-  .then(() => rmdir("./src/articles", { recursive: true, force: true }))
-  .then(() => rmdir("./src/docs", { recursive: true, force: true }))
-  .then(() => rm("./src/_includes/_doc-sidebar-content.njk", { force: true }))
-  // -- Docs ------------------------------------------------------------------
-  // * Copy build/docs/_sidebar.html to src/_includes/_doc-sidebar-content.njk
-  // * Copy files from build/docs to src/docs and cleanup html
-  // * Create frontmatter for each doc: tags + layout
-  .then(() =>
-    copy(
-      "./build/docs/_sidebar.html",
-      "./src/_includes/_doc-sidebar-content.njk"
+// Run the build process!
+build();
+// ----------------------
+
+function build() {
+  console.log("");
+  console.log("BUILDING HTML FROM DOCS");
+  console.log("=========================");
+  console.log(" - Removing old artifacts");
+
+  rm("./build", { recursive: true, force: true })
+    .then(() => rm("./src/docs", { recursive: true, force: true }))
+    .then(() => rm("./src/articles", { recursive: true, force: true }))
+    .then(() => rm("./src/_includes/_doc-sidebar-content.njk", { force: true }))
+    .then(() => console.log(" - Running transcript"))
+    .then(() => mkdir("./build"))
+    .then(() =>
+      run(" TMPDIR=build ucm transcript.fork docs-to-html.md --codebase .")
     )
-  )
-  .then(() =>
-    copy("./build/docs", "./src/docs", {
-      rename: kebabCase,
-    }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
-      const fileName = path.basename(dest);
-      if (!fileName.startsWith("_")) {
-        transformFile("doc", src, dest);
-      }
-    })
-  )
-  // -- Articles --------------------------------------------------------------
-  // * Copy files from build/articles to src/articles and cleanup html
-  // * Create layout data file in src/articles
-  // * Create frontmatter for each article:
-  //     tags + layout + title (title from a _title.html file)
-  .then(() =>
-    copy("./build/articles", "./src/articles", {
-      rename: kebabCase,
-    }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
-      const fileName = path.basename(dest);
-      if (!fileName.startsWith("_")) {
-        transformFile("article", src, dest);
-      }
-    })
-  )
-  .catch((ex) => console.error(ex));
+    // -- Docs ------------------------------------------------------------------
+    // * Copy build/docs/_sidebar.html to src/_includes/_doc-sidebar-content.njk
+    // * Copy files from build/docs to src/docs and cleanup html
+    // * Create frontmatter for each doc: tags + layout
+    .then(() => console.log(" - Building /docs"))
+    .then(() => mkdir("./src/docs"))
+    .then(() =>
+      copy(
+        "./build/docs/_sidebar.html",
+        "./src/_includes/_doc-sidebar-content.njk"
+      )
+    )
+    .then(() =>
+      copy("./build/docs", "./src/docs", {
+        rename: kebabCase,
+      }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
+        const fileName = path.basename(dest);
+        if (!fileName.startsWith("_")) {
+          transformFile("doc", src, dest);
+        }
+      })
+    )
+    // -- Articles --------------------------------------------------------------
+    // * Copy files from build/articles to src/articles and cleanup html
+    // * Create layout data file in src/articles
+    // * Create frontmatter for each article:
+    //     tags + layout + title (title from a _title.html file)
+    .then(() => console.log(" - Building /articles"))
+    .then(() => mkdir("./src/articles"))
+    .then(() =>
+      copy("./build/articles", "./src/articles", {
+        rename: kebabCase,
+      }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
+        const fileName = path.basename(dest);
+        if (!fileName.startsWith("_")) {
+          transformFile("article", src, dest);
+        }
+      })
+    )
+    .catch((ex) => console.error(ex));
+}
 
 // -- Helpers -----------------------------------------------------------------
 
@@ -296,4 +316,19 @@ function trace(key) {
     console.log(key, x);
     return x;
   };
+}
+
+function run(cmd) {
+  return new Promise((resolve, reject) => {
+    exec(cmd, { maxBuffer: 1024 * 500 }, (error, stdout, stderr) => {
+      if (error) {
+        console.warn(error);
+      } else if (stdout) {
+        console.log(stdout);
+      } else {
+        console.log(stderr);
+      }
+      resolve(stdout ? true : false);
+    });
+  });
 }
