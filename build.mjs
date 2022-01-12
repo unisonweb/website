@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { rmdir, mkdir, rm } from "fs/promises";
+import { mkdir, rm } from "fs/promises";
 import { exec } from "child_process";
 import fs from "fs";
 import path from "path";
@@ -20,9 +20,9 @@ function build() {
   console.log("=========================");
   console.log(" - Removing old artifacts");
 
-  rmdir("./build", { recursive: true, force: true })
-    .then(() => rmdir("./src/docs", { recursive: true, force: true }))
-    .then(() => rmdir("./src/articles", { recursive: true, force: true }))
+  rm("./build", { recursive: true, force: true })
+    .then(() => rm("./src/docs", { recursive: true, force: true }))
+    .then(() => rm("./src/articles", { recursive: true, force: true }))
     .then(() => rm("./src/_includes/_doc-sidebar-content.njk", { force: true }))
     .then(() => console.log(" - Running transcript"))
     .then(() => mkdir("./build"))
