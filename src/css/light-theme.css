@@ -23,14 +23,14 @@
   --color-main-header-current-fg: var(--color-gray-darken-10);
   --color-main-header-logo-hover: var(--color-pink-1);
 
-  --color-main-sidebar-fg: var(--color-gray-lighten-50);
-  --color-main-sidebar-fg-em: var(--color-gray-lighten-100);
-  --color-main-sidebar-bg: var(--color-gray-darken-20);
+  --color-main-sidebar-fg: var(--color-gray-darken-10);
+  --color-main-sidebar-fg-em: var(--color-gray-darken-30);
+  --color-main-sidebar-bg: var(--color-gray-lighten-100);
   /* see color files for why this is needed */
   --color-main-sidebar-bg-transparent: var(--color-gray-darken-20-transparent);
   --color-main-sidebar-border: var(--color-transparent);
-  --color-main-sidebar-subtle-fg: var(--color-gray-lighten-20);
-  --color-main-sidebar-subtle-fg-em: var(--color-gray-lighten-30);
+  --color-main-sidebar-subtle-fg: var(--color-gray-lighten-30);
+  --color-main-sidebar-subtle-fg-em: var(--color-gray-lighten-20);
   --color-main-sidebar-subtle-bg: var(--color-transparent);
   --color-main-sidebar-focus-fg: var(--color-gray-lighten-60);
   --color-main-sidebar-focus-bg: var(--color-gray-darken-10);
