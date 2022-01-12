@@ -28,7 +28,7 @@ function build() {
     .then(() => console.log(" - Running transcript"))
     .then(() => mkdir("./build"))
     .then(() =>
-      run(" TMPDIR=build unison transcript.fork docs-to-html.md --codebase .")
+      run(" TMPDIR=build ucm transcript.fork docs-to-html.md --codebase .")
     )
     // -- Docs ------------------------------------------------------------------
     // * Copy build/docs/_sidebar.html to src/_includes/_doc-sidebar-content.njk
