@@ -1,12 +1,21 @@
+main#doc {
+  --main-sidebar-width: 22rem;
+  --color-main-sidebar-bg: var(--color-gray-lighten-55);
+  margin: auto;
+  width: 1500px;
+}
+
 main#doc #main-content {
   position: relative;
   overflow: visible;
+  margin: 0;
+  margin-left: 2rem;
 }
 
 main#doc #title {
   letter-spacing: 0.1rem;
   font-size: 2.5rem;
-  margin: 1.5rem 0 2rem 0;
+  margin: 0rem 0 2rem 0;
   line-height: 1.1;
   font-family: "Palanquin Dark", sans-serif;
   font-weight: 900;
@@ -14,14 +23,62 @@ main#doc #title {
   color: var(--color-pink-2);
 }
 
+main#doc #main-sidebar {
+  height: auto;
+  margin-top: 4rem;
+  background: var(--color-gray-lighten-55);
+  border-radius: var(--border-radius-base);
+}
+
+main#doc #main-sidebar .unison-doc {
+  color: var(--color-gray-lighten-20);
+  font-size: var(--font-size-medium);
+}
+
+main#doc #main-sidebar section {
+  margin-top: 0;
+}
+
+main#doc #main-sidebar h1 {
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+}
+
+main#doc #main-sidebar h1:hover {
+  color: var(--color-pink-2);
+}
+
 main#doc #main-sidebar ul {
   list-style-type: none;
   margin-left: 0;
-}
-main#doc #main-sidebar ul > li > ul {
-  margin-left: 1rem;
+  margin-bottom: 1rem;
 }
 
 main#doc #main-sidebar a {
   color: var(--color-main-sidebar-fg);
+}
+
+main#doc #main-sidebar a:hover {
+  color: var(--color-pink-2);
+}
+main#doc #main-sidebar a[aria-current] {
+  font-weight: bold;
+}
+
+main#doc #main-sidebar ul {
+  display: none;
+}
+
+main#doc #main-sidebar .welcome ul {
+  display: block;
+}
+
+main#doc #main-sidebar .is-expanded ul {
+  display: block;
+}
+
+main#doc #main-sidebar ul.column,
+main#doc #main-sidebar ul.column ul {
+  margin-left: 1rem;
 }

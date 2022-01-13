@@ -8,10 +8,3 @@
   --color-doc-fg: var(--color-main-sidebar-fg);
   --color-doc-bg: var(--color-main-sidebar-bg);
 }
-
-#main-sidebar h1 {
-  color: var(--color-main-sidebar-subtle-fg);
-  font-size: var(--font-size-medium);
-  font-weight: normal;
-  text-transform: uppercase;
-}

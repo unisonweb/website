@@ -39,7 +39,9 @@ function build() {
       copy(
         "./build/docs/_sidebar.html",
         "./src/_includes/_doc-sidebar-content.njk"
-      )
+      ).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
+        transformDocFile(src, dest, false);
+      })
     )
     .then(() =>
       copy("./build/docs", "./src/docs", {
@@ -47,7 +49,7 @@ function build() {
       }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
         const fileName = path.basename(dest);
         if (!fileName.startsWith("_")) {
-          transformFile("doc", src, dest);
+          transformDocFile(src, dest);
         }
       })
     )
@@ -64,7 +66,7 @@ function build() {
       }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
         const fileName = path.basename(dest);
         if (!fileName.startsWith("_")) {
-          transformFile("article", src, dest);
+          transformArticleFile(src, dest);
         }
       })
     )
@@ -79,100 +81,112 @@ const iconCaretRight = fs.readFileSync("./src/img/icon-caret-right.svg", {
   encoding: "utf-8",
 });
 
-function transformFile(type, src, dest) {
+function transformDocFile(_src, dest, includeFrontMatter = true) {
+  let frontmatter = null;
+  if (includeFrontMatter) {
+    frontmatter = {
+      tags: "doc",
+      layout: "doc.njk",
+    };
+  }
+
+  const content = updateContent(
+    frontmatter,
+    "/docs",
+    fs.readFileSync(dest, { encoding: "utf-8" })
+  );
+
+  fs.writeFileSync(dest, content);
+}
+
+function transformArticleFile(src, dest) {
   const srcParts = src.split("/");
 
   let frontmatter = {
-    tags: type,
-    layout: type + ".njk",
+    tags: "article",
+    layout: "article.njk",
   };
 
-  let prefix = "/docs";
-
   let articleKey;
-  if (type === "article") {
-    articleKey = srcParts[2];
+  articleKey = srcParts[2];
 
-    prefix = `/articles/${articleKey}`;
+  const prefix = `/articles/${articleKey}`;
 
-    if (!has(articleKey, articles)) {
-      let article = {};
-      const titleFile = `build/articles/${articleKey}/_title.html`;
-      const summaryFile = `build/articles/${articleKey}/_summary.html`;
-      const authorsFile = `build/articles/${articleKey}/_authors.html`;
-      const sidebarFile = `build/articles/${articleKey}/_sidebar.html`;
+  if (!has(articleKey, articles)) {
+    let article = {};
+    const titleFile = `build/articles/${articleKey}/_title.html`;
+    const summaryFile = `build/articles/${articleKey}/_summary.html`;
+    const authorsFile = `build/articles/${articleKey}/_authors.html`;
+    const sidebarFile = `build/articles/${articleKey}/_sidebar.html`;
+
+    try {
+      const titleFileContent = fs.readFileSync(titleFile, {
+        encoding: "utf-8",
+      });
+
+      article.overallTitle = new JSDOM(
+        titleFileContent
+      ).window.document.querySelector("article").textContent;
 
       try {
-        const titleFileContent = fs.readFileSync(titleFile, {
+        const summaryFileContent = fs.readFileSync(summaryFile, {
           encoding: "utf-8",
         });
 
-        article.overallTitle = new JSDOM(
-          titleFileContent
+        article.summary = new JSDOM(
+          summaryFileContent
         ).window.document.querySelector("article").textContent;
-
-        try {
-          const summaryFileContent = fs.readFileSync(summaryFile, {
-            encoding: "utf-8",
-          });
-
-          article.summary = new JSDOM(
-            summaryFileContent
-          ).window.document.querySelector("article").textContent;
-        } catch (_ex) {
-          // Not all articles have summaries
-        }
-
-        try {
-          const authors = new JSDOM(
-            fs.readFileSync(authorsFile, { encoding: "utf-8" })
-          ).window.document.querySelectorAll("li");
-
-          article.authors = [...authors].map((a) => ({ name: a.textContent }));
-        } catch (_ex) {
-          // Not all articles have authors
-          article.authors = [];
-        }
-
-        // Convert _sidebar.html to <artickeKey>.json with a sidebar key
-        try {
-          const links = new JSDOM(
-            fs.readFileSync(sidebarFile, { encoding: "utf-8" })
-          ).window.document.querySelectorAll("a");
-
-          article.sidebar = {
-            sidebar: map(
-              (a) => ({
-                href: kebabCase(fixInternalLinks_(prefix, a.href)),
-                label: a.textContent,
-              }),
-              [...links]
-            ),
-          };
-
-          fs.writeFileSync(
-            `src/articles/${kebabCase(articleKey)}/${kebabCase(
-              articleKey
-            )}.json`,
-            JSON.stringify(article.sidebar)
-          );
-        } catch (_ex) {
-          // Not all articles have sidebars
-        }
-
-        articles[articleKey] = article;
-      } catch (ex) {
-        console.error(`Error getting title for article ${articleKey}`, ex);
+      } catch (_ex) {
+        // Not all articles have summaries
       }
+
+      try {
+        const authors = new JSDOM(
+          fs.readFileSync(authorsFile, { encoding: "utf-8" })
+        ).window.document.querySelectorAll("li");
+
+        article.authors = [...authors].map((a) => ({ name: a.textContent }));
+      } catch (_ex) {
+        // Not all articles have authors
+        article.authors = [];
+      }
+
+      // Convert _sidebar.html to <artickeKey>.json with a sidebar key
+      try {
+        const links = new JSDOM(
+          fs.readFileSync(sidebarFile, { encoding: "utf-8" })
+        ).window.document.querySelectorAll("a");
+
+        article.sidebar = {
+          sidebar: map(
+            (a) => ({
+              href: kebabCase(fixInternalLinks_(prefix, a.href)),
+              label: a.textContent,
+            }),
+            [...links]
+          ),
+        };
+
+        fs.writeFileSync(
+          `src/articles/${kebabCase(articleKey)}/${kebabCase(articleKey)}.json`,
+          JSON.stringify(article.sidebar)
+        );
+      } catch (_ex) {
+        // Not all articles have sidebars
+      }
+
+      articles[articleKey] = article;
+    } catch (ex) {
+      console.error(`Error getting title for article ${articleKey}`, ex);
     }
-
-    const article = articles[articleKey];
-
-    frontmatter.articleIndex = `/articles/${kebabCase(articleKey)}`;
-    frontmatter.overallTitle = article.overallTitle;
-    frontmatter.summary = article.summary;
-    frontmatter.authors = article.authors;
   }
+
+  const article = articles[articleKey];
+
+  frontmatter.articleIndex = `/articles/${kebabCase(articleKey)}`;
+  frontmatter.overallTitle = article.overallTitle;
+  frontmatter.summary = article.summary;
+  frontmatter.authors = article.authors;
 
   const content = updateContent(
     frontmatter,
@@ -196,11 +210,15 @@ function updateContent(frontmatter, prefix, content) {
     h1.remove();
   }
 
-  const pageFrontmatter = { ...frontmatter, title };
-
   const page = dom.window.document.querySelector("body").innerHTML;
 
-  return frontMatterToString(pageFrontmatter) + page;
+  if (frontmatter) {
+    const pageFrontmatter = { ...frontmatter, title };
+
+    return frontMatterToString(pageFrontmatter) + page;
+  } else {
+    return page;
+  }
 }
 
 function frontMatterToString(frontmatter) {
