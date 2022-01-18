@@ -49,6 +49,12 @@ main#doc #main-sidebar h1 {
   font-size: 1.125rem;
   font-weight: 600;
   display: flex;
+  color: var(--color-gray-base);
+  transition: all 0.2s;
+}
+
+main#doc #main-sidebar h1 .icon {
+  font-size: 1.125rem;
   color: var(--color-gray-lighten-20);
 }
 
@@ -56,19 +62,19 @@ main#doc #main-sidebar .is-expanded h1 {
   color: var(--color-gray-darken-20);
 }
 
-main#doc #main-sidebar h1:after {
-  content: " ";
-  background: url(/img/icon-arrow-right.svg);
-  width: 1.125rem;
-  height: 1.125rem;
+main#doc #main-sidebar .is-expanded h1 .icon {
+  color: var(--color-gray-darken-20);
 }
 
-main#doc #main-sidebar .is-expanded h1:after {
+main#doc #main-sidebar .is-expanded h1 .icon {
   transform: rotate(90deg);
-  color: var(--color-pink-2);
 }
 
 main#doc #main-sidebar h1:hover {
+  color: var(--color-pink-1);
+}
+
+main#doc #main-sidebar h1:hover .icon {
   color: var(--color-pink-2);
 }
 
@@ -87,12 +93,22 @@ main#doc #main-sidebar a {
 }
 
 main#doc #main-sidebar a:hover {
-  color: var(--color-pink-2);
+  color: var(--color-pink-1);
 }
 
 main#doc #main-sidebar a[aria-current] {
-  color: var(--color-pink-2);
+  color: var(--color-gray-darken-30);
   font-weight: bold;
+}
+
+main#doc #main-sidebar a[aria-current]:before {
+  position: absolute;
+  left: -1.5rem;
+  content: " ";
+  width: 0.25rem;
+  height: 1.5rem;
+  background: var(--color-pink-1);
+  border-radius: var(--border-radius-base);
 }
 
 main#doc #main-sidebar ul {
@@ -114,7 +130,7 @@ main#doc #main-sidebar ul.column ul {
 }
 
 main#doc #main-sidebar .welcome {
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 main#doc #main-sidebar .welcome ul {

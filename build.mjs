@@ -40,7 +40,7 @@ function build() {
         "./build/docs/_sidebar.html",
         "./src/_includes/_doc-sidebar-content.njk"
       ).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
-        transformDocFile(src, dest, false);
+        transformDocSidebar(src, dest, false);
       })
     )
     .then(() =>
@@ -77,9 +77,38 @@ function build() {
 
 let articles = {};
 
+const iconArrowRight = fs.readFileSync("./src/img/icon-arrow-right.svg", {
+  encoding: "utf-8",
+});
+
 const iconCaretRight = fs.readFileSync("./src/img/icon-caret-right.svg", {
   encoding: "utf-8",
 });
+
+function transformDocSidebar(_src, dest) {
+  let content = updateContent(
+    null,
+    "/docs",
+    fs.readFileSync(dest, { encoding: "utf-8" })
+  );
+
+  let dom = new JSDOM(content);
+
+  const section = dom.window.document.querySelector("section > section");
+  section?.classList.add("welcome");
+
+  [...dom.window.document.querySelectorAll("h1")].forEach((h1) => {
+    let arrow = dom.window.document.createElement("div");
+    arrow.classList.add("icon");
+    arrow.classList.add("icon-arrow-right");
+    arrow.innerHTML = iconArrowRight;
+    h1.appendChild(arrow);
+  });
+
+  content = dom.window.document.querySelector("body").innerHTML;
+
+  fs.writeFileSync(dest, content);
+}
 
 function transformDocFile(_src, dest, includeFrontMatter = true) {
   let frontmatter = null;
@@ -223,7 +252,7 @@ function updateContent(frontmatter, prefix, content) {
 
 function frontMatterToString(frontmatter) {
   return `---
-${yaml.stringify(frontmatter)}---`;
+${yaml.stringify(frontmatter)}---\n`;
 }
 
 function convertRefsToUnisonShareLinks(dom) {

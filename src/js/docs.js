@@ -1,14 +1,7 @@
 (() => {
   const all = document.querySelectorAll.bind(document);
-  const one = document.querySelector.bind(document);
 
   const currentUrl = window.location.href;
-
-  const section = one("section > section");
-
-  if (section) {
-    section.classList.add("welcome");
-  }
 
   [...all("main#doc #main-sidebar a")].forEach((a) => {
     if (a.href + "/" === currentUrl) {
