@@ -13,7 +13,12 @@
   [...all("main#doc #main-sidebar a")].forEach((a) => {
     if (a.href + "/" === currentUrl) {
       a.setAttribute("aria-current", true);
-      a.closest("section").classList.toggle("is-expanded");
+      const section = a.closest("section");
+
+      if (section) {
+        section.classList.add("is-expanded");
+        section.querySelector("h1")?.classList.add("is-expanded");
+      }
     }
   });
 
@@ -25,6 +30,7 @@
         }
       });
 
+      h1.classList.toggle("is-expanded");
       h1.parentNode.classList.toggle("is-expanded");
     });
   });
