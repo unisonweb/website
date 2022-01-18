@@ -12,7 +12,7 @@
 
   [...all("main#doc #main-sidebar a")].forEach((a) => {
     if (a.href + "/" === currentUrl) {
-      a.setAttribute("aria-current", true);
+      a.setAttribute("aria-current", "page");
       const section = a.closest("section");
 
       if (section) {

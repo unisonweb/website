@@ -108,6 +108,7 @@ main#article {
   align-items: center;
   border-bottom: 1px solid var(--color-main-header-border);
   font-size: var(--font-size-medium);
+  margin-top: 1rem;
 }
 
 #main-header nav {
@@ -125,6 +126,11 @@ main#article {
 #main-header nav section a {
   color: var(--color-main-header-fg);
   line-height: 1.5rem;
+}
+
+#main-header nav section a[aria-current] {
+  font-weight: bold;
+  color: var(--color-gray-darken-20);
 }
 
 #main-header nav section a:hover {
