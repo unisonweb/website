@@ -64,6 +64,9 @@ html {
   font-size: var(--size-base);
   font-family: var(--font-sans-serif);
   font-variant-ligatures: none;
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
 
 body {
@@ -71,7 +74,6 @@ body {
   line-height: 1.4;
   background: var(--color-main-bg);
   color: var(--color-main-fg);
-  -webkit-text-size-adjust: 100%;
 }
 
 /* -- Website -------------------------------------------------------------- */

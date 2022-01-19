@@ -343,7 +343,12 @@ function fixInternalLinks_(prefix, href) {
     href_ = href_.replace("/index", "");
   }
 
-  if (!href_.startsWith(prefix) && !href_.startsWith("http")) {
+  if (
+    !href_.startsWith(prefix) &&
+    !href_.startsWith("http") &&
+    !href_.startsWith("../") &&
+    !href_.startsWith("./")
+  ) {
     href_ = prefix + href_;
   }
 
