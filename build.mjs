@@ -339,6 +339,14 @@ function fixInternalLinks_(prefix, href) {
     href_ = href_.replace(/\.html$/, "");
   }
 
+  if (href_.startsWith("../")) {
+    href_ = href_.replace(/\.\.\//, "../../");
+  }
+
+  if (href_.startsWith("./")) {
+    href_ = href_.replace(/\.\//, "../");
+  }
+
   if (href_.endsWith("/index")) {
     href_ = href_.replace("/index", "");
   }
