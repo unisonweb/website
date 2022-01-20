@@ -122,22 +122,26 @@ main#article {
 
 #main-header nav section {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 #main-header nav section a {
   color: var(--color-main-header-fg);
   line-height: 1.5rem;
+  padding: 0 0.5rem;
+  border-radius: var(--border-radius-base);
 }
 
 #main-header nav section a[aria-current] {
   font-weight: bold;
   color: var(--color-gray-darken-20);
+  background: var(--color-gray-lighten-50);
 }
 
 #main-header nav section a:hover {
   color: var(--color-main-header-current-fg);
   text-decoration: none;
+  background: var(--color-gray-lighten-60);
 }
 
 #main-header nav section a#logo {
