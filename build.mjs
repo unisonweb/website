@@ -366,6 +366,10 @@ function fixInternalLinks_(prefix, href) {
 function fixInternalLinks(prefix, dom) {
   dom.window.document.querySelectorAll(".unison-doc a").forEach((anchor) => {
     anchor.href = kebabCase(fixInternalLinks_(prefix, anchor.href));
+
+    if (!anchor.href.startsWith("http")) {
+      anchor.target = "_self";
+    }
   });
 
   return dom;
