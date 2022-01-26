@@ -140,3 +140,11 @@ main#doc #main-sidebar .welcome ul {
 main#doc #main-sidebar .welcome ul li {
   margin-left: 0;
 }
+
+main#doc .where-to-next {
+  border-top: 1px solid var(--color-main-divider);
+  margin-top: 2.5rem;
+}
+main#doc .where-to-next h2 {
+  margin-bottom: 1rem;
+}
