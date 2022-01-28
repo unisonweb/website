@@ -15,6 +15,6 @@ Build process
 Deployment process
 -------------
 
-* `npm build` will build a local copy of the website using the steps above. 
+* `npm run build` will build a local copy of the website using the steps above. 
 * `npm start` will both build and start a local version of the website. 
-* `npm deploy --prod` will deploy the website to production 
+* `netlify deploy --prod` will deploy the website to production 
