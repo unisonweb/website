@@ -10,3 +10,11 @@ Build process
 2. Pre-process HTML with proper links and parse article sidebars
 3. Copy from build to src/articles and src/docs
 3. Render via eleventy to build/site
+
+
+Deployment process
+-------------
+
+* `npm run build` will build a local copy of the website using the steps above. 
+* `npm start` will both build and start a local version of the website. 
+* `netlify deploy --prod` will deploy the website to production 
