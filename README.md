@@ -3,6 +3,21 @@ Unison Website
 
 Main Unison website
 
+Architecture Where is all the content?
+--------------------------------------
+
+The Unison website is primarily constructed via Unison `Doc`, and the content
+lives in the associated Unison codebase. Through a build process and the ucm
+`docs.to-html` command, this content is transformed to HTML pages, post
+processed for better fit for the website and finally built by eleventy (static
+site generator). This includes both collections like docs, articles, and posts,
+as well as individual pages.
+
+Some collections have "partials" that make up their pages. Articles for
+instance has a `_title` Unison `Doc` term that is transformed into the page as
+frontmatter for eleventy, where Docs has `_sidebar` term that makes up the
+index of the language documentation.
+
 Build process
 -------------
 
