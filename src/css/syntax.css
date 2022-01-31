@@ -11,6 +11,15 @@ pre {
   font-family: var(--font-monospace);
 }
 
+.source.ucm:before {
+  position: absolute;
+  right: 1rem;
+  margin-top: 0.25rem;
+  font-size: var(--font-size-medium);
+  content: "ucm";
+  color: var(--color-main-sublte-fg);
+}
+
 code {
   display: inline-block;
   font-family: var(--font-monospace);

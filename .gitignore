@@ -12,6 +12,7 @@ scratch.u
 # source exists in the codebase
 src/docs
 src/articles
+src/posts
 src/_includes/_doc-sidebar-content.njk
 
 # Transcript

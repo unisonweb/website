@@ -29,7 +29,7 @@ function build() {
     .then(() =>
       run(" TMPDIR=build ucm transcript.fork docs-to-html.md --codebase .")
     )
-    // -- Docs ------------------------------------------------------------------
+    // -- Docs ----------------------------------------------------------------
     // * Copy build/docs/_sidebar.html to src/_includes/_doc-sidebar-content.njk
     // * Copy files from build/docs to src/docs and cleanup html
     // * Create frontmatter for each doc: tags + layout
@@ -53,7 +53,7 @@ function build() {
         }
       })
     )
-    // -- Articles --------------------------------------------------------------
+    // -- Articles ------------------------------------------------------------
     // * Copy files from build/articles to src/articles and cleanup html
     // * Create layout data file in src/articles
     // * Create frontmatter for each article:
@@ -67,6 +67,23 @@ function build() {
         const fileName = path.basename(dest);
         if (!fileName.startsWith("_")) {
           transformArticleFile(src, dest);
+        }
+      })
+    )
+    // -- Blog Posts ----------------------------------------------------------
+    // * Copy files from build/articles to src/articles and cleanup html
+    // * Create layout data file in src/articles
+    // * Create frontmatter for each article:
+    //     tags + layout + title (title from a _title.html file)
+    .then(() => console.log(" - Building /posts"))
+    .then(() => mkdir("./src/posts"))
+    .then(() =>
+      copy("./build/posts", "./src/posts", {
+        rename: kebabCase,
+      }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
+        const fileName = path.basename(dest);
+        if (!fileName.startsWith("_")) {
+          transformPostFile(src, dest);
         }
       })
     )
@@ -122,6 +139,21 @@ function transformDocFile(_src, dest, includeFrontMatter = true) {
   const content = updateContent(
     frontmatter,
     "/docs",
+    fs.readFileSync(dest, { encoding: "utf-8" })
+  );
+
+  fs.writeFileSync(dest, content);
+}
+
+function transformPostFile(_src, dest) {
+  const frontmatter = {
+    tags: "post",
+    layout: "post.njk",
+  };
+
+  const content = updateContent(
+    frontmatter,
+    "/posts",
     fs.readFileSync(dest, { encoding: "utf-8" })
   );
 
