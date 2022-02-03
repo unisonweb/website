@@ -157,9 +157,11 @@ main#article {
 #main-header nav section a#logo:hover {
   color: var(--color-main-header-logo-hover);
 }
+
 #main-header nav section #logo-icon {
   width: var(--font-size-base);
   height: var(--font-size-base);
+  margin-top: -4px;
 }
 
 #main-content {

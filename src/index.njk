@@ -1,0 +1,32 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    {% include "_head.njk" %}
+    <title>the Unison language</title>
+  </head>
+
+  <body>
+    <main id='front'>
+      <header id="main-header">
+        {% include "_main-nav.njk" %}
+
+        <section id="hero">
+          <h1>In Unison, code is Content-Addressed, Immutable, and not text</h1>
+          <h2><strong>Unison</strong> is a general purpose Functional Programming<br />language with a radically new approach to software</h2>
+
+          <div class="install">
+            <input type="text" readonly="readonly" value="brew install unison-language" />
+            <button class="button contained share large">Get Started</button>
+          </div>
+        </section>
+      </header>
+
+      <section id="main-content">
+      </section>
+
+      {% include "_footer.njk" %}
+    </main>
+    {% include "_js.njk" %}
+  </body>
+</html>

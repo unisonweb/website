@@ -1,17 +1,3 @@
 <header id="main-header">
-  <nav id="main-nav">
-    <section id="primary-nav">
-      <a href="https://unisonweb.org" id="logo">
-        <img alt="Unison Logo" src="/img/icon-unison-mark.svg" id="logo-icon"/>
-        Unison
-      </a>
-    </section>
-
-    <section id="secondary-nav">
-      <a href="https://unisonweb.org/docs" {% if '/docs' in page.url %}aria-current="page"{% endif %}>Docs</a>
-      <a href="https://unisonweb.org/community">Community</a>
-      <a href="https://share.unison-lang.org" target="_blank">Share</a>
-      <a href="https://unisonweb.org/blog">Blog</a>
-    </section>
-  </nav>
+  {% include "_main-nav.njk" %}
 </header>

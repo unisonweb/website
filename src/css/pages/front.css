@@ -1,0 +1,62 @@
+#front {
+  --color-main-header-current-fg: var(--color-gray-lighten-50);
+}
+
+#front header {
+  background: linear-gradient(
+    var(--color-gray-darken-10),
+    var(--color-gray-darken-20)
+  );
+  color: var(--color-gray-lighten-100);
+  flex-direction: column;
+  margin-top: 0;
+  padding-top: 4rem;
+  height: 44.5rem;
+  justify-content: flex-start;
+}
+
+#front header #hero {
+  padding-top: 4.5rem;
+  width: 44.5rem;
+}
+
+#front header #hero h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+}
+
+#front header #hero h2 {
+  margin-top: 2.875rem;
+  font-weight: normal;
+  font-size: 1.5rem;
+  color: var(--color-gray-lighten-55);
+}
+
+#front header #logo a {
+  color: var(--color-gray-lighten-100);
+}
+
+#front #main-header nav section a:hover {
+  color: var(--color-main-lighten-100);
+  background: var(--color-gray-base);
+}
+
+#front #main-header .install {
+  margin-top: 3.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+}
+
+#front #main-header .install input {
+  height: 2.5rem;
+  width: 20rem;
+  padding: 0 1rem;
+  background: var(--color-gray-darken-30);
+  color: var(--color-gray-lighten-60);
+  font-size: 1rem;
+  border-radius: var(--border-radius-base);
+  position: relative;
+}
