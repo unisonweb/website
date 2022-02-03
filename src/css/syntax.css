@@ -11,13 +11,20 @@ pre {
   font-family: var(--font-monospace);
 }
 
+.source.unison:before {
+  position: absolute;
+  right: 0.5rem;
+  font-size: var(--font-size-small);
+  content: "unison";
+  color: var(--color-main-subtle-fg);
+}
+
 .source.ucm:before {
   position: absolute;
-  right: 1rem;
-  margin-top: 0.25rem;
-  font-size: var(--font-size-medium);
+  right: 0.5rem;
+  font-size: var(--font-size-small);
   content: "ucm";
-  color: var(--color-main-sublte-fg);
+  color: var(--color-main-subtle-fg);
 }
 
 code {
