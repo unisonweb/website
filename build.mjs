@@ -23,11 +23,12 @@ function build() {
   rm("./build", { recursive: true, force: true })
     .then(() => rm("./src/docs", { recursive: true, force: true }))
     .then(() => rm("./src/articles", { recursive: true, force: true }))
+    .then(() => rm("./src/posts", { recursive: true, force: true }))
     .then(() => rm("./src/_includes/_doc-sidebar-content.njk", { force: true }))
     .then(() => console.log(" - Running transcript"))
     .then(() => mkdir("./build"))
     .then(() =>
-      run(" TMPDIR=build ucm transcript.fork docs-to-html.md --codebase .")
+      run(" TMPDIR=build unison transcript.fork docs-to-html.md --codebase .")
     )
     // -- Docs ----------------------------------------------------------------
     // * Copy build/docs/_sidebar.html to src/_includes/_doc-sidebar-content.njk
@@ -77,6 +78,7 @@ function build() {
     //     tags + layout + title (title from a _title.html file)
     .then(() => console.log(" - Building /posts"))
     .then(() => mkdir("./src/posts"))
+    .then(() => mkdir("./build/posts"))
     .then(() =>
       copy("./build/posts", "./src/posts", {
         rename: kebabCase,
@@ -276,7 +278,13 @@ function updateContent(frontmatter, prefix, content) {
   if (frontmatter) {
     const pageFrontmatter = { ...frontmatter, title };
 
-    return frontMatterToString(pageFrontmatter) + page;
+    // return frontMatterToString(pageFrontmatter) + page;
+    //
+    return `${frontMatterToString(pageFrontmatter)}
+{% raw %}
+${page}
+{% endraw %}
+`;
   } else {
     return page;
   }
