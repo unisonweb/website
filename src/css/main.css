@@ -188,6 +188,49 @@ main#article {
   gap: 0.25rem;
 }
 
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: var(--layer-modal);
+}
+
+.modal-dialog {
+  background: var(--color-gray-lighten-100);
+  width: 36rem;
+  max-height: calc(100vh - 6rem);
+  overflow: auto;
+  border-radius: var(--border-radius-base);
+  padding: 1rem;
+  position: absolute;
+  top: 3rem;
+  left: 0;
+}
+
+.modal-dialog .control {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-dialog .control .icon {
+  color: var(--color-gray-lighten-30);
+}
+
+.modal-dialog .control:hover .icon {
+  color: var(--color-pink-2);
+}
+
 @media only screen and (max-width: 1264px) {
   #main-content {
     margin-left: 2rem;

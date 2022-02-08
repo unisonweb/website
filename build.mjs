@@ -48,7 +48,9 @@ function build() {
       copy("./build/docs", "./src/docs", {
         rename: kebabCase,
       }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
-        transformDocFile(src, dest);
+        if (!isFragment(dest)) {
+          transformDocFile(src, dest);
+        }
       })
     )
     // -- Articles ------------------------------------------------------------
@@ -408,6 +410,10 @@ function fixInternalLinks(prefix, dom) {
   });
 
   return dom;
+}
+
+function isFragment(p) {
+  return path.basename(p).startsWith("_");
 }
 
 function trace(key) {
