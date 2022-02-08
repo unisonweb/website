@@ -49,7 +49,9 @@
   // Modal
 
   function renderDocFragment(url) {
-    fetch(url).then((html) => renderModal(html));
+    fetch(url)
+      .then((r) => r.text())
+      .then((html) => renderModal(html));
   }
 
   function renderModal(content) {
@@ -81,6 +83,12 @@
     modal.appendChild(control);
     modal.appendChild(modalContent);
     overlay.appendChild(modal);
+
+    overlay.addEventListener("click", (evt) => {
+      if (evt.target == overlay) {
+        closeModal();
+      }
+    });
 
     $body.prepend(overlay);
     $body.classList.add("modal-open");

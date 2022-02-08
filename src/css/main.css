@@ -205,14 +205,33 @@ body.modal-open {
 
 .modal-dialog {
   background: var(--color-gray-lighten-100);
-  width: 36rem;
-  max-height: calc(100vh - 6rem);
-  overflow: auto;
+  width: 42rem;
+  max-height: calc(100vh - 8rem);
   border-radius: var(--border-radius-base);
-  padding: 1rem;
   position: absolute;
-  top: 3rem;
+  top: 4rem;
+  padding: 0;
+  padding-top: 2rem;
   left: 0;
+}
+
+.modal-dialog .modal-content {
+  overflow: auto;
+  max-height: calc(100vh - 10.5rem);
+  padding: 0rem 2rem 1rem 2rem;
+  scrollbar-width: 0.5rem;
+  scrollbar-color: var(--color-doc-subtle-fg) var(--color-transparent);
+}
+.modal-dialog .modal-content::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 0.5rem;
+}
+.modal-dialog .modal-content::-webkit-scrollbar-track {
+  background: var(--color-transparent);
+}
+.modal-dialog .modal-content::-webkit-scrollbar-thumb {
+  background-color: var(--color-doc-subtle-fg);
+  border-radius: var(--border-radius-base);
 }
 
 .modal-dialog .control {
