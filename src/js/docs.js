@@ -1,6 +1,7 @@
 (() => {
   const all = document.querySelectorAll.bind(document);
   const one = document.querySelector.bind(document);
+  const $body = one("body");
 
   const currentUrl = window.location.href;
 
@@ -45,8 +46,6 @@
     });
   });
 
-  renderModal("hi");
-
   // Modal
 
   function renderDocFragment(url) {
@@ -83,10 +82,12 @@
     modal.appendChild(modalContent);
     overlay.appendChild(modal);
 
-    one("main").prepend(overlay);
+    $body.prepend(overlay);
+    $body.classList.add("modal-open");
   }
 
   function closeModal() {
     one(".modal-overlay")?.remove();
+    $body.classList.remove("modal-open");
   }
 })();
