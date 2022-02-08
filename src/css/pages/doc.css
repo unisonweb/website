@@ -119,10 +119,11 @@ main#doc #main-sidebar .is-expanded ul {
   display: block;
 }
 
-main#doc #main-sidebar section > ul > li {
-  margin-left: 1rem;
+main#doc #main-sidebar .is-expanded > ul > li {
+  margin-left: 0.5rem;
 }
-main#doc #main-sidebar ul.column {
+
+main#doc #main-sidebar section > ul > li {
   margin-left: 1rem;
 }
 main#doc #main-sidebar ul.column ul {
