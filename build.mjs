@@ -48,10 +48,7 @@ function build() {
       copy("./build/docs", "./src/docs", {
         rename: kebabCase,
       }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
-        const fileName = path.basename(dest);
-        if (!fileName.startsWith("_")) {
-          transformDocFile(src, dest);
-        }
+        transformDocFile(src, dest);
       })
     )
     // -- Articles ------------------------------------------------------------
@@ -278,8 +275,6 @@ function updateContent(frontmatter, prefix, content) {
   if (frontmatter) {
     const pageFrontmatter = { ...frontmatter, title };
 
-    // return frontMatterToString(pageFrontmatter) + page;
-    //
     return `${frontMatterToString(pageFrontmatter)}
 {% raw %}
 ${page}
