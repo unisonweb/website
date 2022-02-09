@@ -1,62 +1,102 @@
 #front {
-  --color-main-header-current-fg: var(--color-gray-lighten-50);
+  --main-header-height: 1.5rem;
+  --main-content-width: 64rem;
 }
 
-#front header {
-  background: linear-gradient(
-    var(--color-gray-darken-10),
-    var(--color-gray-darken-20)
-  );
-  color: var(--color-gray-lighten-100);
+#front #main-header {
+  margin-top: 3.5rem;
+}
+
+#front #main-content {
+  padding: 0;
+  margin-top: 4.75rem;
+  height: auto;
+}
+
+#front #hero {
+  background: var(--color-green-3);
+  color: var(--color-gray-darken-10);
+  border-radius: 0.75rem;
+  display: flex;
   flex-direction: column;
-  margin-top: 0;
-  padding-top: 4rem;
-  height: 44.5rem;
-  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
 }
 
-#front header #hero {
-  padding-top: 4.5rem;
-  width: 44.5rem;
-}
-
-#front header #hero h1 {
+#front #hero h1 {
+  margin-top: 6rem;
   font-size: 3.5rem;
   font-weight: 900;
 }
 
-#front header #hero h2 {
-  margin-top: 2.875rem;
-  font-weight: normal;
-  font-size: 1.5rem;
-  color: var(--color-gray-lighten-55);
-}
-
-#front header #logo a {
-  color: var(--color-gray-lighten-100);
-}
-
-#front #main-header nav section a:hover {
-  color: var(--color-main-lighten-100);
+#front #hero hr {
+  width: 6rem;
+  height: 0.25rem;
+  border-radius: 0.125rem;
   background: var(--color-gray-base);
+  opacity: 0.25;
 }
 
-#front #main-header .install {
-  margin-top: 3.5rem;
+#front #hero h2 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  line-height: 1.5;
+  font-size: 3.5rem;
+  font-weight: 900;
+}
+
+#front #hero .carousel {
+  font-size: 1.5rem;
+  width: 45rem;
+}
+
+#front #hero .carousel p {
+  margin-top: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+#front #hero .carousel .button {
+  margin-bottom: 7.375rem;
+}
+
+#front #hero .sub-text {
   display: flex;
   flex-direction: row;
-  gap: 0.75rem;
-  align-items: center;
-  justify-content: center;
+  gap: 2.625rem;
+  padding: 3.25rem 4rem;
+  font-size: 1.125rem;
+  border-top: 1px solid rgba(81, 82, 88, 0.25);
+  text-align: right;
 }
 
-#front #main-header .install input {
+#front #hero .install {
+  position: relative;
+  text-align: center;
+  width: 21.75rem;
+}
+
+#front #hero .install .prompt {
   height: 2.5rem;
-  width: 20rem;
-  padding: 0 1rem;
-  background: var(--color-gray-darken-30);
-  color: var(--color-gray-lighten-60);
+  position: absolute;
+  top: 0;
+  left: 0.875rem;
   font-size: 1rem;
+  font-weight: 900;
+  font-family: var(--font-monospace);
+  display: flex;
+  align-items: center;
+}
+
+#front #hero .install input {
+  height: 2.5rem;
+  width: 21.75rem;
+  padding: 0 1rem 0 2rem;
+  background: var(--color-transparent);
+  color: var(--color-gray-darken-10);
+  border: 1px solid rgba(81, 82, 88, 0.5);
+  font-size: 1rem;
+  font-weight: 900;
+  font-family: var(--font-monospace);
   border-radius: var(--border-radius-base);
   position: relative;
 }

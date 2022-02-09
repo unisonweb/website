@@ -10,22 +10,37 @@
     <main id='front'>
       <header id="main-header">
         {% include "_main-nav.njk" %}
-
+      </header>
+      <section id="main-content">
         <section id="hero">
-          <h1>In Unison, code is Content-Addressed, Immutable, and not text</h1>
-          <h2><strong>Unison</strong> is a general purpose Functional Programming<br />language with a radically new approach to software</h2>
+          <h1>Unison</h1>
+          <hr />
+          <h2>A new approach to</h2>
+          <div class="carousel">
+            <div >
+              <h2>Distributed Programming</h2>
+              <p> No more writing encoders and decoders at every network
+                boundary. <strong>Say where you want computations to run and it happens</strong>
+                🔮 — Dependencies are deployed on the fly </p>
+              
+              <a href="/docs" class="button primary-mono contained large">Learn More</a>
+            </div>
+            
+          </div>
 
-          <div class="install">
-            <input type="text" readonly="readonly" value="brew install unison-language" />
-            <button class="button contained share large">Get Started</button>
+          <div class="sub-text">
+            <p><strong>Unison</strong> is a friendly programming language from the future:
+              statically-typed, functional, and a lot of fun 😄 </p>
+            <div class="install">
+              <div class="prompt">$</div>
+              <input type="text" readonly="readonly" value="brew install unison-language" />
+            </div>
           </div>
         </section>
-      </header>
 
-      <section id="main-content">
+        {% include "_footer.njk" %}
       </section>
 
-      {% include "_footer.njk" %}
     </main>
     {% include "_js.njk" %}
   </body>

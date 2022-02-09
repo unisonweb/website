@@ -1,4 +1,4 @@
-css/* -- Resets --------------------------------------------------------------- */
+/* -- Resets --------------------------------------------------------------- */
 
 body,
 h1,
@@ -27,7 +27,7 @@ table {
 :root {
   --size-base: 16px;
   --main-header-height: 3.5rem;
-  --cssmain-sidebar-width: 17rem;
+  --main-sidebar-width: 17rem;
   --main-content-height: calc(100vh - var(--main-header-height));
   --main-content-width: 50rem;
   --main-content-top-padding: 4rem;
@@ -87,7 +87,6 @@ main {
 main#front {
   grid-template-columns: auto;
   grid-template-areas: "main-header" "main-content";
-  text-align: center;
 }
 
 main#doc {
