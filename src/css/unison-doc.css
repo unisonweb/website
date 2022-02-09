@@ -190,8 +190,12 @@
 }
 
 .unison-doc .tooltip {
-  min-width: 24rem;
+  width: 24rem;
   top: 1rem;
+}
+
+.unison-doc .tooltip-bubble {
+  width: 24rem;
 }
 
 .unison-doc .tooltip-bubble > section:only-child {
@@ -199,6 +203,7 @@
 }
 .unison-doc .tooltip-bubble > section:only-child > :is(h1, h2, h3, h4, h5) {
   margin-top: 0;
+  color: var(--color-tooltip-fg);
 }
 
 .unison-doc aside {

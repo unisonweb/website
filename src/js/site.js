@@ -10,7 +10,7 @@
   });
 
   [...all(".tooltip-trigger")].forEach((trigger) => {
-    toggle.addEventListener("onMouseOver", (_evt) => {
+    trigger.addEventListener("mouseenter", (_evt) => {
       const tooltipContent = one(`#${trigger.dataset.tooltipContentId}`);
 
       if (tooltipContent) {
@@ -26,10 +26,8 @@
       }
     });
 
-    toggle.addEventListener("onMouseOut", (_evt) => {
-      [...all(".tooltip")].forEach((tooltip) => {
-        tooltip.remove();
-      });
+    trigger.addEventListener("mouseleave", (_evt) => {
+      trigger.querySelector(".tooltip")?.remove();
     });
   });
 })();

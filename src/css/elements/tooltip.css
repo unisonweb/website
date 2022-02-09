@@ -2,8 +2,6 @@
 
 .tooltip {
   position: absolute;
-  opacity: 0;
-  pointer-events: none;
   z-index: var(--layer-tooltip);
 
   --tooltip-border-size: 1px;
@@ -43,6 +41,7 @@
     --color-tooltip-syntax-constructor-namespace
   );
   --color-syntax-text: var(--color-tooltip-syntax-text);
+  white-space: normal;
 }
 
 /* -- Core ------------------------------------------------------------------*/
@@ -213,12 +212,6 @@
 .tooltip-trigger {
   display: inline-flex;
   position: relative;
-}
-
-.tooltip-trigger:hover .tooltip {
-  animation: fade-in 0.2s;
-  pointer-events: auto;
-  opacity: 1;
 }
 
 /* -- Content -------------------------------------------------------------- */
