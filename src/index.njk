@@ -11,21 +11,71 @@
       <header id="main-header">
         {% include "_main-nav.njk" %}
       </header>
+
       <section id="main-content">
-        <section id="hero">
+        <section id="hero" class="slide-1">
+
           <h1>Unison</h1>
           <hr />
           <h2>A new approach to</h2>
+
           <div class="carousel">
-            <div >
-              <h2>Distributed Programming</h2>
-              <p> No more writing encoders and decoders at every network
-                boundary. <strong>Say where you want computations to run and it happens</strong>
-                🔮 — Dependencies are deployed on the fly </p>
-              
-              <a href="/docs" class="button primary-mono contained large">Learn More</a>
+            <div class="slides">
+              <div class="slide-content" id="slide-1-content">
+                <h2>Distributed Programming</h2>
+                <p> No more writing encoders and decoders at every network
+                  boundary. <strong>Say where you want computations to run and it happens</strong>
+                  🔮 — Dependencies are deployed on the fly.</p>
+                
+                <a href="/docs" class="button primary-mono contained large">Learn More</a>
+              </div>
+
+              <div class="slide-content" id="slide-2-content">
+                <h2>Refactoring</h2>
+                <p> Your codebase is always live and typechecks, even in the
+                  middle of a refactoring. Unison has structured refactoring
+                  sessions, not a big misleading list of type errors. </p>
+                
+                <a href="/docs" class="button primary-mono contained large">Learn More</a>
+              </div>
+
+              <div class="slide-content" id="slide-3-content">
+                <h2>Durable Storage</h2>
+                <p> No more writing translation code between your values and the
+                  storage layer. Directly store values an unpersist them later
+                  without fear of dependency conflicts or version mismatches.
+                </p>
+                
+                <a href="/docs" class="button primary-mono contained large">Learn More</a>
+              </div>
+
+              <div class="slide-content" id="slide-4-content">
+                <h2>Storing Code</h2>
+                <p>Other tools try to recover structure from text; Unison stores
+                code in a database. This eliminates builds, provides for instant
+              nonbreaking renames, type-based search, and lots more. </p>
+                
+                <a href="/docs" class="button primary-mono contained large">Learn More</a>
+              </div>
+
+              <div class="slide-content" id="slide-5-content">
+                <h2>Dependencies</h2>
+                <p>Many dependency conflicts arise from definitions competing for
+                the same names. Since Unison references code by hash instead of
+              by name, an entire class of conflicts can be eliminated.</p>
+                
+                <a href="/docs" class="button primary-mono contained large">Learn More</a>
+              </div>
             </div>
-            
+
+            <div class="slide-indicators">
+              <div data-slide-no="1" class="slide-indicator slide-1-indicator"><div class="dot"></div></div>
+              <div data-slide-no="2" class="slide-indicator slide-2-indicator"><div class="dot"></div></div>
+              <div data-slide-no="3" class="slide-indicator slide-3-indicator"><div class="dot"></div></div>
+              <div data-slide-no="4" class="slide-indicator slide-4-indicator"><div class="dot"></div></div>
+              <div data-slide-no="5" class="slide-indicator slide-5-indicator"><div class="dot"></div></div>
+            </div>
+
           </div>
 
           <div class="sub-text">
@@ -42,6 +92,7 @@
       </section>
 
     </main>
+    <script src="/js/home.js"></script>
     {% include "_js.njk" %}
   </body>
 </html>
