@@ -8,7 +8,9 @@
 
   <body>
     <main id='article'>
-      {% include "_header.njk" %}
+      <header id="main-header">
+        {% include "_main-nav-legacy.njk" %}
+      </header>
       <div id="main-content">
         <h2 id="overall-title"><a href="{{articleIndex}}">{{ overallTitle }}</a></h2>
 
