@@ -1,6 +1,64 @@
 (() => {
+  // -- Helpers ---------------------------------------------------------------
+
+  function getOS() {
+    const userAgent = window.navigator.userAgent;
+    const platform = window.navigator.platform;
+    const macosPlatforms = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"];
+    const windowsPlatforms = ["Win32", "Win64", "Windows", "WinCE"];
+    const iosPlatforms = ["iPhone", "iPad", "iPod"];
+    const os = null;
+
+    if (macosPlatforms.includes(platform)) {
+      return "Mac OS";
+    } else if (iosPlatforms.includes(platform)) {
+      return "iOS";
+    } else if (windowsPlatforms.includes(platform)) {
+      return "Windows";
+    } else if (/Android/.test(userAgent)) {
+      return "Android";
+    } else if (!os && /Linux/.test(platform)) {
+      return "Linux";
+    }
+
+    return null;
+  }
+
   const all = document.querySelectorAll.bind(document);
   const one = document.querySelector.bind(document);
+
+  // -- Install ---------------------------------------------------------------
+
+  const installClass = (() => {
+    switch (getOS()) {
+      case "Mac OS":
+        return "install-mac";
+      /*
+      case "Linux":
+        return "install-linux";
+      */
+      default:
+        return "install-other";
+    }
+  })();
+
+  [...all(".install")].forEach((install) => {
+    if (install.classList.contains(installClass)) {
+      install.style.display = "block";
+    } else {
+      install.remove();
+    }
+  });
+
+  const $installInput = one(`.install.${installClass} input`);
+
+  one(".copy-installation-command")?.addEventListener("click", () => {
+    if ($installInput) {
+      navigator.clipboard.writeText($installInput.value);
+    }
+  });
+
+  // -- Carousel --------------------------------------------------------------
 
   const $hero = one("#hero");
   const $slides = one(".slides");

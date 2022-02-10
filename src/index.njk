@@ -7,7 +7,7 @@
   </head>
 
   <body>
-    <main id='front'>
+    <main id='home'>
       <header id="main-header">
         {% include "_main-nav.njk" %}
       </header>
@@ -81,9 +81,36 @@
           <div class="sub-text">
             <p><strong>Unison</strong> is a friendly programming language from the future:
               statically-typed, functional, and a lot of fun 😄 </p>
-            <div class="install">
+            <div class="install install-mac">
               <div class="prompt">$</div>
-              <input type="text" readonly="readonly" value="brew install unison-language" />
+              <input type="text" readonly="readonly" value="brew install unisonweb/unison/unison-language" />
+              <div class="copy-installation-command">
+                <div class="icon icon-clipboard">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2.25C8 2.11193 7.88807 2 7.75 2H6.25C6.11193 2 6 2.11193 6 2.25V2.75C6 2.88807 6.11193 3 6.25 3H7.75C7.88807 3 8 2.88807 8 2.75V2.25ZM6 1C5.44772 1 5 1.44772 5 2V3C5 3.55228 5.44772 4 6 4H8C8.55228 4 9 3.55228 9 3V2C9 1.44772 8.55228 1 8 1H6Z" fill="currentColor"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3 2.5C3 2.22386 3.22386 2 3.5 2C3.77614 2 4 2.22386 4 2.5V10.5C4 10.7761 4.22386 11 4.5 11H9.5C9.77614 11 10 10.7761 10 10.5V2.5C10 2.22386 10.2239 2 10.5 2C10.7761 2 11 2.22386 11 2.5V11C11 11.5523 10.5523 12 10 12H4C3.44772 12 3 11.5523 3 11V2.5Z" fill="currentColor"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="install install-linux">
+              <div class="prompt">$</div>
+              <input type="text" readonly="readonly" value="curl --proto '=https' --tlsv1.2 -sSf https://sh.unison-lang.org | sh" />
+              <div class="copy-installation-command">
+                <div class="icon icon-clipboard">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2.25C8 2.11193 7.88807 2 7.75 2H6.25C6.11193 2 6 2.11193 6 2.25V2.75C6 2.88807 6.11193 3 6.25 3H7.75C7.88807 3 8 2.88807 8 2.75V2.25ZM6 1C5.44772 1 5 1.44772 5 2V3C5 3.55228 5.44772 4 6 4H8C8.55228 4 9 3.55228 9 3V2C9 1.44772 8.55228 1 8 1H6Z" fill="currentColor"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3 2.5C3 2.22386 3.22386 2 3.5 2C3.77614 2 4 2.22386 4 2.5V10.5C4 10.7761 4.22386 11 4.5 11H9.5C9.77614 11 10 10.7761 10 10.5V2.5C10 2.22386 10.2239 2 10.5 2C10.7761 2 11 2.22386 11 2.5V11C11 11.5523 10.5523 12 10 12H4C3.44772 12 3 11.5523 3 11V2.5Z" fill="currentColor"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="install install-other">
+              <a href="https://github.com/unisonweb/unison/releases" target="_blank" class="button contained medium primary-mono">
+                Download the latest release from GitHub
+              </a>
             </div>
           </div>
         </section>

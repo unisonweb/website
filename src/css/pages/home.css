@@ -1,14 +1,14 @@
-#front {
+#home {
   --main-header-height: 1.5rem;
   --main-content-width: 64rem;
   --main-hero-width: 64rem;
 }
 
-#front #main-header {
+#home #main-header {
   margin-top: 3.5rem;
 }
 
-#front #main-content {
+#home #main-content {
   padding: 0;
   margin-top: 4.75rem;
   height: auto;
@@ -16,7 +16,7 @@
 
 /* -- Hero ----------------------------------------------------------------- */
 
-#front #hero {
+#home #hero {
   background: var(--color-green-3);
   color: var(--color-gray-darken-10);
   border-radius: 0.75rem;
@@ -27,13 +27,13 @@
   transition: background 0.4s;
 }
 
-#front #hero h1 {
+#home #hero h1 {
   margin-top: 6rem;
   font-size: 3.5rem;
   font-weight: 900;
 }
 
-#front #hero hr {
+#home #hero hr {
   width: 6rem;
   height: 0.25rem;
   border-radius: 0.125rem;
@@ -41,7 +41,7 @@
   opacity: 0.25;
 }
 
-#front #hero h2 {
+#home #hero h2 {
   margin-bottom: 0;
   padding-bottom: 0;
   line-height: 1.5;
@@ -51,71 +51,71 @@
 
 /* -- Hero/Carousel -------------------------------------------------------- */
 
-#front #hero.slide-1 {
+#home #hero.slide-1 {
   background: var(--color-green-3);
 }
-#front #hero.slide-1 .slide-content h2 {
+#home #hero.slide-1 .slide-content h2 {
   color: var(--color-purple-3);
 }
 
-#front #hero.slide-2 {
+#home #hero.slide-2 {
   background: var(--color-orange-3);
 }
-#front #hero.slide-2 .slide-content h2 {
+#home #hero.slide-2 .slide-content h2 {
   color: var(--color-purple-3);
 }
 
-#front #hero.slide-3 {
+#home #hero.slide-3 {
   background: var(--color-pink-3);
 }
-#front #hero.slide-3 .slide-content h2 {
+#home #hero.slide-3 .slide-content h2 {
   color: var(--color-gray-lighten-100);
 }
 
-#front #hero.slide-4 {
+#home #hero.slide-4 {
   background: var(--color-blue-3);
 }
-#front #hero.slide-4 .slide-content h2 {
+#home #hero.slide-4 .slide-content h2 {
   color: var(--color-gray-lighten-100);
 }
 
-#front #hero.slide-5 {
+#home #hero.slide-5 {
   background: var(--color-purple-4);
 }
-#front #hero.slide-5 .slide-content h2 {
+#home #hero.slide-5 .slide-content h2 {
   color: var(--color-gray-lighten-100);
 }
 
-#front #hero .carousel {
+#home #hero .carousel {
   font-size: 1.5rem;
   overflow: hidden;
   width: var(--main-hero-width);
 }
 
-#front #hero .carousel p {
+#home #hero .carousel p {
   margin-top: 2rem;
   margin-bottom: 3.5rem;
   align-self: center;
   padding: 0 9rem;
 }
 
-#front #hero .carousel .button {
+#home #hero .carousel .button {
   margin-bottom: 4rem;
 }
 
-#front #hero .carousel .slides {
+#home #hero .carousel .slides {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   transition: transform 0.8s cubic-bezier(0.68, -0.4, 0.32, 1);
 }
 
-#front #hero .carousel .slide-content {
+#home #hero .carousel .slide-content {
   width: 100%;
   flex-shrink: 0;
 }
 
-#front #hero .carousel .slide-indicators {
+#home #hero .carousel .slide-indicators {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -124,7 +124,7 @@
   gap: 0.25rem;
 }
 
-#front #hero .carousel .slide-indicator {
+#home #hero .carousel .slide-indicator {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,51 +135,56 @@
   cursor: pointer;
 }
 
-#front #hero .carousel .slide-indicator:hover {
+#home #hero .carousel .slide-indicator:hover {
   opacity: 1;
 }
 
-#front #hero .carousel .slide-indicator .dot {
+#home #hero .carousel .slide-indicator .dot {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 0.25rem;
   background: var(--color-gray-base);
 }
 
-#front #hero.slide-1 .carousel .slide-1-indicator {
+#home #hero.slide-1 .carousel .slide-1-indicator {
   opacity: 0.75;
 }
 
-#front #hero.slide-2 .carousel .slide-2-indicator {
+#home #hero.slide-2 .carousel .slide-2-indicator {
   opacity: 0.75;
 }
-#front #hero.slide-3 .carousel .slide-3-indicator {
+#home #hero.slide-3 .carousel .slide-3-indicator {
   opacity: 0.75;
 }
-#front #hero.slide-4 .carousel .slide-4-indicator {
+#home #hero.slide-4 .carousel .slide-4-indicator {
   opacity: 0.75;
 }
-#front #hero.slide-5 .carousel .slide-5-indicator {
+#home #hero.slide-5 .carousel .slide-5-indicator {
   opacity: 0.75;
 }
 
-#front #hero .sub-text {
+#home #hero .sub-text {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 2.625rem;
-  padding: 3.25rem 4rem;
+  padding: 3.25rem 14rem;
   font-size: 1.125rem;
   border-top: 1px solid rgba(81, 82, 88, 0.25);
-  text-align: right;
+  align-items: center;
 }
 
-#front #hero .install {
+#home #hero .install {
   position: relative;
   text-align: center;
-  width: 21.75rem;
+  width: 32rem;
 }
 
-#front #hero .install .prompt {
+#home #hero .install.install-mac,
+#home #hero .install.install-linux {
+  display: none;
+}
+
+#home #hero .install .prompt {
   height: 2.5rem;
   position: absolute;
   top: 0;
@@ -191,10 +196,9 @@
   align-items: center;
 }
 
-#front #hero .install input {
+#home #hero .install input {
   height: 2.5rem;
-  width: 21.75rem;
-  padding: 0 1rem 0 2rem;
+  padding: 0 2.75rem 0 2rem;
   background: var(--color-transparent);
   color: var(--color-gray-darken-10);
   border: 1px solid rgba(81, 82, 88, 0.5);
@@ -203,4 +207,44 @@
   font-family: var(--font-monospace);
   border-radius: var(--border-radius-base);
   position: relative;
+}
+
+#home #hero .install.install-mac input {
+  width: 32rem;
+}
+
+#home #hero .install.install-linux input {
+  width: 40rem;
+}
+
+#home #hero .install .copy-installation-command {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2.5rem;
+  padding: 0 0.375rem;
+  border-left: 1px solid rgba(81, 82, 88, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+#home #hero .install .copy-installation-command:hover {
+  background: rgba(81, 82, 88, 0.1);
+}
+
+#home #hero .install .copy-installation-command:hover .icon {
+  color: var(--color-gray-darken-30);
+}
+
+#home #hero .install .copy-installation-command .icon {
+  color: var(--color-gray-darken-10);
+  width: 1.5rem;
+  height: 1.5rem;
+}
+#home #hero .install .copy-installation-command .icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
 }
