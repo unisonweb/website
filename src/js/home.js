@@ -28,35 +28,49 @@
   const one = document.querySelector.bind(document);
 
   // -- Install ---------------------------------------------------------------
-
-  const installClass = (() => {
-    switch (getOS()) {
-      case "Mac OS":
-        return "install-mac";
-      /*
+  //
+  function setupInstall(media) {
+    const installClass = (() => {
+      switch (getOS()) {
+        case "Mac OS":
+          return "install-mac";
+        /*
       case "Linux":
         return "install-linux";
       */
-      default:
-        return "install-other";
-    }
-  })();
+        default:
+          return "install-other";
+      }
+    })();
 
-  [...all(".install")].forEach((install) => {
-    if (install.classList.contains(installClass)) {
-      install.style.display = "block";
+    if (media.matches) {
+      [...all(".install")].forEach((install) => {
+        install.style.display = "none";
+      });
+
+      one(".install.install-other").style.display = "block";
     } else {
-      install.remove();
-    }
-  });
+      [...all(".install")].forEach((install) => {
+        if (install.classList.contains(installClass)) {
+          install.style.display = "block";
+        } else {
+          install.style.display = "none";
+        }
+      });
 
-  const $installInput = one(`.install.${installClass} input`);
+      const $installInput = one(`.install.${installClass} input`);
 
-  one(".copy-installation-command")?.addEventListener("click", () => {
-    if ($installInput) {
-      navigator.clipboard.writeText($installInput.value);
+      one(".copy-installation-command")?.addEventListener("click", () => {
+        if ($installInput) {
+          navigator.clipboard.writeText($installInput.value);
+        }
+      });
     }
-  });
+  }
+
+  const media = window.matchMedia("(max-width: 960px)");
+  setupInstall(media);
+  media.addListener(setupInstall);
 
   // -- Carousel --------------------------------------------------------------
 

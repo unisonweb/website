@@ -248,3 +248,89 @@
   width: 1.5rem;
   height: 1.5rem;
 }
+
+@media only screen and (max-width: 1264px) {
+  #home #main-content {
+    margin-left: auto;
+  }
+}
+
+@media only screen and (max-width: 1110px) {
+  #home {
+    --main-header-height: 1.5rem;
+    --main-content-width: 60rem;
+    --main-hero-width: 60rem;
+  }
+
+  #home #main-footer {
+    flex-direction: row;
+  }
+
+  #home #hero .carousel p {
+    padding: 0 7.25rem;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  #home {
+    --main-header-height: 1.5rem;
+    --main-content-width: 100vw;
+    --main-hero-width: 100vw;
+  }
+
+  #home #main-header {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  #home #main-header #main-nav {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  #home #main-header nav section a#logo {
+    margin-right: 0;
+  }
+
+  #home #main-header #main-nav .secondary-nav {
+    font-size: 0.75rem;
+  }
+
+  #home #hero {
+    border-radius: 0;
+  }
+
+  #home #hero h1 {
+    margin-top: 3.25rem;
+  }
+
+  #home #hero h1,
+  #home #hero h2 {
+    font-size: 2.625rem;
+  }
+
+  #home #hero .approach-to {
+    white-space: nowrap;
+  }
+
+  #home #hero .carousel p {
+    padding: 0 1.25rem;
+    font-size: 1.125rem;
+  }
+
+  #home #hero .sub-text {
+    padding: 2rem 1.25rem 3.25rem 1.25rem;
+    font-size: 1.125rem;
+  }
+  #home #hero .install {
+    width: auto;
+  }
+
+  #home #main-footer {
+    margin: 0;
+  }
+  #home #main-footer .public-benefit {
+    display: none;
+  }
+}
