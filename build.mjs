@@ -133,6 +133,7 @@ function transformDocFile(_src, dest, includeFrontMatter = true) {
   if (includeFrontMatter) {
     frontmatter = {
       tags: "doc",
+      overallTitle: "Unison docs",
       layout: "doc.njk",
     };
   }
