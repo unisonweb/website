@@ -3,14 +3,14 @@
 <html lang="en">
   <head>
     {% include "_head.njk" %}
-    <title>{{overallTitle}} | {{ title }} &middot; Unison programming language</title>
+    <title>{{ title }} &middot; Unison programming language</title>
   </head>
 
   <body>
-    <main id='article'>
+    <main id='page'>
       {% include "_header.njk" %}
       <div id="main-content">
-        <h1 id="title">{{ title }}</h1>
+        <h1>{{ title }}</h1>
 
         {{content | safe}}
 

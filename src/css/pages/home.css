@@ -1,7 +1,8 @@
 #home {
   --main-header-height: 1.5rem;
-  --main-content-width: 64rem;
-  --main-hero-width: 64rem;
+  --main-content-width: auto;
+  --hero-width: 64rem;
+  --examples-width: 79rem;
 }
 
 #home #main-header {
@@ -12,6 +13,9 @@
   padding: 0;
   margin-top: 4.75rem;
   height: auto;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 /* -- Hero ----------------------------------------------------------------- */
@@ -25,6 +29,7 @@
   align-items: center;
   text-align: center;
   transition: background 0.4s;
+  width: var(--hero-width);
 }
 
 #home #hero h1 {
@@ -89,7 +94,7 @@
 #home #hero .carousel {
   font-size: 1.5rem;
   overflow: hidden;
-  width: var(--main-hero-width);
+  width: var(--hero-width);
 }
 
 #home #hero .carousel p {
@@ -248,6 +253,68 @@
   width: 1.5rem;
   height: 1.5rem;
 }
+
+/* -- Unison Examples ------------------------------------------------------ */
+
+#home .unison-examples {
+  margin-top: 3.625rem;
+  width: var(--examples-width);
+}
+
+#home .unison-examples header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4.5rem;
+}
+
+#home .unison-examples header:before {
+  position: absolute;
+  top: 1.3rem;
+  left: 0;
+  right: 0;
+  content: " ";
+  height: 2px;
+  background: var(--color-gray-lighten-50);
+  border-radius: 1px;
+}
+
+#home .unison-examples header h1 {
+  font-size: 2rem;
+  text-align: center;
+  display: inline-flex;
+  background: var(--color-gray-lighten-100);
+  position: relative;
+  padding: 0 1.5rem;
+  z-index: 1;
+}
+
+#home .unison-examples .example {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+  align-items: center;
+}
+
+#home .unison-examples .example p {
+  width: 18.75rem;
+}
+
+#home .unison-examples .example p:first-of-type {
+  text-align: right;
+}
+
+#home .unison-examples .example .folded-sources {
+  width: 42rem;
+  flex-shrink: 0;
+}
+
+#home .unison-examples .example .fold-toggle {
+  display: none;
+}
+
+/* -- Responsive ----------------------------------------------------------- */
 
 @media only screen and (max-width: 1264px) {
   #home #main-content {

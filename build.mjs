@@ -8,7 +8,7 @@ import copy from "recursive-copy";
 import { JSDOM } from "jsdom";
 import kebabCase from "kebab-case";
 import yaml from "yaml";
-import { has, map } from "ramda";
+import { last, has, map } from "ramda";
 
 // Run the build process!
 build();
@@ -16,7 +16,7 @@ build();
 
 function build() {
   console.log("");
-  console.log("BUILDING HTML FROM DOCS");
+  console.log("BUILDING HTML FROM CODEBASE");
   console.log("=========================");
   console.log(" - Removing old artifacts");
 
@@ -24,16 +24,40 @@ function build() {
     .then(() => rm("./src/docs", { recursive: true, force: true }))
     .then(() => rm("./src/articles", { recursive: true, force: true }))
     .then(() => rm("./src/posts", { recursive: true, force: true }))
+    .then(() => rm("./src/community", { recursive: true, force: true }))
+    .then(() => rm("./src/home/examples", { recursive: true, force: true }))
+    .then(() => rm("./src/home/_examples.html", { force: true }))
+    .then(() => rm("./src/_includes/_home-examples.njk", { force: true }))
     .then(() => rm("./src/_includes/_doc-sidebar-content.njk", { force: true }))
     .then(() => console.log(" - Running transcript"))
     .then(() => mkdir("./build"))
     .then(() =>
       run(" TMPDIR=build unison transcript.fork docs-to-html.md --codebase .")
     )
+    // -- Pages ----------------------------------------------------------
+    .then(() => console.log(" - Building /pages"))
+    .then(() =>
+      copy(
+        "./build/pages/home/_examples.html",
+        "./src/_includes/_home-examples.njk"
+      ).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
+        transformHomeExamples(src, dest, false);
+      })
+    )
+    .then(() =>
+      copy("./build/pages", "./src", {
+        rename: kebabCase,
+      }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
+        const fileName = path.basename(dest);
+        if (
+          !fileName.startsWith("_") &&
+          !dest.startsWith("src/home/examples/lib")
+        ) {
+          transformPageFile(src, dest);
+        }
+      })
+    )
     // -- Docs ----------------------------------------------------------------
-    // * Copy build/docs/_sidebar.html to src/_includes/_doc-sidebar-content.njk
-    // * Copy files from build/docs to src/docs and cleanup html
-    // * Create frontmatter for each doc: tags + layout
     .then(() => console.log(" - Building /docs"))
     .then(() => mkdir("./src/docs"))
     .then(() =>
@@ -54,10 +78,6 @@ function build() {
       })
     )
     // -- Articles ------------------------------------------------------------
-    // * Copy files from build/articles to src/articles and cleanup html
-    // * Create layout data file in src/articles
-    // * Create frontmatter for each article:
-    //     tags + layout + title (title from a _title.html file)
     .then(() => console.log(" - Building /articles"))
     .then(() => mkdir("./src/articles"))
     .then(() =>
@@ -71,13 +91,9 @@ function build() {
       })
     )
     // -- Blog Posts ----------------------------------------------------------
-    // * Copy files from build/articles to src/articles and cleanup html
-    // * Create layout data file in src/articles
-    // * Create frontmatter for each article:
-    //     tags + layout + title (title from a _title.html file)
+    /*
     .then(() => console.log(" - Building /posts"))
     .then(() => mkdir("./src/posts"))
-    .then(() => mkdir("./build/posts"))
     .then(() =>
       copy("./build/posts", "./src/posts", {
         rename: kebabCase,
@@ -88,6 +104,7 @@ function build() {
         }
       })
     )
+  */
     .catch((ex) => console.error(ex));
 }
 
@@ -102,6 +119,67 @@ const iconArrowRight = fs.readFileSync("./src/img/icon-arrow-right.svg", {
 const iconCaretRight = fs.readFileSync("./src/img/icon-caret-right.svg", {
   encoding: "utf-8",
 });
+
+// -- Pages
+
+function transformHomeExamples(_src, dest) {
+  let content = updateContent(
+    null,
+    "/",
+    fs.readFileSync(dest, { encoding: "utf-8" })
+  );
+
+  let dom = new JSDOM(content);
+
+  const mainSection = dom.window.document.querySelector(
+    "article.unison-doc > section"
+  );
+
+  const examples = [...mainSection?.children]
+    .reduce((acc, e) => {
+      if (!acc.length) {
+        acc.push([e]);
+      }
+      if (e.tagName === "HR") {
+        acc.push([]);
+      } else {
+        last(acc).push(e);
+      }
+
+      return acc;
+    }, [])
+    .map((els) => {
+      const ex = dom.window.document.createElement("div");
+      ex.classList.add("example", "unison-doc");
+      els.forEach((el) => ex.appendChild(el));
+
+      return ex;
+    });
+
+  mainSection.innerHTML = "";
+  examples.forEach((ex) => mainSection.appendChild(ex));
+
+  content = dom.window.document.querySelector("body").innerHTML;
+
+  fs.writeFileSync(dest, content);
+}
+
+function transformPageFile(_src, dest) {
+  const frontmatter = {
+    tags: "page",
+    layout: "page.njk",
+  };
+
+  const content = updateContent(
+    frontmatter,
+    "/",
+    fs.readFileSync(dest, { encoding: "utf-8" })
+  );
+
+  fs.writeFileSync(dest, content);
+}
+
+// -- Docs
 
 function transformDocSidebar(_src, dest) {
   let content = updateContent(
@@ -147,20 +225,7 @@ function transformDocFile(_src, dest, includeFrontMatter = true) {
   fs.writeFileSync(dest, content);
 }
 
-function transformPostFile(_src, dest) {
-  const frontmatter = {
-    tags: "post",
-    layout: "post.njk",
-  };
-
-  const content = updateContent(
-    frontmatter,
-    "/posts",
-    fs.readFileSync(dest, { encoding: "utf-8" })
-  );
-
-  fs.writeFileSync(dest, content);
-}
+// -- Articles
 
 function transformArticleFile(src, dest) {
   const srcParts = src.split("/");
@@ -258,6 +323,25 @@ function transformArticleFile(src, dest) {
   );
   fs.writeFileSync(dest, content);
 }
+
+// -- Posts
+
+function transformPostFile(_src, dest) {
+  const frontmatter = {
+    tags: "post",
+    layout: "post.njk",
+  };
+
+  const content = updateContent(
+    frontmatter,
+    "/posts",
+    fs.readFileSync(dest, { encoding: "utf-8" })
+  );
+
+  fs.writeFileSync(dest, content);
+}
+
+// -- Helpers
 
 function updateContent(frontmatter, prefix, content) {
   let dom = new JSDOM(content);

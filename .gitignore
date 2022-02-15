@@ -13,7 +13,11 @@ scratch.u
 src/docs
 src/articles
 src/posts
+src/pages
+src/home
+src/community
 src/_includes/_doc-sidebar-content.njk
+src/_includes/_home-examples.njk
 
 # Transcript
 *.output.md

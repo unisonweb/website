@@ -1,0 +1,15 @@
+#page {
+  --main-header-height: 1.5rem;
+  --main-content-width: 64rem;
+  --main-hero-width: 64rem;
+}
+
+#page #main-header {
+  margin-top: 3.5rem;
+}
+
+#page #main-content {
+  padding: 0;
+  margin-top: 4.75rem;
+  height: auto;
+}
