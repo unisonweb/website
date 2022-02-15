@@ -360,20 +360,21 @@
   margin-bottom: 0;
 }
 
-:is(.unison-doc h1, .unison-doc h2, .unison-doc h3, .unison-doc h4, .unison-doc
-    h5, .unison-doc h6)
-  p {
+.unison-doc :is(h1, h2, h3, h4, h5, h6) p {
   margin: 0;
 }
 
-:is(.unison-doc h1, .unison-doc h2, .unison-doc h3, .unison-doc h4, .unison-doc
-    h5, .unison-doc h6) {
+.unison-doc :is(h1, h2, h3, h4, h5, h6) {
   color: var(--color-doc-heading-fg);
+  cursor: pointer;
+  scroll-margin-top: 1.5rem;
 }
 
-:is(.unison-doc h1, .unison-doc h2, .unison-doc h3, .unison-doc h4, .unison-doc
-    h5, .unison-doc h6)
-  a {
+.unison-doc :is(h1, h2, h3, h4, h5, h6):hover {
+  color: var(--color-doc-link-hover);
+}
+
+.unison-doc :is(h1, h2, h3, h4, h5, h6) a {
   scroll-margin-top: 1.5rem;
 }
 

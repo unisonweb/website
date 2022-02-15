@@ -10,7 +10,7 @@
   });
 
   [...all(".tooltip-trigger")].forEach((trigger) => {
-    trigger.addEventListener("mouseenter", (_evt) => {
+    trigger.addEventListener("mouseenter", (_ev) => {
       const tooltipContent = one(`#${trigger.dataset.tooltipContentId}`);
 
       if (tooltipContent) {
@@ -26,8 +26,18 @@
       }
     });
 
-    trigger.addEventListener("mouseleave", (_evt) => {
+    trigger.addEventListener("mouseleave", (_ev) => {
       trigger.querySelector(".tooltip")?.remove();
     });
   });
+
+  [...all("#main-content .unison-doc :is(h1, h2, h3, h4, h5, h6)")].forEach(
+    (heading) => {
+      if (heading.id) {
+        heading.addEventListener("click", (_ev) => {
+          window.location.hash = heading.id;
+        });
+      }
+    }
+  );
 })();
