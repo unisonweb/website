@@ -1,15 +1,39 @@
 #page {
   --main-header-height: 1.5rem;
-  --main-content-width: 64rem;
-  --main-hero-width: 64rem;
+  --main-content-width: 60rem;
 }
 
 #page #main-header {
   margin-top: 3.5rem;
 }
 
+#page h1 {
+  font-size: 3.5rem;
+  margin: 1.5rem 0 4rem 0;
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -2px;
+  color: var(--color-gray-darken-10);
+}
+
 #page #main-content {
   padding: 0;
   margin-top: 4.75rem;
   height: auto;
+}
+
+#page #main-content .unison-doc {
+  font-size: 1.125rem;
+}
+
+@media only screen and (max-width: 1264px) {
+  #page {
+    --main-footer-height: 6rem;
+    --main-content-width: 100vw;
+  }
+
+  #page #main-content {
+    margin-left: 0;
+    padding: 0 1.5rem;
+  }
 }
