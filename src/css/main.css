@@ -27,7 +27,6 @@ table {
 :root {
   --size-base: 16px;
   --main-header-height: 3.5rem;
-  --main-sidebar-width: 17rem;
   --main-content-height: calc(100vh - var(--main-header-height));
   --main-content-width: 50rem;
   --main-content-top-margin: 4rem;
@@ -171,7 +170,7 @@ main#page {
 #main-content {
   position: relative;
   grid-area: main-content;
-  height: var(--main-content-height);
+  /* height: var(--main-content-height);*/
   background: var(--color-main-bg);
   color: var(--color-main-fg);
   width: var(--main-content-width);

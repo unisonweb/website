@@ -1,8 +1,27 @@
 main#doc {
-  --main-sidebar-width: 22rem;
-  --color-main-sidebar-bg: var(--color-gray-lighten-60);
   --main-content-width: 50rem;
   margin: auto;
+}
+
+main#doc #toggle-index {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  background: var(--color-gray-lighten-50);
+  border-radius: var(--border-radius-base);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+main#doc #toggle-index .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+main#doc #toggle-index .icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 main#doc #title {
@@ -15,85 +34,89 @@ main#doc #title {
   color: var(--color-gray-darken-10);
 }
 
-main#doc #main-sidebar {
+main#doc #index {
   position: absolute;
-  top: 6rem;
-  left: 2rem;
-  height: auto;
-  background: var(--color-main-sidebar-bg);
+  left: 0;
+  width: 18.5rem;
+  background: var(--color-gray-lighten-60);
+  transform: translateX(-100%);
+  font-size: var(--font-size-medium);
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1rem 0 1rem;
   border-radius: var(--border-radius-base);
-  width: var(--main-sidebar-width);
 }
 
-main#doc #main-sidebar .unison-doc {
+main#doc #index .unison-doc {
   color: var(--color-gray-lighten-20);
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-medium);
+  background: var(--color-gray-lighten-60);
 }
 
-main#doc #main-sidebar section {
+main#doc #index section {
   margin-top: 0;
 }
 
-main#doc #main-sidebar h1 {
+main#doc #index h1 {
   cursor: pointer;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 600;
   display: flex;
   color: var(--color-gray-base);
   transition: all 0.2s;
 }
 
-main#doc #main-sidebar h1 .icon {
+main#doc #index h1 .icon {
   font-size: 1.125rem;
   color: var(--color-gray-lighten-20);
 }
 
-main#doc #main-sidebar .is-expanded h1 {
+main#doc #index .is-expanded h1 {
   color: var(--color-gray-darken-20);
 }
 
-main#doc #main-sidebar .is-expanded h1 .icon {
+main#doc #index .is-expanded h1 .icon {
   color: var(--color-gray-darken-20);
 }
 
-main#doc #main-sidebar .is-expanded h1 .icon {
+main#doc #index .is-expanded h1 .icon {
   transform: rotate(90deg);
 }
 
-main#doc #main-sidebar h1:hover {
+main#doc #index h1:hover {
   color: var(--color-pink-1);
 }
 
-main#doc #main-sidebar h1:hover .icon {
+main#doc #index h1:hover .icon {
   color: var(--color-pink-2);
 }
 
-main#doc #main-sidebar ul {
+main#doc #index ul {
   list-style-type: none;
   margin-left: 0;
   margin-bottom: 1rem;
 }
 
-main#doc #main-sidebar ul li {
+main#doc #index ul li {
   margin-bottom: 0.25rem;
 }
 
-main#doc #main-sidebar a {
-  color: var(--color-main-sidebar-fg);
+main#doc #index a {
+  color: var(--color-main-fg);
 }
 
-main#doc #main-sidebar a:hover {
+main#doc #index a:hover {
   color: var(--color-pink-1);
 }
 
-main#doc #main-sidebar a[aria-current] {
+main#doc #index a[aria-current] {
   color: var(--color-gray-darken-30);
   font-weight: bold;
 }
 
-main#doc #main-sidebar a[aria-current]:before {
+main#doc #index a[aria-current]:before {
   position: absolute;
-  left: -1.5rem;
+  left: -1rem;
   content: " ";
   width: 0.25rem;
   height: 1.5rem;
@@ -101,34 +124,34 @@ main#doc #main-sidebar a[aria-current]:before {
   border-radius: var(--border-radius-base);
 }
 
-main#doc #main-sidebar ul {
+main#doc #index ul {
   display: none;
 }
 
-main#doc #main-sidebar .is-expanded ul {
+main#doc #index .is-expanded ul {
   display: block;
 }
 
-main#doc #main-sidebar .is-expanded > ul > li {
+main#doc #index .is-expanded > ul > li {
   margin-left: 0.5rem;
 }
 
-main#doc #main-sidebar section > ul > li {
+main#doc #index section > ul > li {
   margin-left: 1rem;
 }
-main#doc #main-sidebar ul.column ul {
+main#doc #index ul.column ul {
   margin-left: 1rem;
 }
 
-main#doc #main-sidebar .welcome {
+main#doc #index .welcome {
   margin-bottom: 2rem;
 }
 
-main#doc #main-sidebar .welcome ul {
+main#doc #index .welcome ul {
   display: block;
 }
 
-main#doc #main-sidebar .welcome ul li {
+main#doc #index .welcome ul li {
   margin-left: 0;
 }
 
@@ -138,4 +161,73 @@ main#doc .where-to-next {
 }
 main#doc .where-to-next h2 {
   margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 1439px) {
+  main#doc #main-content {
+    position: static;
+  }
+
+  main#doc #toggle-index {
+    display: flex;
+    left: 2rem;
+    top: calc(var(--main-header-height) + var(--main-content-top-margin));
+    margin-top: 0.35rem;
+  }
+
+  main#doc #index {
+    position: absolute;
+    top: calc(var(--main-header-height) + var(--main-content-top-margin));
+    margin-top: 0.35rem;
+    left: 4.5rem;
+    bottom: 2rem;
+    transform: none;
+    background: var(--color-gray-lighten-45);
+    z-index: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: none;
+  }
+
+  main#doc.show-index #index {
+    display: block;
+  }
+
+  main#doc #index .unison-doc {
+    background: var(--color-gray-lighten-45);
+  }
+}
+
+@media only screen and (max-width: 1264px) {
+  main#doc #toggle-index {
+    left: 1rem;
+  }
+
+  main#doc #index {
+    left: 3.5rem;
+  }
+}
+
+@media only screen and (max-width: 1110px) {
+  main#doc #toggle-index {
+    left: 2rem;
+    top: 0.25rem;
+  }
+
+  main#doc #index {
+    left: 2rem;
+    top: 3rem;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  main#doc #toggle-index {
+    left: 2rem;
+    top: 0.75rem;
+  }
+
+  main#doc #index {
+    left: 2rem;
+    top: 3.5rem;
+  }
 }

@@ -7,7 +7,7 @@
 
   // Event handler setup
 
-  [...all("main#doc #main-sidebar a")].forEach((a) => {
+  [...all("main#doc #index a")].forEach((a) => {
     if (a.href + "/" === currentUrl) {
       a.setAttribute("aria-current", "page");
       const section = a.closest("section");
@@ -19,9 +19,9 @@
     }
   });
 
-  [...all("main#doc #main-sidebar h1")].forEach((h1) => {
+  [...all("main#doc #index h1")].forEach((h1) => {
     h1.addEventListener("click", () => {
-      [...all("main#doc #main-sidebar .is-expanded")].forEach((n) => {
+      [...all("main#doc #index .is-expanded")].forEach((n) => {
         if (n !== h1.parentNode) {
           n.classList.remove("is-expanded");
         }
@@ -44,6 +44,10 @@
         evt.preventDefault();
       }
     });
+  });
+
+  one("#toggle-index").addEventListener("click", () => {
+    one("main#doc")?.classList.toggle("show-index");
   });
 
   // Modal
