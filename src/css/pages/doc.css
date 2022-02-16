@@ -182,7 +182,7 @@ main#doc .where-to-next h2 {
     left: 4.5rem;
     bottom: 2rem;
     transform: none;
-    background: var(--color-gray-lighten-45);
+    background: var(--color-gray-lighten-50);
     z-index: 1;
     overflow-y: auto;
     overflow-x: hidden;
@@ -194,7 +194,7 @@ main#doc .where-to-next h2 {
   }
 
   main#doc #index .unison-doc {
-    background: var(--color-gray-lighten-45);
+    background: var(--color-gray-lighten-50);
   }
 }
 
@@ -221,6 +221,10 @@ main#doc .where-to-next h2 {
 }
 
 @media only screen and (max-width: 960px) {
+  main#doc {
+    --main-content-width: 100vw;
+  }
+
   main#doc #toggle-index {
     left: 2rem;
     top: 0.75rem;
