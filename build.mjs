@@ -32,7 +32,7 @@ function build() {
     .then(() => console.log(" - Running transcript"))
     .then(() => mkdir("./build"))
     .then(() =>
-      run(" TMPDIR=build unison transcript.fork docs-to-html.md --codebase .")
+      run(" TMPDIR=build ucm transcript.fork docs-to-html.md --codebase .")
     )
     // -- Pages ----------------------------------------------------------
     .then(() => console.log(" - Building /pages"))

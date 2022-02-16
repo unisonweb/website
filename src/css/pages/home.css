@@ -295,13 +295,16 @@
   flex-direction: row;
   gap: 2rem;
   margin-bottom: 3.5rem;
-  align-items: center;
 }
 
 #home .unison-examples .example p {
   width: 18.75rem;
   font-size: 1.125rem;
   margin: 0;
+}
+
+#home .unison-examples .example p * {
+  white-space: normal;
 }
 
 #home .unison-examples .example p:first-of-type {
