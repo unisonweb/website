@@ -184,9 +184,7 @@
 }
 
 .unison-doc .tooltip-trigger {
-  text-decoration: underline dotted var(--color-doc-subtle-fg);
-  text-underline-offset: 2px;
-  /* Other tooltip styling is handled by elements/tooltip */
+  border-bottom: 1px dotted var(--color-doc-subtle-fg);
 }
 
 .unison-doc .tooltip {
@@ -484,6 +482,16 @@
   .unison-doc .source.example,
   .unison-doc .source.eval,
   .unison-doc .source.signatures .signature {
+    width: auto;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .unison-doc .tooltip {
+    width: 18rem;
+  }
+
+  .unison-doc .tooltip-bubble {
     width: auto;
   }
 }

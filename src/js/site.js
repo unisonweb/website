@@ -11,25 +11,37 @@
 
   [...all(".tooltip-trigger")].forEach((trigger) => {
     trigger.addEventListener("mouseenter", (_ev) => {
-      const tooltipContent = one(`#${trigger.dataset.tooltipContentId}`);
-
-      if (tooltipContent) {
-        const tooltip = document.createElement("div");
-        tooltip.classList.add("tooltip", "below", "arrow-middle");
-
-        const bubble = document.createElement("div");
-        bubble.classList.add("tooltip-bubble");
-        bubble.innerHTML = tooltipContent.innerHTML;
-
-        tooltip.appendChild(bubble);
-        trigger.appendChild(tooltip);
-      }
+      showTooltip(trigger);
     });
 
     trigger.addEventListener("mouseleave", (_ev) => {
       trigger.querySelector(".tooltip")?.remove();
     });
+
+    trigger.addEventListener("touchstart", (_ev) => {
+      showTooltip(trigger);
+    });
   });
+
+  one("body").addEventListener("touchstart", (_ev) => {
+    [...all(".tooltip")].forEach((t) => t.remove());
+  });
+
+  function showTooltip(trigger) {
+    const tooltipContent = one(`#${trigger.dataset.tooltipContentId}`);
+
+    if (tooltipContent) {
+      const tooltip = document.createElement("div");
+      tooltip.classList.add("tooltip", "below", "arrow-middle");
+
+      const bubble = document.createElement("div");
+      bubble.classList.add("tooltip-bubble");
+      bubble.innerHTML = tooltipContent.innerHTML;
+
+      tooltip.appendChild(bubble);
+      trigger.appendChild(tooltip);
+    }
+  }
 
   [...all("#main-content .unison-doc :is(h1, h2, h3, h4, h5, h6)")].forEach(
     (heading) => {
