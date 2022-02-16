@@ -30,7 +30,7 @@ table {
   --main-sidebar-width: 17rem;
   --main-content-height: calc(100vh - var(--main-header-height));
   --main-content-width: 50rem;
-  --main-content-top-padding: 4rem;
+  --main-content-top-margin: 4rem;
   --main-content-padding: 2rem;
   /* used to query width further down in page */
   --main-inner-content-width: calc(
@@ -80,7 +80,7 @@ body {
 
 main {
   display: grid;
-  grid-template-rows: var(--app-header-height) auto;
+  grid-template-rows: var(--main-header-height) auto;
   transition: grid-template-columns 0.3s;
 }
 
@@ -169,15 +169,16 @@ main#page {
 }
 
 #main-content {
+  position: relative;
   grid-area: main-content;
   height: var(--main-content-height);
   background: var(--color-main-bg);
   color: var(--color-main-fg);
-  overflow: auto;
   width: var(--main-content-width);
   margin: auto;
   padding: var(--main-content-padding);
-  padding-top: var(--main-content-top-padding);
+  padding-top: 0;
+  margin-top: var(--main-content-top-margin);
 }
 
 #main-footer {
@@ -259,20 +260,11 @@ body.modal-open {
   color: var(--color-pink-2);
 }
 
-@media only screen and (max-width: 1264px) {
-  #main-content {
-    margin-left: 2rem;
-  }
-}
-
 @media only screen and (max-width: 1110px) {
   :root {
+    --main-header-height: 1.5rem;
     --main-footer-height: 6rem;
     --main-content-width: 100vw;
-  }
-
-  #main-content {
-    margin-left: 0;
   }
 
   #main-header nav {
@@ -289,6 +281,39 @@ body.modal-open {
   }
 
   #main-footer {
+    flex-direction: row;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  :root {
+    --main-content-top-margin: 6rem;
+  }
+
+  #main-header {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  #main-header #main-nav {
     flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  #main-header nav section a#logo {
+    margin-right: 0;
+  }
+
+  #main-header #main-nav .secondary-nav {
+    font-size: 0.75rem;
+  }
+
+  #main-footer {
+    margin: 0;
+  }
+
+  #main-footer .public-benefit {
+    display: none;
   }
 }

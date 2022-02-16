@@ -46,7 +46,7 @@
 .unison-doc .folded .source.example,
 .unison-doc .folded .source.eval,
 .unison-doc .folded .source.signatures .signature {
-  max-width: calc(
+  max-gidth: calc(
     var(--main-inner-content-width) - var(--fold-toggle-column-width)
   );
 }

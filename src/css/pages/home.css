@@ -1,18 +1,10 @@
 #home {
-  --main-header-height: 1.5rem;
   --main-content-width: auto;
   --hero-width: 64rem;
   --examples-width: 79rem;
 }
 
-#home #main-header {
-  margin-top: 3.5rem;
-}
-
 #home #main-content {
-  padding: 0;
-  margin-top: 4.75rem;
-  height: auto;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -361,14 +353,9 @@
 /* tablet */
 @media only screen and (max-width: 1110px) {
   #home {
-    --main-header-height: 1.5rem;
     --main-content-width: 60rem;
     --hero-width: 60rem;
     --examples-width: 60rem;
-  }
-
-  #home #main-footer {
-    flex-direction: row;
   }
 
   #home #hero .carousel p {
@@ -379,29 +366,9 @@
 /* phone */
 @media only screen and (max-width: 960px) {
   #home {
-    --main-header-height: 1.5rem;
     --main-content-width: 100vw;
     --hero-width: 100vw;
     --examples-width: 100vw;
-  }
-
-  #home #main-header {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  #home #main-header #main-nav {
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
-  }
-
-  #home #main-header nav section a#logo {
-    margin-right: 0;
-  }
-
-  #home #main-header #main-nav .secondary-nav {
-    font-size: 0.75rem;
   }
 
   #home #hero {
@@ -432,14 +399,6 @@
   }
   #home #hero .install {
     width: auto;
-  }
-
-  #home #main-footer {
-    margin: 0;
-  }
-
-  #home #main-footer .public-benefit {
-    display: none;
   }
 
   #home .unison-examples {
