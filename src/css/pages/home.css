@@ -287,6 +287,7 @@
   position: relative;
   padding: 0 1.5rem;
   z-index: 1;
+  font-weight: 900;
 }
 
 #home .unison-examples .example {
@@ -316,17 +317,49 @@
 
 /* -- Responsive ----------------------------------------------------------- */
 
+/* smaller laptop */
 @media only screen and (max-width: 1264px) {
   #home #main-content {
     margin-left: auto;
   }
+
+  #home {
+    --hero-width: 60rem;
+    --examples-width: 60rem;
+  }
+
+  #home .unison-examples .example {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #home .unison-examples .example p {
+    text-align: right;
+    align-self: flex-end;
+    margin-bottom: 0;
+  }
+
+  #home .unison-examples .example p:first-of-type {
+    text-align: left;
+    align-self: flex-start;
+  }
+
+  #home .unison-examples .example .folded-sources {
+    align-self: center;
+  }
+
+  #home .unison-examples .example .folded-sources .folded {
+    margin-bottom: 0;
+  }
 }
 
+/* tablet */
 @media only screen and (max-width: 1110px) {
   #home {
     --main-header-height: 1.5rem;
     --main-content-width: 60rem;
-    --main-hero-width: 60rem;
+    --hero-width: 60rem;
+    --examples-width: 60rem;
   }
 
   #home #main-footer {
@@ -338,11 +371,13 @@
   }
 }
 
+/* phone */
 @media only screen and (max-width: 960px) {
   #home {
     --main-header-height: 1.5rem;
     --main-content-width: 100vw;
-    --main-hero-width: 100vw;
+    --hero-width: 100vw;
+    --examples-width: 100vw;
   }
 
   #home #main-header {
@@ -397,7 +432,59 @@
   #home #main-footer {
     margin: 0;
   }
+
   #home #main-footer .public-benefit {
     display: none;
+  }
+
+  #home .unison-examples {
+    margin-top: 2rem;
+  }
+
+  #home .unison-examples header {
+    justify-content: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  #home .unison-examples header:before {
+    display: none;
+  }
+
+  #home .unison-examples header h1 {
+    text-align: left;
+    padding: 0 0.625rem;
+    font-size: 1.5rem;
+    width: 16rem;
+  }
+
+  #home .unison-examples .example {
+    gap: 0.75rem;
+    width: var(--main-content-width);
+    margin-bottom: 4rem;
+  }
+
+  #home .unison-examples .example p {
+    text-align: left;
+    align-self: flex-start;
+    padding: 0 0.625rem;
+    font-size: var(--font-size-medium);
+    width: 100vw;
+  }
+
+  #home .unison-examples .example p:first-of-type {
+    text-align: left;
+    align-self: flex-start;
+  }
+
+  #home .unison-examples .example .folded-sources {
+    align-self: flex-start;
+    width: 100vw;
+    overflow: auto;
+  }
+
+  #home .unison-examples .example .folded-sources .folded {
+    border-radius: 0;
+    font-size: var(--font-size-small);
+    padding: 0.5rem 0.625rem;
   }
 }
