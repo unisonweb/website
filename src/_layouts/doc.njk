@@ -19,13 +19,19 @@
       </a>
       {% include "_header.njk" %}
       <div id="main-content">
-        <aside id='index'>{% include "_doc-sidebar-content.njk" %}</aside>
+        <aside id='index'>
+          <div id="autocomplete"></div>
+          {% include "_doc-sidebar-content.njk" %}
+        </aside>
 
         <h1 id="title">{{ title }}</h1>
         {{content | safe}}
         {% include "_footer.njk" %}
       </div>
     </main>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-theme-classic" />
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js" integrity="sha256-EXPXz4W6pQgfYY3yTpnDa3OH8/EPn16ciVsPQ/ypsjk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js"></script>
     <script src="/js/docs.js"></script>
     {% include "_js.njk" %}
   </body>

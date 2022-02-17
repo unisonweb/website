@@ -50,7 +50,75 @@
     one("main#doc")?.classList.toggle("show-index");
   });
 
-  // Modal
+  // -- Search ----------------------------------------------------------------
+
+  const searchClient = algoliasearch(
+    "ITKVRJJI7M",
+    "8a59b2585e45a15548391e3f2a8ab05b"
+  );
+
+  const { autocomplete, getAlgoliaResults } = window[
+    "@algolia/autocomplete-js"
+  ];
+
+  autocomplete({
+    container: "#autocomplete",
+    placeholder: "Search docs",
+    getSources({ query }) {
+      return [
+        {
+          sourceId: "docs",
+          getItems() {
+            return getAlgoliaResults({
+              searchClient,
+              queries: [
+                {
+                  indexName: "docs",
+                  query,
+                  params: {
+                    hitsPerPage: 5,
+                    attributesToSnippet: ["title:10", "content:35"],
+                    snippetEllipsisText: "…",
+                  },
+                },
+              ],
+            });
+          },
+          templates: {
+            item({ item, components, createElement }) {
+              return createElement(
+                "a",
+                { className: "aa-ItemWrapper", href: item.url },
+                createElement(
+                  "div",
+                  { className: "aa-ItemContent" },
+                  createElement(
+                    "div",
+                    { className: "aa-ItemContentBody" },
+                    createElement(
+                      "div",
+                      { className: "aa-ItemContentTitle" },
+                      components.Snippet({ hit: item, attribute: "title" })
+                    ),
+                    createElement(
+                      "div",
+                      { className: "aa-ItemContentDescription" },
+                      components.Snippet({ hit: item, attribute: "content" })
+                    )
+                  )
+                )
+              );
+            },
+          },
+          getItemUrl({ item }) {
+            return item.url;
+          },
+        },
+      ];
+    },
+  });
+
+  // -- Modal -----------------------------------------------------------------
 
   function renderDocFragment(url) {
     fetch(url)

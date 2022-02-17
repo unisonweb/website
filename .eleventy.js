@@ -1,5 +1,7 @@
 const R = require("ramda");
 const fs = require("fs");
+const { convert } = require("html-to-text");
+const { decode } = require("html-entities");
 
 const leftArrow = fs.readFileSync("./src/img/icon-arrow-left.svg");
 const rightArrow = fs.readFileSync("./src/img/icon-arrow-right.svg");
@@ -82,14 +84,32 @@ module.exports = function (config) {
     }
   });
 
-  // Remove <code>.*</code>, remove HTML, then with plain text, limit to 5k chars
-  config.addFilter("algExcerpt", function (text) {
+  config.addFilter("htmlToText", function (text) {
+    // return convert(decode(text), { ignoreHref: true }).replace(/"/g, "");
+
     //first remove code
     text = text.replace(/<code class="language-.*?">.*?<\/code>/gs, "");
+
     //now remove html tags
     text = text.replace(/<.*?>/g, "");
-    //now limit to 5k
-    return text.substring(0, 5000);
+
+    //Remove backslashes
+    text = text.replace(/\\/g, "");
+
+    //Remove tabs
+    text = text.replace(/\t/g, "");
+
+    //Remove big spaces and punctuation
+    text = text.replace(/\n/g, " ");
+
+    //remove repeated spaces
+    text = text.replace(/[ ]{2,}/g, "  ");
+
+    // Remove quotes
+    text = text.replace(/"/g, "");
+
+    //now limit to 8k
+    return text.substring(0, 8000);
   });
 
   config.addFilter("jsonify", function (text) {

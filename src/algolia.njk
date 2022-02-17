@@ -1,12 +1,13 @@
 ---
 permalink: /algolia.json
 ---
+
 [
 {%- for d in collections.doc -%}
 	{
-  "title": {{ d.data.title | jsonify }},
-  "url": "{{ d.url }}",
-  "content":{{ d.templateContent | jsonify }}
-}{%- if loop.last -%} {%- else -%},{%- endif -%}
+    "title": "{{ d.data.title }}",
+    "url": "{{ d.url }}",
+    "content": "{{ d.templateContent | htmlToText | safe }}"
+  }{%- if loop.last -%}{%- else -%},{%- endif -%}
 {%- endfor -%}
 ]
