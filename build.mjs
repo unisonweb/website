@@ -345,9 +345,9 @@ function transformPostFile(_src, dest) {
 
 function updateContent(frontmatter, prefix, content) {
   let dom = new JSDOM(content);
-  dom = convertRefsToUnisonShareLinks(dom);
   dom = fixFolded(dom);
   dom = fixInternalLinks(prefix, dom);
+  dom = convertRefsToUnisonShareLinks(dom);
 
   let title = "";
   const h1 = dom.window.document.querySelector("h1");
@@ -451,6 +451,8 @@ function fixFolded(dom) {
 
 function fixInternalLinks_(prefix, href) {
   let href_ = href;
+
+  if (href_.startsWith("https://share.unison-lang.org")) return href_;
 
   // JSDOM randonly adds about:blank to fragment links...
   if (href_.startsWith("about:blank#")) {
