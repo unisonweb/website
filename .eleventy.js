@@ -82,6 +82,20 @@ module.exports = function (config) {
     }
   });
 
+  // Remove <code>.*</code>, remove HTML, then with plain text, limit to 5k chars
+  config.addFilter("algExcerpt", function (text) {
+    //first remove code
+    text = text.replace(/<code class="language-.*?">.*?<\/code>/gs, "");
+    //now remove html tags
+    text = text.replace(/<.*?>/g, "");
+    //now limit to 5k
+    return text.substring(0, 5000);
+  });
+
+  config.addFilter("jsonify", function (text) {
+    return JSON.stringify(text);
+  });
+
   return {
     dir: {
       input: "src",
