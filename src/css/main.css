@@ -426,6 +426,16 @@ body.modal-open {
     --main-content-top-margin: 6rem;
   }
 
+  #autocomplete {
+    --autocomplete-width: 100vw - 2rem;
+  }
+
+  #autocomplete-search {
+    top: 3rem;
+    height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+
   #main-header {
     margin-top: 1rem;
     margin-bottom: 1rem;
