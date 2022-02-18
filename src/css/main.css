@@ -300,7 +300,8 @@ body.modal-open {
   background: var(--color-gray-lighten-100);
   display: none;
   width: var(--autocomplete-width);
-  border: 1px solid var(--color-gray-lighten-20);
+  box-shadow: 0 0.375rem 1rem var(--color-modal-shadow),
+    0 0 0 1px var(--color-modal-border);
   margin-top: -1.85rem;
   margin-left: -1px;
   border-radius: var(--border-radius-base);
@@ -347,7 +348,7 @@ body.modal-open {
   position: relative;
   height: 0.875rem;
   width: 0.875rem;
-  right: -0.5rem;
+  right: 0;
   background: url(/img/icon-x.svg);
   opacity: 0.4;
 }
@@ -358,7 +359,7 @@ body.modal-open {
 }
 
 #autocomplete.show-search #autocomplete-panel .aa-Panel {
-  border-top: 1px solid var(--color-gray-lighten-40);
+  border-top: 1px solid var(--color-modal-inner-border);
 }
 
 #autocomplete.show-search #autocomplete-search .match {
