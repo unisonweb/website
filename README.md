@@ -33,3 +33,7 @@ Deployment process
 * `npm run build` will build a local copy of the website using the steps above. 
 * `npm start` will both build and start a local version of the website. 
 * `netlify deploy --prod` will deploy the website to production 
+
+After the deploy to Netlify has succeeded, update the algolia search index by
+going to https://unison-lang.org/algolia.json, saving the json file and
+uploading to the algolia index.

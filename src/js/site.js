@@ -52,4 +52,93 @@
       }
     }
   );
+
+  // -- Search ----------------------------------------------------------------
+
+  const searchClient = algoliasearch(
+    "ITKVRJJI7M",
+    "8a59b2585e45a15548391e3f2a8ab05b"
+  );
+
+  const { autocomplete, getAlgoliaResults } = window[
+    "@algolia/autocomplete-js"
+  ];
+
+  autocomplete({
+    debug: true,
+    container: "#autocomplete-input",
+    panelContainer: "#autocomplete-panel",
+    placeholder: "Search",
+    detachedMediaQuery: "none",
+    getSources({ query }) {
+      return [
+        {
+          sourceId: "docs",
+          getItems() {
+            return getAlgoliaResults({
+              searchClient,
+              queries: [
+                {
+                  indexName: "docs",
+                  query,
+                  params: {
+                    hitsPerPage: 9,
+                    attributesToSnippet: ["title:15", "content:14"],
+                    snippetEllipsisText: "…",
+                  },
+                },
+              ],
+            });
+          },
+          templates: {
+            item({ item, components, createElement }) {
+              return createElement(
+                "a",
+                { className: "match", href: item.url },
+                createElement(
+                  "div",
+                  { className: "match-title" },
+                  components.Snippet({ hit: item, attribute: "title" })
+                ),
+                createElement(
+                  "div",
+                  { className: "match-content" },
+                  components.Snippet({ hit: item, attribute: "content" })
+                )
+              );
+            },
+          },
+          getItemUrl({ item }) {
+            return item.url;
+          },
+        },
+      ];
+    },
+  });
+
+  const $autocomplete = one("#autocomplete");
+  const $searchButton = one("#autocomplete .toggle");
+
+  $searchButton.addEventListener("click", () => {
+    if ($autocomplete.classList.contains("show-search")) {
+      hideSearch();
+    } else {
+      showSearch();
+    }
+  });
+
+  function showSearch() {
+    $autocomplete.classList.add("show-search");
+    $autocomplete.querySelector("input").focus();
+    const overlay = document.createElement("div");
+    overlay.classList.add("modal-overlay", "soft-overlay");
+    overlay.addEventListener("click", hideSearch);
+    one("body").appendChild(overlay);
+  }
+
+  function hideSearch() {
+    $autocomplete.classList.remove("show-search");
+    $autocomplete.querySelector("input").blur();
+    one(".modal-overlay").remove();
+  }
 })();
