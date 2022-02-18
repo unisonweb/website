@@ -118,6 +118,7 @@
 
   const $autocomplete = one("#autocomplete");
   const $searchButton = one("#autocomplete .toggle");
+  const $body = one("body");
 
   $searchButton.addEventListener("click", () => {
     if ($autocomplete.classList.contains("show-search")) {
@@ -133,12 +134,14 @@
     const overlay = document.createElement("div");
     overlay.classList.add("modal-overlay", "soft-overlay");
     overlay.addEventListener("click", hideSearch);
-    one("body").appendChild(overlay);
+    $body.appendChild(overlay);
+    $body.classList.add("modal-open");
   }
 
   function hideSearch() {
     $autocomplete.classList.remove("show-search");
     $autocomplete.querySelector("input").blur();
     one(".modal-overlay").remove();
+    $body.classList.remove("modal-open");
   }
 })();

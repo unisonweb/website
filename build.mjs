@@ -360,7 +360,9 @@ function updateContent(frontmatter, prefix, content) {
   const page = dom.window.document.querySelector("body").innerHTML;
 
   if (frontmatter) {
-    const pageFrontmatter = { ...frontmatter, title };
+    const pageFrontmatter = title
+      ? { ...frontmatter, title }
+      : { ...frontmatter, tags: `_${frontmatter.tags}` };
 
     return `${frontMatterToString(pageFrontmatter)}
 {% raw %}
