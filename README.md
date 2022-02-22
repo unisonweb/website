@@ -35,5 +35,7 @@ Deployment process
 * `netlify deploy --prod` will deploy the website to production 
 
 After the deploy to Netlify has succeeded, update the algolia search index by
-going to https://unison-lang.org/algolia.json, saving the json file and
-uploading to the algolia index.
+going to https://unison-lang.org/algolia.json and saving the json file.
+
+Then go to the "docs" index in Algolia, clear it (removing all records), and
+upload the downloaded json file.

@@ -84,29 +84,31 @@ module.exports = function (config) {
     }
   });
 
-  config.addFilter("htmlToText", function (text) {
-    // return convert(decode(text), { ignoreHref: true }).replace(/"/g, "");
+  config.addFilter("algoliafy", function (text) {
+    // Remove code
+    text = text.replaceAll(/<code>.*?<\/code>/gs, "");
 
-    //first remove code
-    text = text.replace(/<code class="language-.*?">.*?<\/code>/gs, "");
+    // Remove html tags
+    text = text.replace(/<.*?>/g, " "); // Extra space for code blocks
 
-    //now remove html tags
-    text = text.replace(/<.*?>/g, "");
-
-    //Remove backslashes
+    // Remove backslashes
     text = text.replace(/\\/g, "");
 
-    //Remove tabs
+    // Remove tabs
     text = text.replace(/\t/g, "");
 
-    //Remove big spaces and punctuation
+    // Remove big spaces and punctuation
     text = text.replace(/\n/g, " ");
 
-    //remove repeated spaces
-    text = text.replace(/[ ]{2,}/g, "  ");
+    // Remove repeated spaces
+    text = text.replace(/[ ]{2,}/g, " ");
 
     // Remove quotes
     text = text.replace(/"/g, "");
+
+    // Support -> and <-
+    text = text.replaceAll("-&gt;", "->");
+    text = text.replaceAll("&lt;-", "<-");
 
     //now limit to 8k
     return text.substring(0, 8000);

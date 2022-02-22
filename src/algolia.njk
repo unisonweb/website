@@ -7,7 +7,7 @@ permalink: /algolia.json
 	{
     "title": "{{ d.data.title }}",
     "url": "{{ d.url }}",
-    "content": "{{ d.templateContent | htmlToText | safe }}"
+    "content": "{{ d.templateContent | algoliafy | safe }}"
   }{%- if loop.last -%}{%- else -%},{%- endif -%}
 {%- endfor -%}
 ]
