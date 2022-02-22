@@ -23,7 +23,7 @@ function build() {
   rm("./build", { recursive: true, force: true })
     .then(() => rm("./src/docs", { recursive: true, force: true }))
     .then(() => rm("./src/articles", { recursive: true, force: true }))
-    .then(() => rm("./src/posts", { recursive: true, force: true }))
+    .then(() => rm("./src/blog/posts", { recursive: true, force: true }))
     .then(() => rm("./src/community", { recursive: true, force: true }))
     .then(() => rm("./src/home/examples", { recursive: true, force: true }))
     .then(() => rm("./src/home/_examples.html", { force: true }))
@@ -90,21 +90,19 @@ function build() {
         }
       })
     )
-    // -- Blog Posts ----------------------------------------------------------
-    /*
-    .then(() => console.log(" - Building /posts"))
-    .then(() => mkdir("./src/posts"))
+    // -- Blog ----------------------------------------------------------------
+    .then(() => console.log(" - Building /blog/posts"))
+    .then(() => mkdir("./src/blog/posts"))
     .then(() =>
-      copy("./build/posts", "./src/posts", {
+      copy("./build/blog", "./src/blog/posts", {
         rename: kebabCase,
       }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
         const fileName = path.basename(dest);
         if (!fileName.startsWith("_")) {
-          transformPostFile(src, dest);
+          transformBlogFile(src, dest);
         }
       })
     )
-  */
     .catch((ex) => console.error(ex));
 }
 
@@ -324,17 +322,18 @@ function transformArticleFile(src, dest) {
   fs.writeFileSync(dest, content);
 }
 
-// -- Posts
+// -- Blog
 
-function transformPostFile(_src, dest) {
+function transformBlogFile(_src, dest) {
   const frontmatter = {
-    tags: "post",
-    layout: "post.njk",
+    tags: "blog",
+    layout: "blog.njk",
+    permalink: dest.replace("src/", "").replace("/posts", ""),
   };
 
   const content = updateContent(
     frontmatter,
-    "/posts",
+    "/",
     fs.readFileSync(dest, { encoding: "utf-8" })
   );
 

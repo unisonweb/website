@@ -1,0 +1,9 @@
+---
+layout: "page"
+---
+
+{%- for p in collections.blog -%}
+<a href="{{p.url}}">
+  <h2>{{ p.data.title }}</h2>
+</a>
+{%- endfor -%}
