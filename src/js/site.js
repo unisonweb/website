@@ -120,6 +120,10 @@
   const $searchButton = one("#autocomplete .toggle");
   const $body = one("body");
 
+  one(".aa-InputWrapperPrefix").innerHTML = $searchButton.querySelector(
+    ".icon"
+  ).outerHTML;
+
   $searchButton.addEventListener("click", () => {
     if ($autocomplete.classList.contains("show-search")) {
       hideSearch();
