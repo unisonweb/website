@@ -110,11 +110,11 @@ function build() {
 
 let articles = {};
 
-const iconArrowRight = fs.readFileSync("./src/img/icon-arrow-right.svg", {
+const iconArrowRight = fs.readFileSync("./src/assets/icon-arrow-right.svg", {
   encoding: "utf-8",
 });
 
-const iconCaretRight = fs.readFileSync("./src/img/icon-caret-right.svg", {
+const iconCaretRight = fs.readFileSync("./src/assets/icon-caret-right.svg", {
   encoding: "utf-8",
 });
 

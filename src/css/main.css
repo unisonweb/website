@@ -370,7 +370,7 @@ body.modal-open {
   height: 0.875rem;
   width: 0.875rem;
   right: 0;
-  background: url(/img/icon-x.svg);
+  background: url(/assets/icon-x.svg);
   opacity: 0.4;
 }
 
