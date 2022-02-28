@@ -3,8 +3,8 @@ const fs = require("fs");
 const { convert } = require("html-to-text");
 const { decode } = require("html-entities");
 
-const leftArrow = fs.readFileSync("./src/img/icon-arrow-left.svg");
-const rightArrow = fs.readFileSync("./src/img/icon-arrow-right.svg");
+const leftArrow = fs.readFileSync("./src/assets/icon-arrow-left.svg");
+const rightArrow = fs.readFileSync("./src/assets/icon-arrow-right.svg");
 
 function paginationItem(direction, link) {
   let directionIndicator;

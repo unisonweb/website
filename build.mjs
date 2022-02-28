@@ -17,8 +17,8 @@ build();
 function build() {
   console.log("");
   console.log("BUILDING HTML FROM CODEBASE");
-  console.log("=========================");
-  console.log(" - Removing old artifacts");
+  console.log("===========================");
+  console.log(" * Removing old artifacts");
 
   rm("./build", { recursive: true, force: true })
     .then(() => rm("./src/docs", { recursive: true, force: true }))
@@ -29,13 +29,13 @@ function build() {
     .then(() => rm("./src/home/_examples.html", { force: true }))
     .then(() => rm("./src/_includes/_home-examples.njk", { force: true }))
     .then(() => rm("./src/_includes/_doc-sidebar-content.njk", { force: true }))
-    .then(() => console.log(" - Running transcript"))
+    .then(() => console.log(" * Running transcript"))
     .then(() => mkdir("./build"))
     .then(() =>
       run(" TMPDIR=build unison transcript.fork docs-to-html.md --codebase .")
     )
     // -- Pages ----------------------------------------------------------
-    .then(() => console.log(" - Building /pages"))
+    .then(() => console.log(" * Building /pages"))
     .then(() =>
       copy(
         "./build/pages/home/_examples.html",
@@ -58,7 +58,7 @@ function build() {
       })
     )
     // -- Docs ----------------------------------------------------------------
-    .then(() => console.log(" - Building /docs"))
+    .then(() => console.log(" * Building /docs"))
     .then(() => mkdir("./src/docs"))
     .then(() =>
       copy(
