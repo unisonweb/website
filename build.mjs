@@ -390,7 +390,7 @@ function convertRefsToUnisonShareLinks(dom) {
         if (ref && refType) {
           let link = dom.window.document.createElement("a");
 
-          link.href = `https://share.unison-lang.org/latest/namespaces/unison/website/;/${refType}s/${ref}`;
+          link.href = `https://share.unison-lang.org/latest/${refType}s/${ref}`;
           link.target = "_blank";
           link.innerHTML = span.innerHTML;
           link.classList = span.classList;
