@@ -344,7 +344,20 @@ function transformBlogFile(_src, dest) {
 // -- Helpers
 
 function updateContent(frontmatter, prefix, rawContent) {
-  const content = matter(rawContent);
+  let content = matter(rawContent);
+
+  if (content.data.authors) {
+    if (!Array.isArray(content.data.authors)) {
+      content.data.authors = [content.data.authors];
+    }
+  }
+
+  if (content.data.categories) {
+    if (!Array.isArray(content.data.categories)) {
+      content.data.categories = [content.data.categories];
+    }
+  }
+
   let dom = new JSDOM(content.content);
   dom = fixFolded(dom);
   dom = fixInternalLinks(prefix, dom);

@@ -2,6 +2,7 @@ const R = require("ramda");
 const fs = require("fs");
 const { convert } = require("html-to-text");
 const { decode } = require("html-entities");
+const { parse, format, formatISO } = require("date-fns");
 
 const leftArrow = fs.readFileSync("./src/assets/icon-arrow-left.svg");
 const rightArrow = fs.readFileSync("./src/assets/icon-arrow-right.svg");
@@ -117,6 +118,12 @@ module.exports = function (config) {
   config.addFilter("jsonify", function (text) {
     return JSON.stringify(text);
   });
+
+  config.addFilter("formatDate", (date) => format(date, "MMM dd, yyyy"));
+  config.addFilter("isoDate", (date) => formatISO(date));
+  config.addFilter("month", (month) =>
+    format(parse(month, "M", new Date()), "MMM")
+  );
 
   return {
     dir: {

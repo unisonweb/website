@@ -5,3 +5,71 @@
 #blog video {
   width: 100%;
 }
+
+#blog .post-summaries {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#blog .post-summaries .card {
+  width: 50%;
+  transition: all 0.2s;
+}
+
+#blog .post-summaries .card:hover {
+  background: var(--color-gray-lighten-50);
+  text-decoration: none;
+}
+
+#blog .post-summaries .card img {
+  margin-bottom: 1rem;
+}
+
+#blog .post-summaries .card .categories {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  font-size: var(--font-size-small);
+  color: var(--color-main-subtle-fg-em);
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
+}
+
+#blog .post-summaries .card h2 {
+  font-size: 1.3rem;
+  line-height: 1.3;
+}
+
+#blog .post-summaries .card p {
+  font-size: var(--font-size-medium);
+}
+
+#blog .post-summaries .card footer {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  font-size: var(--font-size-small);
+  color: var(--color-main-subtle-fg-em);
+}
+
+#blog .post-summaries .card footer .authors {
+  padding-right: 0.5rem;
+  border-right: 1px solid var(--color-main-border);
+  color: var(--color-main-fg);
+  display: flex;
+  gap: 0.5rem;
+}
+
+#blog .post-summaries .card:first-child {
+  width: 100%;
+}
+#blog .post-summaries .card:first-child h2 {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: var(--color-pink-1);
+}
+
+#blog .post-summaries .card:first-child p {
+  font-size: var(--font-size-base);
+}

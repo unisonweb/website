@@ -1,9 +1,30 @@
 ---
-layout: "page"
+layout: "blog"
 ---
 
-{%- for p in collections.blog -%}
-<a href="{{p.url}}">
-  <h2>{{ p.data.title }}</h2>
-</a>
-{%- endfor -%}
+<div class="post-summaries">
+  {%- for p in collections.blog | reverse -%}
+  <a href="{{p.url}}" class="card contained">
+    <header>
+      <img src="{{ p.data.featuredImage }}" class="featured-image">
+      <div class="categories">
+        {%- for c in p.data.categories -%}
+        <div class="category">{{ c }}</div>
+        {%- endfor -%}
+      </div>
+      <h2>{{ p.data.title }}</h2>
+    </header>
+    <section>
+      <p>{{ p.data.summary }}</p>
+    </section>
+    <footer>
+      <div class="authors">
+      {%- for a in p.data.authors -%}
+        <label class="author">{{ a }}</label>
+      {%- endfor -%}
+      </div>
+      <label class="date">{{ p.data.date | formatDate }}</label>
+    </footer>
+  </a>
+  {%- endfor -%}
+</div>
