@@ -1,0 +1,7 @@
+#blog {
+  --main-content-width: 50rem;
+}
+
+#blog video {
+  width: 100%;
+}

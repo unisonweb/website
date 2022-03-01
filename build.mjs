@@ -9,6 +9,7 @@ import { JSDOM } from "jsdom";
 import kebabCase from "kebab-case";
 import yaml from "yaml";
 import { last, has, map } from "ramda";
+import matter from "gray-matter";
 
 // Run the build process!
 build();
@@ -342,8 +343,9 @@ function transformBlogFile(_src, dest) {
 
 // -- Helpers
 
-function updateContent(frontmatter, prefix, content) {
-  let dom = new JSDOM(content);
+function updateContent(frontmatter, prefix, rawContent) {
+  const content = matter(rawContent);
+  let dom = new JSDOM(content.content);
   dom = fixFolded(dom);
   dom = fixInternalLinks(prefix, dom);
   dom = convertRefsToUnisonShareLinks(dom);
@@ -356,12 +358,32 @@ function updateContent(frontmatter, prefix, content) {
     h1.remove();
   }
 
+  [...dom.window.document.querySelectorAll("video")].forEach((video) => {
+    const source = video.querySelector("source");
+    if (source?.getAttribute("type") === "youtube") {
+      const iframe = dom.window.document.createElement("iframe");
+      iframe.src = source.getAttribute("src");
+      iframe.setAttribute("width", "580");
+      iframe.setAttribute("height", "436");
+      iframe.setAttribute("frameborder", "0");
+      iframe.setAttribute(
+        "allow",
+        "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      );
+      iframe.setAttribute("allowfullscreen", "true");
+
+      video.replaceWith(iframe);
+    } else {
+      video.setAttribute("controls", "true");
+    }
+  });
+
   const page = dom.window.document.querySelector("body").innerHTML;
 
   if (frontmatter) {
     const pageFrontmatter = title
-      ? { ...frontmatter, title }
-      : { ...frontmatter, tags: `_${frontmatter.tags}` };
+      ? { ...frontmatter, ...content.data, title }
+      : { ...frontmatter, ...content.data, tags: `_${frontmatter.tags}` };
 
     return `${frontMatterToString(pageFrontmatter)}
 {% raw %}
