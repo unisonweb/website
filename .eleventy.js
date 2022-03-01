@@ -48,7 +48,7 @@ module.exports = function (config) {
   // Static files passthrough
   config.addPassthroughCopy("src/css");
   config.addPassthroughCopy("src/js");
-  config.addPassthroughCopy("src/img");
+  config.addPassthroughCopy("src/assets");
   config.addPassthroughCopy("src/video");
   config.addPassthroughCopy("src/fonts");
   config.addPassthroughCopy("src/favicon.svg");

@@ -147,6 +147,10 @@
   text-decoration: line-through;
 }
 
+.unison-doc .named-link {
+  white-space: normal;
+}
+
 .unison-doc .named-link:not(.invalid-href),
 .unison-doc .named-link:not(.invalid-href):visited {
   color: var(--color-doc-link);

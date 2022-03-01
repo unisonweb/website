@@ -78,7 +78,7 @@ function build() {
       })
     )
     // -- Articles ------------------------------------------------------------
-    .then(() => console.log(" - Building /articles"))
+    .then(() => console.log(" * Building /articles"))
     .then(() => mkdir("./src/articles"))
     .then(() =>
       copy("./build/articles", "./src/articles", {
@@ -91,7 +91,7 @@ function build() {
       })
     )
     // -- Blog ----------------------------------------------------------------
-    .then(() => console.log(" - Building /blog/posts"))
+    .then(() => console.log(" * Building /blog/posts"))
     .then(() => mkdir("./src/blog/posts"))
     .then(() =>
       copy("./build/blog", "./src/blog/posts", {
@@ -454,6 +454,8 @@ function fixInternalLinks_(prefix, href) {
   let href_ = href;
 
   if (href_.startsWith("https://share.unison-lang.org")) return href_;
+
+  if (href_.startsWith("mailto:")) return href_;
 
   // JSDOM randonly adds about:blank to fragment links...
   if (href_.startsWith("about:blank#")) {
