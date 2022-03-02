@@ -7,7 +7,7 @@
   </head>
 
   <body>
-    <main id='doc'>
+    <main id='learn'>
       <a id="toggle-index">
         <div class="icon icon-list">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,7 +21,7 @@
       <div id="main-content">
         <aside id='index'>
           <div id="autocomplete"></div>
-          {% include "_doc-sidebar-content.njk" %}
+          {% include "_learn-sidebar-content.njk" %}
         </aside>
 
         <h1 id="title">{{ title }}</h1>
@@ -30,6 +30,6 @@
       </div>
     </main>
     {% include "_js.njk" %}
-    <script src="/js/docs.js"></script>
+    <script src="/js/learn.js"></script>
   </body>
 </html>

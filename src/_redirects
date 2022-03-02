@@ -6,18 +6,20 @@
 # -- old website support --
 
 # new urls
-/docs/abilities               /docs/fundamentals/abilities/
-/docs/documentation           /docs/usage-topics/documentation/
-/docs/language-reference      /docs/language-reference/top-level-declaration/
-/docs/testing                 /docs/usage-topics/testing/
-/docs/configuration           /docs/tooling/configuration/
-/docs/commands                /docs/ucm-commands/
-/docs/transcripts             /docs/tooling/transcripts/
+/docs                         /learn
+/learn/abilities              /learn/fundamentals/abilities/
+/docs/abilities               /learn/fundamentals/abilities/
+/docs/documentation           /learn/usage-topics/documentation/
+/docs/language-reference      /learn/language-reference/top-level-declaration/
+/docs/testing                 /learn/usage-topics/testing/
+/docs/configuration           /learn/tooling/configuration/
+/docs/commands                /learn/ucm-commands/
+/docs/transcripts             /learn/tooling/transcripts/
 
 /docs/libraries               https://share.unison-lang.org
 
 # fallbacks
-/docs/codebase-organization   /docs
-/docs/refactoring             /docs
-/docs/bibliography            /docs
-# /docs/faq                     /docs/usage-topics/faq
+/docs/codebase-organization   /learn
+/docs/refactoring             /learn
+/docs/bibliography            /learn
+# /docs/faq                     /learn/usage-topics/faq

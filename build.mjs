@@ -22,14 +22,16 @@ function build() {
   console.log(" * Removing old artifacts");
 
   rm("./build", { recursive: true, force: true })
-    .then(() => rm("./src/docs", { recursive: true, force: true }))
+    .then(() => rm("./src/learn", { recursive: true, force: true }))
     .then(() => rm("./src/articles", { recursive: true, force: true }))
     .then(() => rm("./src/blog/posts", { recursive: true, force: true }))
     .then(() => rm("./src/community", { recursive: true, force: true }))
     .then(() => rm("./src/home/examples", { recursive: true, force: true }))
     .then(() => rm("./src/home/_examples.html", { force: true }))
     .then(() => rm("./src/_includes/_home-examples.njk", { force: true }))
-    .then(() => rm("./src/_includes/_doc-sidebar-content.njk", { force: true }))
+    .then(() =>
+      rm("./src/_includes/_learn-sidebar-content.njk", { force: true })
+    )
     .then(() => console.log(" * Running transcript"))
     .then(() => mkdir("./build"))
     .then(() =>
@@ -58,23 +60,23 @@ function build() {
         }
       })
     )
-    // -- Docs ----------------------------------------------------------------
-    .then(() => console.log(" * Building /docs"))
-    .then(() => mkdir("./src/docs"))
+    // -- Lear ----------------------------------------------------------------
+    .then(() => console.log(" * Building /learn"))
+    .then(() => mkdir("./src/learn"))
     .then(() =>
       copy(
-        "./build/docs/_sidebar.html",
-        "./src/_includes/_doc-sidebar-content.njk"
+        "./build/learn/_sidebar.html",
+        "./src/_includes/_learn-sidebar-content.njk"
       ).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
-        transformDocSidebar(src, dest, false);
+        transformLearnSidebar(src, dest, false);
       })
     )
     .then(() =>
-      copy("./build/docs", "./src/docs", {
+      copy("./build/learn", "./src/learn", {
         rename: kebabCase,
       }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
         if (!isFragment(dest)) {
-          transformDocFile(src, dest);
+          transformLearnFile(src, dest);
         }
       })
     )
@@ -178,12 +180,12 @@ function transformPageFile(_src, dest) {
   fs.writeFileSync(dest, content);
 }
 
-// -- Docs
+// -- Learn
 
-function transformDocSidebar(_src, dest) {
+function transformLearnSidebar(_src, dest) {
   let content = updateContent(
     null,
-    "/docs",
+    "/learn",
     fs.readFileSync(dest, { encoding: "utf-8" })
   );
 
@@ -205,19 +207,19 @@ function transformDocSidebar(_src, dest) {
   fs.writeFileSync(dest, content);
 }
 
-function transformDocFile(_src, dest, includeFrontMatter = true) {
+function transformLearnFile(_src, dest, includeFrontMatter = true) {
   let frontmatter = null;
   if (includeFrontMatter) {
     frontmatter = {
-      tags: "doc",
-      overallTitle: "Unison docs",
-      layout: "doc.njk",
+      tags: "learn",
+      overallTitle: "Learn Unison",
+      layout: "learn.njk",
     };
   }
 
   const content = updateContent(
     frontmatter,
-    "/docs",
+    "/learn",
     fs.readFileSync(dest, { encoding: "utf-8" })
   );
 
