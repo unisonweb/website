@@ -10,6 +10,11 @@
   max-width: 100%;
 }
 
+#blog #main-content iframe {
+  margin: auto;
+  display: flex;
+}
+
 /* header */
 
 #blog header {
