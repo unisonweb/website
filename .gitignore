@@ -18,6 +18,7 @@ src/home
 src/community
 src/unison-computing
 src/jobs
+src/talks
 src/_includes/_learn-sidebar-content.njk
 src/_includes/_home-examples.njk
 
