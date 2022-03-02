@@ -11,19 +11,21 @@
       {% include "_header.njk" %}
       <div id="main-content">
         <header class="post-header">
-          <div class="categories">
-            {%- for c in categories -%}
-            <div class="category">{{ c }}</div>
-            {%- endfor -%}
-          </div>
+          <div class="categories-and-date">
+            <div class="categories">
+              {%- for c in categories -%}
+              <span class="category">{{ c }}</span>
+              {%- endfor -%}
+            </div>
 
-          <label class="date">{{ date | formatDate }}</label>
+            <span class="date">{{ date | formatDate }}</span>
+          </div>
 
           <h1 id="title">{{ title }}</h1>
 
           <div class="authors">
           {%- for a in authors -%}
-            <label class="author">{{ a }}</label>
+            <label class="author">{{ a | author }}</label>
           {%- endfor -%}
           </div>
 

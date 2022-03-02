@@ -1,11 +1,17 @@
 const R = require("ramda");
 const fs = require("fs");
-const { convert } = require("html-to-text");
-const { decode } = require("html-entities");
 const { parse, format, formatISO } = require("date-fns");
-
+const authors = require("./src/authors.json");
 const leftArrow = fs.readFileSync("./src/assets/icon-arrow-left.svg");
 const rightArrow = fs.readFileSync("./src/assets/icon-arrow-right.svg");
+
+function titleCase(str) {
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
 
 function paginationItem(direction, link) {
   let directionIndicator;
@@ -124,6 +130,15 @@ module.exports = function (config) {
   config.addFilter("month", (month) =>
     format(parse(month, "M", new Date()), "MMM")
   );
+
+  config.addFilter("author", (authorTag) => {
+    const author = authors[authorTag];
+    if (author) {
+      return author.name;
+    } else {
+      return titleCase(authorTag.replaceAll("-", " "));
+    }
+  });
 
   return {
     dir: {

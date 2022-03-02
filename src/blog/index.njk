@@ -20,10 +20,10 @@ layout: "blog-index"
     <footer>
       <div class="authors">
       {%- for a in p.data.authors -%}
-        <label class="author">{{ a }}</label>
+        <span class="author">{{ a | author }}</span>
       {%- endfor -%}
       </div>
-      <label class="date">{{ p.data.date | formatDate }}</label>
+      <span class="date">{{ p.data.date | formatDate }}</span>
     </footer>
   </a>
   {%- endfor -%}

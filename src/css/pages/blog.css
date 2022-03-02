@@ -23,16 +23,50 @@
   line-height: 1.1;
   font-weight: 900;
   color: var(--color-pink-1);
+  margin: 1rem 0 1.25rem 0;
+}
+
+#blog .categories-and-date {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  font-size: var(--font-size-small);
+  color: var(--color-main-subtle-fg-em);
+}
+
+#blog .categories {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  text-transform: capitalize;
+  padding-right: 0.5rem;
+  border-right: 1px solid var(--color-main-border);
+}
+
+#blog .categories .category:after {
+  content: ", ";
+}
+#blog .categories .category:last-child:after {
+  content: "";
 }
 
 #blog .authors {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  font-size: var(--font-size-medium);
+  gap: 0.25rem;
+}
+
+#blog .authors .author:after {
+  content: ", ";
+}
+#blog .authors .author:last-child:after {
+  content: "";
 }
 
 #blog #main-content img.featured-image {
-  margin: 2rem 0;
+  display: flex;
+  margin: 2rem auto;
 }
 
 /* content */
@@ -41,4 +75,20 @@
 #blog .unison-doc {
   width: 50rem;
   margin: auto;
+}
+
+@media only screen and (max-width: 1264px) {
+  #blog {
+    --main-footer-height: 6rem;
+    --main-content-width: 100vw;
+  }
+
+  #blog #main-content {
+    padding: 0 1.5rem;
+  }
+
+  #blog .post-header,
+  #blog .unison-doc {
+    width: 100vw;
+  }
 }
