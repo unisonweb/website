@@ -61,6 +61,7 @@ module.exports = function (config) {
   config.addPassthroughCopy("src/favicon.svg");
   config.addPassthroughCopy("src/favicon.ico");
   config.addPassthroughCopy("src/robots.txt");
+  config.addPassthroughCopy("src/_redirects");
 
   // Shortcodes
   config.addShortcode("currentYear", () => `${new Date().getFullYear()}`);
