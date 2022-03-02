@@ -10,7 +10,26 @@
     <main id='blog'>
       {% include "_header.njk" %}
       <div id="main-content">
-        <h1 id="title">{{ title }}</h1>
+        <header class="post-header">
+          <div class="categories">
+            {%- for c in categories -%}
+            <div class="category">{{ c }}</div>
+            {%- endfor -%}
+          </div>
+
+          <label class="date">{{ date | formatDate }}</label>
+
+          <h1 id="title">{{ title }}</h1>
+
+          <div class="authors">
+          {%- for a in authors -%}
+            <label class="author">{{ a }}</label>
+          {%- endfor -%}
+          </div>
+
+        </header>
+
+        <img src="{{ featuredImage }}" class="featured-image">
 
         {{content | safe}}
 

@@ -1,0 +1,20 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    {% include "_head.njk" %}
+    <title>Blog &middot; Unison programming language</title>
+  </head>
+
+  <body>
+    <main id='blog-index'>
+      {% include "_header.njk" %}
+      <div id="main-content">
+        {{content | safe}}
+
+        {% include "_footer.njk" %}
+      </div>
+    </main>
+    {% include "_js.njk" %}
+  </body>
+</html>
