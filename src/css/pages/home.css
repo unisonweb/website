@@ -262,6 +262,8 @@
   margin-bottom: 4.5rem;
   font-size: 1.125rem;
   color: var(--color-gray-base);
+  text-align: center;
+  padding: 0 1rem;
 }
 
 #home .unison-examples header h1 {
@@ -324,10 +326,12 @@
 }
 
 #home .unison-examples .hello-world {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
 }
 
-#home .unison-examples .hello-world .folded.source {
+#home .unison-examples .hello-world .folded.source,
+#home .unison-examples .distributed-map-reduce .folded.source,
+#home .unison-examples .http-request .folded.source {
   font-size: 1.125rem;
 }
 
@@ -352,7 +356,7 @@
 }
 
 #home .unison-examples p {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
 }
 
 #home .unison-examples p * {
@@ -408,28 +412,33 @@
     --examples-width: 64rem;
   }
 
-  #home .unison-examples .example {
-    flex-direction: column;
-    align-items: flex-start;
+  #home .unison-examples header p {
+    font-size: 1rem;
   }
 
-  #home .unison-examples .example p {
-    text-align: right;
-    align-self: flex-end;
-    margin-bottom: 0;
+  #home .unison-examples header h1 {
+    font-size: 2rem;
   }
 
-  #home .unison-examples .example p:first-of-type {
-    text-align: left;
-    align-self: flex-start;
+  #home .unison-examples .examples .hello-world h1,
+  #home .unison-examples .examples .distributed-map-reduce h1,
+  #home .unison-examples .examples .http-request h1 {
+    font-size: 1.75rem;
   }
 
-  #home .unison-examples .example .folded-sources {
-    align-self: center;
+  #home .unison-examples .examples .hello-world,
+  #home .unison-examples .examples p {
+    font-size: 1rem;
   }
 
-  #home .unison-examples .example .folded-sources .folded {
-    margin-bottom: 0;
+  #home .unison-examples .hello-world .folded.source,
+  #home .unison-examples .distributed-map-reduce .folded.source,
+  #home .unison-examples .http-request .folded.source {
+    font-size: 1rem;
+  }
+
+  #home .at-a-glance-banner p {
+    font-size: 1rem;
   }
 }
 
@@ -449,6 +458,21 @@
   #home .unison-examples .examples .distributed-map-reduce,
   #home .unison-examples .examples .http-request {
     width: 100%;
+  }
+
+  #home .unison-examples .examples .http-request section {
+    flex-direction: column;
+  }
+
+  #home .unison-examples .hello-world .folded.source,
+  #home .unison-examples .distributed-map-reduce .folded.source,
+  #home .unison-examples .http-request .folded.source {
+    width: calc(100vw - 7rem);
+    overflow: auto;
+  }
+
+  #home .at-a-glance-banner {
+    width: var(--examples-width);
   }
 }
 
@@ -501,7 +525,9 @@
     border-radius: 0;
   }
 
-  #home .unison-examples .examples .http-request section {
-    flex-direction: column;
+  #home .unison-examples .hello-world .folded.source,
+  #home .unison-examples .distributed-map-reduce .folded.source,
+  #home .unison-examples .http-request .folded.source {
+    width: calc(100vw - 3rem);
   }
 }
