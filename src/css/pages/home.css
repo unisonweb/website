@@ -417,7 +417,7 @@
   }
 
   #home .unison-examples header h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   #home .unison-examples .examples .hello-world h1,
@@ -452,27 +452,6 @@
 
   #home #hero .carousel p {
     padding: 0 7.25rem;
-  }
-
-  #home .unison-examples .examples .hello-world,
-  #home .unison-examples .examples .distributed-map-reduce,
-  #home .unison-examples .examples .http-request {
-    width: 100%;
-  }
-
-  #home .unison-examples .examples .http-request section {
-    flex-direction: column;
-  }
-
-  #home .unison-examples .hello-world .folded.source,
-  #home .unison-examples .distributed-map-reduce .folded.source,
-  #home .unison-examples .http-request .folded.source {
-    width: calc(100vw - 7rem);
-    overflow: auto;
-  }
-
-  #home .at-a-glance-banner {
-    width: var(--examples-width);
   }
 }
 
@@ -514,20 +493,84 @@
     width: auto;
   }
 
-  #home .unison-examples .examples .unison-doc {
-    width: var(--examples-width);
+  #home .unison-examples header h1 {
+    font-size: 2rem;
   }
+
+  #home .unison-examples .examples {
+    margin: 0 2rem;
+  }
+
+  #home .unison-examples .unison-doc {
+    width: 100%;
+  }
+
   #home .unison-examples .examples .hello-world,
   #home .unison-examples .examples .distributed-map-reduce,
-  #home .unison-examples .examples .http-request,
-  #home .at-a-glance-banner {
-    width: var(--examples-width);
-    border-radius: 0;
+  #home .unison-examples .examples .http-request {
+    padding: 1rem;
+  }
+
+  #home .unison-examples .examples .hello-world h1,
+  #home .unison-examples .examples .distributed-map-reduce h1,
+  #home .unison-examples .examples .http-request h1 {
+    font-size: 1.5rem;
+  }
+
+  #home .unison-examples .examples .hello-world,
+  #home .unison-examples .examples p {
+    font-size: 0.875rem;
+  }
+
+  #home .unison-examples .examples .hello-world p,
+  #home .unison-examples .examples .distributed-map-reduce p,
+  #home .unison-examples .examples .http-request p {
+    margin-bottom: 1rem;
   }
 
   #home .unison-examples .hello-world .folded.source,
   #home .unison-examples .distributed-map-reduce .folded.source,
   #home .unison-examples .http-request .folded.source {
-    width: calc(100vw - 3rem);
+    font-size: 0.875rem;
+    padding: 0.5rem;
+  }
+
+  #home .unison-examples .examples .hello-world .folded.source,
+  #home .unison-examples .examples .distributed-map-reduce .folded.source {
+    margin-bottom: 1rem;
+  }
+
+  #home .at-a-glance-banner p {
+    font-size: 0.875rem;
+  }
+}
+
+/* smaller phone */
+@media only screen and (max-width: 800px) {
+  #home .unison-examples .examples {
+    margin: 0;
+  }
+  #home .unison-examples .examples .hello-world,
+  #home .unison-examples .examples .distributed-map-reduce,
+  #home .unison-examples .examples .http-request {
+    width: 100%;
+    border-radius: 0;
+    padding: 2rem;
+  }
+
+  #home .unison-examples .examples .http-request section {
+    flex-direction: column;
+  }
+
+  #home .unison-examples .hello-world .folded.source,
+  #home .unison-examples .distributed-map-reduce .folded.source,
+  #home .unison-examples .http-request .folded.source {
+    width: calc(100vw - 7rem);
+    overflow: auto;
+  }
+
+  #home .at-a-glance-banner {
+    width: var(--examples-width);
+    border-radius: 0;
   }
 }
