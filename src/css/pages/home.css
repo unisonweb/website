@@ -1,7 +1,7 @@
 #home {
   --main-content-width: auto;
   --hero-width: 64rem;
-  --examples-width: 79rem;
+  --examples-width: 64rem;
 }
 
 #home #main-content {
@@ -260,17 +260,6 @@
   margin-bottom: 4.5rem;
 }
 
-#home .unison-examples header:before {
-  position: absolute;
-  top: 1.3rem;
-  left: 0;
-  right: 0;
-  content: " ";
-  height: 2px;
-  background: var(--color-gray-lighten-50);
-  border-radius: 1px;
-}
-
 #home .unison-examples header h1 {
   font-size: 2rem;
   text-align: center;
@@ -282,34 +271,106 @@
   font-weight: 900;
 }
 
-#home .unison-examples .example {
+#home .unison-examples .examples .unison-doc > section {
   display: flex;
   flex-direction: row;
-  gap: 2rem;
-  margin-bottom: 3.5rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-#home .unison-examples .example p {
-  width: 18.75rem;
+#home .unison-examples .examples .hello-world,
+#home .unison-examples .examples .distributed-map-reduce,
+#home .unison-examples .examples .http-request {
+  background: var(--color-gray-lighten-60);
+  border-radius: 0.75rem;
+  padding: 2rem;
+}
+
+#home .unison-examples .examples .hello-world,
+#home .unison-examples .examples .distributed-map-reduce {
+  display: flex;
+  width: calc(50% - 0.75rem);
+}
+
+#home .unison-examples .examples .hello-world .folded.source,
+#home .unison-examples .examples .distributed-map-reduce .folded.source {
+  margin-bottom: 2rem;
+}
+
+#home .unison-examples .examples .hello-world p,
+#home .unison-examples .examples .distributed-map-reduce p {
+  margin-bottom: 2rem;
+}
+#home .unison-examples .examples .hello-world p:last-child,
+#home .unison-examples .examples .hello-world p:last-child,
+#home .unison-examples .examples .distributed-map-reduce p:last-child {
+  margin-bottom: 0;
+}
+
+#home .unison-examples .hello-world {
   font-size: 1.125rem;
-  margin: 0;
 }
 
-#home .unison-examples .example p * {
+#home .unison-examples .hello-world .delayed-computation {
+  display: inline-flex;
+  font-weight: bold;
+  color: var(--color-pink-1);
+}
+
+#home .unison-examples .examples .http-request {
+  display: flex;
+  width: 100%;
+}
+#home .unison-examples .examples .http-request section {
+  display: flex;
+  flex-direction: row;
+}
+
+#home .unison-examples .examples .http-request .description p {
+}
+
+#home .unison-examples .examples .http-request .folded.source {
+  margin-bottom: 0;
+}
+
+#home .unison-examples p {
+  font-size: 1.125rem;
+}
+
+#home .unison-examples p * {
   white-space: normal;
 }
 
-#home .unison-examples .example p:first-of-type {
-  text-align: right;
+#home .unison-examples .folded.source {
+  padding: 1.125rem;
+  background: var(--color-gray-lighten-100);
+  border: 1px solid var(--color-gray-lighten-50);
 }
 
-#home .unison-examples .example .folded-sources {
-  width: 42rem;
+#home .unison-examples .folded-sources {
+  width: auto;
   flex-shrink: 0;
+  margin: 0 -0.5rem;
 }
 
-#home .unison-examples .example .fold-toggle {
+#home .unison-examples .fold-toggle {
   display: none;
+}
+
+#home .at-a-glance-banner {
+  background: var(--color-orange-5);
+  padding: 2rem 1.5rem 2rem 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.75rem;
+}
+
+#home .at-a-glance-banner p {
+  font-size: 1.25rem;
 }
 
 /* -- Responsive ----------------------------------------------------------- */

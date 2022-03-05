@@ -134,36 +134,78 @@ function transformHomeExamples(_src, dest) {
   );
 
   let dom = new JSDOM(content);
+  const document = dom.window.document;
 
-  const mainSection = dom.window.document.querySelector(
-    "article.unison-doc > section"
-  );
+  [...document.querySelectorAll("p")].forEach((p) => {
+    if (p.innerHTML.trim() === "") {
+      p.remove();
+    }
+  });
 
-  const examples = [...mainSection?.children]
-    .reduce((acc, e) => {
-      if (!acc.length) {
-        acc.push([e]);
-      }
-      if (e.tagName === "HR") {
-        acc.push([]);
-      } else {
-        last(acc).push(e);
-      }
+  [...document.querySelectorAll(".fqn")].forEach((fqn) => {
+    const seg = fqn.querySelector(".segment");
 
-      return acc;
-    }, [])
-    .map((els) => {
-      const ex = dom.window.document.createElement("div");
-      ex.classList.add("example", "unison-doc");
-      els.forEach((el) => ex.appendChild(el));
+    // Slim down `examples.http` to `http`
+    if (seg.textContent.trim() === "examples") {
+      seg.nextSibling.remove();
+      seg.remove();
+    }
 
-      return ex;
-    });
+    // Slim down `Nat.mod` to `mod`
+    if (seg.textContent.trim() === "Nat") {
+      seg.nextSibling.remove();
+      seg.remove();
+    }
+  });
 
-  mainSection.innerHTML = "";
-  examples.forEach((ex) => mainSection.appendChild(ex));
+  // Remove lines with `use` statements
+  [...document.querySelectorAll(".use-keyword")].forEach((u) => u.remove());
+  [...document.querySelectorAll(".use-prefix")].forEach((use) => {
+    const prev = use.previousSibling;
+    if (prev?.className.trim() === "blank") prev.remove();
 
-  content = dom.window.document.querySelector("body").innerHTML;
+    const next = use.nextSibling;
+    if (next?.className.trim() === "blank") next.remove();
+
+    use.remove();
+  });
+  [...document.querySelectorAll(".use-suffix")].forEach((use) => {
+    const next = use.nextSibling;
+
+    if (next?.className.trim() === "blank") next.remove();
+
+    use.remove();
+  });
+
+  [...document.querySelectorAll(".term-reference")].forEach((term) => {
+    if (term.textContent === "Path.root") {
+      const blank1 = term.previousSibling;
+      const blank2 = blank1.previousSibling;
+      const blank3 = blank2.previousSibling;
+      const blank4 = blank3.previousSibling;
+
+      if (blank1?.className.trim() === "blank") blank1.innerHTML = " ";
+      if (blank2?.className.trim() === "blank") blank2.remove();
+      if (blank3?.className.trim() === "blank") blank3.remove();
+      if (blank4?.className.trim() === "blank") blank4.remove();
+    }
+  });
+
+  const httpRequest = document.querySelector(".http-request > section");
+
+  const newSection = document.createElement("section");
+
+  const description = document.createElement("div");
+  description.classList.add("description");
+  description.append(httpRequest.querySelector("h1"));
+  [...httpRequest.querySelectorAll("p")].forEach((p) => description.append(p));
+
+  newSection.append(description);
+  newSection.append(httpRequest.querySelector(".folded-sources"));
+
+  httpRequest.replaceWith(newSection);
+
+  content = document.querySelector("body").innerHTML;
 
   fs.writeFileSync(dest, content);
 }
@@ -371,7 +413,7 @@ function updateContent(frontmatter, prefix, rawContent) {
   let title = "";
   const h1 = dom.window.document.querySelector("h1");
 
-  if (h1) {
+  if (frontmatter && h1) {
     title = h1.textContent;
     h1.remove();
   }
