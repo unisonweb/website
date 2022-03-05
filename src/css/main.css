@@ -130,6 +130,11 @@ main#blog {
   width: 64rem;
   height: 1.5rem;
   display: flex;
+}
+
+#main-header nav .navs {
+  display: flex;
+  flex: 1;
   justify-content: space-between;
 }
 
@@ -177,11 +182,11 @@ main#blog {
   opacity: 1;
 }
 
-#main-header nav section > a#logo:after {
+#main-header nav a#logo:after {
   opacity: 0;
 }
 
-#main-header nav section > a#logo {
+#main-header nav a#logo {
   margin-right: 2.5rem;
   font-weight: bold;
   color: var(--color-main-header-current-fg);
@@ -191,11 +196,11 @@ main#blog {
   font-size: var(--font-size-base);
 }
 
-#main-header nav section > a#logo:hover {
+#main-header nav a#logo:hover {
   color: var(--color-main-header-logo-hover);
 }
 
-#main-header nav section #logo-icon {
+#main-header nav #logo-icon {
   width: var(--font-size-base);
   height: var(--font-size-base);
   margin-top: -4px;

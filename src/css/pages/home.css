@@ -543,10 +543,15 @@
   #home .at-a-glance-banner p {
     font-size: 0.875rem;
   }
+  #home .at-a-glance-banner .button {
+    font-size: 1rem;
+  }
 }
 
-/* smaller phone */
 @media only screen and (max-width: 800px) {
+  #home .unison-examples header h1 {
+    font-size: 1.8rem;
+  }
   #home .unison-examples .examples {
     margin: 0;
   }
@@ -565,12 +570,50 @@
   #home .unison-examples .hello-world .folded.source,
   #home .unison-examples .distributed-map-reduce .folded.source,
   #home .unison-examples .http-request .folded.source {
-    width: calc(100vw - 7rem);
+    width: calc(100vw - 3rem);
     overflow: auto;
+  }
+
+  #home .unison-examples .examples .http-request section {
+    gap: 0;
+  }
+
+  #home .unison-examples .examples .hello-world,
+  #home .unison-examples .examples p {
+    font-size: 1rem;
+  }
+
+  #home .unison-examples .hello-world .folded.source,
+  #home .unison-examples .distributed-map-reduce .folded.source,
+  #home .unison-examples .http-request .folded.source {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  #home .at-a-glance-banner p {
+    font-size: 1rem;
   }
 
   #home .at-a-glance-banner {
     width: var(--examples-width);
     border-radius: 0;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  #home .unison-examples .examples .hello-world,
+  #home .unison-examples .examples p {
+    font-size: 0.875rem;
+  }
+
+  #home .unison-examples .hello-world .folded.source,
+  #home .unison-examples .distributed-map-reduce .folded.source,
+  #home .unison-examples .http-request .folded.source {
+    font-size: 0.875rem;
+    padding: 0.875rem;
+  }
+
+  #home .at-a-glance-banner p {
+    font-size: 0.875rem;
   }
 }
