@@ -260,14 +260,14 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 4.5rem;
-  font-size: 1.125rem;
+  font-size: 1rem;
   color: var(--color-gray-base);
   text-align: center;
   padding: 0 1rem;
 }
 
 #home .unison-examples header h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-align: center;
   display: inline-flex;
   background: var(--color-gray-lighten-100);
@@ -300,7 +300,7 @@
 #home .unison-examples .examples .distributed-map-reduce h1,
 #home .unison-examples .examples .http-request h1 {
   color: var(--color-gray-base);
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 900;
 }
 
@@ -326,13 +326,13 @@
 }
 
 #home .unison-examples .hello-world {
-  font-size: 1.125rem;
+  font-size: 1rem;
 }
 
 #home .unison-examples .hello-world .folded.source,
 #home .unison-examples .distributed-map-reduce .folded.source,
 #home .unison-examples .http-request .folded.source {
-  font-size: 1.125rem;
+  font-size: 1rem;
 }
 
 #home .unison-examples .hello-world .delayed-computation {
@@ -356,7 +356,7 @@
 }
 
 #home .unison-examples p {
-  font-size: 1.125rem;
+  font-size: 1rem;
 }
 
 #home .unison-examples p * {
@@ -381,7 +381,7 @@
 
 #home .at-a-glance-banner {
   background: var(--color-orange-5);
-  padding: 1.5rem 1.5rem 1.5rem 2rem;
+  padding: 1rem 1.5rem;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -391,12 +391,13 @@
 }
 
 #home .at-a-glance-banner p {
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 #home .at-a-glance-banner .button {
   white-space: nowrap;
   margin-left: 1rem;
+  font-size: 1rem;
 }
 
 /* -- Responsive ----------------------------------------------------------- */
@@ -410,35 +411,6 @@
   #home {
     --hero-width: 60rem;
     --examples-width: 64rem;
-  }
-
-  #home .unison-examples header p {
-    font-size: 1rem;
-  }
-
-  #home .unison-examples header h1 {
-    font-size: 2.5rem;
-  }
-
-  #home .unison-examples .examples .hello-world h1,
-  #home .unison-examples .examples .distributed-map-reduce h1,
-  #home .unison-examples .examples .http-request h1 {
-    font-size: 1.75rem;
-  }
-
-  #home .unison-examples .examples .hello-world,
-  #home .unison-examples .examples p {
-    font-size: 1rem;
-  }
-
-  #home .unison-examples .hello-world .folded.source,
-  #home .unison-examples .distributed-map-reduce .folded.source,
-  #home .unison-examples .http-request .folded.source {
-    font-size: 1rem;
-  }
-
-  #home .at-a-glance-banner p {
-    font-size: 1rem;
   }
 }
 
