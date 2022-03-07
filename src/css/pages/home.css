@@ -446,10 +446,15 @@
   #home #hero h1,
   #home #hero h2 {
     font-size: 2.625rem;
+    line-height: 1.3;
   }
 
   #home #hero .approach-to {
     white-space: nowrap;
+  }
+
+  #home #hero .carousel {
+    margin-top: 1rem;
   }
 
   #home #hero .carousel p {
