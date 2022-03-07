@@ -63,7 +63,7 @@ function build() {
         }
       })
     )
-    // -- Lear ----------------------------------------------------------------
+    // -- Learn ----------------------------------------------------------------
     .then(() => console.log(" * Building /learn"))
     .then(() => mkdir("./src/learn"))
     .then(() =>
@@ -78,7 +78,7 @@ function build() {
       copy("./build/learn", "./src/learn", {
         rename: kebabCase,
       }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
-        if (!isFragment(dest)) {
+        if (!isFragment(dest) && !isGlossary(dest)) {
           transformLearnFile(src, dest);
         }
       })
@@ -254,6 +254,7 @@ function transformLearnSidebar(_src, dest) {
 
 function transformLearnFile(_src, dest, includeFrontMatter = true) {
   let frontmatter = null;
+
   if (includeFrontMatter) {
     frontmatter = {
       tags: "learn",
@@ -586,6 +587,10 @@ function fixInternalLinks(prefix, dom) {
 
 function isFragment(p) {
   return path.basename(p).startsWith("_");
+}
+
+function isGlossary(p) {
+  return p.includes("glossary");
 }
 
 function trace(key) {

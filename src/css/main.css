@@ -198,6 +198,7 @@ main#blog {
 
 #main-header nav a#logo:hover {
   color: var(--color-main-header-logo-hover);
+  text-decoration: none;
 }
 
 #main-header nav #logo-icon {
