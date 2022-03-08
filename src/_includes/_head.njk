@@ -12,7 +12,17 @@
 
 <meta name="theme-color" content="#ffffff">
 
+{% if overallTitle %}
 <meta property="og:title" content="{{overallTitle}} | {{ title }} &middot; Unison programming language">
+<meta name="twitter:title" content="{{overallTitle}} | {{ title }} &middot; Unison programming language">
+{% elif title %}
+<meta property="og:title" content="{{ title }} &middot; Unison programming language">
+<meta name="twitter:title" content="{{ title }} &middot; Unison programming language">
+{% else %}
+<meta property="og:title" content="Unison programming language">
+<meta name="twitter:title" content="Unison programming language">
+{% endif %}
+
 <meta property="og:type" content="blog">
 <meta property="og:url" content="https://unison-lang.org">
 <meta property="og:image" content="https://unison-lang.org/assets/unison-social.png">
@@ -22,7 +32,6 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:image" content="https://unison-lang.org/assets/unison-social.png">
 <meta name="twitter:site" content="@unisonweb" />
-<meta name="twitter:title" content="{{overallTitle}} | {{ title }} &middot; Unison programming language">
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="alternate icon" href="/favicon.ico">
