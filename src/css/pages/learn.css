@@ -147,6 +147,10 @@ main#learn #index .welcome {
   margin-bottom: 2rem;
 }
 
+main#learn #index .welcome h1 {
+  display: none;
+}
+
 main#learn #index .welcome ul {
   display: block;
 }
