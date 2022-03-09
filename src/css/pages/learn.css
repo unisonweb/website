@@ -226,12 +226,19 @@ main#learn .where-to-next h2 {
   }
 
   main#learn #toggle-index {
-    left: 2rem;
+    left: 1rem;
     top: 0.75rem;
   }
 
   main#learn #index {
-    left: 2rem;
+    left: 1rem;
     top: 3.5rem;
+    bottom: 1rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  main#learn #index {
+    width: calc(100vw - 2rem);
   }
 }
