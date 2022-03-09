@@ -335,7 +335,9 @@ function transformArticleFile(src, dest) {
         article.sidebar = {
           sidebar: map(
             (a) => ({
-              href: kebabCase(fixInternalLinks_(prefix, a.href)),
+              href: a.href.startsWith("http")
+                ? a.href
+                : kebabCase(fixInternalLinks_(prefix, a.href)),
               label: a.textContent,
             }),
             [...links]
@@ -575,9 +577,8 @@ function fixInternalLinks_(prefix, href) {
 
 function fixInternalLinks(prefix, dom) {
   dom.window.document.querySelectorAll(".unison-doc a").forEach((anchor) => {
-    anchor.href = kebabCase(fixInternalLinks_(prefix, anchor.href));
-
     if (!anchor.href.startsWith("http")) {
+      anchor.href = kebabCase(fixInternalLinks_(prefix, anchor.href));
       anchor.target = "_self";
     }
   });
