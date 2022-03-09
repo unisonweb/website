@@ -68,7 +68,7 @@
     }
   }
 
-  const media = window.matchMedia("(max-width: 960px)");
+  const media = window.matchMedia("(max-width: 600px)");
   setupInstall(media);
   media.addListener(setupInstall);
 
