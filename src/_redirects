@@ -6,7 +6,6 @@
 # -- old website support --
 
 # new urls
-/docs                         /learn
 /learn/abilities              /learn/fundamentals/abilities/
 /docs/abilities               /learn/fundamentals/abilities/
 /docs/documentation           /learn/usage-topics/documentation/
@@ -15,6 +14,7 @@
 /docs/configuration           /learn/tooling/configuration/
 /docs/commands                /learn/ucm-commands/
 /docs/transcripts             /learn/tooling/transcripts/
+/docs/*                       /learn/:splat
 
 /docs/libraries               https://share.unison-lang.org
 
@@ -22,4 +22,3 @@
 /docs/codebase-organization   /learn
 /docs/refactoring             /learn
 /docs/bibliography            /learn
-# /docs/faq                     /learn/usage-topics/faq
