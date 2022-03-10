@@ -1,12 +1,14 @@
-# quick links
+# -- quick links --
 /slack       https://join.slack.com/t/unisonlanguage/shared_invite/zt-p010xqyb-66ZYDJgMhv_ZpeRlHSpUCg
 /calendar    https://calendar.google.com/calendar/u/0/embed?src=c_dtba5eidumieu2vv6pu5j45514@group.calendar.google.com&ctz=America/Boston&mode=AGENDA
 /at-work     https://drahilgwy2i.typeform.com/to/qQwzyJNs
 
-# -- old website support --
 
-# new urls
+# -- aliases --
 /learn/abilities              /learn/fundamentals/abilities/
+
+# -- old website support --
+/unisoncomputing              /unison-computing
 /docs/abilities               /learn/fundamentals/abilities/
 /docs/documentation           /learn/usage-topics/documentation/
 /docs/language-reference      /learn/language-reference/top-level-declaration/
@@ -14,11 +16,8 @@
 /docs/configuration           /learn/tooling/configuration/
 /docs/commands                /learn/ucm-commands/
 /docs/transcripts             /learn/tooling/transcripts/
-/docs/*                       /learn/:splat
-
-/docs/libraries               https://share.unison-lang.org
-
-# fallbacks
 /docs/codebase-organization   /learn
 /docs/refactoring             /learn
 /docs/bibliography            /learn
+/docs/libraries               https://share.unison-lang.org
+/docs/*                       /learn/:splat
