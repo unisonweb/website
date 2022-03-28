@@ -1,6 +1,7 @@
 const R = require("ramda");
 const fs = require("fs");
-const { parse, format, formatISO } = require("date-fns");
+const { parse } = require("date-fns");
+const { format, utcToZonedTime } = require("date-fns-tz");
 const authors = require("./src/authors.json");
 const leftArrow = fs.readFileSync("./src/assets/icon-arrow-left.svg");
 const rightArrow = fs.readFileSync("./src/assets/icon-arrow-right.svg");
@@ -126,7 +127,11 @@ module.exports = function (config) {
     return JSON.stringify(text);
   });
 
-  config.addFilter("formatDate", (date) => format(date, "MMM dd, yyyy"));
+  // Parsing and formatting in UTC basically means we retain the date of a non
+  // timezoned date.
+  config.addFilter("formatDate", (date) =>
+    format(utcToZonedTime(date, "UTC"), "MMM dd, yyyy", "UTC")
+  );
   config.addFilter("isoDate", (date) => formatISO(date));
   config.addFilter("month", (month) =>
     format(parse(month, "M", new Date()), "MMM")

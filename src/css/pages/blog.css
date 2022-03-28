@@ -8,6 +8,7 @@
 
 #blog #main-content img {
   max-width: 100%;
+  max-height: 33.375rem;
 }
 
 #blog #main-content iframe {
