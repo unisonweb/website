@@ -91,6 +91,7 @@
 
   #blog #main-content {
     padding: 0 1.5rem;
+    margin-left: 0;
   }
 
   #blog .post-header,
