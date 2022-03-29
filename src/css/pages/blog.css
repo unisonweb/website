@@ -95,6 +95,6 @@
 
   #blog .post-header,
   #blog .unison-doc {
-    width: 100vw;
+    width: 100%;
   }
 }
