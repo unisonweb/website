@@ -23,8 +23,9 @@
   gap: 3rem;
 }
 
-#unison-forall-2022 .hero img {
+#unison-forall-2022 .hero footer img {
   margin: auto;
+  width: 42rem;
 }
 
 #unison-forall-2022 .hero hr {
