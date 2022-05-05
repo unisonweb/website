@@ -1,0 +1,57 @@
+#unison-forall-2022 {
+  display: flex;
+  flex-direction: column;
+}
+
+#unison-forall-2022 .hero {
+  width: 60rem;
+  margin: 2rem auto;
+  background: var(--color-gray-darken-10);
+  padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  overflow: clip;
+}
+
+#unison-forall-2022 .hero footer {
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+#unison-forall-2022 .hero img {
+  margin: auto;
+}
+
+#unison-forall-2022 .hero hr {
+  opacity: 0.25;
+  width: 20rem;
+  margin: auto;
+}
+
+#unison-forall-2022 .hero .text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  color: var(--color-gray-lighten-40);
+}
+#unison-forall-2022 .hero .text h1,
+#unison-forall-2022 .hero .text h2,
+#unison-forall-2022 .hero .text h3 {
+  font-size: 1.25rem;
+  font-weight: normal;
+}
+#unison-forall-2022 .hero .text h3 {
+  font-weight: bold;
+}
+#unison-forall-2022 .hero .text hr {
+  margin: 1.5rem 0;
+  width: 2rem;
+}
