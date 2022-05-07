@@ -18,6 +18,10 @@ instance has a `_title` Unison `Doc` term that is transformed into the page as
 frontmatter for eleventy, where Docs has `_sidebar` term that makes up the
 index of the language documentation.
 
+Running the website
+-------------------
+`npm start` will both build and start a local version of the website.
+
 Build process
 -------------
 
@@ -31,7 +35,6 @@ Deployment process
 -------------
 
 * `npm run build` will build a local copy of the website using the steps above. 
-* `npm start` will both build and start a local version of the website. 
 * `netlify deploy --prod` will deploy the website to production 
 
 After the deploy to Netlify has succeeded, update the algolia search index by
