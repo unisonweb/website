@@ -32,7 +32,9 @@ Build process
 
 
 Deployment process
--------------
+------------------
+
+Note that this requires being setup in Netlify with the correct access.
 
 * `npm run build` will build a local copy of the website using the steps above. 
 * `netlify deploy --prod` will deploy the website to production 
