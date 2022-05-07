@@ -6,7 +6,8 @@
     "start": "./build.mjs && eleventy --serve --port 2345",
     "dev": "eleventy --serve --port 2345",
     "preBuild": "./build.mjs",
-    "build": "./build.mjs && eleventy"
+    "build": "./build.mjs && eleventy",
+    "deploy:prod": "netlify deploy --prod --build"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "gray-matter": "^4.0.3",
     "jsdom": "^16.7.0",
     "kebab-case": "^1.0.1",
+    "netlify": "^11.0.1",
     "ramda": "^0.27.1",
     "recursive-copy": "^2.0.13",
     "yaml": "^2.0.0-9"
