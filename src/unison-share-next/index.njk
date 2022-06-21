@@ -1,0 +1,39 @@
+---
+tags: page
+title: Unison Share Next
+---
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    {% include "_head.njk" %}
+    <title>Unison Share Next | The Unison language</title>
+  </head>
+
+  <body>
+    <main id="unison-share-next">
+      <header id="main-header">{% include "_main-nav.njk" %}</header>
+      <h1>Unison Share Next</h1>
+      <p>
+        We're getting ready to launch the next version of Unison Share with
+        codehosting and UCM integration!
+      </p>
+
+      <p>Signup now to join the beta waitlist!</p>
+
+      <form name="unison-share-beta-waitlist" method="POST" data-netlify="true">
+        <input
+          placeholder="Email"
+          type="email"
+          id="waitlist-email"
+          name="email"
+        />
+        <button class="button primary medium contained" type="submit">
+          Join!
+        </button>
+      </form>
+      {% include "_footer.njk" %}
+    </main>
+  </body>
+</html>

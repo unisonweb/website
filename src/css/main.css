@@ -527,6 +527,7 @@ body.modal-open {
     display: none;
   }
 }
+
 @media only screen and (max-width: 600px) {
   #main-header #secondary-nav .social-links {
     display: none;
