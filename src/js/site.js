@@ -24,7 +24,8 @@
   ].forEach((summary) => {
     summary.addEventListener("click", (ev) => {
       const folded = findUpByClass(ev.currentTarget, "folded");
-      folded?.classList?.toggle("is-folded");
+      if (!folded) { return; }
+      folded.classList.toggle("is-folded");
     });
   });
 
