@@ -3,7 +3,7 @@ Unison Website
 
 Main Unison website
 
-Architecture Where is all the content?
+Where is all the content?
 --------------------------------------
 
 The Unison website is primarily constructed via Unison `Doc`, and the content
