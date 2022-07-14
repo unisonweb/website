@@ -11,6 +11,8 @@ import yaml from "yaml";
 import { last, has, map } from "ramda";
 import matter from "gray-matter";
 
+const UNISON_SHARE_BASE_URL = "https://share.unison-lang.org";
+
 // Run the build process!
 build();
 // ----------------------
@@ -475,7 +477,7 @@ function convertRefsToUnisonShareLinks(dom) {
         if (ref && refType) {
           let link = dom.window.document.createElement("a");
 
-          link.href = `https://share.unison-lang.org/latest/${refType}s/${ref}`;
+          link.href = `${UNISON_SHARE_BASE_URL}/users/unison/code/latest/${refType}s/${ref}`;
           link.target = "_blank";
           link.innerHTML = span.innerHTML;
           link.classList = span.classList;
@@ -538,7 +540,7 @@ function fixFolded(dom) {
 function fixInternalLinks_(prefix, href) {
   let href_ = href;
 
-  if (href_.startsWith("https://share.unison-lang.org")) return href_;
+  if (href_.startsWith(UNISON_SHARE_BASE_URL)) return href_;
 
   if (href_.startsWith("mailto:")) return href_;
 
