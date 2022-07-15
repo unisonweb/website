@@ -11,6 +11,8 @@ import yaml from "yaml";
 import { last, has, map } from "ramda";
 import matter from "gray-matter";
 
+const UCM_EXEC = "unison";
+
 const UNISON_SHARE_BASE_URL = "https://share.unison-lang.org";
 
 // Run the build process!
@@ -40,7 +42,9 @@ function build() {
     .then(() => console.log(" * Running transcript"))
     .then(() => mkdir("./build"))
     .then(() =>
-      run(" TMPDIR=build unison transcript.fork docs-to-html.md --codebase .")
+      run(
+        ` TMPDIR=build ${UCM_EXEC} transcript.fork docs-to-html.md --codebase .`
+      )
     )
     // -- Pages ----------------------------------------------------------
     .then(() => console.log(" * Building /pages"))
