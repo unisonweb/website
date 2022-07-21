@@ -304,6 +304,11 @@
   flex-direction: row;
 }
 
+.unison-doc .folded-summary,
+.unison-doc .folded-details > div .word {
+  cursor: pointer;
+}
+
 .unison-doc .folded.is-folded > .folded-content > .folded-details {
   display: none;
 }
