@@ -1,15 +1,6 @@
 (() => {
   const all = document.querySelectorAll.bind(document);
   const one = document.querySelector.bind(document);
-  const findUpByClass = (el, class_) => {
-    if (!el || !el.classList) {
-      return null;
-    }
-    if (el.classList.contains(class_)) {
-      return el;
-    }
-    return findUpByClass(el.parentNode, class_);
-  }
 
   [...all(".fold-toggle")].forEach((toggle) => {
     toggle.addEventListener("click", (ev) => {
@@ -23,7 +14,7 @@
     ...all(".folded-details > div .word"),
   ].forEach((summary) => {
     summary.addEventListener("click", (ev) => {
-      const folded = findUpByClass(ev.currentTarget, "folded");
+      const folded = ev.currentTarget.closest(".folded");
       if (!folded) { return; }
       folded.classList.toggle("is-folded");
     });
