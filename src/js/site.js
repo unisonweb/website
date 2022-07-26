@@ -9,6 +9,17 @@
     });
   });
 
+  [
+    ...all(".folded-summary"),
+    ...all(".folded-details > div .word"),
+  ].forEach((summary) => {
+    summary.addEventListener("click", (ev) => {
+      const folded = ev.currentTarget.closest(".folded");
+      if (!folded) { return; }
+      folded.classList.toggle("is-folded");
+    });
+  });
+
   [...all(".tooltip-trigger")].forEach((trigger) => {
     trigger.addEventListener("mouseenter", (_ev) => {
       showTooltip(trigger);
