@@ -1,0 +1,13 @@
+---
+permalink: /algolia.json
+---
+
+[
+{%- for d in collections.learn -%}
+	{
+    "title": "{{ d.data.title }}",
+    "url": "{{ d.url }}",
+    "content": "{{ d.templateContent | algoliafy | safe }}"
+  }{%- if loop.last -%}{%- else -%},{%- endif -%}
+{%- endfor -%}
+]
