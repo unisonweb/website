@@ -1,0 +1,17 @@
+---
+tags: whats-new
+layout: whats-new-post.njk
+permalink: whats-new/vscode-startup/index.html
+summary: Enable auto-startup of the UCM with the Unison VS Code extension so you
+  can start writing Unison code faster.
+categories:
+  - highlights
+authors:
+  - rebecca-mark
+date: 2022-11-10T00:00:00.000Z
+title: The Unison VS Code extension includes auto-startup of the UCM
+---
+
+{% raw %}
+<article class="unison-doc"><section><p></p><section><p><span class="span"><span class="word">We'd like to highlight a community contributed tooling improvement for VS Code users. Huge thank you to Tavish Pegram for adding this functionality! Previously, the Unison VS Code extension would alert you that there was no UCM instance running when you opened a directory with Unison scratch files. But since it's likely that you're opening</span><span class="rich source inline-code"><code class="inline-code"><span class="word">.u</span></code></span><span class="word">suffixed files to write Unison code, now you can configure VS Code to start an instance of the UCM in the VS Code terminal.</span></span></p><p><span class="span"><span class="word">By default, the VS Code extension will open the codebase in your home directory by calling</span><span class="group"><span class="join"><span class="rich source inline-code"><code class="inline-code"><span class="word">ucm</span></code></span><span class="word">,</span></span></span><span class="word">but if you have located your codebase somewhere else, you can change it by going to "Preferences &gt; Settings &gt; Extensions &gt; Unison" in VS Code, and then changing the setting called "UCM command".</span></span></p><p><span class="span"><span class="word">You can disable the auto-startup with the "Automatically Open UCM" flag, also configurable in the extension settings. (But why would you? 🧐)</span></span></p></section></section><div class="tooltips" style="display: none;"></div></article>
+{% endraw %}

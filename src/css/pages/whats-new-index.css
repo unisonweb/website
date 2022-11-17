@@ -1,32 +1,32 @@
-#blog-index {
+#whats-new-index {
   --main-content-width: 64rem;
 }
 
-#blog-index video {
-  width: 100%;
-}
-
-#blog-index .post-summaries {
+#whats-new-index .post-summaries {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  row-gap: 2rem;
+  column-gap: 2rem;
+  padding-left: 2rem;
 }
 
-#blog-index .post-summaries .card {
-  width: 50%;
+#whats-new-index .post-summaries .card {
+  width: calc(50% - 2rem);
   transition: all 0.2s;
 }
 
-#blog-index .post-summaries .card:hover {
+#whats-new-index .post-summaries .card:hover {
   background: var(--color-gray-lighten-50);
   text-decoration: none;
 }
 
-#blog-index .post-summaries .card img {
+#whats-new-index .post-summaries .card img {
   margin-bottom: 1rem;
+  border-radius: 0.5rem;
 }
 
-#blog-index .post-summaries .card .categories {
+#whats-new-index .post-summaries .card .categories {
   display: flex;
   flex-direction: row;
   gap: 0.25rem;
@@ -36,24 +36,24 @@
   margin-bottom: 0.5rem;
 }
 
-#blog-index .categories .category:after {
+#whats-new-index .categories .category:after {
   content: ", ";
 }
 
-#blog-index .categories .category:last-child:after {
+#whats-new-index .categories .category:last-child:after {
   content: "";
 }
 
-#blog-index .post-summaries .card h2 {
+#whats-new-index .post-summaries .card h2 {
   font-size: 1.3rem;
   line-height: 1.3;
 }
 
-#blog-index .post-summaries .card p {
+#whats-new-index .post-summaries .card p {
   font-size: var(--font-size-medium);
 }
 
-#blog-index .post-summaries .card footer {
+#whats-new-index .post-summaries .card footer {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
@@ -61,7 +61,7 @@
   color: var(--color-main-subtle-fg-em);
 }
 
-#blog-index .post-summaries .card footer .authors {
+#whats-new-index .post-summaries .card footer .authors {
   padding-right: 0.5rem;
   border-right: 1px solid var(--color-main-border);
   color: var(--color-main-fg);
@@ -69,39 +69,30 @@
   gap: 0.25rem;
 }
 
-#blog-index .post-summaries .authors .author:after {
+#whats-new-index .post-summaries .authors .author:after {
   content: ", ";
 }
-#blog-index .post-summaries .authors .author:last-child:after {
+#whats-new-index .post-summaries .authors .author:last-child:after {
   content: "";
 }
 
-#blog-index .post-summaries .card:first-child {
-  width: 100%;
-}
-#blog-index .post-summaries .card:first-child h2 {
-  font-size: 1.75rem;
-  font-weight: 900;
+#whats-new-index .post-summaries .card:first-child h2 {
   color: var(--color-pink-1);
 }
 
-#blog-index .post-summaries .card:first-child p {
-  font-size: var(--font-size-base);
-}
-
 @media only screen and (max-width: 1264px) {
-  #blog-index {
+  #whats-new-index {
     --main-footer-height: 6rem;
     --main-content-width: 100vw;
   }
 
-  #blog-index #main-content {
+  #whats-new-index #main-content {
     padding: 0 1.5rem;
   }
 }
 
 @media only screen and (max-width: 768px) {
-  #blog-index .post-summaries .card {
+  #whats-new-index .post-summaries .card {
     width: 100%;
   }
 }

@@ -8,7 +8,7 @@ import copy from "recursive-copy";
 import { JSDOM } from "jsdom";
 import kebabCase from "kebab-case";
 import yaml from "yaml";
-import { last, has, map } from "ramda";
+import { has, map } from "ramda";
 import matter from "gray-matter";
 
 const UCM_EXEC = "unison";
@@ -28,7 +28,7 @@ function build() {
   rm("./build", { recursive: true, force: true })
     .then(() => rm("./src/learn", { recursive: true, force: true }))
     .then(() => rm("./src/articles", { recursive: true, force: true }))
-    .then(() => rm("./src/blog/posts", { recursive: true, force: true }))
+    .then(() => rm("./src/whats-new/posts", { recursive: true, force: true }))
     .then(() => rm("./src/community", { recursive: true, force: true }))
     .then(() => rm("./src/jobs", { recursive: true, force: true }))
     .then(() => rm("./src/talks", { recursive: true, force: true }))
@@ -102,16 +102,16 @@ function build() {
         }
       })
     )
-    // -- Blog ----------------------------------------------------------------
-    .then(() => console.log(" * Building /blog/posts"))
-    .then(() => mkdir("./src/blog/posts"))
+    // -- Whats New? ----------------------------------------------------------------
+    .then(() => console.log(" * Building /whats-new/posts"))
+    .then(() => mkdir("./src/whats-new/posts"))
     .then(() =>
-      copy("./build/blog", "./src/blog/posts", {
+      copy("./build/whats-new", "./src/whats-new/posts", {
         rename: kebabCase,
       }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
         const fileName = path.basename(dest);
         if (!fileName.startsWith("_")) {
-          transformBlogFile(src, dest);
+          transformWhatsNewFile(src, dest);
         }
       })
     )
@@ -379,12 +379,12 @@ function transformArticleFile(src, dest) {
   fs.writeFileSync(dest, content);
 }
 
-// -- Blog
+// -- Whats New
 
-function transformBlogFile(_src, dest) {
+function transformWhatsNewFile(_src, dest) {
   const frontmatter = {
-    tags: "blog",
-    layout: "blog.njk",
+    tags: "whats-new",
+    layout: "whats-new-post.njk",
     permalink: dest.replace("src/", "").replace("/posts", ""),
   };
 

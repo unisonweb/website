@@ -1,0 +1,17 @@
+---
+tags: whats-new
+layout: whats-new-post.njk
+permalink: whats-new/stack-traces-m4d/index.html
+summary: "To the tune of Ghostbusters: If there's something weird, and it don't
+  look good, who you gonna call? *Stack traces!*"
+categories:
+  - highlights
+authors:
+  - rebecca-mark
+date: 2022-11-11T00:00:00.000Z
+title: Unison produces stack traces for errors
+---
+
+{% raw %}
+<article class="unison-doc"><section><p></p><section><p><span class="span"><span class="word">If you haven't upgraded or downloaded the newest version of Unison,</span><span class="group"><span class="join"><a href="https://www.unison-lang.org/learn/quickstart/#step-1-install-unison" class="named-link" rel="noopener" target="_blank"><span class="word">M4d</span></a><span class="word">,</span></span></span><span class="word">it contains several quality of life improvements for users, including but not limited to a beloved feature for frustrated developers:</span><span class="group"><span class="join"><strong><span class="span"><span class="word">stack traces</span></span></strong><span class="word">.</span></span></span></span></p><section><h2 id="how-to-invoke-stack-traces"><span class="span"><span class="word">How to invoke stack traces</span></span></h2><p><span class="span"><span class="word">A stack trace will be generated upon calls to</span><code class="inline-code rich source"><span class="syntax"><a href="https://share.unison-lang.org/@unison/code/latest/namespaces/public/;/terms/@4n0fgs00hpsj3paqnm9bfm4nbt9cbrin3hl88i992m9tjiq1ik7eq72asu4hcg885uti36tbnj5rudt56eahhnut1nobofg86pk1bng@a0" target="_blank" class="term-reference"><span class="fqn"><span class="segment">Exception</span><span class="sep ">.</span><span class="segment">raise</span></span></a></span></code><span class="word">and when</span><code class="inline-code rich source"><span class="syntax"><a href="https://share.unison-lang.org/@unison/code/latest/namespaces/public/;/terms/@@bug" target="_blank" class="term-reference"><span class="fqn"><span class="segment">base</span><span class="sep ">.</span><span class="segment">bug</span></span></a></span></code><span class="word">has been called. It contains the names of the functions that have been called en-route to generating the failure, with the last term being the entry point to the program.</span></span></p><p><span class="span"><span class="word">Check it out in action:</span></span></p><img src="/assets/feed/stacktrace-demo.gif" alt="gif of calling functions which produce stack traces"><p><span class="aside-anchor"></span></p><aside><span class="span"><span class="word">Fun fact, compiler engineer Dan Doel did this as a "miscellaneous task" one week. 🤯 Thanks Dan, we think you're incredible!</span></span></aside><p></p><p><span class="span"><span class="word">We hope stack traces will help when you're stuck. Better yet, channel your inner Unison teammate, Cody, when he says: "I don't write bugs so I've never seen a stack trace." 😂</span></span></p></section></section></section><div class="tooltips" style="display: none;"></div></article>
+{% endraw %}

@@ -1,12 +1,16 @@
 ---
-layout: "blog-index"
+layout: "whats-new-index"
 ---
 
 <div class="post-summaries">
-  {%- for p in collections.blog | reverse -%}
+  {%- for p in collections['whats-new'] | reverse -%}
   <a href="{{p.url}}" class="card contained">
     <header>
-      <img src="{{ p.data.featuredImage }}" class="featured-image">
+        {% if p.data.featuredImage %}
+          <img src="{{ p.data.featuredImage }}" class="featured-image">
+        {% else %}
+          <img src="/assets/highlights.svg" class="featured-image">
+        {% endif %}
       <div class="categories">
         {%- for c in p.data.categories -%}
         <div class="category">{{ c }}</div>

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -7,7 +7,7 @@
   </head>
 
   <body>
-    <main id='blog'>
+    <main id="whats-new-post">
       {% include "_header.njk" %}
       <div id="main-content">
         <header class="post-header">
@@ -24,16 +24,17 @@
           <h1 id="title">{{ title }}</h1>
 
           <div class="authors">
-          {%- for a in authors -%}
+            {%- for a in authors -%}
             <label class="author">{{ a | author }}</label>
-          {%- endfor -%}
+            {%- endfor -%}
           </div>
-
         </header>
 
-        <img src="{{ featuredImage }}" class="featured-image">
+        {% if featuredImage %}
+        <img src="{{ featuredImage }}" class="featured-image" />
+        {% endif %}
 
-        {{content | safe}}
+        {{ content | safe }}
 
         {% include "_footer.njk" %}
       </div>
