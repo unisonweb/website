@@ -4,6 +4,7 @@ layout: "whats-new-index"
 
 <div class="post-summaries">
   {%- for p in collections['whats-new'] | reverse -%}
+  {% if p.data.status === "published" %}
   <a href="{{p.url}}" class="card contained">
     <header>
         {% if p.data.featuredImage %}
@@ -30,5 +31,6 @@ layout: "whats-new-index"
       <span class="date">{{ p.data.date | formatDate }}</span>
     </footer>
   </a>
+  {% endif %}
   {%- endfor -%}
 </div>

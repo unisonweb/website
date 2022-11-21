@@ -450,9 +450,14 @@ function updateContent(frontmatter, prefix, rawContent) {
   const page = dom.window.document.querySelector("body").innerHTML;
 
   if (frontmatter) {
-    const pageFrontmatter = title
+    let pageFrontmatter = title
       ? { ...frontmatter, ...content.data, title }
       : { ...frontmatter, ...content.data, tags: `_${frontmatter.tags}` };
+
+    pageFrontmatter = {
+      ...pageFrontmatter,
+      status: pageFrontmatter.status || "published",
+    };
 
     return `${frontMatterToString(pageFrontmatter)}
 {% raw %}
