@@ -23,3 +23,4 @@
 /docs/bibliography            /learn
 /docs/libraries               https://share.unison-lang.org
 /docs/*                       /learn/:splat
+/blog/*                       /whats-new/:splat

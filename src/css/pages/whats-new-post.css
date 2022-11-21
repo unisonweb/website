@@ -1,30 +1,30 @@
-#blog {
+#whats-new-post {
   --main-content-width: 64rem;
 }
 
-#blog #main-content video {
+#whats-new-post #main-content video {
   width: 100%;
 }
 
-#blog #main-content img {
+#whats-new-post #main-content img {
   max-width: 100%;
   max-height: 33.375rem;
 }
 
-#blog #main-content iframe {
+#whats-new-post #main-content iframe {
   margin: auto;
   display: flex;
 }
 
 /* header */
 
-#blog header {
+#whats-new-post header {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-#blog h1#title {
+#whats-new-post h1#title {
   font-size: 3rem;
   line-height: 1.1;
   font-weight: 900;
@@ -32,7 +32,7 @@
   margin: 1rem 0 1.25rem 0;
 }
 
-#blog .categories-and-date {
+#whats-new-post .categories-and-date {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
@@ -40,7 +40,7 @@
   color: var(--color-main-subtle-fg-em);
 }
 
-#blog .categories {
+#whats-new-post .categories {
   display: flex;
   flex-direction: row;
   gap: 0.25rem;
@@ -49,53 +49,53 @@
   border-right: 1px solid var(--color-main-border);
 }
 
-#blog .categories .category:after {
+#whats-new-post .categories .category:after {
   content: ", ";
 }
-#blog .categories .category:last-child:after {
+#whats-new-post .categories .category:last-child:after {
   content: "";
 }
 
-#blog .authors {
+#whats-new-post .authors {
   display: flex;
   flex-direction: row;
   font-size: var(--font-size-medium);
   gap: 0.25rem;
 }
 
-#blog .authors .author:after {
+#whats-new-post .authors .author:after {
   content: ", ";
 }
-#blog .authors .author:last-child:after {
+#whats-new-post .authors .author:last-child:after {
   content: "";
 }
 
-#blog #main-content img.featured-image {
+#whats-new-post #main-content img.featured-image {
   display: flex;
   margin: 2rem auto;
 }
 
 /* content */
 
-#blog .post-header,
-#blog .unison-doc {
+#whats-new-post .post-header,
+#whats-new-post .unison-doc {
   width: 50rem;
   margin: auto;
 }
 
 @media only screen and (max-width: 1264px) {
-  #blog {
+  #whats-new-post {
     --main-footer-height: 6rem;
     --main-content-width: 100vw;
   }
 
-  #blog #main-content {
+  #whats-new-post #main-content {
     padding: 0 1.5rem;
     margin-left: 0;
   }
 
-  #blog .post-header,
-  #blog .unison-doc {
+  #whats-new-post .post-header,
+  #whats-new-post .unison-doc {
     width: 100%;
   }
 }
