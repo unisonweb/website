@@ -5,6 +5,7 @@ import { exec } from "child_process";
 import fs from "fs";
 import path from "path";
 import copy from "recursive-copy";
+import { parseISO, isFuture } from "date-fns";
 import { JSDOM } from "jsdom";
 import kebabCase from "kebab-case";
 import yaml from "yaml";
@@ -458,6 +459,15 @@ function updateContent(frontmatter, prefix, rawContent) {
       ...pageFrontmatter,
       status: pageFrontmatter.status || "published",
     };
+
+    if (pageFrontmatter.date) {
+      pageFrontmatter = {
+        ...pageFrontmatter,
+        eleventyExcludeFromCollections:
+          isFuture(pageFrontmatter.date) ||
+          pageFrontmatter.status !== "published",
+      };
+    }
 
     return `${frontMatterToString(pageFrontmatter)}
 {% raw %}

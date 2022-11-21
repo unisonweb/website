@@ -64,10 +64,14 @@ module.exports = function (config) {
   config.addPassthroughCopy("src/robots.txt");
   config.addPassthroughCopy("src/_redirects");
 
+  config.addShortcode("isFutureDate", (date) => {
+    return true;
+  });
+
   // Shortcodes
   config.addShortcode("currentYear", () => `${new Date().getFullYear()}`);
 
-  config.addShortcode("articlePagination", function (sidebar, current) {
+  config.addShortcode("articlePagination", (sidebar, current) => {
     const first = 0;
     const last = sidebar.length - 1;
     const c = R.findIndex((l) => l.href + "/" === current, sidebar);
@@ -93,7 +97,7 @@ module.exports = function (config) {
     }
   });
 
-  config.addFilter("algoliafy", function (text) {
+  config.addFilter("algoliafy", (text) => {
     // Remove code
     text = text.replaceAll(/<code>.*?<\/code>/gs, "");
 
@@ -123,7 +127,7 @@ module.exports = function (config) {
     return text.substring(0, 8000);
   });
 
-  config.addFilter("jsonify", function (text) {
+  config.addFilter("jsonify", (text) => {
     return JSON.stringify(text);
   });
 
