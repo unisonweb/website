@@ -496,7 +496,7 @@ function convertRefsToUnisonShareLinks(dom) {
         if (ref && refType) {
           let link = dom.window.document.createElement("a");
 
-          link.href = `${UNISON_SHARE_BASE_URL}/@unison/code/latest/namespaces/public/;/${refType}s/${ref}`;
+          link.href = `${UNISON_SHARE_BASE_URL}/@unison/p/code/latest/namespaces/public/;/${refType}s/${ref}`;
           link.target = "_blank";
           link.innerHTML = span.innerHTML;
           link.classList = span.classList;
