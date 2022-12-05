@@ -13,7 +13,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ metadata.url }}">
   <title>{{ metadata.title }}</title>
   <link href="{{ permalink | absoluteUrl(metadata.url) }}" rel="self"/>
-  <link href="{{ metadata.url }}"/>
+  <link href="{{ metadata.url }}" xml:base="http://www.unison-lang.org/feed.xml"/>
   <updated>{{ collections['whats-new'] | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
   <id>{{ metadata.url }}</id>
   {%- for post in collections['whats-new'] | reverse %}
