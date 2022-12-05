@@ -5,4 +5,4 @@
 [[headers]]
   for = "/feed.xml"
   [headers.values]
-    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Origin = "https://share.unison-lang.org"
