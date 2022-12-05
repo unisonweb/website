@@ -5,6 +5,7 @@ const { format, utcToZonedTime } = require("date-fns-tz");
 const authors = require("./src/authors.json");
 const leftArrow = fs.readFileSync("./src/assets/icon-arrow-left.svg");
 const rightArrow = fs.readFileSync("./src/assets/icon-arrow-right.svg");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 
 function titleCase(str) {
   return str
@@ -149,6 +150,8 @@ module.exports = function (config) {
       return titleCase(authorTag.replaceAll("-", " "));
     }
   });
+
+  config.addPlugin(pluginRss);
 
   return {
     dir: {
