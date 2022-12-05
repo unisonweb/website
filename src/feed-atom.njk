@@ -5,7 +5,7 @@
   "metadata": {
     "title": "Unison Language | Whats New?",
     "language": "en",
-    "url": "https://unison-lang.org/whats-new"
+    "url": "https://www.unison-lang.org/whats-new"
   }
 }
 ---
@@ -25,6 +25,9 @@
     <id>{{ absolutePostUrl }}</id>
     <summary>{{ post.data.summary }}</summary>
     <content xml:lang="{{ metadata.language }}" type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}</content>
+    {%- for a in post.data.authors -%}
+    <author><name>{{a | author}}</name></author>
+    {%- endfor -%}
   </entry>
   {%- endfor %}
 </feed>
