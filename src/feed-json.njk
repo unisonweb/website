@@ -23,7 +23,6 @@
       "url": "{{ absolutePostUrl }}",
       "title": "{{ post.data.title }}",
       "summary": "{{ post.data.summary }}",
-      "summary": "{{ post.data.summary }}",
       "content_html": {% if post.templateContent %}{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) | dump | safe }}{% else %}""{% endif %},
       "date_published": "{{ post.date | dateToRfc3339 }}"
     }
