@@ -16,7 +16,7 @@
   "home_page_url": "{{ metadata.url }}",
   "feed_url": "{{ permalink | absoluteUrl(metadata.url) }}",
   "items": [
-    {%- for post in collections.posts | reverse %}
+    {%- for post in collections["whats-new"] | reverse %}
     {%- set absolutePostUrl = post.url | absoluteUrl(metadata.url) %}
     {
       "id": "{{ absolutePostUrl }}",
