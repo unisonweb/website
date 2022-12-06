@@ -1,0 +1,32 @@
+---json
+{
+  "permalink": "feed-summary.json",
+  "eleventyExcludeFromCollections": true,
+  "metadata": {
+    "title": "Unison Language | Whats New?",
+    "language": "en",
+    "url": "https://www.unison-lang.org/whats-new"
+  }
+}
+---
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "{{ metadata.title }}",
+  "language": "{{ metadata.language }}",
+  "home_page_url": "{{ metadata.url }}",
+  "feed_url": "{{ permalink | absoluteUrl(metadata.url) }}",
+  "items": [
+    {%- for post in collections["whats-new"] | reverse | slice(3) %}
+    {%- set absolutePostUrl = post.url | absoluteUrl(metadata.url) %}
+    {
+      "id": "{{ absolutePostUrl }}",
+      "url": "{{ absolutePostUrl }}",
+      "title": "{{ post.data.title }}",
+      "summary": "{{ post.data.summary }}",
+      "date_published": "{{ post.date | dateToRfc3339 }}"
+    }
+    {% if not loop.last %},{% endif %}
+    {%- endfor %}
+  ]
+}
+
