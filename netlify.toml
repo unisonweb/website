@@ -3,6 +3,6 @@
   command = "npm run build"
 
 [[headers]]
-  for = "/feed.xml"
+  for = "/feed.json"
   [headers.values]
     Access-Control-Allow-Origin = "https://share.unison-lang.org"
