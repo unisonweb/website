@@ -3,6 +3,6 @@
   command = "npm run build"
 
 [[headers]]
-  for = "/feed.json"
+  for = "/f*"
   [headers.values]
     Access-Control-Allow-Origin = "*"
