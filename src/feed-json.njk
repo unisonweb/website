@@ -21,8 +21,8 @@
     {
       "id": "{{ absolutePostUrl }}",
       "url": "{{ absolutePostUrl }}",
-      "title": "{{ post.data.title }}",
-      "summary": "{{ post.data.summary }}",
+      "title": "{{ post.data.title | jsonify  | safe}}",
+      "summary": "{{ post.data.summary | jsonify | safe}}",
       "content_html": {% if post.templateContent %}{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) | dump | safe }}{% else %}""{% endif %},
       "date_published": "{{ post.date | dateToRfc3339 }}"
     }
