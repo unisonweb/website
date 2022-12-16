@@ -5,7 +5,7 @@ import { exec } from "child_process";
 import fs from "fs";
 import path from "path";
 import copy from "recursive-copy";
-import { parseISO, isFuture } from "date-fns";
+import { isFuture } from "date-fns";
 import { JSDOM } from "jsdom";
 import kebabCase from "kebab-case";
 import yaml from "yaml";
@@ -419,6 +419,7 @@ function updateContent(frontmatter, prefix, rawContent) {
   dom = fixFolded(dom);
   dom = fixInternalLinks(prefix, dom);
   dom = convertRefsToUnisonShareLinks(dom);
+  dom = enableMermaid(dom);
 
   let title = "";
   const h1 = dom.window.document.querySelector("h1");
@@ -505,6 +506,14 @@ function convertRefsToUnisonShareLinks(dom) {
         }
       }
     });
+
+  return dom;
+}
+
+function enableMermaid(dom) {
+  dom.window.document
+    .querySelectorAll(".source.mermaid pre")
+    .forEach((pre) => pre.classList.add("mermaid"));
 
   return dom;
 }
