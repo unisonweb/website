@@ -419,7 +419,6 @@ function updateContent(frontmatter, prefix, rawContent) {
   dom = fixFolded(dom);
   dom = fixInternalLinks(prefix, dom);
   dom = convertRefsToUnisonShareLinks(dom);
-  dom = enableMermaid(dom);
 
   let title = "";
   const h1 = dom.window.document.querySelector("h1");
@@ -506,14 +505,6 @@ function convertRefsToUnisonShareLinks(dom) {
         }
       }
     });
-
-  return dom;
-}
-
-function enableMermaid(dom) {
-  dom.window.document
-    .querySelectorAll(".source.mermaid pre")
-    .forEach((pre) => pre.classList.add("mermaid"));
 
   return dom;
 }

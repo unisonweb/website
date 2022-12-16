@@ -1,15 +1,44 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.css" integrity="sha384-ko6T2DjISesD0S+wOIeHKMyKsHvWpdQ1s/aiaQMbL+TIXx3jg6uyf9hlv3WWfwYv" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.js" integrity="sha384-tsPOhveNsi36uhglzMBNOAA2xd7LlEqQuQHFKi4DwP+6UKrrLGub1MD77Zx18F8e" crossorigin="anonymous"></script>
-<script type="module">
-  import renderMathInElement from "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.mjs";
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+<script>
+  console.log(katex);
+
   document.querySelectorAll(".source.latex").forEach(el => {
-    renderMathInElement(el);
+    const markup = el.textContent.trim();
+
+    const katex_ = document.createElement('div');
+    el.parentNode.insertBefore(katex_, el);
+
+    katex.render(markup, katex_, {
+      throwOnError: false,
+      displayMode: true
+    });
+
+    el.remove();
   });
 </script>
 
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true, securityLevel: 'sandbox'});
+  mermaid.initialize({ 
+    theme: "neutral",
+    startOnLoad: false, 
+    securityLevel: 'sandbox'
+  });
+
+  document.querySelectorAll(".source.mermaid").forEach(el => {
+    const diagram = el.textContent.trim();
+
+    const diagram_ = document.createElement('div');
+    el.parentNode.insertBefore(diagram_, el);
+
+    const diagramId = Date.now().toString();
+    mermaid.render("mermaid-diagram_" + diagramId, diagram, (svg) => {
+      diagram_.innerHTML = svg;
+    });
+
+    el.remove();
+  });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js" integrity="sha256-EXPXz4W6pQgfYY3yTpnDa3OH8/EPn16ciVsPQ/ypsjk=" crossorigin="anonymous"></script>
