@@ -464,6 +464,10 @@ body.modal-open {
   display: none;
 }
 
+.katex-display {
+  padding: 4rem 0;
+}
+
 @media only screen and (max-width: 1110px) {
   :root {
     --main-header-height: 1.5rem;
