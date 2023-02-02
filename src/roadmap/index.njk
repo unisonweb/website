@@ -1,0 +1,129 @@
+---
+tags: page
+title: Unison Roadmap
+---
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    {% include "_head.njk" %}
+    <title>Unison Roadmap</title>
+  </head>
+
+  <body>
+    <main id="roadmap">
+      <header id="main-header">{% include "_main-nav.njk" %}</header>
+
+      <article id="hero">
+        <h1>Unison Roadmap</h1>
+      </article>
+
+      <div class="main-content">
+        <article class="roadmap_intro">
+          <p>
+            There’s deliberately no dates on here, and don’t expect any one
+            feature to be guaranteed. We learn a lot as we are developing and
+            designing Unison work and sometimes features aren’t the right fit at
+            the current time.
+          </p>
+
+          <p>
+            This page show cases the bigger efforts we are focused on and are
+            considering. It doesn’t cover everything. Head over to our GitHub
+            for more details on minor items, efforts, and bug fix work.
+          </p>
+        </article>
+
+        <article class="roadmap_section">
+          <header class="roadmap_section_header">
+            <h2>Now</h2>
+            <p>Active and ongoing efforts.</p>
+            <p>
+              We have confidence in the ideas, but things always change as we
+              work through the work.
+            </p>
+          </header>
+
+          <section class="roadmap_items">
+            {%- for i in roadmap.now %}
+            <div class="roadmap_item">
+              <header>
+                <h3>{{ i.title }}</h3>
+                <ul class="roadmap_areas">
+                  {%- for a in i.areas %}
+                  <li class="{{ a }}">{{ roadmap.areas[a] }}</li>
+                  {%- endfor -%}
+                </ul>
+              </header>
+              <div class="roadmap_item_description">
+                {{ i.description }}
+              </div>
+            </div>
+            {%- endfor -%}
+          </section>
+        </article>
+
+        <hr class="divider" />
+
+        <article class="roadmap_section">
+          <header class="roadmap_section_header">
+            <h2>Next</h2>
+            <p>Items that we are quite likely to work on Next.</p>
+            <p>
+              Not everything is clear and set in stone, but we have an idea that
+              these items in some shape or form will be worked on soon.
+            </p>
+          </header>
+
+          <section class="roadmap_items">
+            {%- for i in roadmap.next %}
+            <div class="roadmap_item">
+              <header>
+                <h3>{{ i.title }}</h3>
+                <ul class="roadmap_areas">
+                  {%- for a in i.areas %}
+                  <li class="{{ a }}">{{ roadmap.areas[a] }}</li>
+                  {%- endfor -%}
+                </ul>
+              </header>
+              <div class="roadmap_item_description">
+                {{ i.description }}
+              </div>
+            </div>
+            {%- endfor -%}
+          </section>
+        </article>
+
+        <hr class="divider" />
+
+        <article class="roadmap_section">
+          <header class="roadmap_section_header">
+            <h2>Later</h2>
+            <p>Items that we are considering to work on in the future.</p>
+            <p>
+              The details here are vague and very likely to change as we learn
+              more over time.
+            </p>
+          </header>
+
+          <section class="roadmap_items">
+            {%- for i in roadmap.later %}
+            <div class="roadmap_item roadmap_item_small">
+              <header>
+                <h3>{{ i.title }}</h3>
+                <ul class="roadmap_areas">
+                  {%- for a in i.areas %}
+                  <li class="{{ a }}">{{ roadmap.areas[a] }}</li>
+                  {%- endfor -%}
+                </ul>
+              </header>
+            </div>
+            {%- endfor -%}
+          </section>
+        </article>
+        {% include "_footer.njk" %}
+      </div>
+    </main>
+  </body>
+</html>

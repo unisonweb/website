@@ -1,0 +1,21 @@
+{
+  "areas": {
+    "unison-share": "Unison Share",
+    "ucm": "ucm",
+    "core-lang": "Core Language"
+  },
+  "now": [
+    {
+      "title": "Projects v1",
+      "description": "some description",
+      "areas": ["unison-share", "ucm"]
+    },
+    {
+      "title": "JIT",
+      "description": "some description",
+      "areas": ["core-lang"]
+    }
+  ],
+  "next": [],
+  "later": []
+}
