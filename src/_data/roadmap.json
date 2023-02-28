@@ -1,8 +1,8 @@
 {
   "areas": {
     "unison-share": "Unison Share",
-    "ucm": "ucm",
-    "core-language": "Core Language",
+    "ucm": "UCM",
+    "core-language": "Core language",
     "services": "Services",
     "runtime": "Runtime",
     "performance": "Performance",
@@ -15,7 +15,7 @@
       "areas": ["runtime", "performance"]
     },
     {
-      "title": "Unison Cloud Microservices",
+      "title": "Unison Cloud microservices",
       "description": "Promote any Unison function to a typed microservice.\n\nTurn any microservice into an autoscaled HTTP endpoint; call Unison-native services without serialization boilerplate.",
       "areas": ["cloud", "services"]
     },
@@ -37,14 +37,14 @@
       "areas": ["ucm"]
     },
     {
-      "title": "Stateful Unison Cloud Microservices",
+      "title": "Stateful Unison Cloud microservices",
       "description": "Stateful services using Unison-native storage, without manual serialization code to/from a datastore.",
       "areas": ["cloud", "services"]
     }
   ],
   "later": [
     {
-      "title": "Dependency Management",
+      "title": "Dependency management",
       "description": "Easy dependency management and library upgrades.",
       "areas": ["unison-share", "ucm"]
     },
@@ -59,7 +59,7 @@
       "areas": ["runtime", "performance"]
     },
     {
-      "title": "Extensible Records",
+      "title": "Extensible records",
       "description": "Support for extensible records. An extension to the syntax and the type system.",
       "areas": ["core-language"]
     },
