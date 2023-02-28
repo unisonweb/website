@@ -1,6 +1,7 @@
 #roadmap {
   display: flex;
   flex-direction: column;
+  overflow-x: clip; /* hack */
 }
 
 #roadmap #hero {
@@ -12,8 +13,9 @@
   width: 64rem;
   margin: auto;
   margin-top: calc(var(--main-content-top-margin) - 1rem);
-  background: url(/assets/roadmap-hero.svg);
+  background: url(/assets/roadmap-hero.svg) no-repeat center;
   height: 22.25rem;
+  background-size: contain;
 }
 
 #roadmap #hero h1 {
@@ -124,6 +126,7 @@
   background: var(--color-gray-lighten-40);
   color: var(--color-gray-base);
   height: 1.125rem;
+  white-space: nowrap;
 }
 
 .roadmap_item .roadmap_areas li.unison-share {
@@ -204,4 +207,51 @@
 }
 .roadmap_item_small header h3 {
   font-size: 1rem;
+}
+
+@media only screen and (max-width: 1056px) {
+  #roadmap #hero {
+    height: auto;
+  }
+
+  #roadmap #hero,
+  #roadmap .main-content {
+    width: 100%;
+  }
+
+  #roadmap .main-content {
+    padding: 0 2rem;
+    margin-top: 1rem;
+  }
+}
+@media only screen and (max-width: 720px) {
+  #roadmap #hero {
+    background: 0;
+    padding: 0 2rem;
+  }
+  #roadmap #hero h1 {
+    font-size: 3rem;
+  }
+  #roadmap #hero h2 {
+    font-size: 1.5rem;
+  }
+  #roadmap .main-content {
+    margin-top: 3rem;
+    padding: 0 1.5rem;
+  }
+
+  .roadmap_section .roadmap_section_header {
+    padding: 0;
+  }
+
+  .roadmap_items {
+    flex-direction: column;
+  }
+  .roadmap_items .roadmap_item {
+    width: 100%;
+  }
+
+  .roadmap_items .roadmap_item .tooltip {
+    max-width: 10rem;
+  }
 }
