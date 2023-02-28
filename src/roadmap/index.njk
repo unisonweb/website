@@ -16,24 +16,25 @@ title: Unison Roadmap
       <header id="main-header">{% include "_main-nav.njk" %}</header>
 
       <article id="hero">
-        <h1>Unison Roadmap</h1>
+        <h1>
+          Unison Language<br />and Platform
+          <span class="hero-roadmap">Roadmap</span>
+        </h1>
+        <h2>Learn where Unison is headed</h2>
       </article>
 
       <div class="main-content">
         <article class="roadmap_intro">
           <p>
-            There’s deliberately no dates on here, and don’t expect any one
-            feature to be guaranteed. We learn a lot as we are developing and
-            designing Unison work and sometimes features aren’t the right fit at
-            the current time.
+            Check out what we’re excited about and working on at the moment 😎
           </p>
-
-          <p>
-            This page show cases the bigger efforts we are focused on and are
-            considering. It doesn’t cover everything. Head over to our GitHub
-            for more details on minor items, efforts, and bug fix work.
+          <p class="subtle">
+            The roadmap is of course not an exhaustive list of our efforts and
+            is very much subject to change.
           </p>
         </article>
+
+        <hr class="divider" />
 
         <article class="roadmap_section">
           <header class="roadmap_section_header">
@@ -49,15 +50,15 @@ title: Unison Roadmap
             {%- for i in roadmap.now %}
             <div class="roadmap_item">
               <header>
-                <h3>{{ i.title }}</h3>
                 <ul class="roadmap_areas">
                   {%- for a in i.areas %}
                   <li class="{{ a }}">{{ roadmap.areas[a] }}</li>
                   {%- endfor -%}
                 </ul>
+                <h3>{{ i.title }}</h3>
               </header>
               <div class="roadmap_item_description">
-                {{ i.description }}
+                {{ i.description | striptags(true) | escape | nl2br }}
               </div>
             </div>
             {%- endfor -%}
@@ -80,15 +81,15 @@ title: Unison Roadmap
             {%- for i in roadmap.next %}
             <div class="roadmap_item">
               <header>
-                <h3>{{ i.title }}</h3>
                 <ul class="roadmap_areas">
                   {%- for a in i.areas %}
                   <li class="{{ a }}">{{ roadmap.areas[a] }}</li>
                   {%- endfor -%}
                 </ul>
+                <h3>{{ i.title }}</h3>
               </header>
               <div class="roadmap_item_description">
-                {{ i.description }}
+                {{ i.description | striptags(true) | escape | nl2br }}
               </div>
             </div>
             {%- endfor -%}
@@ -107,7 +108,7 @@ title: Unison Roadmap
             </p>
           </header>
 
-          <section class="roadmap_items">
+          <section class="roadmap_items roadmap_item_list">
             {%- for i in roadmap.later %}
             <div class="roadmap_item roadmap_item_small">
               <header>
