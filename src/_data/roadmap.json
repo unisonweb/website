@@ -1,0 +1,72 @@
+{
+  "areas": {
+    "unison-share": "Unison Share",
+    "ucm": "ucm",
+    "core-language": "Core Language",
+    "services": "Services",
+    "runtime": "Runtime",
+    "performance": "Performance",
+    "cloud": "Cloud"
+  },
+  "now": [
+    {
+      "title": "JIT compiler",
+      "description": "Compile Unison to native code.\n\nFirst milestone:\nJIT can compile enough of the language to power the backend of Unison Cloud.",
+      "areas": ["runtime", "performance"]
+    },
+    {
+      "title": "Unison Cloud Microservices",
+      "description": "Promote any Unison function to a typed microservice.\n\nTurn any microservice into an autoscaled HTTP endpoint; call Unison-native services without serialization boilerplate.",
+      "areas": ["cloud", "services"]
+    },
+    {
+      "title": "Projects: milestone 1",
+      "description": "Dedicated commands for creating public or private projects and branches and publishing them to Unison Share.\n\nA building block for collaboration features like merge requests and issue tracking, as well as nicer support for dependency management.",
+      "areas": ["unison-share", "ucm"]
+    }
+  ],
+  "next": [
+    {
+      "title": "Projects: merge requests and issue tracking",
+      "description": "Support for creating and commenting on merge requests.\n\nStructural, hyperlinked diffs and code comments.\n\nBasic issue tracking.",
+      "areas": ["unison-share", "ucm"]
+    },
+    {
+      "title": "Redesigned update process",
+      "description": "Code updates that 'Just Work', guiding users through structured refactoring sessions in response to changes.\n\nMore intelligent merge algorithms.",
+      "areas": ["ucm"]
+    },
+    {
+      "title": "Stateful Unison Cloud Microservices",
+      "description": "Stateful services using Unison-native storage, without manual serialization code to/from a datastore.",
+      "areas": ["cloud", "services"]
+    }
+  ],
+  "later": [
+    {
+      "title": "Dependency Management",
+      "description": "Easy dependency management and library upgrades.",
+      "areas": ["unison-share", "ucm"]
+    },
+    {
+      "title": "Graphical UCM",
+      "description": "All the same functionality as UCM, but in a rich UI. Command palette with typeahead. Hyperlinked code viewing. Structural diffs.",
+      "areas": ["ucm"]
+    },
+    {
+      "title": "JIT compiler: milestone 2",
+      "description": "Support JIT of all Unison programs.",
+      "areas": ["runtime", "performance"]
+    },
+    {
+      "title": "Extensible Records",
+      "description": "Support for extensible records. An extension to the syntax and the type system.",
+      "areas": ["core-language"]
+    },
+    {
+      "title": "Advent of Cloud and Unison Cloud public beta",
+      "description": "Unison Cloud open to all users, with supporting learning materials.",
+      "areas": ["cloud"]
+    }
+  ]
+}
