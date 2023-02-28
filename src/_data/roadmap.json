@@ -10,8 +10,8 @@
   },
   "now": [
     {
-      "title": "JIT compiler",
-      "description": "Compile Unison to native code.\n\nMilestone 1:\nJIT can compile enough of the language to power the backend of Unison Cloud.",
+      "title": "JIT compiler: milestone 1",
+      "description": "Compile Unison to native code.\n\nInitial milestone is being able to compile enough of the language to power the backend of Unison Cloud.",
       "areas": ["runtime", "performance"]
     },
     {
