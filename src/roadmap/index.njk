@@ -107,6 +107,9 @@ title: Unison Roadmap
                   {%- endfor -%}
                 </ul>
               </header>
+              <div class="tooltip">
+                {{ i.description | striptags(true) | escape | nl2br }}
+              </div>
             </div>
             {%- endfor -%}
           </section>

@@ -50,7 +50,7 @@
     },
     {
       "title": "Graphical UCM",
-      "description": "All the same functionality as UCM, but in a rich UI. Command palette with typeahead. Hyperlinked code viewing. Structural diffs.",
+      "description": "All the same functionality as UCM, but in a rich UI.\n\n• Command palette with typeahead.\n• Hyperlinked code viewing.\n• Structural diffs.",
       "areas": ["ucm"]
     },
     {
@@ -60,7 +60,7 @@
     },
     {
       "title": "Extensible records",
-      "description": "Support for extensible records. An extension to the syntax and the type system.",
+      "description": "Support for extensible records; an extension to the syntax and the type system.",
       "areas": ["core-language"]
     },
     {

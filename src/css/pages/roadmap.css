@@ -160,6 +160,41 @@
 .roadmap_item_list .roadmap_item {
   width: 100%;
   padding: 1rem 1.5rem;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.roadmap_item_list .roadmap_item .tooltip {
+  opacity: 0;
+  display: absolute;
+  top: 3rem;
+  background: var(--color-gray-lighten-40);
+  color: var(--color-gray-darken-30);
+  max-width: 19rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius-base);
+  transition: all 0.2s;
+  pointer-events: none;
+}
+.roadmap_item_list .roadmap_item:hover {
+  background: var(--color-gray-lighten-55);
+}
+.roadmap_item_list .roadmap_item:hover .tooltip {
+  opacity: 1;
+}
+
+.roadmap_item_list .roadmap_item .tooltip:after {
+  bottom: 100%;
+  left: 1rem;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: var(--color-gray-lighten-40);
+  border-width: 0.5rem;
+  margin-left: -0.5rem;
 }
 
 .roadmap_item_small header {
