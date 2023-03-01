@@ -44,7 +44,12 @@
 
     if (tooltipContent) {
       const tooltip = document.createElement("div");
-      tooltip.classList.add("tooltip", "below", "arrow-middle");
+
+      if (trigger.closest(".unison-doc")) {
+        tooltip.classList.add("tooltip", "below", "arrow-start");
+      } else {
+        tooltip.classList.add("tooltip", "below", "arrow-middle");
+      }
 
       const bubble = document.createElement("div");
       bubble.classList.add("tooltip-bubble");

@@ -92,6 +92,20 @@
   border-bottom-color: var(--color-tooltip-border);
 }
 
+.tooltip:is(.below, .above).arrow-middle .tooltip-bubble {
+  transform: translateX(-25%);
+}
+
+.tooltip:is(.below, .above).arrow-middle .tooltip-bubble:after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tooltip:is(.below, .above).arrow-middle .tooltip-bubble:before {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .tooltip.above {
   padding-bottom: 0.5rem;
   bottom: 1.5rem;

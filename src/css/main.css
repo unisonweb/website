@@ -153,19 +153,18 @@ main#whats-new-post {
 }
 
 #main-header nav section > a .tooltip {
-  opacity: 0;
   width: fit-content;
   max-width: fit-content;
+  top: 1.5rem;
+  left: -50%;
+  transform: translateX(1rem);
 }
+
 #main-header nav section > a .tooltip-bubble {
   width: fit-content;
   max-width: fit-content;
   min-width: fit-content;
   white-space: nowrap;
-}
-#main-header nav section > a:hover .tooltip {
-  opacity: 1;
-  top: 1.5rem;
 }
 
 #main-header nav section > a:after {

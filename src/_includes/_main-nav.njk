@@ -12,13 +12,8 @@
     <section id="primary-nav">
       <a href="/learn" {% if '/learn' in page.url %}aria-current="page"{% endif %}>Learn</a>
       <a href="/community" {% if '/community' in page.url %}aria-current="page"{% endif %}>Community</a>
-      <a href="https://share.unison-lang.org" target="_blank" class="tooltip-trigger">
+      <a href="https://share.unison-lang.org" target="_blank" class="tooltip-trigger" data-tooltip-content-id="unison-share-tooltip">
         Ecosystem
-        <div class="tooltip below arrow-start">
-          <div class="tooltip-bubble">
-            Browse and host code on Unison Share
-          </div>
-        </div>
       </a>
       <a href="/roadmap" {% if '/roadmap' in page.url %}aria-current="page"{% endif %}>Roadmap</a>
       <div id="autocomplete">
@@ -76,5 +71,8 @@
         </a>
       </div>
     </section>
+  </div>
+  <div id="unison-share-tooltip" class="tooltip-content" style="display: none">
+    Browse and host code on Unison Share
   </div>
 </nav>
