@@ -12,7 +12,7 @@ import yaml from "yaml";
 import { has, map } from "ramda";
 import matter from "gray-matter";
 
-const UCM_EXEC = "ucm";
+const UCM_EXEC = process.env.UCM_EXEC || "ucm";
 
 const UNISON_SHARE_BASE_URL = "https://share.unison-lang.org";
 
