@@ -1,9 +1,10 @@
 ---
-overallTitle : "Unison"
+overallTitle: "Unison"
 title: "A friendly, statically-typed, functional programming language from the future"
 permalink: "/"
 ---
-<!doctype html>
+
+<!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -12,14 +13,11 @@ permalink: "/"
   </head>
 
   <body>
-    <main id='home'>
-      <header id="main-header">
-        {% include "_main-nav.njk" %}
-      </header>
+    <main id="home">
+      <header id="main-header">{% include "_main-nav.njk" %}</header>
 
       <section id="main-content">
         <section id="hero" class="slide-1">
-
           <h1>Unison</h1>
           <hr />
           <h2>A new <span class="approach-to">approach to</span></h2>
@@ -28,93 +26,185 @@ permalink: "/"
             <div class="slides">
               <div class="slide-content" id="slide-1-content">
                 <h2>Distributed programming</h2>
-                <p> No more writing encoders and decoders at every network
-                  boundary. <strong>Say where you want computations to run and it happens</strong>
-                  🔮 — Dependencies are deployed on the fly.</p>
-                
-                <a href="/learn/the-big-idea/" class="button primary-mono contained large">Learn More</a>
+                <p>
+                  No more writing encoders and decoders at every network
+                  boundary.
+                  <strong
+                    >Say where you want computations to run and it
+                    happens</strong
+                  >
+                  🔮 — Dependencies are deployed on the fly.
+                </p>
+
+                <a
+                  href="/learn/the-big-idea/"
+                  class="button primary-mono contained large"
+                  >Learn More</a
+                >
               </div>
 
               <div class="slide-content" id="slide-2-content">
                 <h2>Refactoring</h2>
-                <p> Your codebase is always live and typechecks, even in the
+                <p>
+                  Your codebase is always live and typechecks, even in the
                   middle of a refactoring. Unison has structured refactoring
-                  sessions, not a big misleading list of type errors. </p>
-                
-                <a href="/learn/the-big-idea/" class="button primary-mono contained large">Learn More</a>
+                  sessions, not a big misleading list of type errors.
+                </p>
+
+                <a
+                  href="/learn/the-big-idea/"
+                  class="button primary-mono contained large"
+                  >Learn More</a
+                >
               </div>
 
               <div class="slide-content" id="slide-3-content">
                 <h2>Durable storage</h2>
-                <p> No more writing translation code between your values and the
+                <p>
+                  No more writing translation code between your values and the
                   storage layer. Directly store values and unpersist them later
                   without fear of dependency conflicts or version mismatches.
                 </p>
-                
-                <a href="/learn/the-big-idea/" class="button primary-mono contained large">Learn More</a>
+
+                <a
+                  href="/learn/the-big-idea/"
+                  class="button primary-mono contained large"
+                  >Learn More</a
+                >
               </div>
 
               <div class="slide-content" id="slide-4-content">
                 <h2>Storing code</h2>
-                <p>Other tools try to recover structure from text; Unison stores
-                code in a database. This eliminates builds, provides for instant
-              nonbreaking renames, type-based search, and lots more. </p>
-                
-                <a href="/learn/the-big-idea/" class="button primary-mono contained large">Learn More</a>
+                <p>
+                  Other tools try to recover structure from text; Unison stores
+                  code in a database. This eliminates builds, provides for
+                  instant nonbreaking renames, type-based search, and lots more.
+                </p>
+
+                <a
+                  href="/learn/the-big-idea/"
+                  class="button primary-mono contained large"
+                  >Learn More</a
+                >
               </div>
 
               <div class="slide-content" id="slide-5-content">
                 <h2>Dependencies</h2>
-                <p>Many dependency conflicts arise from definitions competing for
-                the same names. Since Unison references code by hash instead of
-              by name, an entire class of conflicts can be eliminated.</p>
-                
-                <a href="/learn/the-big-idea/" class="button primary-mono contained large">Learn More</a>
+                <p>
+                  Many dependency conflicts arise from definitions competing for
+                  the same names. Since Unison references code by hash instead
+                  of by name, an entire class of conflicts can be eliminated.
+                </p>
+
+                <a
+                  href="/learn/the-big-idea/"
+                  class="button primary-mono contained large"
+                  >Learn More</a
+                >
               </div>
             </div>
 
             <div class="slide-indicators">
-              <div data-slide-no="1" class="slide-indicator slide-1-indicator"><div class="dot"></div></div>
-              <div data-slide-no="2" class="slide-indicator slide-2-indicator"><div class="dot"></div></div>
-              <div data-slide-no="3" class="slide-indicator slide-3-indicator"><div class="dot"></div></div>
-              <div data-slide-no="4" class="slide-indicator slide-4-indicator"><div class="dot"></div></div>
-              <div data-slide-no="5" class="slide-indicator slide-5-indicator"><div class="dot"></div></div>
+              <div data-slide-no="1" class="slide-indicator slide-1-indicator">
+                <div class="dot"></div>
+              </div>
+              <div data-slide-no="2" class="slide-indicator slide-2-indicator">
+                <div class="dot"></div>
+              </div>
+              <div data-slide-no="3" class="slide-indicator slide-3-indicator">
+                <div class="dot"></div>
+              </div>
+              <div data-slide-no="4" class="slide-indicator slide-4-indicator">
+                <div class="dot"></div>
+              </div>
+              <div data-slide-no="5" class="slide-indicator slide-5-indicator">
+                <div class="dot"></div>
+              </div>
             </div>
-
           </div>
 
           <div class="sub-text">
-            <p><strong>Unison</strong> is a friendly programming language from the future:
-              statically-typed, functional, and a lot of fun 😄 </p>
+            <p>
+              <strong>Unison</strong> is a friendly programming language from
+              the future: statically-typed, functional, and a lot of fun 😄
+            </p>
             <div class="install install-mac">
               <div class="prompt">$</div>
-              <input type="text" readonly="readonly" value="brew install unisonweb/unison/unison-language" />
+              <input
+                type="text"
+                readonly="readonly"
+                value="brew install unisonweb/unison/unison-language"
+              />
               <div class="copy-installation-command">
                 <div class="icon icon-clipboard">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2.25C8 2.11193 7.88807 2 7.75 2H6.25C6.11193 2 6 2.11193 6 2.25V2.75C6 2.88807 6.11193 3 6.25 3H7.75C7.88807 3 8 2.88807 8 2.75V2.25ZM6 1C5.44772 1 5 1.44772 5 2V3C5 3.55228 5.44772 4 6 4H8C8.55228 4 9 3.55228 9 3V2C9 1.44772 8.55228 1 8 1H6Z" fill="currentColor"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3 2.5C3 2.22386 3.22386 2 3.5 2C3.77614 2 4 2.22386 4 2.5V10.5C4 10.7761 4.22386 11 4.5 11H9.5C9.77614 11 10 10.7761 10 10.5V2.5C10 2.22386 10.2239 2 10.5 2C10.7761 2 11 2.22386 11 2.5V11C11 11.5523 10.5523 12 10 12H4C3.44772 12 3 11.5523 3 11V2.5Z" fill="currentColor"/>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M8 2.25C8 2.11193 7.88807 2 7.75 2H6.25C6.11193 2 6 2.11193 6 2.25V2.75C6 2.88807 6.11193 3 6.25 3H7.75C7.88807 3 8 2.88807 8 2.75V2.25ZM6 1C5.44772 1 5 1.44772 5 2V3C5 3.55228 5.44772 4 6 4H8C8.55228 4 9 3.55228 9 3V2C9 1.44772 8.55228 1 8 1H6Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M3 2.5C3 2.22386 3.22386 2 3.5 2C3.77614 2 4 2.22386 4 2.5V10.5C4 10.7761 4.22386 11 4.5 11H9.5C9.77614 11 10 10.7761 10 10.5V2.5C10 2.22386 10.2239 2 10.5 2C10.7761 2 11 2.22386 11 2.5V11C11 11.5523 10.5523 12 10 12H4C3.44772 12 3 11.5523 3 11V2.5Z"
+                      fill="currentColor"
+                    />
                   </svg>
                 </div>
               </div>
-              <div class="apple-silicon">On <abbr title="Such as the Apple M1 and M2">Apple Silicon</abbr>? You'll need <a class="rosetta-help">Rosetta</a> to run Unison.</div>
+              <div class="apple-silicon">
+                On
+                <abbr title="Such as the Apple M1 and M2">Apple Silicon</abbr>?
+                You'll need <a class="rosetta-help">Rosetta</a> to run Unison.
+              </div>
             </div>
 
             <div class="install install-linux">
               <div class="prompt">$</div>
-              <input type="text" readonly="readonly" value="curl --proto '=https' --tlsv1.2 -sSf https://sh.unison-lang.org | sh" />
+              <input
+                type="text"
+                readonly="readonly"
+                value="curl --proto '=https' --tlsv1.2 -sSf https://sh.unison-lang.org | sh"
+              />
               <div class="copy-installation-command">
                 <div class="icon icon-clipboard">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2.25C8 2.11193 7.88807 2 7.75 2H6.25C6.11193 2 6 2.11193 6 2.25V2.75C6 2.88807 6.11193 3 6.25 3H7.75C7.88807 3 8 2.88807 8 2.75V2.25ZM6 1C5.44772 1 5 1.44772 5 2V3C5 3.55228 5.44772 4 6 4H8C8.55228 4 9 3.55228 9 3V2C9 1.44772 8.55228 1 8 1H6Z" fill="currentColor"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3 2.5C3 2.22386 3.22386 2 3.5 2C3.77614 2 4 2.22386 4 2.5V10.5C4 10.7761 4.22386 11 4.5 11H9.5C9.77614 11 10 10.7761 10 10.5V2.5C10 2.22386 10.2239 2 10.5 2C10.7761 2 11 2.22386 11 2.5V11C11 11.5523 10.5523 12 10 12H4C3.44772 12 3 11.5523 3 11V2.5Z" fill="currentColor"/>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M8 2.25C8 2.11193 7.88807 2 7.75 2H6.25C6.11193 2 6 2.11193 6 2.25V2.75C6 2.88807 6.11193 3 6.25 3H7.75C7.88807 3 8 2.88807 8 2.75V2.25ZM6 1C5.44772 1 5 1.44772 5 2V3C5 3.55228 5.44772 4 6 4H8C8.55228 4 9 3.55228 9 3V2C9 1.44772 8.55228 1 8 1H6Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M3 2.5C3 2.22386 3.22386 2 3.5 2C3.77614 2 4 2.22386 4 2.5V10.5C4 10.7761 4.22386 11 4.5 11H9.5C9.77614 11 10 10.7761 10 10.5V2.5C10 2.22386 10.2239 2 10.5 2C10.7761 2 11 2.22386 11 2.5V11C11 11.5523 10.5523 12 10 12H4C3.44772 12 3 11.5523 3 11V2.5Z"
+                      fill="currentColor"
+                    />
                   </svg>
                 </div>
               </div>
             </div>
 
             <div class="install install-other">
-              <a href="https://github.com/unisonweb/unison/releases" target="_blank" class="button contained medium primary-mono">
+              <a
+                href="https://github.com/unisonweb/unison/releases"
+                target="_blank"
+                class="button contained medium primary-mono"
+              >
                 Download the latest release from GitHub
               </a>
             </div>
@@ -124,24 +214,29 @@ permalink: "/"
         <section class="unison-examples">
           <header>
             <h1>How does Unison code look?</h1>
-            <p>💡 All parts of the code examples are interactive. <strong>Click a dependency to read its definition and docs.</strong></p>
+            <p>
+              💡 All parts of the code examples are interactive.
+              <strong
+                >Click a dependency to read its definition and docs.</strong
+              >
+            </p>
           </header>
 
-          <div class="examples">
-            {% include "_home-examples.njk" %}
-          </div>
+          <div class="examples">{% include "_home-examples.njk" %}</div>
         </section>
 
         <div class="at-a-glance-banner">
           <p>
-            <strong>Unison at a glance:</strong> get a complete overview of Unison with many more examples. 
+            <strong>Unison at a glance:</strong> get a complete overview of
+            Unison with many more examples.
           </p>
-          <a href="/learn/at-a-glance/" class="button contained primary large">Learn More</a>
+          <a href="/learn/at-a-glance/" class="button contained primary large"
+            >Learn More</a
+          >
         </div>
 
         {% include "_footer.njk" %}
       </section>
-
     </main>
     <script src="/js/home.js"></script>
     {% include "_js.njk" %}

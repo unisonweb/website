@@ -1,0 +1,29 @@
+node_modules
+.DS_Store
+build
+.unison
+.unisonHistory
+reflog
+scratch.u
+
+# Learn, articles, and sidebar content are pre-built in build and copied
+# into src. They do not belong in the git repository as files, since their
+# source exists in the codebase
+src/learn
+src/articles
+src/blog/posts
+src/whats-new/posts
+src/pages
+src/home
+src/community
+src/unison-computing
+src/jobs
+src/talks
+src/_includes/_learn-sidebar-content.njk
+src/_includes/_home-examples.njk
+
+# Transcript
+*.output.md
+
+# Local Netlify folder
+.netlify
