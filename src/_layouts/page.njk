@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -7,12 +7,12 @@
   </head>
 
   <body>
-    <main id='page'>
+    <main id="page">
       {% include "_header.njk" %}
       <div id="main-content">
         <h1>{{ title }}</h1>
 
-        {{content | safe}}
+        {{ content | safe }}
 
         {% include "_footer.njk" %}
       </div>

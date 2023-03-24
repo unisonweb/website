@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -7,25 +7,52 @@
   </head>
 
   <body>
-    <main id='learn'>
+    <main id="learn">
       <a id="toggle-index">
         <div class="icon icon-list">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="3" y="9.5" width="8" height="1" rx="0.5" fill="currentColor"/>
-            <rect x="3" y="6.5" width="8" height="1" rx="0.5" fill="currentColor"/>
-            <rect x="3" y="3.5" width="8" height="1" rx="0.5" fill="currentColor"/>
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="3"
+              y="9.5"
+              width="8"
+              height="1"
+              rx="0.5"
+              fill="currentColor"
+            />
+            <rect
+              x="3"
+              y="6.5"
+              width="8"
+              height="1"
+              rx="0.5"
+              fill="currentColor"
+            />
+            <rect
+              x="3"
+              y="3.5"
+              width="8"
+              height="1"
+              rx="0.5"
+              fill="currentColor"
+            />
           </svg>
         </div>
       </a>
       {% include "_header.njk" %}
       <div id="main-content">
-        <aside id='index'>
+        <aside id="index">
           <div id="autocomplete"></div>
           {% include "_learn-sidebar-content.njk" %}
         </aside>
 
         <h1 id="title">{{ title }}</h1>
-        {{content | safe}}
+        {{ content | safe }}
         {% include "_footer.njk" %}
       </div>
     </main>
