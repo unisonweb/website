@@ -2,6 +2,7 @@
   --main-content-width: auto;
   --hero-width: 64rem;
   --examples-width: 64rem;
+  --flow-width: 64rem;
 }
 
 #home #main-content {
@@ -364,7 +365,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 4.5rem;
+  margin-bottom: 4rem;
   font-size: 1rem;
   color: var(--color-gray-base);
   text-align: center;
@@ -484,6 +485,157 @@
   display: none;
 }
 
+/* -- Unison Dev Flow ------------------------------------------------------ */
+
+#home .unison-dev-flow {
+  display: flex;
+  flex-direction: column;
+  width: var(--flow-width);
+  margin: 4rem 0;
+}
+
+#home .unison-dev-flow > header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4rem;
+  gap: 1rem;
+  font-size: 1rem;
+  color: var(--color-gray-base);
+  text-align: center;
+  padding: 0 1rem;
+}
+
+#home .unison-dev-flow > header h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  display: inline-flex;
+  background: var(--color-gray-lighten-100);
+  color: var(--color-gray-darken-10);
+  position: relative;
+  padding: 0 1.5rem;
+  z-index: 1;
+  font-weight: 900;
+}
+
+#home .unison-dev-flow .unison-dev-flow_editor-and-ucm {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  position: relative;
+}
+
+#home .unison-dev-flow .unison-dev-flow_window {
+  width: 50%;
+  border: 1px solid var(--color-gray-lighten-45);
+  border-radius: var(--border-radius-base);
+  height: 35.5rem;
+  opacity: 0.5;
+  background: var(--color-gray-lighten-60);
+  transition: all 0.2s;
+  overflow: clip;
+}
+
+#home .unison-dev-flow .media-controls {
+  position: absolute;
+  z-index: 1000;
+  left: 1rem;
+  bottom: 1rem;
+  place-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#home .unison-dev-flow .media-button {
+  height: 3.25rem;
+  border-radius: 2rem;
+  background: var(--color-gray-darken-20);
+  border: 0;
+  line-height: 1;
+  place-items: center;
+  display: flex;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 0.25rem solid var(--color-gray-lighten-100);
+  color: var(--color-gray-lighten-100);
+  padding: 0 1.25rem 0 0.35rem;
+  font-weight: bold;
+}
+
+#home .unison-dev-flow .media-button .icon {
+  font-size: 2.5rem;
+  color: var(--color-gray-lighten-100);
+  line-height: 1;
+}
+
+#home .unison-dev-flow .media-button:hover {
+  background: var(--color-blue-2);
+}
+
+#home .unison-dev-flow .media-button .icon .media-outline {
+  opacity: 0;
+}
+
+#home .unison-dev-flow[data-play-state="idle"] .media-button.button-stop,
+#home .unison-dev-flow[data-play-state="idle"] .media-button.button-restart {
+  display: none;
+}
+
+#home .unison-dev-flow[data-play-state="playing"] .media-button.button-play,
+#home .unison-dev-flow[data-play-state="playing"] .media-button.button-restart {
+  display: none;
+}
+
+#home .unison-dev-flow[data-play-state="stopped"] .media-button.button-play,
+#home .unison-dev-flow[data-play-state="stopped"] .media-button.button-stop {
+  display: none;
+}
+
+#home .unison-dev-flow .unison-dev-flow_window.unison-dev-flow_window-focus {
+  box-shadow: 0 0 0 4px var(--color-blue-5);
+  border: 1px solid var(--color-blue-1);
+  opacity: 1;
+  background: var(--color-gray-lighten-100);
+}
+
+#home .unison-dev-flow .unison-dev-flow_window-header {
+  padding: 0.75rem 1rem;
+  line-height: 1;
+  font-size: var(--font-size-small);
+  border-bottom: 1px solid var(--color-gray-lighten-45);
+  color: var(--color-gray-lighten-20);
+  background: var(--color-gray-lighten-60);
+}
+
+#home .unison-dev-flow .unison-dev-flow_window-body {
+  padding: 1rem;
+  font-family: var(--font-monospace);
+  font-weight: 300;
+}
+
+#home .unison-dev-flow .unison-dev-flow_ucm .ucm-file {
+  color: var(--color-blue-1);
+}
+
+#home .unison-dev-flow .unison-dev-flow_ucm .ucm-delayed {
+  font-weight: bold;
+  color: var(--color-pink-1);
+}
+
+#home .unison-dev-flow .unison-dev-flow_ucm .ucm-emphasized {
+  font-weight: bold;
+}
+
+#home .unison-dev-flow .unison-dev-flow_ucm .ucm-subdued {
+  color: var(--color-gray-lighten-30);
+}
+
+#home .unison-dev-flow .unison-dev-flow_ucm .ucm-add {
+  color: var(--color-green-1);
+}
+
 #home .at-a-glance-banner {
   background: var(--color-orange-5);
   padding: 1rem 1.5rem;
@@ -516,6 +668,7 @@
   #home {
     --hero-width: 60rem;
     --examples-width: 64rem;
+    --flow-width: 64rem;
   }
 }
 
@@ -525,6 +678,7 @@
     --main-content-width: 60rem;
     --hero-width: 60rem;
     --examples-width: 60rem;
+    --flow-width: 60rem;
   }
 
   #home #hero .carousel p {
@@ -538,6 +692,7 @@
     --main-content-width: 100vw;
     --hero-width: 100vw;
     --examples-width: 100vw;
+    --flow-width: 100vw;
   }
 
   #home #hero {
@@ -573,6 +728,14 @@
   }
   #home #hero .install {
     width: auto;
+  }
+
+  #home .unison-examples {
+    margin-top: 6rem;
+  }
+
+  #home .unison-examples header {
+    margin-bottom: 2rem;
   }
 
   #home .unison-examples header h1 {
@@ -628,6 +791,26 @@
   #home .at-a-glance-banner .button {
     font-size: 1rem;
   }
+
+  #home .unison-dev-flow > header {
+    margin-bottom: 2rem;
+  }
+
+  #home .unison-dev-flow > header h1 {
+    font-size: 1.8rem;
+  }
+
+  #home .unison-dev-flow {
+    margin-bottom: 2rem;
+  }
+
+  #home .unison-dev-flow .unison-dev-flow_editor-and-ucm {
+    margin: 0 2rem;
+  }
+
+  #home .unison-dev-flow .unison-dev-flow_window {
+    font-size: 0.875rem;
+  }
 }
 
 @media only screen and (max-width: 800px) {
@@ -679,6 +862,34 @@
   #home .at-a-glance-banner {
     width: var(--examples-width);
     border-radius: 0;
+  }
+
+  #home .unison-dev-flow .unison-dev-flow_editor-and-ucm {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 1rem;
+  }
+
+  #home .unison-dev-flow .unison-dev-flow_window {
+    width: 100%;
+    height: auto;
+    font-size: 0.75rem;
+  }
+
+  #home .unison-dev-flow .media-controls {
+    bottom: auto;
+    left: auto;
+    top: -1.25rem;
+    right: 0.5rem;
+  }
+
+  #home .unison-dev-flow .media-button {
+    height: 2.5rem;
+    padding: 0 1rem 0 0.15rem;
+  }
+
+  #home .unison-dev-flow .media-button .icon {
+    font-size: 2rem;
   }
 }
 

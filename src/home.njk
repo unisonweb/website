@@ -10,6 +10,7 @@ permalink: "/"
   <head>
     {% include "_head.njk" %}
     <title>The Unison language</title>
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
   </head>
 
   <body>
@@ -223,6 +224,133 @@ permalink: "/"
           </header>
 
           <div class="examples">{% include "_home-examples.njk" %}</div>
+        </section>
+
+        <section class="unison-dev-flow" data-play-state="idle">
+          <header>
+            <h1>Whats it like to write Unison Code?</h1>
+            <p>
+              The Unison Codebase Manager (UCM) is by your side as you write,
+              guiding you through the<br />development process; adding,
+              updating, and running your programs.
+            </p>
+          </header>
+
+          <div class="unison-dev-flow_editor-and-ucm">
+            <div class="media-controls">
+              <button
+                id="start-dev-flow-button"
+                class="media-button button-play"
+              >
+                <div class="icon icon-play-circle">
+                  <svg
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M7 12C9.76142 12 12 9.76142 12 7C12 4.23858 9.76142 2 7 2C4.23858 2 2 4.23858 2 7C2 9.76142 4.23858 12 7 12ZM7 13C10.3137 13 13 10.3137 13 7C13 3.68629 10.3137 1 7 1C3.68629 1 1 3.68629 1 7C1 10.3137 3.68629 13 7 13Z"
+                      fill="currentColor"
+                      class="media-outline"
+                    />
+                    <path
+                      d="M5.25 9.00815C5.25 9.39485 5.67019 9.63518 6.00351 9.43911L9.51736 7.37214C9.84601 7.17882 9.84601 6.70354 9.51736 6.51021L6.00351 4.44324C5.67019 4.24717 5.25 4.4875 5.25 4.87421V9.00815Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                Play demo
+              </button>
+              <button
+                id="stop-dev-flow-button"
+                class="media-button button-stop"
+              >
+                <div class="icon icon-stop-circle">
+                  <svg
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M7 12C9.76142 12 12 9.76142 12 7C12 4.23858 9.76142 2 7 2C4.23858 2 2 4.23858 2 7C2 9.76142 4.23858 12 7 12ZM7 13C10.3137 13 13 10.3137 13 7C13 3.68629 10.3137 1 7 1C3.68629 1 1 3.68629 1 7C1 10.3137 3.68629 13 7 13Z"
+                      fill="currentColor"
+                      class="media-outline"
+                    />
+                    <rect
+                      x="4.5"
+                      y="4.5"
+                      width="5"
+                      height="5"
+                      rx="1"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                Stop playback
+              </button>
+              <button
+                id="restart-dev-flow-button"
+                class="media-button button-restart"
+              >
+                <div class="icon icon-restart-circle">
+                  <svg
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M7 12C9.76142 12 12 9.76142 12 7C12 4.23858 9.76142 2 7 2C4.23858 2 2 4.23858 2 7C2 9.76142 4.23858 12 7 12ZM7 13C10.3137 13 13 10.3137 13 7C13 3.68629 10.3137 1 7 1C3.68629 1 1 3.68629 1 7C1 10.3137 3.68629 13 7 13Z"
+                      fill="currentColor"
+                      class="media-outline"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M4.32941 5.63327C4.20336 5.87958 4.35327 6.16379 4.61711 6.24715C4.88095 6.3305 5.15755 6.17906 5.30377 5.94416C5.45059 5.70831 5.64597 5.50406 5.87897 5.34613C6.25132 5.09375 6.69793 4.97439 7.14654 5.00738C7.59514 5.04037 8.0195 5.22377 8.35091 5.52791C8.68233 5.83204 8.90143 6.23911 8.97274 6.68324C9.04405 7.12737 8.96341 7.58257 8.74387 7.97517C8.52432 8.36778 8.17872 8.67481 7.76299 8.84658C7.34726 9.01835 6.88573 9.04482 6.45309 8.92169C6.1655 8.83984 5.90185 8.69507 5.68016 8.5H6C6.27614 8.5 6.5 8.27614 6.5 8C6.5 7.72386 6.27614 7.5 6 7.5H4.5C4.22386 7.5 4 7.72386 4 8V9.5C4 9.77614 4.22386 10 4.5 10C4.77614 10 5 9.77614 5 9.5V9.23606C5.33662 9.53714 5.73907 9.76026 6.17881 9.88542C6.82842 10.0703 7.5214 10.0306 8.14562 9.77265C8.76984 9.51473 9.28876 9.05372 9.61841 8.46423C9.94806 7.87473 10.0691 7.19125 9.96207 6.52439C9.85499 5.85753 9.52602 5.24631 9.02839 4.78965C8.53077 4.33299 7.89361 4.05761 7.22002 4.00808C6.54644 3.95855 5.87585 4.13776 5.31677 4.51671C4.89676 4.80141 4.55815 5.18632 4.32941 5.63327Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                Restart demo
+              </button>
+            </div>
+            <div
+              class="unison-dev-flow_window unison-dev-flow_editor unison-dev-flow_window-focus"
+            >
+              <header class="unison-dev-flow_window-header">
+                <strong>Editor</strong> : ~/scratch.u
+              </header>
+              <section class="unison-dev-flow_window-body rich source">
+                <pre><code><span class="syntax"></span></code></pre>
+              </section>
+            </div>
+
+            <div class="unison-dev-flow_window unison-dev-flow_ucm">
+              <header class="unison-dev-flow_window-header">
+                <strong>Terminal</strong> : UCM - Unison Codebase Manager
+              </header>
+              <section class="unison-dev-flow_window-body">
+                <pre>
+👋 Welcome to Unison!
+
+.> </pre
+                >
+                <pre class="unison-dev-flow_ucm-body"></pre>
+              </section>
+            </div>
+          </div>
         </section>
 
         <div class="at-a-glance-banner">

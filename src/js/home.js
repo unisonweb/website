@@ -192,4 +192,93 @@
 
     renderModal(rosettaHelp);
   });
+
+  // -- Dev Flow --------------------------------------------------------------
+
+  function startDevFlow() {
+    const editor = one(".unison-dev-flow_editor");
+    const editorContent = editor.querySelector(".syntax");
+    const ucm = one(".unison-dev-flow_ucm");
+    const ucmContent = ucm.querySelector(".unison-dev-flow_ucm-body");
+    const typing = { delay: 75 };
+    const devFlow = one(".unison-dev-flow");
+
+    function editorWriter() {
+      const editorWriter = new window.Typewriter(editorContent, typing);
+
+      editorWriter
+        .typeString(
+          `<span class="hash-qualifier"><span class="fqn"><span class="segment">helloWorld</span></span></span><span class="type-ascription-colon"> :</span><span class="blank"> </span><span class="delay-force-char">'</span><span class="ability-braces">{</span><a href="https://share.unison-lang.org/@unison/code/latest/namespaces/public/;/types/@@IO" target="_blank" class="type-reference">IO</a><span class="blank">,</span><span class="blank"> </span><a href="https://share.unison-lang.org/@unison/code/latest/namespaces/public/;/types/@4n0fgs00hpsj3paqnm9bfm4nbt9cbrin3hl88i992m9tjiq1ik7eq72asu4hcg885uti36tbnj5rudt56eahhnut1nobofg86pk1bng" target="_blank" class="type-reference">Exception</a><span class="ability-braces">}</span><span class="blank"> </span><span class="unit">()</span><span class="blank">
+</span><span class="hash-qualifier"><span class="fqn"><span class="segment">helloWorld</span></span></span><span class="blank"> </span><span class="var">_</span><span class="binding-equals"> =</span><span class="blank"> </span><a href="https://share.unison-lang.org/@unison/code/latest/namespaces/public/;/terms/@le5947v6dm1nqqjba9ipodo56uge7bu2d45lsmv6u7lgqqoas9k38bd4khu0iemok6u3iqcnai4asbnvl4ktc0r21liu7m45pc5j40g" target="_blank" class="term-reference">printLine</a><span class="blank"> </span><span class="text-literal">"Hello World! 🎉"</span>`
+        )
+        .pauseFor(1000)
+        .callFunction(() => {
+          editor.classList.remove("unison-dev-flow_window-focus");
+          ucm.classList.add("unison-dev-flow_window-focus");
+
+          const ucmWriter = new window.Typewriter(ucmContent, typing);
+
+          ucmWriter
+            .pauseFor(1000)
+            .pasteString(
+              `
+  I found and <strong>typechecked</strong> these definitions in
+  <span class="ucm-file">~/scratch.u</span>. If you do an \`add\` or \`update\`, 
+  here's how your codebase would change:
+
+    <span class="ucm-add">⍟ These new definitions are ok to \`add\`:</span>
+
+      <span class="ucm-emphasized">helloWorld</span> : <span class="ucm-delayed">'</span><span class="ucm-subdued">{</span>IO, Exception<span class="ucm-subdued">}</span> ()
+
+.> `
+            )
+            .pauseFor(2500)
+            .typeString("add")
+            .pauseFor(1000)
+            .pasteString(
+              `
+
+  <span class="ucm-add">⍟ I've added these definitions:</span>
+
+    <span class="ucm-emphasized">helloWorld</span> : <span class="ucm-delayed">'</span><span class="ucm-subdued">{</span>IO, Exception<span class="ucm-subdued">}</span> ()
+
+.> `
+            )
+            .pauseFor(2500)
+            .typeString("run helloWorld")
+            .pauseFor(1000)
+            .pasteString(
+              `
+Hello World! 🎉
+
+  ()`
+            )
+            .callFunction(() => {
+              devFlow.dataset.playState = "stopped";
+            })
+            .start();
+        });
+      return editorWriter;
+    }
+
+    function isPlaying(devFlow) {
+      return devFlow.dataset.playState == "playing";
+    }
+
+    let ew;
+    all(".unison-dev-flow .media-button").forEach((b) => {
+      b.addEventListener("click", (_) => {
+        if (isPlaying(devFlow)) {
+          ew?.stop();
+          devFlow.dataset.playState = "stopped";
+        } else {
+          ew = editorWriter();
+          ew.start();
+          devFlow.dataset.playState = "playing";
+        }
+      });
+    });
+  }
+
+  startDevFlow();
 })();

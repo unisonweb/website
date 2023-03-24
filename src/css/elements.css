@@ -49,6 +49,10 @@ hr {
   border-radius: 1px;
 }
 
+pre {
+  font-family: var(--font-monospace);
+}
+
 .loading-placeholder {
   display: inline-block;
   height: calc(var(--font-size-base) * 0.65);

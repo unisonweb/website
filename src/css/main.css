@@ -53,6 +53,7 @@ table {
   --font-size-large: 1.5rem;
   --font-size-medium: 0.875rem;
   --font-size-small: 0.75rem;
+  --font-size-extra-small: 0.625rem;
 }
 
 * {
