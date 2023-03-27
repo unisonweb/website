@@ -24,18 +24,14 @@
 
           <div class="authors">
             {%- for a in authors -%}
-            <label class="author">{{ a | author }}</label>
+            <span class="author">{{ a | author }}</span>
             {%- endfor -%}
           </div>
         </header>
 
         {% if featuredImage %}
         <img src="{{ featuredImage }}" class="featured-image" />
-        {% endif %}
-
-        {{ content | safe }}
-
-        {% include "_footer.njk" %}
+        {% endif %} {{ content | safe }} {% include "_footer.njk" %}
       </div>
     </main>
     {% include "_js.njk" %}

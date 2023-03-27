@@ -9,7 +9,7 @@
   <body>
     <main id="learn">
       <a id="toggle-index">
-        <div class="icon icon-list">
+        <span class="icon icon-list">
           <svg
             width="14"
             height="14"
@@ -42,7 +42,7 @@
               fill="currentColor"
             />
           </svg>
-        </div>
+        </span>
       </a>
       {% include "_header.njk" %}
       <div id="main-content">
@@ -52,8 +52,7 @@
         </aside>
 
         <h1 id="title">{{ title }}</h1>
-        {{ content | safe }}
-        {% include "_footer.njk" %}
+        {{ content | safe }} {% include "_footer.njk" %}
       </div>
     </main>
     {% include "_js.njk" %}

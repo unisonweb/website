@@ -563,9 +563,10 @@ body.modal-open {
     display: none;
   }
 
-  #main-header nav .button label {
+  #main-header nav .button .button_label {
     display: none;
   }
+
   #main-header #secondary-nav .social-links {
     gap: 0.5rem;
   }
