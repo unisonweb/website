@@ -12,6 +12,11 @@
   color: var(--color-gray-darken-10);
 }
 
+#page .app-error {
+  font-size: 1rem;
+  text-align: center;
+}
+
 @media only screen and (max-width: 1264px) {
   #page {
     --main-footer-height: 6rem;
