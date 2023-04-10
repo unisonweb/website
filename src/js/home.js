@@ -272,6 +272,9 @@ Hello World! 🎉
           ew?.stop();
           devFlow.dataset.playState = "stopped";
         } else {
+          ucm.classList.remove("unison-dev-flow_window-focus");
+          editor.classList.add("unison-dev-flow_window-focus");
+
           ew = editorWriter();
           ew.start();
           devFlow.dataset.playState = "playing";
