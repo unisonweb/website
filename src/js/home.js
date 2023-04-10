@@ -207,6 +207,8 @@
     let ucmWriter;
 
     function setupWriter() {
+      editorContent.innerHTML = "";
+      ucmContent.innerHTML = "";
       editorWriter = new window.Typewriter(editorContent, typing);
 
       editorWriter
