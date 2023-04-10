@@ -203,8 +203,11 @@
     const typing = { delay: 75 };
     const devFlow = one(".unison-dev-flow");
 
-    function editorWriter() {
-      const editorWriter = new window.Typewriter(editorContent, typing);
+    let editorWriter;
+    let ucmWriter;
+
+    function setupWriter() {
+      editorWriter = new window.Typewriter(editorContent, typing);
 
       editorWriter
         .typeString(
@@ -216,7 +219,7 @@
           editor.classList.remove("unison-dev-flow_window-focus");
           ucm.classList.add("unison-dev-flow_window-focus");
 
-          const ucmWriter = new window.Typewriter(ucmContent, typing);
+          ucmWriter = new window.Typewriter(ucmContent, typing);
 
           ucmWriter
             .pauseFor(1000)
@@ -265,18 +268,18 @@ Hello World! 🎉
       return devFlow.dataset.playState == "playing";
     }
 
-    let ew;
     all(".unison-dev-flow .media-button").forEach((b) => {
       b.addEventListener("click", (_) => {
         if (isPlaying(devFlow)) {
-          ew?.stop();
+          editorWriter?.stop();
+          ucmWriter?.stop();
           devFlow.dataset.playState = "stopped";
         } else {
           ucm.classList.remove("unison-dev-flow_window-focus");
           editor.classList.add("unison-dev-flow_window-focus");
 
-          ew = editorWriter();
-          ew.start();
+          setupWriter();
+          editorWriter?.start();
           devFlow.dataset.playState = "playing";
         }
       });
