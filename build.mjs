@@ -111,7 +111,7 @@ function build() {
         rename: kebabCase,
       }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
         const fileName = path.basename(dest);
-        if (!fileName.startsWith("_")) {
+        if (fileName.startsWith("index")) {
           transformWhatsNewFile(src, dest);
         }
       })
