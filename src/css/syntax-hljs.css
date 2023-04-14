@@ -1,0 +1,109 @@
+.rich.source.code.unison {
+  color: var(--color-syntax-subtle);
+}
+
+.hljs-meta.prompt_ {
+  color: var(--color-syntax-subtle);
+}
+
+.rich .fqn .sep {
+  color: var(--color-syntax-subtle-em);
+}
+
+.hljs-string {
+  color: var(--color-syntax-text);
+}
+
+.hljs-literal,
+.hljs-symbol,
+.rich .data-constructor-reference {
+  color: var(--color-syntax-constructor);
+}
+
+.rich .data-constructor-reference .segment {
+  color: var(--color-syntax-constructor-namespace);
+}
+
+.rich .data-constructor-reference .segment:last-child {
+  color: var(--color-syntax-constructor);
+}
+
+.hljs-variable,
+.hljs-params {
+  color: var(--color-syntax-base);
+}
+
+.hljs-number,
+.hljs-title.class_,
+.hljs-variable.constant_,
+.hljs-type {
+  color: var(--color-syntax-type);
+}
+
+.rich .type-reference .fqn .segment {
+  color: var(--color-syntax-type-namespace);
+}
+
+.rich .type-reference .fqn .segment:last-child {
+  color: var(--color-syntax-type);
+}
+
+.hljs-title,
+.hljs-title.function_,
+.rich .ability-constructor-reference,
+.rich .hash-qualifier {
+  color: var(--color-syntax-term);
+}
+
+.rich .term-reference .fqn .segment,
+.rich .ability-constructor-reference .fqn .segment,
+.rich .hash-qualifier .fqn .segment {
+  color: var(--color-syntax-term-namespace);
+}
+
+.rich .term-reference .fqn .segment:last-child,
+.rich .ability-constructor-reference .fqn .segment:last-child,
+.rich .hash-qualifier .fqn .segment:last-child {
+  color: var(--color-syntax-term);
+}
+
+.rich .op.cons,
+.rich .op.snoc,
+.rich .op.concat,
+.hljs-operator,
+.rich .binding-equals {
+  color: var(--color-syntax-operator);
+}
+
+.rich .delay-force-char {
+  color: var(--color-syntax-ability);
+  font-weight: bold;
+}
+
+.hljs-keyword,
+.hljs-variable.language_,
+.hljs-built_in,
+.rich .control-keyword,
+.rich .data-type-keyword,
+.rich .link-keyword,
+.rich .doc-keyword {
+  color: var(--color-syntax-keyword);
+}
+
+.hljs-punctuation {
+  color: var(--color-syntax-subtle);
+}
+
+.hljs-comment,
+.rich .ability-braces,
+.rich .unit,
+.hljs-import,
+.hljs-import .hljs-keyword,
+.hljs-import .hljs-title,
+.hljs-import .hljs-operator,
+.rich .blank,
+.rich .parenthesis,
+.rich .arrow,
+.rich .doc-delimeter {
+  color: var(--color-syntax-subtle);
+}

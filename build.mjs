@@ -11,6 +11,12 @@ import kebabCase from "kebab-case";
 import yaml from "yaml";
 import { has, map } from "ramda";
 import matter from "gray-matter";
+import hljs from "highlight.js";
+import hljsUnison from "./hljs-unison.mjs";
+import hljsUcm from "./hljs-ucm.mjs";
+
+hljs.registerLanguage("unison", hljsUnison);
+hljs.registerLanguage("ucm", hljsUcm);
 
 const UCM_EXEC = process.env.UCM_EXEC || "ucm";
 
@@ -419,6 +425,7 @@ function updateContent(frontmatter, prefix, rawContent) {
   dom = fixFolded(dom);
   dom = fixInternalLinks(prefix, dom);
   dom = convertRefsToUnisonShareLinks(dom);
+  dom = highlightCode(dom);
 
   let title = "";
   const h1 = dom.window.document.querySelector("h1");
@@ -477,6 +484,32 @@ ${page}
   } else {
     return page;
   }
+}
+
+function highlightCode(dom) {
+  // .unison-doc .rich.source.code.ucm pre code .word,
+  dom.window.document
+    .querySelectorAll(
+      `.unison-doc .rich.source.code.unison pre code .word,
+      .unison-doc .rich.source.code.python pre code .word`
+    )
+    .forEach((code) => {
+      let lang = "unison";
+      if (code.closest(".code.ucm")) lang = "ucm";
+      if (code.closest(".code.python")) lang = "python";
+
+      const code_ = code.innerHTML
+        ?.replaceAll("-&gt;", "->")
+        .replaceAll("&lt;-", "<-")
+        .replaceAll("&gt;", ">")
+        .replaceAll("&lt;", "<");
+
+      const highlightedCode = hljs.highlight(code_, { language: lang }).value;
+
+      code.innerHTML = highlightedCode;
+    });
+
+  return dom;
 }
 
 function frontMatterToString(frontmatter) {
