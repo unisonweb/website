@@ -16,6 +16,8 @@ instance has a `_title` Unison `Doc` term that is transformed into the page as
 frontmatter for eleventy, where Docs has `_sidebar` term that makes up the
 index of the language documentation.
 
+Browse the Unison Docs that power the website here: https://share.unison-lang.org/@unison/p/code/latest/namespaces/public/website
+
 ## Setup for running locally and deployment
 
 Ensure all dependencies are installed by running `npm install` (node v17+
