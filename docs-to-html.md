@@ -2,8 +2,8 @@
 
 ```ucm
 .> switch @unison/website
-.> docs.to-html pages build/pages
-.> docs.to-html articles.distributedDatasets.docs build/articles/distributedDatasets
-.> docs.to-html learn build/learn
-.> docs.to-html feed build/whats-new
+@unison/website/main> docs.to-html pages build/pages
+@unison/website/main> docs.to-html articles.distributedDatasets.docs build/articles/distributedDatasets
+@unison/website/main> docs.to-html learn build/learn
+@unison/website/main> docs.to-html feed build/whats-new
 ```
