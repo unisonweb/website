@@ -9,6 +9,8 @@
 /learn/faq                    /learn/usage-topics/general-faqs/
 /learn/abilities              /learn/fundamentals/abilities/
 /learn/fundamentals/abilities/mental-model/ /learn/fundamentals/abilities/
+/learn/structured-find       https://share.unison-lang.org/@unison/base/code/main/latest/types/reflection/Rewrites
+
 
 # -- old website support --
 /unisoncomputing              /unison-computing
