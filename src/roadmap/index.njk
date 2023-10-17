@@ -38,6 +38,33 @@ title: Unison Roadmap
 
         <article class="roadmap_section">
           <header class="roadmap_section_header">
+            <h2>Recently</h2>
+            <p>Recently shipped efforts and milestones.</p>
+          </header>
+
+          <section class="roadmap_items">
+            {%- for i in roadmap.recently %}
+            <div class="roadmap_item">
+              <header>
+                <ul class="roadmap_areas">
+                  {%- for a in i.areas %}
+                  <li class="{{ a }}">{{ roadmap.areas[a] }}</li>
+                  {%- endfor -%}
+                </ul>
+                <h3>{{ i.title }}</h3>
+              </header>
+              <div class="roadmap_item_description">
+                {{ i.description | striptags(true) | escape | nl2br }}
+              </div>
+            </div>
+            {%- endfor -%}
+          </section>
+        </article>
+
+        <hr class="divider" />
+
+        <article class="roadmap_section">
+          <header class="roadmap_section_header">
             <h2>Now</h2>
             <p>Active and ongoing efforts.</p>
           </header>
