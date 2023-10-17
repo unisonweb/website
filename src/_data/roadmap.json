@@ -8,7 +8,7 @@
     "performance": "Performance",
     "cloud": "Cloud"
   },
-  "recently-shipped": [
+  "recently": [
     {
       "title": "Unison Cloud microservices",
       "description": "Promote any Unison function to a typed microservice.\n\nTurn any microservice into an autoscaled HTTP endpoint; call Unison-native services without serialization boilerplate.",
