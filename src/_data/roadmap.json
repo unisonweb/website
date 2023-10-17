@@ -40,7 +40,7 @@
       "title": "Unison Cloud WebSocket support",
       "description": "Easy deployment of WebSocket services on Unison Cloud.",
       "areas": ["cloud", "services"]
-    },
+    }
   ],
   "next": [
     {
