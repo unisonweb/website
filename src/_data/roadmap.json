@@ -8,15 +8,15 @@
     "performance": "Performance",
     "cloud": "Cloud"
   },
-  "now": [
-    {
-      "title": "JIT compiler: milestone 1",
-      "description": "Compile Unison to native code.\n\nInitial milestone is being able to compile enough of the language to power the backend of Unison Cloud.",
-      "areas": ["runtime", "performance"]
-    },
+  "recently": [
     {
       "title": "Unison Cloud microservices",
       "description": "Promote any Unison function to a typed microservice.\n\nTurn any microservice into an autoscaled HTTP endpoint; call Unison-native services without serialization boilerplate.",
+      "areas": ["cloud", "services"]
+    },
+    {
+      "title": "Unison Cloud durable storage",
+      "description": "Unison-native transactional storage, without manual serialization code to/from a datastore.",
       "areas": ["cloud", "services"]
     },
     {
@@ -25,21 +25,33 @@
       "areas": ["unison-share", "ucm"]
     }
   ],
-  "next": [
-    {
-      "title": "Projects: merge requests and issue tracking",
-      "description": "Support for creating and commenting on merge requests.\n\nStructural, hyperlinked diffs and code comments.\n\nBasic issue tracking.",
-      "areas": ["unison-share", "ucm"]
-    },
+  "now": [
     {
       "title": "Redesigned update process",
       "description": "Code updates that 'Just Work', guiding users through structured refactoring sessions in response to changes.\n\nMore intelligent merge algorithms.",
       "areas": ["ucm"]
     },
     {
-      "title": "Stateful Unison Cloud microservices",
-      "description": "Stateful services using Unison-native storage, without manual serialization code to/from a datastore.",
+      "title": "JIT compiler: milestone 1",
+      "description": "Compile Unison to native code.\n\nInitial milestone is being able to compile enough of the language to power the backend of Unison Cloud.",
+      "areas": ["runtime", "performance"]
+    },
+    {
+      "title": "Unison Cloud WebSocket support",
+      "description": "Easy deployment of WebSocket services on Unison Cloud.",
       "areas": ["cloud", "services"]
+    },
+  ],
+  "next": [
+    {
+      "title": "Unison + Unison Cloud general availability",
+      "description": "Polish, additional testing, bugfixes, and improved documentation in preparation for GA.",
+      "areas": ["ucm", "cloud"]
+    },
+    {
+      "title": "Projects: merge requests and issue tracking",
+      "description": "Support for creating and commenting on merge requests.\n\nStructural, hyperlinked diffs and code comments.\n\nBasic issue tracking.",
+      "areas": ["unison-share", "ucm"]
     }
   ],
   "later": [
@@ -62,11 +74,6 @@
       "title": "Extensible records",
       "description": "Support for extensible records; an extension to the syntax and the type system.",
       "areas": ["core-language"]
-    },
-    {
-      "title": "Advent of Cloud and Unison Cloud public beta",
-      "description": "Unison Cloud open to all users, with supporting learning materials.",
-      "areas": ["cloud"]
     }
   ]
 }
