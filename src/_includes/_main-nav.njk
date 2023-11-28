@@ -10,12 +10,15 @@
   </a>
   <div class="navs">
     <section id="primary-nav">
-      <a href="/learn" {% if '/learn' in page.url %}aria-current="page"{% endif %}>Learn</a>
+      <a href="/docs" {% if '/docs' in page.url %}aria-current="page"{% endif %}>Docs</a>
       <a href="/community" {% if '/community' in page.url %}aria-current="page"{% endif %}>Community</a>
       <a href="https://share.unison-lang.org" target="_blank" class="tooltip-trigger" data-tooltip-content-id="unison-share-tooltip">
         Ecosystem
       </a>
       <a href="/roadmap" {% if '/roadmap' in page.url %}aria-current="page"{% endif %}>Roadmap</a>
+      <a href="https://unison.cloud" target="_blank" class="tooltip-trigger" data-tooltip-content-id="unison-cloud-tooltip">
+        Cloud
+      </a>
       <div id="autocomplete">
         <button class="toggle button small contained default content-icon-then-label">
           <span class="icon icon-search">
@@ -35,7 +38,7 @@
     </section>
 
     <section id="secondary-nav">
-      <a href="/whats-new" {% if '/whats-new' in page.url %}aria-current="page"{% endif %}>Whats new?</a>
+      <a href="/blog" {% if '/blog' in page.url %}aria-current="page"{% endif %}>Blog</a>
       <div class="social-links">
         <a href="https://unison-lang.org/slack" target="_blank">
           <span class="icon icon-slack" title="Unison Slack">
@@ -74,5 +77,8 @@
   </div>
   <div id="unison-share-tooltip" class="tooltip-content" style="display: none">
     Browse and host code on Unison Share
+  </div>
+  <div id="unison-cloud-tooltip" class="tooltip-content" style="display: none">
+    Deploy servers to Unison Cloud
   </div>
 </nav>

@@ -33,9 +33,9 @@ function build() {
   console.log(" * Removing old artifacts");
 
   rm("./build", { recursive: true, force: true })
-    .then(() => rm("./src/learn", { recursive: true, force: true }))
+    .then(() => rm("./src/docs", { recursive: true, force: true }))
     .then(() => rm("./src/articles", { recursive: true, force: true }))
-    .then(() => rm("./src/whats-new/posts", { recursive: true, force: true }))
+    .then(() => rm("./src/blog/posts", { recursive: true, force: true }))
     .then(() => rm("./src/community", { recursive: true, force: true }))
     .then(() => rm("./src/jobs", { recursive: true, force: true }))
     .then(() => rm("./src/talks", { recursive: true, force: true }))
@@ -44,7 +44,7 @@ function build() {
     .then(() => rm("./src/home/_examples.html", { force: true }))
     .then(() => rm("./src/_includes/_home-examples.njk", { force: true }))
     .then(() =>
-      rm("./src/_includes/_learn-sidebar-content.njk", { force: true })
+      rm("./src/_includes/_docs-sidebar-content.njk", { force: true })
     )
     .then(() => console.log(" * Running transcript"))
     .then(() => mkdir("./build"))
@@ -76,23 +76,23 @@ function build() {
         }
       })
     )
-    // -- Learn ----------------------------------------------------------------
-    .then(() => console.log(" * Building /learn"))
-    .then(() => mkdir("./src/learn"))
+    // -- docs ----------------------------------------------------------------
+    .then(() => console.log(" * Building /docs"))
+    .then(() => mkdir("./src/docs"))
     .then(() =>
       copy(
-        "./build/learn/_sidebar.html",
-        "./src/_includes/_learn-sidebar-content.njk"
+        "./build/docs/_sidebar.html",
+        "./src/_includes/_docs-sidebar-content.njk"
       ).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
-        transformLearnSidebar(src, dest, false);
+        transformdocsSidebar(src, dest, false);
       })
     )
     .then(() =>
-      copy("./build/learn", "./src/learn", {
+      copy("./build/docs", "./src/docs", {
         rename: kebabCase,
       }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
         if (!isFragment(dest) && !isGlossary(dest)) {
-          transformLearnFile(src, dest);
+          transformdocsFile(src, dest);
         }
       })
     )
@@ -109,16 +109,16 @@ function build() {
         }
       })
     )
-    // -- Whats New? ----------------------------------------------------------------
-    .then(() => console.log(" * Building /whats-new/posts"))
-    .then(() => mkdir("./src/whats-new/posts"))
+    // -- Blog ----------------------------------------------------------------
+    .then(() => console.log(" * Building /blog/posts"))
+    .then(() => mkdir("./src/blog/posts"))
     .then(() =>
-      copy("./build/whats-new", "./src/whats-new/posts", {
+      copy("./build/blog", "./src/blog/posts", {
         rename: kebabCase,
       }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
         const fileName = path.basename(dest);
         if (fileName.startsWith("index")) {
-          transformWhatsNewFile(src, dest);
+          transformBlogFile(src, dest);
         }
       })
     )
@@ -238,12 +238,12 @@ function transformPageFile(_src, dest) {
   fs.writeFileSync(dest, content);
 }
 
-// -- Learn
+// -- docs
 
-function transformLearnSidebar(_src, dest) {
+function transformdocsSidebar(_src, dest) {
   let content = updateContent(
     null,
-    "/learn",
+    "/docs",
     fs.readFileSync(dest, { encoding: "utf-8" })
   );
 
@@ -265,20 +265,20 @@ function transformLearnSidebar(_src, dest) {
   fs.writeFileSync(dest, content);
 }
 
-function transformLearnFile(_src, dest, includeFrontMatter = true) {
+function transformdocsFile(_src, dest, includeFrontMatter = true) {
   let frontmatter = null;
 
   if (includeFrontMatter) {
     frontmatter = {
-      tags: "learn",
-      overallTitle: "Learn Unison",
-      layout: "learn.njk",
+      tags: "docs",
+      overallTitle: "docs Unison",
+      layout: "docs.njk",
     };
   }
 
   const content = updateContent(
     frontmatter,
-    "/learn",
+    "/docs",
     fs.readFileSync(dest, { encoding: "utf-8" })
   );
 
@@ -386,12 +386,12 @@ function transformArticleFile(src, dest) {
   fs.writeFileSync(dest, content);
 }
 
-// -- Whats New
+// -- Blog
 
-function transformWhatsNewFile(_src, dest) {
+function transformBlogFile(_src, dest) {
   const frontmatter = {
-    tags: "whats-new",
-    layout: "whats-new-post.njk",
+    tags: "blog",
+    layout: "blog-post.njk",
     permalink: dest.replace("src/", "").replace("/posts", ""),
   };
 

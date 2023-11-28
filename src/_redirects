@@ -7,23 +7,25 @@
 
 
 # -- aliases --
-/learn/faq                    /learn/usage-topics/general-faqs/
-/learn/abilities              /learn/fundamentals/abilities/
-/learn/fundamentals/abilities/mental-model/ /learn/fundamentals/abilities/
-/learn/structured-find        https://share.unison-lang.org/@unison/base/code/main/latest/types/reflection/Rewrites
+/docs/faq                    /docs/usage-topics/general-faqs/
+/docs/abilities              /docs/fundamentals/abilities/
+/docs/fundamentals/abilities/mental-model/ /docs/fundamentals/abilities/
+/docs/structured-find        https://share.unison-lang.org/@unison/base/code/main/latest/types/reflection/Rewrites
 
 # -- old website support --
 /unisoncomputing              /unison-computing
-/docs/abilities               /learn/fundamentals/abilities/
-/docs/documentation           /learn/usage-topics/documentation/
-/docs/language-reference      /learn/language-reference/top-level-declaration/
-/docs/testing                 /learn/usage-topics/testing/
-/docs/configuration           /learn/tooling/configuration/
-/docs/commands                /learn/ucm-commands/
-/docs/transcripts             /learn/tooling/transcripts/
-/docs/codebase-organization   /learn
-/docs/refactoring             /learn
-/docs/bibliography            /learn
+/docs/abilities               /docs/fundamentals/abilities/
+/docs/documentation           /docs/usage-topics/documentation/
+/docs/language-reference      /docs/language-reference/top-level-declaration/
+/docs/testing                 /docs/usage-topics/testing/
+/docs/configuration           /docs/tooling/configuration/
+/docs/commands                /docs/ucm-commands/
+/docs/transcripts             /docs/tooling/transcripts/
+/docs/codebase-organization   /docs
+/docs/refactoring             /docs
+/docs/bibliography            /docs
 /docs/libraries               https://share.unison-lang.org
-/docs/*                       /learn/:splat
-/blog/*                       /whats-new/:splat
+
+# -- recent rename (dec 2023) --
+/learn/*                      /docs/:splat
+/whats-new/*                  /blog/:splat

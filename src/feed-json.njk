@@ -3,9 +3,9 @@
   "permalink": "feed.json",
   "eleventyExcludeFromCollections": true,
   "metadata": {
-    "title": "Unison Language | Whats New?",
+    "title": "Unison Language | Blog",
     "language": "en",
-    "url": "https://www.unison-lang.org/whats-new"
+    "url": "https://www.unison-lang.org/blog"
   }
 }
 ---
@@ -16,7 +16,7 @@
   "home_page_url": "{{ metadata.url }}",
   "feed_url": "{{ permalink | absoluteUrl(metadata.url) }}",
   "items": [
-    {%- for post in collections["whats-new"] | reverse %}
+    {%- for post in collections["blog"] | reverse %}
     {%- set absolutePostUrl = post.url | absoluteUrl(metadata.url) %}
     {
       "id": "{{ absolutePostUrl }}",
