@@ -1,9 +1,9 @@
-main#learn {
+main#docs {
   --main-content-width: 50rem;
   margin: auto;
 }
 
-main#learn #toggle-index {
+main#docs #toggle-index {
   position: absolute;
   width: 2rem;
   height: 2rem;
@@ -14,17 +14,17 @@ main#learn #toggle-index {
   justify-content: center;
 }
 
-main#learn #toggle-index .icon {
+main#docs #toggle-index .icon {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-main#learn #toggle-index .icon svg {
+main#docs #toggle-index .icon svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-main#learn #title {
+main#docs #title {
   letter-spacing: 0.1rem;
   font-size: 2.2rem;
   margin: 0rem 0 2rem 0;
@@ -34,7 +34,7 @@ main#learn #title {
   color: var(--color-gray-darken-10);
 }
 
-main#learn #index {
+main#docs #index {
   position: absolute;
   left: 0;
   width: 18.5rem;
@@ -47,17 +47,17 @@ main#learn #index {
   border-radius: var(--border-radius-base);
 }
 
-main#learn #index .unison-doc {
+main#docs #index .unison-doc {
   color: var(--color-gray-lighten-20);
   font-size: var(--font-size-medium);
   background: var(--color-gray-lighten-60);
 }
 
-main#learn #index section {
+main#docs #index section {
   margin-top: 0;
 }
 
-main#learn #index h1 {
+main#docs #index h1 {
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
@@ -66,55 +66,55 @@ main#learn #index h1 {
   transition: all 0.2s;
 }
 
-main#learn #index h1 .icon {
+main#docs #index h1 .icon {
   font-size: 1.125rem;
   color: var(--color-gray-lighten-20);
 }
 
-main#learn #index .is-expanded h1 {
+main#docs #index .is-expanded h1 {
   color: var(--color-gray-darken-20);
 }
 
-main#learn #index .is-expanded h1 .icon {
+main#docs #index .is-expanded h1 .icon {
   color: var(--color-gray-darken-20);
 }
 
-main#learn #index .is-expanded h1 .icon {
+main#docs #index .is-expanded h1 .icon {
   transform: rotate(90deg);
 }
 
-main#learn #index h1:hover {
+main#docs #index h1:hover {
   color: var(--color-pink-1);
 }
 
-main#learn #index h1:hover .icon {
+main#docs #index h1:hover .icon {
   color: var(--color-pink-2);
 }
 
-main#learn #index ul {
+main#docs #index ul {
   list-style-type: none;
   margin-left: 0;
   margin-bottom: 1rem;
 }
 
-main#learn #index ul li {
+main#docs #index ul li {
   margin-bottom: 0.25rem;
 }
 
-main#learn #index a {
+main#docs #index a {
   color: var(--color-main-fg);
 }
 
-main#learn #index a:hover {
+main#docs #index a:hover {
   color: var(--color-pink-1);
 }
 
-main#learn #index a[aria-current] {
+main#docs #index a[aria-current] {
   color: var(--color-gray-darken-30);
   font-weight: bold;
 }
 
-main#learn #index a[aria-current]:before {
+main#docs #index a[aria-current]:before {
   position: absolute;
   left: -1rem;
   content: " ";
@@ -124,62 +124,62 @@ main#learn #index a[aria-current]:before {
   border-radius: var(--border-radius-base);
 }
 
-main#learn #index ul {
+main#docs #index ul {
   display: none;
 }
 
-main#learn #index .is-expanded ul {
+main#docs #index .is-expanded ul {
   display: block;
 }
 
-main#learn #index .is-expanded > ul > li {
+main#docs #index .is-expanded > ul > li {
   margin-left: 0.5rem;
 }
 
-main#learn #index section > ul > li {
+main#docs #index section > ul > li {
   margin-left: 1rem;
 }
-main#learn #index ul.column ul {
+main#docs #index ul.column ul {
   margin-left: 1rem;
 }
 
-main#learn #index .welcome {
+main#docs #index .welcome {
   margin-bottom: 2rem;
 }
 
-main#learn #index .welcome h1 {
+main#docs #index .welcome h1 {
   display: none;
 }
 
-main#learn #index .welcome ul {
+main#docs #index .welcome ul {
   display: block;
 }
 
-main#learn #index .welcome ul li {
+main#docs #index .welcome ul li {
   margin-left: 0;
 }
 
-main#learn .where-to-next {
+main#docs .where-to-next {
   border-top: 1px solid var(--color-main-divider);
   margin-top: 2.5rem;
 }
-main#learn .where-to-next h2 {
+main#docs .where-to-next h2 {
   margin-bottom: 1rem;
 }
 
 @media only screen and (max-width: 1439px) {
-  main#learn #main-content {
+  main#docs #main-content {
     position: static;
   }
 
-  main#learn #toggle-index {
+  main#docs #toggle-index {
     display: flex;
     left: 2rem;
     top: calc(var(--main-header-height) + var(--main-content-top-margin));
     margin-top: 0.35rem;
   }
 
-  main#learn #index {
+  main#docs #index {
     position: absolute;
     top: calc(var(--main-header-height) + var(--main-content-top-margin));
     margin-top: 0.35rem;
@@ -193,48 +193,48 @@ main#learn .where-to-next h2 {
     display: none;
   }
 
-  main#learn.show-index #index {
+  main#docs.show-index #index {
     display: block;
   }
 
-  main#learn #index .unison-doc {
+  main#docs #index .unison-doc {
     background: var(--color-gray-lighten-50);
   }
 }
 
 @media only screen and (max-width: 1264px) {
-  main#learn #toggle-index {
+  main#docs #toggle-index {
     left: 1rem;
   }
 
-  main#learn #index {
+  main#docs #index {
     left: 3.5rem;
   }
 }
 
 @media only screen and (max-width: 1110px) {
-  main#learn #toggle-index {
+  main#docs #toggle-index {
     left: 2rem;
     top: 0.25rem;
   }
 
-  main#learn #index {
+  main#docs #index {
     left: 2rem;
     top: 3rem;
   }
 }
 
 @media only screen and (max-width: 960px) {
-  main#learn {
+  main#docs {
     --main-content-width: 100vw;
   }
 
-  main#learn #toggle-index {
+  main#docs #toggle-index {
     left: 1rem;
     top: 0.75rem;
   }
 
-  main#learn #index {
+  main#docs #index {
     left: 1rem;
     top: 3.5rem;
     bottom: 1rem;
@@ -242,7 +242,7 @@ main#learn .where-to-next h2 {
 }
 
 @media only screen and (max-width: 600px) {
-  main#learn #index {
+  main#docs #index {
     width: calc(100vw - 2rem);
   }
 }

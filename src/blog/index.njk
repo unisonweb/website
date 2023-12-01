@@ -1,9 +1,9 @@
 ---
-layout: "whats-new-index"
+layout: "blog-index"
 ---
 
 <div class="post-summaries">
-  {%- for p in collections['whats-new'] | reverse -%}
+  {%- for p in collections['blog'] | reverse -%}
     <a href="{{p.url}}" class="card contained">
       <header>
           {% if p.data.featuredImage %}

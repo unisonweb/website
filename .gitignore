@@ -9,10 +9,9 @@ scratch.u
 # Learn, articles, and sidebar content are pre-built in build and copied
 # into src. They do not belong in the git repository as files, since their
 # source exists in the codebase
-src/learn
+src/docs
 src/articles
 src/blog/posts
-src/whats-new/posts
 src/pages
 src/home
 src/community

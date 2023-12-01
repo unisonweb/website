@@ -7,7 +7,7 @@
 
   // Event handler setup
 
-  [...all("main#learn #index a")].forEach((a) => {
+  [...all("main#docs #index a")].forEach((a) => {
     if (a.href + "/" === currentUrl) {
       a.setAttribute("aria-current", "page");
       const section = a.closest("section");
@@ -19,9 +19,9 @@
     }
   });
 
-  [...all("main#learn #index h1")].forEach((h1) => {
+  [...all("main#docs #index h1")].forEach((h1) => {
     h1.addEventListener("click", () => {
-      [...all("main#learn #index .is-expanded")].forEach((n) => {
+      [...all("main#docs #index .is-expanded")].forEach((n) => {
         if (n !== h1.parentNode) {
           n.classList.remove("is-expanded");
         }
@@ -47,7 +47,7 @@
   });
 
   one("#toggle-index").addEventListener("click", () => {
-    one("main#learn")?.classList.toggle("show-index");
+    one("main#docs")?.classList.toggle("show-index");
   });
 
   function renderDocFragment(url) {

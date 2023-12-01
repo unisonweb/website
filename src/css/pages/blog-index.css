@@ -1,8 +1,8 @@
-#whats-new-index {
+#blog-index {
   --main-content-width: 64rem;
 }
 
-#whats-new-index .post-summaries {
+#blog-index .post-summaries {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -11,22 +11,22 @@
   padding-left: 2rem;
 }
 
-#whats-new-index .post-summaries .card {
+#blog-index .post-summaries .card {
   width: calc(50% - 2rem);
   transition: all 0.2s;
 }
 
-#whats-new-index .post-summaries .card:hover {
+#blog-index .post-summaries .card:hover {
   background: var(--color-gray-lighten-50);
   text-decoration: none;
 }
 
-#whats-new-index .post-summaries .card img {
+#blog-index .post-summaries .card img {
   margin-bottom: 1rem;
   border-radius: 0.5rem;
 }
 
-#whats-new-index .post-summaries .card .categories {
+#blog-index .post-summaries .card .categories {
   display: flex;
   flex-direction: row;
   gap: 0.25rem;
@@ -36,24 +36,24 @@
   margin-bottom: 0.5rem;
 }
 
-#whats-new-index .categories .category:after {
+#blog-index .categories .category:after {
   content: ", ";
 }
 
-#whats-new-index .categories .category:last-child:after {
+#blog-index .categories .category:last-child:after {
   content: "";
 }
 
-#whats-new-index .post-summaries .card h2 {
+#blog-index .post-summaries .card h2 {
   font-size: 1.3rem;
   line-height: 1.3;
 }
 
-#whats-new-index .post-summaries .card p {
+#blog-index .post-summaries .card p {
   font-size: var(--font-size-medium);
 }
 
-#whats-new-index .post-summaries .card footer {
+#blog-index .post-summaries .card footer {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
@@ -61,7 +61,7 @@
   color: var(--color-main-subtle-fg-em);
 }
 
-#whats-new-index .post-summaries .card footer .authors {
+#blog-index .post-summaries .card footer .authors {
   padding-right: 0.5rem;
   border-right: 1px solid var(--color-main-border);
   color: var(--color-main-fg);
@@ -69,30 +69,30 @@
   gap: 0.25rem;
 }
 
-#whats-new-index .post-summaries .authors .author:after {
+#blog-index .post-summaries .authors .author:after {
   content: ", ";
 }
-#whats-new-index .post-summaries .authors .author:last-child:after {
+#blog-index .post-summaries .authors .author:last-child:after {
   content: "";
 }
 
-#whats-new-index .post-summaries .card:first-child h2 {
+#blog-index .post-summaries .card:first-child h2 {
   color: var(--color-pink-1);
 }
 
 @media only screen and (max-width: 1264px) {
-  #whats-new-index {
+  #blog-index {
     --main-footer-height: 6rem;
     --main-content-width: 100vw;
   }
 
-  #whats-new-index #main-content {
+  #blog-index #main-content {
     padding: 0 1.5rem;
   }
 }
 
 @media only screen and (max-width: 768px) {
-  #whats-new-index .post-summaries .card {
+  #blog-index .post-summaries .card {
     width: 100%;
   }
 }

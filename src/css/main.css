@@ -89,7 +89,7 @@ main#home {
   grid-template-areas: "main-header" "main-content";
 }
 
-main#learn {
+main#docs {
   grid-template-columns: auto;
   grid-template-areas: "main-header" "main-content";
 }
@@ -104,12 +104,12 @@ main#page {
   grid-template-areas: "main-header" "main-content";
 }
 
-main#whats-new-index {
+main#blog-index {
   grid-template-columns: auto;
   grid-template-areas: "main-header" "main-content";
 }
 
-main#whats-new-post {
+main#blog-post {
   grid-template-columns: auto;
   grid-template-areas: "main-header" "main-content";
 }
