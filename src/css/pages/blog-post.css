@@ -1,5 +1,5 @@
 #blog-post {
-  --main-content-width: 64rem;
+  --main-content-width: min(100vw, 64rem);
 }
 
 #blog-post #main-content video {
@@ -79,23 +79,6 @@
 
 #blog-post .post-header,
 #blog-post .unison-doc {
-  width: 50rem;
+  width: min(100%, 50rem);
   margin: auto;
-}
-
-@media only screen and (max-width: 1264px) {
-  #blog-post {
-    --main-footer-height: 6rem;
-    --main-content-width: 100vw;
-  }
-
-  #blog-post #main-content {
-    padding: 0 1.5rem;
-    margin-left: 0;
-  }
-
-  #blog-post .post-header,
-  #blog-post .unison-doc {
-    width: 100%;
-  }
 }
