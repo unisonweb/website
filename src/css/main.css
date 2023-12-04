@@ -133,6 +133,11 @@ main#blog-post {
   display: flex;
 }
 
+#main-header nav .cloud.tooltip-trigger .tooltip {
+  left: -80px;
+  transform: none;
+}
+
 #main-header nav .navs {
   display: flex;
   flex: 1;
