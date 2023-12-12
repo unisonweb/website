@@ -506,7 +506,7 @@ body.modal-open {
   }
 
   #main-header nav section {
-    gap: 0.5rem;
+    gap: 0rem;
   }
 
   #main-footer {
