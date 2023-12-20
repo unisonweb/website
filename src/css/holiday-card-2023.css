@@ -1,0 +1,212 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(/assets/holiday-card-2023/BackgroundNight.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-color: rgb(31, 48, 78);
+  padding: 0;
+  margin: 0;
+  font-family: 'Single Day', cursive;
+  font-family: 'Satisfy', cursive;
+  font-family: 'Jim Nightshade', cursive;
+  font-family: 'Dancing Script', cursive;
+  font-family: 'Caveat', cursive;
+  font-family: 'Borel', cursive;
+  font-size: 1.5rem;
+  color: #5F4322;
+}
+
+a, a:visited {
+  color: #5F4322;
+  text-decoration: underline;
+  text-underline-offset: 0.15rem;
+}
+
+/* cloud container section */
+#stars-top {
+  background-size: cover;
+  width: 100%;
+}
+
+.cloud-container {
+  height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.cloud {
+  position: absolute;
+}
+
+#moon-1 {
+  transform: translate(0, 0);
+  width: 100%;
+  height: auto;
+}
+
+#santa-1 {
+  transform: translate(0, 0);
+  width: 100%;
+  height: auto;
+}
+
+#cloud-1 {
+  background-size: cover;
+  width: auto;
+  height: 100%;
+}
+
+#cloud-2 {
+  background-size: cover;
+  width: auto;
+  height: 100%;
+  right: 0;
+}
+
+#cloud-5 {
+  transform: translate(-400px, 800px);
+}
+
+/* sky container section */
+
+.sky-container section {
+  background-color: #401c59;
+  height: 500px;
+  width: 800px;
+  display: block;
+  text-align: center;
+  margin: auto;
+  padding: 1em 3em;
+}
+
+.sky-container p {
+  font-family: "Corben", serif;
+  color: #cae6e4;
+  text-align: left;
+}
+
+/* ground forest section */
+
+.comet {
+  width: 100%;
+  height: auto;
+}
+
+#stars-bottom {
+  background-size: cover;
+  width: 100%;
+  height: auto;
+}
+
+.ground-container {
+  padding: 20px;
+  height: 150vh;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.ground {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.background {
+  width: 100%;
+}
+
+.left-trees {
+  left: 0;
+  will-change: transform;
+}
+
+.right-trees {
+  right: 0;
+  will-change: transform;
+}
+
+/* tree styling */
+
+.main-tree {
+  width: auto;
+  margin: auto;
+  left: -500%;
+  right: -500%;
+  background-size: cover;
+}
+.lights {
+  opacity: 0;
+}
+
+/* PRESENTS - NOT RESPONSIVE YET - HALP */
+.present {
+  width: auto;
+  margin: auto;
+  left: -500%;
+  right: -500%;
+  background-size: cover;
+}
+
+.position-present {
+  /* padding-left: 120px; */
+  position: absolute;
+  display: block;
+  margin-bottom: clamp(30px, 9%, 70px);
+  width: clamp(150px, 100%, 380px);
+  height: auto;
+}
+
+/* CARD SECTION */
+.card-container {
+  background: url(/assets/holiday-card-2023/Paper.png) no-repeat;
+  background-position: center 20px;
+  position: absolute;
+  width: 48rem;
+  padding: 8rem 7rem;
+  height: 52rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.card {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.card-text-container {
+  position: relative;
+  z-index: 12;
+  padding: 50px 150px;
+}
+
+.left-foreground {
+  left: 0;
+  pointer-events: none;
+}
+
+.right-foreground {
+  right: 0;
+  pointer-events: none;
+}
+
+h1 {
+  color: #cae6e4;
+  font-size: 3em;
+  font-family: "Corben", serif;
+  font-weight: normal;
+  text-shadow: 0 0 7px black;
+}
+h1::first-letter {
+  font-size: 5rem;
+  font-family: "Rye", serif;
+  color: #bf9d52;
+}
