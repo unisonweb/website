@@ -26,6 +26,25 @@ a, a:visited {
   text-underline-offset: 0.15rem;
 }
 
+.happy-holidays {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.8;
+  filter: blur(0.5px);
+}
+
+.happy-holidays.main-title {
+  padding-top: 4rem;
+  filter: brightness(100) blur(0.6px);
+  opacity: 0.6;
+}
+
+.happy-holidays img {
+  width: 32rem;
+}
+
 /* cloud container section */
 #stars-top {
   background-size: cover;
@@ -53,6 +72,7 @@ a, a:visited {
   transform: translate(0, 0);
   width: 100%;
   height: auto;
+  filter: blur(1px);
 }
 
 #cloud-1 {
