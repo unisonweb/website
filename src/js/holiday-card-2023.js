@@ -1,14 +1,7 @@
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Timeline } from "gsap/gsap-core";
-
-import submissions from "../submissions.json";
-
 const one = document.querySelector.bind(document);
 const all = document.querySelectorAll.bind(document);
 
 gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(Timeline);
 
 // ~*~*~*~*~*~*~*~ SKY ELEMENTS SCROLL TIMELINE ~*~*~*~*~*~*~*~
 

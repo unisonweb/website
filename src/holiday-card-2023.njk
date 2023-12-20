@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="en">
   <head>
     <link
@@ -165,8 +166,16 @@
 
         <h2>Advent of Code Highlights</h2>
 
-        Day 1 : 
-         * `@userLink`'s writeup
+        {%- for day, submissions in aoc2023 %}
+          <div>{{day}}</div>
+          {%- for submission in submissions %}
+            <div>
+              <a href="{{submission.readmeURL}}" target="_blank">
+                {{submission.shareHandle}}
+              </a>
+            </div>
+          {%- endfor -%}
+        {%- endfor -%}
       </div>
 
       <!-- Foreground details -->
@@ -181,6 +190,9 @@
         class="ground right-foreground"
       />
     </div>
-    <script type="module" src="/js/holiday-card-2023.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+    <script src="/js/holiday-card-2023.js"></script>
   </body>
 </html>
