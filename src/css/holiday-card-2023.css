@@ -10,20 +10,19 @@ body {
   background-color: rgb(31, 48, 78);
   padding: 0;
   margin: 0;
-  font-family: 'Single Day', cursive;
   font-family: 'Satisfy', cursive;
-  font-family: 'Jim Nightshade', cursive;
-  font-family: 'Dancing Script', cursive;
-  font-family: 'Borel', cursive;
-  font-family: 'Caveat', cursive;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   color: #5F4322;
 }
 
 a, a:visited {
-  color: #5F4322;
+  color: #4A3318;
   text-decoration: underline;
   text-underline-offset: 0.15rem;
+}
+
+a:hover {
+  color: #224A18;
 }
 
 .happy-holidays {
@@ -161,6 +160,7 @@ a, a:visited {
   right: -500%;
   background-size: cover;
 }
+
 .lights {
   opacity: 0;
 }
@@ -194,6 +194,20 @@ a, a:visited {
   left: 0;
   right: 0;
   margin: auto;
+}
+
+.card-container .card-text {
+  transform: rotate(-2deg);
+  padding-left: 2rem;
+  filter: blur(0.3px);
+}
+
+.card-container .happy-holidays {
+  margin-bottom: 3rem;
+}
+
+.card-container .happy-holidays img {
+  width: 12rem;
 }
 
 .card {
