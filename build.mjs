@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { mkdir, rm } from "fs/promises";
+import { mkdir, rm, writeFile } from "fs/promises";
 import { exec } from "child_process";
 import fs from "fs";
 import path from "path";
@@ -24,6 +24,8 @@ const UNISON_SHARE_BASE_URL = "https://share.unison-lang.org";
 
 // Run the build process!
 build();
+
+
 // ----------------------
 
 function build() {
@@ -31,6 +33,8 @@ function build() {
   console.log("BUILDING HTML FROM CODEBASE");
   console.log("===========================");
   console.log(" * Removing old artifacts");
+
+  const holidayCard2023 = fs.readFileSync("./src/blog/posts/holiday-card-2023/index.njk");
 
   rm("./build", { recursive: true, force: true })
     .then(() => rm("./src/docs", { recursive: true, force: true }))
@@ -112,6 +116,8 @@ function build() {
     // -- Blog ----------------------------------------------------------------
     .then(() => console.log(" * Building /blog/posts"))
     .then(() => mkdir("./src/blog/posts"))
+    .then(() => mkdir("./src/blog/posts/holiday-card-2023"))
+    .then(() => writeFile("./src/blog/posts/holida-card-2023", holidayCard2023))
     .then(() =>
       copy("./build/blog", "./src/blog/posts", {
         rename: kebabCase,
