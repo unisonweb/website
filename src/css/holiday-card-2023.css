@@ -305,6 +305,7 @@ a.back:hover {
   }
 
   .card {
+    background: url(/assets/holiday-card-2023/PaperLong.png) no-repeat;
     position: relative;
     width: 100vw;
     margin: 0 -2rem -8rem;
