@@ -2,7 +2,8 @@
   "1": [
     {
       "shareHandle": "@rlmark",
-      "readmeURL": "https://share.unison-lang.org/@rlmark/aoc2023/code/main/latest/terms/day01/README"
+      "readmeURL": "https://share.unison-lang.org/@rlmark/aoc2023/code/main/latest/terms/day01/README",
+      "blurb": "hi from json"
     }
   ],
   "3": [

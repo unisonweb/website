@@ -217,6 +217,9 @@ eleventyExcludeFromCollections: false
                   <div class="submissions">
                   {%- for submission in submissions %}
                   <div class="submission">
+                    {%- if submission.blurb %}
+                    <p class="submission-blurb">{{submission.blurb}}</p>
+                    {%- endif %}
                     {%- if submission.readmeURL %}
                     <a href="{{submission.readmeURL}}" target="_blank">
                       {{submission.shareHandle}}
