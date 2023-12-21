@@ -72,6 +72,15 @@
       ],
       "blurb": null
   },
+  "6": {
+      "submissions": [
+          {
+              "shareHandle": "@stew",
+              "readmeURL": "https://share.unison-lang.org/@stew/advent-of-code/code/main/latest/terms/day06/README"
+          }
+      ],
+      "blurb": null
+  },
   "7": {
       "submissions": [
           {
