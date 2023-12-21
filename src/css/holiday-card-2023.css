@@ -33,6 +33,7 @@ a.back {
   opacity: 0.3;
   transition: all 0.2s;
   text-decoration: none;
+  filter: blur(0.2px);
 }
 
 a.back:hover {
@@ -260,6 +261,7 @@ a.back:hover {
   gap: 1.5rem;
 }
 
+.card .day-blurb,
 .card .submissions {
   margin-left: 1.5rem;
 }

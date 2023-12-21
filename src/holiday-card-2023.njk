@@ -7,7 +7,7 @@ authors:
 categories:
   - highlights
 date: 2023-12-27T00:00:00.000Z
-featuredImage: /assets/aoc-2022.svg
+featuredImage: /assets/feed/holiday-card-2023.png
 status: published
 summary: 'We wish all of you a festive holiday season and a New Year filled with possibilities!'
 title: Happy Holidays from the Unison team
@@ -211,15 +211,15 @@ eleventyExcludeFromCollections: false
             <h2>Advent of Code Highlights</h2>
 
             <div class="days">
-            {%- for day, submissions in aoc2023 %}
+            {%- for dayName, day in aoc2023 %}
               <div class="day">
-                <div class="day-title">Day {{day}}</div>
+                <div class="day-title">Day {{dayName}}</div>
+                  {%- if day.blurb %}
+                  <p class="day-blurb">{{day.blurb}}</p>
+                  {%- endif %}
                   <div class="submissions">
-                  {%- for submission in submissions %}
+                  {%- for submission in day.submissions %}
                   <div class="submission">
-                    {%- if submission.blurb %}
-                    <p class="submission-blurb">{{submission.blurb}}</p>
-                    {%- endif %}
                     {%- if submission.readmeURL %}
                     <a href="{{submission.readmeURL}}" target="_blank">
                       {{submission.shareHandle}}
