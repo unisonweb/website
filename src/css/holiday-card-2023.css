@@ -10,19 +10,20 @@ body {
   background-color: rgb(31, 48, 78);
   padding: 0;
   margin: 0;
-  font-family: 'Satisfy', cursive;
+  font-family: "Satisfy", cursive;
   font-size: 1.5rem;
-  color: #5F4322;
+  color: #5f4322;
 }
 
-a, a:visited {
-  color: #4A3318;
+a,
+a:visited {
+  color: #4a3318;
   text-decoration: underline;
   text-underline-offset: 0.15rem;
 }
 
 a:hover {
-  color: #224A18;
+  color: #742222;
 }
 
 .happy-holidays {
@@ -175,63 +176,77 @@ a:hover {
   background-size: cover;
 }
 
-.position-present {
-  /* padding-left: 120px; */
-  position: absolute;
-  display: block;
-  margin-bottom: clamp(30px, 9%, 70px);
-  width: clamp(150px, 100%, 380px);
-  height: auto;
-}
-
 /* CARD SECTION */
-.card-container {
+
+.card {
   background: url(/assets/holiday-card-2023/Paper.png) no-repeat;
   background-position: center 20px;
   position: absolute;
   width: 48rem;
-  padding: 8rem 7rem;
+  padding: 8rem 4.5rem;
   height: 52rem;
   left: 0;
   right: 0;
   margin: auto;
 }
 
-.card-container .card-text {
+.card .card-content {
+  height: 40rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 0 1.5rem 8rem 2rem;
+  scrollbar-width: 0.5rem;
+  scrollbar-color: #715C44 transparent;
+}
+
+.card .card-content::-webkit-scrollbar {
+  height: 0.375rem;
+  width: 0.5rem;
+}
+
+.card .card-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card .card-content::-webkit-scrollbar-thumb {
+  background-color: #715C44;
+  border-radius: 0.25rem;
+}
+
+.card .card-text {
   transform: rotate(-2deg);
   padding-left: 2rem;
   filter: blur(0.3px);
 }
 
-.card-container .happy-holidays {
-  margin-bottom: 3rem;
+.card .happy-holidays {
+  margin-bottom: 1rem;
 }
 
-.card-container .happy-holidays img {
+.card .happy-holidays img {
   width: 12rem;
 }
 
-.card-container .unison-mark {
+.card .unison-mark {
   width: 100%;
   margin-bottom: 1rem;
 }
-.card-container .unison-mark img {
+
+.card .unison-mark img {
   width: 3rem;
   height: 3rem;
   margin: 0 auto;
   display: block;
 }
 
-.card {
-  position: absolute;
-  height: 100%;
-  width: 100%;
+.card .days {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.card-text-container {
-  position: relative;
-  z-index: 12;
-  padding: 50px 150px;
+.card .submissions {
+  margin-left: 1.5rem;
 }
 
 .left-foreground {
@@ -242,17 +257,4 @@ a:hover {
 .right-foreground {
   right: 0;
   pointer-events: none;
-}
-
-h1 {
-  color: #cae6e4;
-  font-size: 3em;
-  font-family: "Corben", serif;
-  font-weight: normal;
-  text-shadow: 0 0 7px black;
-}
-h1::first-letter {
-  font-size: 5rem;
-  font-family: "Rye", serif;
-  color: #bf9d52;
 }

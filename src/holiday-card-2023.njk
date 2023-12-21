@@ -152,58 +152,72 @@
         class="ground present present-back"
       />
 
-      <div class="ground card-container">
-        <div class="happy-holidays">
-          <img
-            src="/assets/holiday-card-2023/happy.png"
-            alt="Happy"
-          />
-          <img
-            src="/assets/holiday-card-2023/holidays.png"
-            alt="Holidays"
-          />
-        </div>
-        <div class="unison-mark">
-          <img
-            src="/assets/holiday-card-2023/UnisonRed.png"
-            alt="Unison logo"
-          />
-        </div>
-        <div class="card-text">
-          <p>
-            We wish all of you a festive holiday season and a New Year filled
-            with possibilities! Whether you've just learned about Unison or have
-            authored multiple libraries on the
-            <a href="https://share.unison-lang.org/" target="_blank">
-              front page of the Unison Share catalog
-            </a>, you’re a part of what inspires us to
-            make Unison happen. We look forward to another year of growth,
-            collaboration, and community with you all. Keep creating and sharing!
-          </p>
-          <p>
-            This month many of the Unison community members participated in the
-            <a href="https://adventofcode.com" target="_blank">Advent of Code</a>.
-            Our community spaces have been filled with folks sharing tips,
-            solutions, and written explainers of their implementations. We want
-            to highlight our community's commitment to learning and generosity by
-            sharing some of the work they’ve done over the month (this list is
-            backed by a Unison Cloud service!) Many forayed into new parts of the
-            standard library and their Readme’s stand alone as tutorials in their
-            own right! Enjoy!
-          </p>
+      <div class="ground card">
+        <div class="card-content">
+          <div class="happy-holidays">
+            <img
+              src="/assets/holiday-card-2023/happy.png"
+              alt="Happy"
+            />
+            <img
+              src="/assets/holiday-card-2023/holidays.png"
+              alt="Holidays"
+            />
+          </div>
+          <div class="unison-mark">
+            <img
+              src="/assets/holiday-card-2023/UnisonRed.png"
+              alt="Unison logo"
+            />
+          </div>
+          <div class="card-text">
+            <p>
+              We wish all of you a festive holiday season and a New Year filled
+              with possibilities! Whether you've just learned about Unison or have
+              authored multiple libraries on the
+              <a href="https://share.unison-lang.org/" target="_blank">
+                front page of the Unison Share catalog
+              </a>, you’re a part of what inspires us to
+              make Unison happen. We look forward to another year of growth,
+              collaboration, and community with you all. Keep creating and sharing!
+            </p>
+            <p>
+              This month many of the Unison community members participated in the
+              <a href="https://adventofcode.com" target="_blank">Advent of Code</a>.
+              Our community spaces have been filled with folks sharing tips,
+              solutions, and written explainers of their implementations. We want
+              to highlight our community's commitment to learning and generosity by
+              sharing some of the work they’ve done over the month (this list is
+              backed by a Unison Cloud service!) Many forayed into new parts of the
+              standard library and their Readme’s stand alone as tutorials in their
+              own right! Enjoy!
+            </p>
 
-          <h2>Advent of Code Highlights</h2>
+            <h2>Advent of Code Highlights</h2>
 
-          {%- for day, submissions in aoc2023 %}
-            <div>Day {{day}}</div>
-            {%- for submission in submissions %}
-              <div>
-                <a href="{{submission.readmeURL}}" target="_blank">
-                  {{submission.shareHandle}}
-                </a>
+            <div class="days">
+            {%- for day, submissions in aoc2023 %}
+              <div class="day">
+                <div class="day-title">Day {{day}}</div>
+                  <div class="submissions">
+                  {%- for submission in submissions %}
+                  <div class="submission">
+                    {%- if submission.readmeURL %}
+                    <a href="{{submission.readmeURL}}" target="_blank">
+                      {{submission.shareHandle}}
+                    </a>{%- elseif submission.solutionURLs -%}{%- for solutionUrl in submission.solutionURLs %}
+                      {%- if loop.index !== 1%}, {%- endif %}
+                      <a href="{{solutionUrl}}" target="_blank">
+                        {{submission.shareHandle}}
+                        {%- if submission.solutionURLs.length > 1 %}
+                        solution #{{loop.index}}{%- endif %}</a>{%- endfor -%}{%- endif -%}
+                  </div>
+                  {%- endfor -%}
+                </div>
               </div>
             {%- endfor -%}
-          {%- endfor -%}
+            </div>
+          </div>
         </div>
       </div>
 

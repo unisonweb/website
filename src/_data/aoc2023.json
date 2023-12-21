@@ -1,32 +1,32 @@
 {
   "1": [
-      {
-          "shareHandle": "@rlmark",
-          "readmeURL": "https://share.unison-lang.org/@rlmark/aoc2023/code/main/latest/terms/day01/README"
-      }
+    {
+      "shareHandle": "@rlmark",
+      "readmeURL": "https://share.unison-lang.org/@rlmark/aoc2023/code/main/latest/terms/day01/README"
+    }
   ],
   "3": [
-      {
-          "shareHandle": "@rlmark",
-          "readmeURL": "https://share.unison-lang.org/@rlmark/aoc2023/code/main/latest/terms/day03/README"
-      },
-      {
-          "shareHandle": "@systemfw",
-          "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day03/README"
-      }
+    {
+      "shareHandle": "@rlmark",
+      "readmeURL": "https://share.unison-lang.org/@rlmark/aoc2023/code/main/latest/terms/day03/README"
+    },
+    {
+      "shareHandle": "@systemfw",
+      "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day03/README"
+    }
   ],
   "8": [
-      {
-          "shareHandle": "@mdr",
-          "solutionURLs": [
-              "https://share.unison-lang.org/@mdr/aoc-2023/code/main/latest/terms/day08/solvePart2"
-          ]
-      }
+    {
+      "shareHandle": "@mdr",
+      "solutionURLs": [
+        "https://share.unison-lang.org/@mdr/aoc-2023/code/main/latest/terms/day08/solvePart2"
+      ]
+    }
   ],
   "10": [
-      {
-          "shareHandle": "@hagl",
-          "readmeURL": "https://share.unison-lang.org/@hagl/advent-of-code-2023/code/main/latest/terms/day10/README"
-      }
+    {
+      "shareHandle": "@hagl",
+      "readmeURL": "https://share.unison-lang.org/@hagl/advent-of-code-2023/code/main/latest/terms/day10/README"
+    }
   ]
 }

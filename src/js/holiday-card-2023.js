@@ -26,20 +26,20 @@ gsap
 
 // ~*~*~*~*~*~*~*~ GROUND ELEMENTS SCROLL TIMELINE ~*~*~*~*~*~*~*~
 
-const groundScroll = {
-  trigger: ".ground-container",
-  start: "center center",
-  end: "bottom bottom",
-  normalizeScroll: true,
-  ease: "ease-in",
-  scrub: 3,
-  anticipatePin: 1,
-  // pin: true,
-  pinType: "fixed",
-};
-
 gsap
-  .timeline({ scrollTrigger: groundScroll })
+  .timeline({
+    scrollTrigger: {
+      trigger: ".ground-container",
+      start: "center center",
+      end: "bottom bottom",
+      normalizeScroll: true,
+      ease: "ease-in",
+      scrub: 3,
+      anticipatePin: 1,
+      // pin: true,
+      pinType: "fixed",
+    }
+  })
   .from(".stars", { y: innerHeight * 0.2 })
   .from(".left-front-tree", { y: innerHeight * 0.3 }, 0.1)
   .from(".right-front-tree", { y: innerHeight * 0.3 }, "<")
@@ -55,37 +55,44 @@ gsap
 
 // ~*~*~*~*~*~*~*~ MAIN TREE TIMELINE ~*~*~*~*~*~*~*~
 
-let slowScroll = {
-  trigger: ".ground-container",
-  start: "-=500",
-  end: "bottom bottom",
-  normalizeScroll: true,
-  ease: "ease-in",
-  scrub: 3,
-  anticipatePin: 1,
-};
-
-gsap
-  .timeline({ scrollTrigger: slowScroll })
+let slowScroll = gsap
+  .timeline({
+    scrollTrigger: {
+      trigger: ".ground-container",
+      start: "-=500",
+      end: "bottom bottom",
+      normalizeScroll: true,
+      ease: "ease-in",
+      scrub: 3,
+      anticipatePin: 1,
+    },
+  })
   .fromTo(
     ".comet",
     { y: -300, x: innerWidth * 1.1 },
-    { y: innerHeight * 0.8, x: -800 },
+    { y: innerHeight * 0.8, x: -800 }
   )
   .from(".main-tree", { y: innerHeight * 0.85 }, 0.5);
 
 // ~*~*~*~*~*~*~*~ CARD TIMELINE ~*~*~*~*~*~*~*~
 
-let verySlow = {
-  trigger: ".ground-container",
-  start: "-=500",
-  end: "bottom bottom",
-  normalizeScroll: true,
-  ease: "ease-in",
-  scrub: 3,
-  anticipatePin: 1,
-};
-
 gsap
-  .timeline({ scrollTrigger: verySlow })
-  .from(".card-container", { y: 10000 }, 0.5);
+  .timeline({
+    scrollTrigger: {
+      trigger: ".ground-container",
+      start: "-=500",
+      end: "bottom bottom",
+      normalizeScroll: true,
+      ease: "ease-in",
+      scrub: 3,
+      anticipatePin: 1,
+    },
+    onComplete: () => console.log("card complete"),
+  })
+  .from(".card-container", { y: innerHeight }, 4);
+
+document.addEventListener("scroll", (evt) => {
+  const rect = one('.card-container').getBoundingClientRect();
+
+  console.log("scroll", rect);
+}, false);
