@@ -1,38 +1,176 @@
 {
   "1": {
-    "blurb": "hi from json",
-    "submissions": [
-      { "shareHandle": "@rlmark", "readmeURL": "https://share.unison-lang.org/@rlmark/aoc2023/code/main/latest/terms/day01/README" }
-    ]
+      "submissions": [
+          {
+              "shareHandle": "@gfinol",
+              "readmeURL": "https://share.unison-lang.org/@gfinol/advent-of-code-2023/code/main/latest/terms/day01/README"
+          },
+          {
+              "shareHandle": "@rlmark",
+              "readmeURL": "https://share.unison-lang.org/@rlmark/aoc2023/code/main/latest/terms/day01/README"
+          }
+      ],
+      "blurb": null
+  },
+  "2": {
+      "submissions": [
+          {
+              "shareHandle": "@jcwilk",
+              "readmeURL": "https://share.unison-lang.org/@jcwilk/advent-of-code-2023/code/main/latest/terms/day02/README"
+          },
+          {
+              "shareHandle": "@kemiller",
+              "readmeURL": "https://share.unison-lang.org/@kemiller/advent-of-code-2023/code/main/latest/terms/day02/README"
+          }
+      ],
+      "blurb": null
   },
   "3": {
-    "submissions": [
-      {
-        "shareHandle": "@rlmark",
-        "readmeURL": "https://share.unison-lang.org/@rlmark/aoc2023/code/main/latest/terms/day03/README"
-      },
-      {
-        "shareHandle": "@systemfw",
-        "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day03/README"
-      }
-    ]
+      "submissions": [
+          {
+              "shareHandle": "@ceedubs",
+              "readmeURL": "https://share.unison-lang.org/@ceedubs/advent-of-code-2023/code/main/latest/terms/day03/README"
+          },
+          {
+              "shareHandle": "@systemfw",
+              "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day03/README"
+          }
+      ],
+      "blurb": null
+  },
+  "4": {
+      "submissions": [
+          {
+              "shareHandle": "@chrispenner",
+              "readmeURL": "https://share.unison-lang.org/@chrispenner/aoc/code/main/latest/namespaces/day04"
+          },
+          {
+              "shareHandle": "@kemiller",
+              "readmeURL": "https://share.unison-lang.org/@kemiller/advent-of-code-2023/code/main/latest/terms/day04/README"
+          },
+          {
+              "shareHandle": "@rlmark",
+              "readmeURL": "https://share.unison-lang.org/@rlmark/aoc2023/code/main/latest/terms/day04/README"
+          },
+          {
+              "shareHandle": "@systemfw",
+              "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day04/README"
+          }
+      ],
+      "blurb": null
+  },
+  "5": {
+      "submissions": [
+          {
+              "shareHandle": "@jcwilk",
+              "readmeURL": "https://share.unison-lang.org/@jcwilk/advent-of-code-2023/code/main/latest/terms/day05/README"
+          },
+          {
+              "shareHandle": "@systemfw",
+              "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day05/README"
+          }
+      ],
+      "blurb": null
+  },
+  "6": {
+      "submissions": [
+          {
+              "shareHandle": "@stew",
+              "readmeURL": "https://share.unison-lang.org/@stew/advent-of-code/code/main/latest/terms/day06/README"
+          }
+      ],
+      "blurb": null
+  },
+  "7": {
+      "submissions": [
+          {
+              "shareHandle": "@hagl",
+              "readmeURL": "https://share.unison-lang.org/@hagl/advent-of-code-2023/code/main/latest/terms/day07/README"
+          },
+          {
+              "shareHandle": "@systemfw",
+              "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day07/README"
+          }
+      ],
+      "blurb": null
   },
   "8": {
-    "submissions": [
-      {
-        "shareHandle": "@mdr",
-        "solutionURLs": [
-          "https://share.unison-lang.org/@mdr/aoc-2023/code/main/latest/terms/day08/solvePart2"
-        ]
-      }
-    ]
+      "submissions": [
+          {
+              "shareHandle": "@systemfw",
+              "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day08/README"
+          }
+      ],
+      "blurb": null
+  },
+  "9": {
+      "submissions": [
+          {
+              "shareHandle": "@dvberkel",
+              "readmeURL": "https://share.unison-lang.org/@dvberkel/advent-of-code-2023/code/main/latest/terms/day09/README"
+          },
+          {
+              "shareHandle": "@johanwinther",
+              "readmeURL": "https://share.unison-lang.org/@johanwinther/advent-of-code-2023/code/main/latest/namespaces/day09"
+          },
+          {
+              "shareHandle": "@kemiller",
+              "readmeURL": "https://share.unison-lang.org/@kemiller/advent-of-code-2023/code/main/latest/terms/day09/README"
+          }
+      ],
+      "blurb": null
   },
   "10": {
-    "submissions": [
-      {
-        "shareHandle": "@hagl",
-        "readmeURL": "https://share.unison-lang.org/@hagl/advent-of-code-2023/code/main/latest/terms/day10/README"
-      }
-    ]
+      "submissions": [
+          {
+              "shareHandle": "@ceedubs",
+              "readmeURL": "https://share.unison-lang.org/@ceedubs/advent-of-code-2023/code/main/latest/terms/day10/README"
+          }
+      ],
+      "blurb": null
+  },
+  "11": {
+      "submissions": [
+          {
+              "shareHandle": "@hagl",
+              "readmeURL": "https://share.unison-lang.org/@hagl/advent-of-code-2023/code/main/latest/terms/day11/README"
+          },
+          {
+              "shareHandle": "@systemfw",
+              "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day11/README"
+          }
+      ],
+      "blurb": null
+  },
+  "12": {
+      "submissions": [
+          {
+              "shareHandle": "@hagl",
+              "readmeURL": "https://share.unison-lang.org/@hagl/advent-of-code-2023/code/main/latest/terms/day12/README"
+          },
+          {
+              "shareHandle": "@systemfw",
+              "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day12/README"
+          }
+      ],
+      "blurb": null
+  },
+  "13": {
+      "submissions": [
+          {
+              "shareHandle": "@systemfw",
+              "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day13/README"
+          }
+      ],
+      "blurb": null
+  },
+  "14": {
+      "submissions": [
+          {
+              "shareHandle": "@systemfw",
+              "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day14/README"
+          }
+      ],
+      "blurb": null
   }
 }
