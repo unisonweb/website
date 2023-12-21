@@ -12,6 +12,7 @@ scratch.u
 src/docs
 src/articles
 src/blog/posts
+!src/blog/posts/holiday-card-2023
 src/pages
 src/home
 src/community
