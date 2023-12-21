@@ -4,12 +4,11 @@ const all = document.querySelectorAll.bind(document);
 gsap.registerPlugin(ScrollTrigger);
 
 // ~*~*~*~*~*~*~*~ SKY ELEMENTS SCROLL TIMELINE ~*~*~*~*~*~*~*~
-
 gsap
   .timeline({
     scrollTrigger: {
       trigger: ".cloud-container",
-      start: "center center",
+      start: "top center",
       end: "bottom top",
       ease: "ease-in",
       scrub: 3,
@@ -51,7 +50,6 @@ gsap
   .from(".lt-bkground", { y: innerHeight * 0.3 }, 0.2)
   .from(".left-foreground", { y: innerHeight * 0.2 }, 0.1)
   .from(".right-foreground", { y: innerHeight * 0.2 }, "<")
-  .from(".present-back", { y: innerHeight * 0.25 }, 2);
 
 // ~*~*~*~*~*~*~*~ MAIN TREE TIMELINE ~*~*~*~*~*~*~*~
 
@@ -72,27 +70,7 @@ let slowScroll = gsap
     { y: -300, x: innerWidth * 1.1 },
     { y: innerHeight * 0.8, x: -800 }
   )
-  .from(".main-tree", { y: innerHeight * 0.85 }, 0.5);
+  .from(".main-tree", { y: innerHeight * 0.85 }, 2)
+  .from(".present-back", { y: innerHeight * 0.85 }, 2.3)
+  .from(".card", { y: innerHeight }, 2.5);
 
-// ~*~*~*~*~*~*~*~ CARD TIMELINE ~*~*~*~*~*~*~*~
-
-gsap
-  .timeline({
-    scrollTrigger: {
-      trigger: ".ground-container",
-      start: "-=500",
-      end: "bottom bottom",
-      normalizeScroll: true,
-      ease: "ease-in",
-      scrub: 3,
-      anticipatePin: 1,
-    },
-    onComplete: () => console.log("card complete"),
-  })
-  .from(".card-container", { y: innerHeight }, 4);
-
-document.addEventListener("scroll", (evt) => {
-  const rect = one('.card-container').getBoundingClientRect();
-
-  console.log("scroll", rect);
-}, false);

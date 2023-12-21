@@ -169,10 +169,10 @@ a.back:hover {
 /* tree styling */
 
 .main-tree {
+  left: -500%;
+  right: -540%;
   width: auto;
   margin: auto;
-  left: -500%;
-  right: -500%;
   background-size: cover;
 }
 
@@ -185,7 +185,7 @@ a.back:hover {
   width: auto;
   margin: auto;
   left: -500%;
-  right: -500%;
+  right: -530%;
   background-size: cover;
 }
 
@@ -196,18 +196,20 @@ a.back:hover {
   background-position: center 20px;
   position: absolute;
   width: 48rem;
-  padding: 8rem 4.5rem;
-  height: 52rem;
-  left: 0;
+  padding: 8rem 4.5rem 0 4.5rem;
+  height: 58rem;
+  bottom: 0;
+  left: -40%;
   right: 0;
   margin: auto;
+  z-index: 100;
 }
 
 .card .card-content {
-  height: 40rem;
+  height: 44rem;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 0 1.5rem 8rem 2rem;
+  padding: 0 1.5rem 2.5rem 2rem;
   scrollbar-width: 0.5rem;
   scrollbar-color: #715C44 transparent;
 }
@@ -268,6 +270,20 @@ a.back:hover {
 }
 
 .right-foreground {
-  right: 0;
+  right: -10%;
   pointer-events: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .left-foreground, .right-foreground, .left-trees, .right-trees {
+    display: none !important;
+  }
+
+  .card {
+    left: 0;
+  }
+
+  .main-tree, .present {
+    right: -500%;
+  }
 }
