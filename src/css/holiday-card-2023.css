@@ -135,6 +135,7 @@ a:hover {
   position: absolute;
   right: 0;
   bottom: 0;
+  will-change: transform;
 }
 
 .background {
@@ -208,6 +209,17 @@ a:hover {
 
 .card-container .happy-holidays img {
   width: 12rem;
+}
+
+.card-container .unison-mark {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.card-container .unison-mark img {
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto;
+  display: block;
 }
 
 .card {

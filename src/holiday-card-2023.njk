@@ -163,6 +163,12 @@
             alt="Holidays"
           />
         </div>
+        <div class="unison-mark">
+          <img
+            src="/assets/holiday-card-2023/UnisonRed.png"
+            alt="Unison logo"
+          />
+        </div>
         <div class="card-text">
           <p>
             We wish all of you a festive holiday season and a New Year filled
@@ -189,7 +195,7 @@
           <h2>Advent of Code Highlights</h2>
 
           {%- for day, submissions in aoc2023 %}
-            <div>{{day}}</div>
+            <div>Day {{day}}</div>
             {%- for submission in submissions %}
               <div>
                 <a href="{{submission.readmeURL}}" target="_blank">
