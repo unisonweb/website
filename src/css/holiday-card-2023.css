@@ -26,6 +26,19 @@ a:hover {
   color: #742222;
 }
 
+a.back {
+  padding: 2rem;
+  display: flex;
+  color: #fff;
+  opacity: 0.3;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+a.back:hover {
+  opacity: 0.8;
+}
+
 .happy-holidays {
   margin: auto;
   display: flex;
