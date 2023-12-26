@@ -230,7 +230,7 @@ a.back:hover {
 }
 
 .card .card-text {
-  transform: rotate(-2deg);
+  /* transform: rotate(-2deg); */
   padding-left: 2rem;
   filter: blur(0.3px);
 }
