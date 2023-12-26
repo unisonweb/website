@@ -1,0 +1,176 @@
+{
+  "1": {
+    "submissions": [
+      {
+        "shareHandle": "@gfinol",
+        "readmeURL": "https://share.unison-lang.org/@gfinol/advent-of-code-2023/code/main/latest/terms/day01/README"
+      },
+      {
+        "shareHandle": "@rlmark",
+        "readmeURL": "https://share.unison-lang.org/@rlmark/aoc2023/code/main/latest/terms/day01/README"
+      }
+    ],
+    "blurb": "Day 1: Trebuchet features an excellent List pattern matching demo by @gfinol while @rlmark discusses combining the Parse and Ask abilities to reduce boilerplate when writing Unison."
+  },
+  "2": {
+    "submissions": [
+      {
+        "shareHandle": "@jcwilk",
+        "readmeURL": "https://share.unison-lang.org/@jcwilk/advent-of-code-2023/code/main/latest/terms/day02/README"
+      },
+      {
+        "shareHandle": "@kemiller",
+        "readmeURL": "https://share.unison-lang.org/@kemiller/advent-of-code-2023/code/main/latest/terms/day02/README"
+      }
+    ],
+    "blurb": "Day 2: Cube Conundrum, features @kemiller writing up a solution using Lists with a clever use of `uncollated,` a little known standard lib function. @jcwilk sums up this day nicely, \"It was a lot of fun to explore how to best leverage folding and pattern matching to solve these problems.\" Calls to foldMap abound! "
+  },
+  "3": {
+    "submissions": [
+      {
+        "shareHandle": "@ceedubs",
+        "readmeURL": "https://share.unison-lang.org/@ceedubs/advent-of-code-2023/code/main/latest/terms/day03/README"
+      },
+      {
+        "shareHandle": "@systemfw",
+        "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day03/README"
+      }
+    ],
+    "blurb": "For Day 3: Gear Ratios, @ceedubs produced a beautiful explanation of his solution. It even includes mermaid diagrams using another Unison library by @alvaroc1 to better display the problem. @systemfw offers us a pro-tip about representing matrices as `Map` values, and leverages the `Each` ability in his algorithm."
+  },
+  "4": {
+    "submissions": [
+      {
+        "shareHandle": "@chrispenner",
+        "readmeURL": "https://share.unison-lang.org/@chrispenner/aoc/code/main/latest/namespaces/day04"
+      },
+      {
+        "shareHandle": "@kemiller",
+        "readmeURL": "https://share.unison-lang.org/@kemiller/advent-of-code-2023/code/main/latest/terms/day04/README"
+      },
+      {
+        "shareHandle": "@rlmark",
+        "readmeURL": "https://share.unison-lang.org/@rlmark/aoc2023/code/main/latest/terms/day04/README"
+      },
+      {
+        "shareHandle": "@systemfw",
+        "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day04/README"
+      }
+    ],
+    "blurb": "Day 4: Scratchcards has the Unison community sharing some wisdom when writing parsers. @cpenner's writeup includes a lesson on backtracking in parser combinator libraries and @systemfw and @rlmark sing the virtues of writing small parser combinators to test iteratively. @kemiller and @systemfw use two of Unison's data structures optimized for natural numbers, NatSet and NatMap, respectively. "
+  },
+  "5": {
+    "submissions": [
+      {
+        "shareHandle": "@jcwilk",
+        "readmeURL": "https://share.unison-lang.org/@jcwilk/advent-of-code-2023/code/main/latest/terms/day05/README"
+      },
+      {
+        "shareHandle": "@systemfw",
+        "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day05/README"
+      }
+    ],
+    "blurb": "In Day 5: If You Give A Seed A Fertilizer, @systemfw explored some optimizations. From his Readme: \"I couldn't keep ucm churning all day since I had to...you know, work.\" Instead, his implementation explores an Interval map for greater efficiency. @jcwilk's writeup discusses the process of writing Unison programs itself, \"I was able to follow a pattern of leaning hard into composition, building tiny one-line functions, and relying heavily on the typing system to assert correct program behavior.\""
+  },
+  "6": {
+    "submissions": [
+      {
+        "shareHandle": "@stew",
+        "readmeURL": "https://share.unison-lang.org/@stew/advent-of-code/code/main/latest/terms/day06/README"
+      }
+    ],
+    "blurb": "For Day 6: Wait for it, @stew's lovely solution includes play-by-play descriptions of the functions which constitute his solution and a discussion wherein he uses mathematical reasoning to cut down on the problem space. Thank you @stew! "
+  },
+  "7": {
+    "submissions": [
+      {
+        "shareHandle": "@hagl",
+        "readmeURL": "https://share.unison-lang.org/@hagl/advent-of-code-2023/code/main/latest/terms/day07/README"
+      },
+      {
+        "shareHandle": "@systemfw",
+        "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day07/README"
+      }
+    ],
+    "blurb": "Day 7: Camel Cards includes a pattern matching primer by @hagl, who exercises tuple decomposition, list pattern matching, and pattern guards in his algorithm! @systemfw's work includes a great discussion about when to use custom types or rely on more primitive abstractions in a language. Both are very educational reads!"
+  },
+  "8": {
+    "submissions": [
+      {
+        "shareHandle": "@systemfw",
+        "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day08/README"
+      }
+    ],
+    "blurb": "Day 8: Haunted Wasteland, was a challenging day! @systemfw boldly went where many feared to tread and his solution discusses, among other things, the vicissitudes of cycle detection! It's wonderful to follow along with his problem solving process."
+  },
+  "9": {
+    "submissions": [
+      {
+        "shareHandle": "@dvberkel",
+        "readmeURL": "https://share.unison-lang.org/@dvberkel/advent-of-code-2023/code/main/latest/terms/day09/README"
+      },
+      {
+        "shareHandle": "@johanwinther",
+        "readmeURL": "https://share.unison-lang.org/@johanwinther/advent-of-code-2023/code/main/latest/namespaces/day09"
+      },
+      {
+        "shareHandle": "@kemiller",
+        "readmeURL": "https://share.unison-lang.org/@kemiller/advent-of-code-2023/code/main/latest/terms/day09/README"
+      }
+    ],
+    "blurb": "For Day 9: Mirage Maintenance @dvberkel relates the problem to one which Douglas Hofstadter (of Goedel Escher Bach fame) studied. Very cool! He also uses a custom domain Sequence type to help clarify the problem space. It makes for a very readable writeup. Both @johanwinter and @kemiller explore more of the standard library, with lots of folds and unfolding over lists. "
+  },
+  "10": {
+    "submissions": [
+      {
+        "shareHandle": "@ceedubs",
+        "readmeURL": "https://share.unison-lang.org/@ceedubs/advent-of-code-2023/code/main/latest/terms/day10/README"
+      }
+    ],
+    "blurb": "We love @ceedubs writeup for Day 10 because he takes the time to walk s through his problem solving logic and edge cases with humor and wisdom. It includes an interlude where he takes a walk away from his computer and he returns with a ray-casting inspired solution! Eureka!"
+  },
+  "11": {
+    "submissions": [
+      {
+        "shareHandle": "@hagl",
+        "readmeURL": "https://share.unison-lang.org/@hagl/advent-of-code-2023/code/main/latest/terms/day11/README"
+      },
+      {
+        "shareHandle": "@systemfw",
+        "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day11/README"
+      }
+    ],
+    "blurb": "To solve Day 11: Cosmic Expansion, @systemfw uses a Map based representation of the X,Y grid again. Unison's Map standard lib utility functions offer a rich set of options for this solution. We love @hagl's write-ups because he includes links to the helper functions that he adds or finds useful in the standard lib. This solution used \"allPairs,\" which is a function we'll keep in mind for generating pairs from a list."
+  },
+  "12": {
+    "submissions": [
+      {
+        "shareHandle": "@hagl",
+        "readmeURL": "https://share.unison-lang.org/@hagl/advent-of-code-2023/code/main/latest/terms/day12/README"
+      },
+      {
+        "shareHandle": "@systemfw",
+        "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day12/README"
+      }
+    ],
+    "blurb": "In Day 12: Hot Springs, @hagl used a handy library for memoization to cut down his runtime from 7 hours (yay! an excuse to sleep!) to less than 4 minutes. @systemfw brought out the heavy artillery for the solutions for day 12, using both dynamic programming and parallelism. Any time we get the chance to listen to Fabio about concurrency, we'll take it! "
+  },
+  "13": {
+    "submissions": [
+      {
+        "shareHandle": "@systemfw",
+        "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day13/README"
+      }
+    ],
+    "blurb": "For Day 13: Point of Incidence, @systemfw's solution writeup includes some beautiful ascii art to help explain his algorithm and also breaks down some efficiency shortcuts for part 2 of the problem."
+  },
+  "14": {
+    "submissions": [
+      {
+        "shareHandle": "@systemfw",
+        "readmeURL": "https://share.unison-lang.org/@systemfw/aoc-2023/code/main/latest/terms/day14/README"
+      }
+    ],
+    "blurb": "For Day 14: Parabolic Reflector Dish, @systemfw wrote a Shakespearean play in 5 acts. Just kidding! No really, there is a whole introduction section to the problem, a section dedicated to the core algorithm, and two sections dedicated to writing a custom memoization ability and ability handler. Truly a masterclass!"
+  }
+}

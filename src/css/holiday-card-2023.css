@@ -1,0 +1,362 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(/assets/holiday-card-2023/BackgroundNight.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-color: rgb(31, 48, 78);
+  padding: 0;
+  margin: 0;
+  font-family: "Satisfy", cursive;
+  font-size: 1.5rem;
+  color: #5f4322;
+}
+
+a,
+a:visited {
+  color: #4a3318;
+  text-decoration: underline;
+  text-underline-offset: 0.15rem;
+}
+
+a:hover {
+  color: #742222;
+}
+
+a.back {
+  padding: 2rem;
+  display: flex;
+  color: #fff;
+  opacity: 0.3;
+  transition: all 0.2s;
+  text-decoration: none;
+  filter: blur(0.2px);
+}
+
+a.back:hover {
+  opacity: 0.8;
+}
+
+.happy-holidays {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+ align-items: center;
+  opacity: 0.8;
+  filter: blur(0.5px);
+}
+
+.happy-holidays.main-title {
+  padding-top: 4rem;
+  filter: brightness(100) blur(0.6px);
+  opacity: 0.6;
+}
+
+.happy-holidays img {
+  width: 32rem;
+}
+
+/* cloud container section */
+#stars-top {
+  background-size: cover;
+  width: 100%;
+}
+
+.cloud-container {
+  height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.cloud {
+  position: absolute;
+}
+
+#moon-1 {
+  transform: translate(0, 0);
+  width: 100%;
+  height: auto;
+}
+
+#santa-1 {
+  transform: translate(0, 0);
+  width: 100%;
+  height: auto;
+  filter: blur(1px);
+}
+
+#cloud-1 {
+  background-size: cover;
+  width: auto;
+  height: 100%;
+}
+
+#cloud-2 {
+  background-size: cover;
+  width: auto;
+  height: 100%;
+  right: 0;
+}
+
+#cloud-5 {
+  transform: translate(-400px, 800px);
+}
+
+/* sky container section */
+
+.sky-container section {
+  background-color: #401c59;
+  height: 500px;
+  width: 800px;
+  display: block;
+  text-align: center;
+  margin: auto;
+  padding: 1em 3em;
+}
+
+.sky-container p {
+  font-family: "Corben", serif;
+  color: #cae6e4;
+  text-align: left;
+}
+
+/* ground forest section */
+
+.comet {
+  width: 100%;
+  height: auto;
+}
+
+#stars-bottom {
+  background-size: cover;
+  width: 100%;
+  height: auto;
+}
+
+.ground-container {
+  padding: 20px;
+  height: 150vh;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.ground {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  will-change: transform;
+}
+
+.background {
+  width: 100%;
+}
+
+.left-trees {
+  left: 0;
+  will-change: transform;
+}
+
+.right-trees {
+  right: 0;
+  will-change: transform;
+}
+
+/* tree styling */
+
+.main-tree {
+  left: -500%;
+  right: -540%;
+  width: auto;
+  margin: auto;
+  background-size: cover;
+}
+
+.lights {
+  opacity: 0;
+}
+
+/* PRESENTS - NOT RESPONSIVE YET - HALP */
+.present {
+  width: auto;
+  margin: auto;
+  left: -500%;
+  right: -530%;
+  background-size: cover;
+}
+
+/* CARD SECTION */
+
+.card {
+  background: url(/assets/holiday-card-2023/Paper.png) no-repeat;
+  background-position: center 20px;
+  position: absolute;
+  width: 48rem;
+  padding: 8rem 4.5rem 0 4.5rem;
+  height: 58rem;
+  bottom: 0;
+  left: -40%;
+  right: 0;
+  margin: auto;
+  z-index: 100;
+}
+
+.card .card-content {
+  height: 44rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 0 1.5rem 2.5rem 2rem;
+  scrollbar-width: 0.5rem;
+  scrollbar-color: #715C44 transparent;
+}
+
+.card .card-content::-webkit-scrollbar {
+  height: 0.375rem;
+  width: 0.5rem;
+}
+
+.card .card-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card .card-content::-webkit-scrollbar-thumb {
+  background-color: #715C44;
+  border-radius: 0.25rem;
+}
+
+.card .card-text {
+  /* transform: rotate(-2deg); */
+  padding-left: 2rem;
+  filter: blur(0.3px);
+}
+
+.card .happy-holidays {
+  margin-bottom: 1rem;
+}
+
+.card .happy-holidays img {
+  width: 12rem;
+}
+
+.card .unison-mark {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.card .unison-mark img {
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto;
+  display: block;
+}
+
+.card .days {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card .day-blurb,
+.card .submissions {
+  margin-left: 1.5rem;
+}
+
+.left-foreground {
+  left: 0;
+  pointer-events: none;
+}
+
+.right-foreground {
+  right: -10%;
+  pointer-events: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .ground-container {
+    height: auto;
+  }
+
+  .back {
+    justify-content: center;
+    font-size: 1rem;
+  }
+
+  .happy-holidays img {
+    width: 75%;
+  }
+
+  .left-foreground, .right-foreground, .left-trees, .right-trees, .comet {
+    display: none !important;
+  }
+
+  .main-tree.christmas-tree,
+  .present {
+    position: absolute;
+    width: 100%;
+    margin-top: -4rem;
+    margin-right: -8rem;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: auto;
+    z-index: 200;
+    transform: rotate(4deg);
+  }
+
+  .card {
+    background-color: #C4BA90;
+    background-image: url(/assets/holiday-card-2023/PaperRepeat.png);
+    background-repeat: repeat-y;
+    position: relative;
+    width: 100vw;
+    height: auto;
+    margin: 0 -2rem -8rem;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    padding: 6rem 2rem;
+    margin-top: 100px;
+  }
+
+  .card::before {
+    background: url(/assets/holiday-card-2023/Paper.png) no-repeat;
+    background-position: center 30px;
+    position: absolute;
+    top: -150px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 200px;
+    content: " ";
+  }
+
+  .card .happy-holidays {
+    position: absolute;
+    left: 2rem;
+    top: 12rem;
+  }
+
+  .card .unison-mark {
+    position: absolute;
+    width: 4rem;
+    left: 6.5rem;
+    top: 22.5rem;
+    margin: 0;
+  }
+
+  .card .card-content {
+    overflow: inherit;
+    padding: 0;
+    padding-bottom: 4rem;
+    height: auto;
+  }
+
+  .card .card-text {
+    padding-top: 20rem;
+  }
+}

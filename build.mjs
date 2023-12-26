@@ -24,6 +24,8 @@ const UNISON_SHARE_BASE_URL = "https://share.unison-lang.org";
 
 // Run the build process!
 build();
+
+
 // ----------------------
 
 function build() {
@@ -112,6 +114,7 @@ function build() {
     // -- Blog ----------------------------------------------------------------
     .then(() => console.log(" * Building /blog/posts"))
     .then(() => mkdir("./src/blog/posts"))
+    .then(() => mkdir("./src/blog/posts/holiday-card-2023"))
     .then(() =>
       copy("./build/blog", "./src/blog/posts", {
         rename: kebabCase,
