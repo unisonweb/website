@@ -86,6 +86,6 @@ function scrollAnimation() {
     )
     .from(".main-tree", { y: innerHeight * 0.85 }, 2)
     .from(".present-back", { y: innerHeight * 0.85 }, 2.3)
-    .from(".card", { y: innerHeight }, 2.5);
+    .from(".card", { y: innerHeight * 1.25 }, 2.5);
 
 }
