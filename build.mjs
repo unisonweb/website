@@ -400,7 +400,7 @@ function transformBlogFile(_src, dest) {
 
   const content = updateContent(
     frontmatter,
-    "/",
+    "/blog",
     fs.readFileSync(dest, { encoding: "utf-8" })
   );
 
