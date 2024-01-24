@@ -77,6 +77,22 @@
   rel="stylesheet"
 />
 
+<style>
+/* 
+avoid flash of unstyled content with resizing 
+the main logo during layout painting 
+*/
+#main-header nav a#logo {
+  color: #41424b;
+}
+
+#main-header nav #logo-icon {
+  width: 1rem;
+  height: 1rem;
+  margin-top: -4px;
+}
+</style>
+
 <link rel="stylesheet" href="/css/styles.css" />
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
