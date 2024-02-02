@@ -100,8 +100,21 @@
     Managed cloud platform for Unison services and batch jobs
   </div>
   <script>
-    document.querySelector("#newsletter-trigger").addEventListener("click", () => {
-      document.querySelector(".newsletter").classList.toggle("visible");
+    const newsletter = document.querySelector(".newsletter")
+    const trigger = document.querySelector("#newsletter-trigger");
+
+    trigger.addEventListener("click", () => {
+      newsletter.classList.toggle("visible");
+    });
+
+    document.addEventListener("click", ev => {
+      if (newsletter.classList.contains("visible") && ev.target !== trigger) {
+        const isOutside = !newsletter.contains(ev.target);
+
+        if (isOutside) {
+          newsletter.classList.remove("visible");
+        }
+      }
     });
   </script>
 </nav>
