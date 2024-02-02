@@ -627,6 +627,15 @@ body.modal-open {
   #main-footer .public-benefit {
     display: none;
   }
+
+  #main-header .newsletter {
+    right: -1rem;
+  }
+
+  #main-header .newsletter::after {
+    right: auto;
+    left: 50%;
+  }
 }
 
 @media only screen and (max-width: 650px) {
