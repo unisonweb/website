@@ -18,6 +18,10 @@ index of the language documentation.
 
 Browse the Unison Docs that power the website here: https://share.unison-lang.org/@unison/p/code/latest/namespaces/public/website
 
+## Filing tickets and contributing to the Docs 
+
+Tickets about the website content should be filed [using the Unison Share ticketing feature](https://share.unison-lang.org/@unison/website/tickets). PR's are gratefully accepted through the regular [Unison code contribution workflow](https://share.unison-lang.org/@unison/website/code/main/latest/terms/learn/contributeDocs). 
+
 ## Setup for running locally and deployment
 
 Ensure all dependencies are installed by running `npm install` (node v17+
