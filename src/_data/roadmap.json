@@ -10,25 +10,25 @@
   },
   "recently": [
     {
-      "title": "Unison Cloud microservices",
-      "description": "Promote any Unison function to a typed microservice.\n\nTurn any microservice into an autoscaled HTTP endpoint; call Unison-native services without serialization boilerplate.",
-      "areas": ["cloud", "services"]
+      "title": "Redesigned update and library upgrade process",
+      "description": "Code updates and library upgrades that 'Just Work'.",
+      "areas": ["ucm"]
     },
     {
-      "title": "Unison Cloud durable storage",
-      "description": "Unison-native transactional storage, without manual serialization code to/from a datastore.",
-      "areas": ["cloud", "services"]
+      "title": "Unison + Unison Cloud general availability",
+      "description": "Polish, additional testing, bugfixes, and improved documentation in preparation for GA.",
+      "areas": ["ucm", "cloud"]
     },
     {
-      "title": "Projects: milestone 1",
-      "description": "Dedicated commands for creating public or private projects and branches and publishing them to Unison Share.\n\nA building block for collaboration features like merge requests and issue tracking, as well as nicer support for dependency management.",
+      "title": "Projects: merge requests and issue tracking",
+      "description": "Support for creating and commenting on merge requests. Basic issue tracking.",
       "areas": ["unison-share", "ucm"]
     }
   ],
   "now": [
     {
-      "title": "Redesigned update process",
-      "description": "Code updates that 'Just Work', guiding users through structured refactoring sessions in response to changes.\n\nMore intelligent merge algorithms.",
+      "title": "Redesigned merge algorithm",
+      "description": "Branch merges that 'Just Work'.",
       "areas": ["ucm"]
     },
     {
@@ -37,21 +37,31 @@
       "areas": ["runtime", "performance"]
     },
     {
-      "title": "Unison Cloud WebSocket support",
-      "description": "Easy deployment of WebSocket services on Unison Cloud.",
-      "areas": ["cloud", "services"]
+      "title": "Structural hyperlinked diffs and automated changelogs",
+      "description": "Structural hyperlinked diffs for Contributions on Unison Share.",
+      "areas": ["unison-share", "ucm"]
+    },
+    {
+      "title": "Code search on Unison Share",
+      "description": "Search across all projects on Unison Share.\n\nImplemented using an open source Unison library, running atop Unison Cloud.",
+      "areas": ["unison-share", "cloud"]
     }
   ],
   "next": [
     {
-      "title": "Unison + Unison Cloud general availability",
-      "description": "Polish, additional testing, bugfixes, and improved documentation in preparation for GA.",
-      "areas": ["ucm", "cloud"]
+      "title": "JIT compiler: milestone 2",
+      "description": "Faster performance. Support JIT of all Unison programs.",
+      "areas": ["runtime", "performance"]
     },
     {
-      "title": "Projects: merge requests and issue tracking",
-      "description": "Support for creating and commenting on merge requests.\n\nStructural, hyperlinked diffs and code comments.\n\nBasic issue tracking.",
-      "areas": ["unison-share", "ucm"]
+      "title": "Resilient scheduled jobs and workflows",
+      "description": "Durably sleep and await events within a service.\n\nCan be used to implement scheduled jobs, resilient workflows, and much more.",
+      "areas": ["unison-share", "cloud"]
+    },
+    {
+      "title": "Graphical UCM",
+      "description": "All the same functionality as UCM, but in a rich UI.\n\n• Command palette with typeahead.\n• Hyperlinked code viewing.\n• Structural diffs.",
+      "areas": ["ucm"]
     }
   ],
   "later": [
@@ -59,16 +69,6 @@
       "title": "Dependency management",
       "description": "Easy dependency management and library upgrades.",
       "areas": ["unison-share", "ucm"]
-    },
-    {
-      "title": "Graphical UCM",
-      "description": "All the same functionality as UCM, but in a rich UI.\n\n• Command palette with typeahead.\n• Hyperlinked code viewing.\n• Structural diffs.",
-      "areas": ["ucm"]
-    },
-    {
-      "title": "JIT compiler: milestone 2",
-      "description": "Support JIT of all Unison programs.",
-      "areas": ["runtime", "performance"]
     },
     {
       "title": "Extensible records",
