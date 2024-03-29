@@ -214,7 +214,7 @@
       editorWriter
         .typeString(
           `<span class="hash-qualifier"><span class="fqn"><span class="segment">helloWorld</span></span></span><span class="type-ascription-colon"> :</span><span class="blank"> </span><span class="delay-force-char">'</span><span class="ability-braces">{</span><a href="https://share.unison-lang.org/@unison/code/latest/namespaces/public/;/types/@@IO" target="_blank" class="type-reference">IO</a><span class="blank">,</span><span class="blank"> </span><a href="https://share.unison-lang.org/@unison/code/latest/namespaces/public/;/types/@4n0fgs00hpsj3paqnm9bfm4nbt9cbrin3hl88i992m9tjiq1ik7eq72asu4hcg885uti36tbnj5rudt56eahhnut1nobofg86pk1bng" target="_blank" class="type-reference">Exception</a><span class="ability-braces">}</span><span class="blank"> </span><span class="unit">()</span><span class="blank">
-</span><span class="hash-qualifier"><span class="fqn"><span class="segment">helloWorld</span></span></span><span class="blank"> </span><span class="var">_</span><span class="binding-equals"> =</span><span class="blank"> </span><a href="https://share.unison-lang.org/@unison/code/latest/namespaces/public/;/terms/@le5947v6dm1nqqjba9ipodo56uge7bu2d45lsmv6u7lgqqoas9k38bd4khu0iemok6u3iqcnai4asbnvl4ktc0r21liu7m45pc5j40g" target="_blank" class="term-reference">printLine</a><span class="blank"> </span><span class="text-literal">"Hello World! 🎉"</span>`
+</span><span class="hash-qualifier"><span class="fqn"><span class="segment">helloWorld</span></span></span><span class="blank"> </span><span class="var">_</span><span class="binding-equals"> =</span><span class="blank"> </span><a href="https://share.unison-lang.org/@unison/code/latest/namespaces/public/;/terms/@le5947v6dm1nqqjba9ipodo56uge7bu2d45lsmv6u7lgqqoas9k38bd4khu0iemok6u3iqcnai4asbnvl4ktc0r21liu7m45pc5j40g" target="_blank" class="term-reference">printLine</a><span class="blank"> </span><span class="text-literal">"Hello World!"</span>`
         )
         .pauseFor(1000)
         .callFunction(() => {
@@ -254,7 +254,7 @@
             .pauseFor(1000)
             .pasteString(
               `
-Hello World! 🎉
+Hello World!
 
   ()`
             )
