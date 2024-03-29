@@ -1,7 +1,6 @@
 (() => {
   const all = document.querySelectorAll.bind(document);
   const one = document.querySelector.bind(document);
-  const $body = one("body");
 
   const currentUrl = window.location.href;
 
