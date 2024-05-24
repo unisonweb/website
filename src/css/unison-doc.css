@@ -12,14 +12,6 @@
   --doc-aside-margin: 1rem;
 }
 
-.unison-doc .word {
-  margin-right: 0.5ch;
-}
-
-.unison-doc .group .join > :last-child {
-  margin-left: -0.5ch;
-}
-
 .unison-doc .group .join {
   white-space: nowrap;
 }
