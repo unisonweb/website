@@ -10,52 +10,53 @@
   },
   "recently": [
     {
-      "title": "Redesigned update and library upgrade process",
-      "description": "Code updates and library upgrades that 'Just Work'.",
-      "areas": ["ucm"]
+      "title": "JIT compiler beta release",
+      "description": "Compile Unison to native code.",
+      "areas": ["runtime", "performance"]
     },
-    {
-      "title": "Unison + Unison Cloud general availability",
-      "description": "Polish, additional testing, bugfixes, and improved documentation in preparation for GA.",
-      "areas": ["ucm", "cloud"]
-    },
-    {
-      "title": "Projects: merge requests and issue tracking",
-      "description": "Support for creating and commenting on merge requests. Basic issue tracking.",
-      "areas": ["unison-share", "ucm"]
-    }
-  ],
-  "now": [
     {
       "title": "Redesigned merge algorithm",
       "description": "Branch merges that 'Just Work'.",
       "areas": ["ucm"]
     },
     {
-      "title": "JIT compiler: milestone 1",
-      "description": "Compile Unison to native code.\n\nInitial milestone is being able to compile enough of the language to power the backend of Unison Cloud.",
-      "areas": ["runtime", "performance"]
-    },
-    {
-      "title": "Structural hyperlinked diffs and automated changelogs",
+      "title": "Structural hyperlinked diffs",
       "description": "Structural hyperlinked diffs for Contributions on Unison Share.",
       "areas": ["unison-share", "ucm"]
     },
+
+  ],
+  "now": [
     {
-      "title": "Code search on Unison Share",
-      "description": "Search across all projects on Unison Share.\n\nImplemented using an open source Unison library, running atop Unison Cloud.",
-      "areas": ["unison-share", "cloud"]
+      "title": "JIT compilation: Milestone 1",
+      "description": "Use JIT compiler for all nodes on Unison Cloud.",
+      "areas": ["cloud", "performance"]
+    },
+    {
+      "title": "UCM quality of life improvements",
+      "description": "Examples: per project undo and reflog, fast shallow clones, bugfixes and performance improvements.",
+      "areas": ["unison-share", "ucm"]
+    },
+    {
+      "title": "Daemons: long-running resillient background tasks",
+      "description": "A powerful building block for scheduled jobs, distributed event processing, resillient workflows and more.",
+      "areas": ["cloud"]
     }
   ],
   "next": [
     {
-      "title": "JIT compiler: milestone 2",
-      "description": "Faster performance. Support JIT of all Unison programs.",
-      "areas": ["runtime", "performance"]
+      "title": "Scheduled jobs and cloud cron",
+      "description": "Open source library for resilient scheduled jobs and recurring jobs."
+      "areas": ["cloud"]
     },
     {
-      "title": "Resilient scheduled jobs and workflows",
-      "description": "Durably sleep and await events within a service.\n\nCan be used to implement scheduled jobs, resilient workflows, and much more.",
+      "title": "Distributed event processing",
+      "description": "Open source library for distributed event processing, streaming map-reduce, and lots more.",
+      "areas": ["cloud"]
+    },
+    {
+      "title": "Code search on Unison Share",
+      "description": "Search across all projects on Unison Share.\n\nImplemented using an open source Unison library, running atop Unison Cloud.",
       "areas": ["unison-share", "cloud"]
     },
     {
@@ -67,11 +68,11 @@
   "later": [
     {
       "title": "Dependency management",
-      "description": "Easy dependency management and library upgrades.",
+      "description": "Easier dependency management and library upgrades.",
       "areas": ["unison-share", "ucm"]
     },
     {
-      "title": "Extensible records",
+      "title": "Proper record types",
       "description": "Support for extensible records; an extension to the syntax and the type system.",
       "areas": ["core-language"]
     }
