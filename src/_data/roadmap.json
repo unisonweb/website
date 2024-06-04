@@ -23,8 +23,7 @@
       "title": "Structural hyperlinked diffs",
       "description": "Structural hyperlinked diffs for Contributions on Unison Share.",
       "areas": ["unison-share", "ucm"]
-    },
-
+    }
   ],
   "now": [
     {
@@ -46,7 +45,7 @@
   "next": [
     {
       "title": "Scheduled jobs and cloud cron",
-      "description": "Open source library for resilient scheduled jobs and recurring jobs."
+      "description": "Open source library for resilient scheduled jobs and recurring jobs.",
       "areas": ["cloud"]
     },
     {
