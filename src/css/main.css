@@ -140,7 +140,7 @@ main#blog-post {
   align-items: center;
   justify-content: center;
   gap: 0.25rem;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
 }
 
 #main-header .announcement a {
@@ -591,6 +591,7 @@ body.modal-open {
   }
 
   #main-header .announcement {
+    font-size: 0.875rem;
     margin-top: 1rem;
     padding: 1rem;
   }
