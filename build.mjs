@@ -163,13 +163,25 @@ function transformHomeExamples(_src, dest) {
 
     // Slim down `examples.http` to `http`
     if (seg.textContent.trim() === "examples") {
-      seg.nextSibling.remove();
+      seg.nextSibling.remove(); // "."
       seg.remove();
     }
 
     // Slim down `Nat.mod` to `mod`
     if (seg.textContent.trim() === "Nat") {
-      seg.nextSibling.remove();
+      seg.nextSibling.remove(); // "."
+      seg.remove();
+    }
+
+    // Remove `lib`
+    if (seg.textContent.trim() === "lib") {
+      seg.nextSibling.remove(); // "."
+
+      if (seg.nextSibling.textContent.trim() === "distributed") {
+        seg.nextSibling.remove(); // "distributed"
+        seg.nextSibling.remove(); // "."
+      }
+
       seg.remove();
     }
   });
@@ -191,20 +203,6 @@ function transformHomeExamples(_src, dest) {
     if (next?.className.trim() === "blank") next.remove();
 
     use.remove();
-  });
-
-  [...document.querySelectorAll(".term-reference")].forEach((term) => {
-    if (term.textContent === "Path.root") {
-      const blank1 = term.previousSibling;
-      const blank2 = blank1.previousSibling;
-      const blank3 = blank2.previousSibling;
-      const blank4 = blank3.previousSibling;
-
-      if (blank1?.className.trim() === "blank") blank1.innerHTML = " ";
-      if (blank2?.className.trim() === "blank") blank2.remove();
-      if (blank3?.className.trim() === "blank") blank3.remove();
-      if (blank4?.className.trim() === "blank") blank4.remove();
-    }
   });
 
   const httpRequest = document.querySelector(".http-request > section");
