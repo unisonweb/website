@@ -83,14 +83,14 @@ function build() {
     .then(() => mkdir("./src/docs"))
     .then(() =>
       copy(
-        "./build/learn/_sidebar.html",
+        "./build/docs/_sidebar.html",
         "./src/_includes/_docs-sidebar-content.njk"
       ).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
         transformdocsSidebar(src, dest, false);
       })
     )
     .then(() =>
-      copy("./build/learn", "./src/docs", {
+      copy("./build/docs", "./src/docs", {
         rename: kebabCase,
       }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
         if (!isFragment(dest) && !isGlossary(dest)) {
@@ -116,7 +116,7 @@ function build() {
     .then(() => mkdir("./src/blog/posts"))
     .then(() => mkdir("./src/blog/posts/holiday-card-2023"))
     .then(() =>
-      copy("./build/feed", "./src/blog/posts", {
+      copy("./build/blog", "./src/blog/posts", {
         rename: kebabCase,
       }).on(copy.events.COPY_FILE_COMPLETE, ({ src, dest }) => {
         const fileName = path.basename(dest);
