@@ -1,0 +1,60 @@
+#unison-forall-2024 {
+  display: flex;
+  flex-direction: column;
+}
+
+#unison-forall-2024 .hero {
+  width: 60rem;
+  margin: 3rem auto 1rem auto;
+  padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  overflow: clip;
+}
+
+#unison-forall-2024 .hero hr {
+  width: 6rem;
+  margin: 1.5rem 0;
+  background: var(--color-gray-lighten-40);
+}
+
+#unison-forall-2024 .hero .text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  color: var(--color-gray-darken-30);
+}
+#unison-forall-2024 .hero .text h2,
+#unison-forall-2024 .hero .text h3 {
+  font-size: 1.25rem;
+  font-weight: normal;
+}
+#unison-forall-2024 .hero .text h3 {
+  font-weight: bold;
+  color: var(--color-gray-darken-30);
+}
+
+@media only screen and (max-width: 600px) {
+  #unison-forall-2024 .hero {
+    width: 100%;
+    border-radius: 0;
+    margin-top: 4rem;
+  }
+  #unison-forall-2024 .hero footer {
+    font-size: 0.875rem;
+  }
+  #unison-forall-2024 .hero footer img {
+    max-width: 75%;
+  }
+  #unison-forall-2024 .hero .text h2,
+  #unison-forall-2024 .hero .text h3 {
+    font-size: 0.875rem;
+    font-weight: normal;
+  }
+}
