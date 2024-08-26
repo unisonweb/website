@@ -1,11 +1,22 @@
+h2 a,
+h2 a:visited {
+  text-decoration: underline;
+}
+
+h2 a:hover,
+h2 a:visited:hover {
+  color: var(--color-blue-1);
+}
+
 #unison-forall-2024 {
   display: flex;
   flex-direction: column;
+  padding-bottom: 4rem;
 }
 
 #unison-forall-2024 .hero {
   width: 60rem;
-  margin: 3rem auto 1rem auto;
+  margin: 3rem auto 5rem auto;
   padding-bottom: 3rem;
   display: flex;
   flex-direction: column;
@@ -13,12 +24,6 @@
   justify-content: center;
   border-radius: 0.75rem;
   overflow: clip;
-}
-
-#unison-forall-2024 .hero hr {
-  width: 6rem;
-  margin: 1.5rem 0;
-  background: var(--color-gray-lighten-40);
 }
 
 #unison-forall-2024 .hero .text {
@@ -30,14 +35,78 @@
   text-align: center;
   color: var(--color-gray-darken-30);
 }
-#unison-forall-2024 .hero .text h2,
-#unison-forall-2024 .hero .text h3 {
+
+#unison-forall-2024 .hero .text h2 {
   font-size: 1.25rem;
   font-weight: normal;
 }
-#unison-forall-2024 .hero .text h3 {
-  font-weight: bold;
-  color: var(--color-gray-darken-30);
+
+.conference-title {
+  font-size: 3rem;
+  color: var(--color-gray-darken-10);
+  font-weight: 900;
+  margin-top: 2rem;
+}
+
+.conference-description {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  gap: 1.5rem;
+  text-align: right;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.conference-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+  color: var(--color-gray-lighten-20);
+}
+
+.conference-description .actions {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.talks > h3 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.talk-cards {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  width: 64rem;
+  margin: auto;
+}
+
+.talk-cards .card {
+  background: var(--color-gray-lighten-55);
+  max-width: calc(50% - 0.75rem);
+  text-align: left;
+  gap: 0.5rem;
+}
+
+.talk-cards .card h2 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin-bottom: 0;
+  color: var(--color-pink-1);
+}
+
+.talk-cards .card h3 {
+  color: var(--color-gray-lighten-20);
+  margin-bottom: 1rem;
 }
 
 @media only screen and (max-width: 600px) {
@@ -52,8 +121,7 @@
   #unison-forall-2024 .hero footer img {
     max-width: 75%;
   }
-  #unison-forall-2024 .hero .text h2,
-  #unison-forall-2024 .hero .text h3 {
+  #unison-forall-2024 .hero .text h2 {
     font-size: 0.875rem;
     font-weight: normal;
   }
