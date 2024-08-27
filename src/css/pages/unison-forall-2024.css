@@ -101,7 +101,7 @@ h2 a:visited:hover {
   font-size: 1.5rem;
   line-height: 1.2;
   margin-bottom: 0;
-  color: var(--color-pink-1);
+  color: var(--color-gray-darken-10);
 }
 
 .talk-cards .card h3 {
