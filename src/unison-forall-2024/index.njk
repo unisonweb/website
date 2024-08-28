@@ -24,12 +24,21 @@ title: Unison Forall 2024
         <section class="text">
           <h1 class="conference-title">Unison Forall 2024</h1>
           <div class="conference-description">
-            <div class="conference-details">
+            <div class="conference-info">
               <h2>
-                Remote and free conference in our <a target="_blank"
-                href="https://unison-lang.org/discord">Discord</a> · 
-                <strong>September 20 2024</strong>
+                <strong>100% Remote</strong> and <strong>free</strong> conference in our <a target="_blank"
+                href="https://unison-lang.org/discord">Discord</a> |
+                <a href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NnN1YnVhaGYyb2tvZm1zczhqZ2VrYWQ5YzAgY19kdGJhNWVpZHVtaWV1MnZ2NnB1NWo0NTUxNEBn&tmsrc=c_dtba5eidumieu2vv6pu5j45514%40group.calendar.google.com" target="_blank">
+                  September 20, 2024</a>, 10am-6pm EDT
               </h2>
+            </div>
+            <div class="card">
+              Unison Forall is a full day of talks dedicated to the Unison
+              programming language and ecosystem! Whether you're a seasoned Unison
+              developer or just curious about the future of programming, this
+              conference is a chance to explore the friendly and powerful world of
+              Unison, a language designed from the ground up to simplify
+              modern software development.
             </div>
             <div class="actions">
               <a data-tf-popup="https://drahilgwy2i.typeform.com/unisonForall24" class="contained button large primary">Register</a>
@@ -39,60 +48,165 @@ title: Unison Forall 2024
         </section>
       </article>
 
+      <div class="conference-details">
+        <div class="card">
+          <h3>A bit about Unison, for the uninitiated</h3>
+
+          <p>
+            Unison is a general-purpose, statically typed functional programming
+            language in which functions are saved and identified by a hash of
+            their AST, not as text values on a file system. 
+            <a href="https://www.unison-lang.org/docs/the-big-idea/">
+              We think this decision has radical consequences
+            </a>
+            and built everything from <a href="https://share.unison-lang.org/">
+              our code hosting tooling
+            </a> and <a href="https://www.unison.cloud/">cloud platform</a>
+            to suit this new programming model. 😎
+          </p>
+
+          <hr>
+
+          <h3>What to expect at Unison Forall</h3>
+
+          <div class="expectation">
+            <h4>🌐 Unison on the web</h4>
+            <p>
+              Discover how to build web apps with Unison and Unison Cloud,
+              leveraging the unique capabilities of the language and tooling to
+              power full-stack applications.
+            </p>
+          </div>
+
+          <div class="expectation">
+            <h4>💌 Distributed systems</h4>
+            <p>
+              Learn how Unison's support for distributed computing lends itself to
+              better abstractions for topics like event-driven architectures.
+            </p>
+          </div>
+
+          <div class="expectation">
+            <h4>🧰 Programming language innovations</h4>
+            <p>
+              Dive into algebraic effects and other wild Unison language features
+              and see how they can lead to cleaner, more elegant code.
+            </p>
+          </div>
+
+          <div class="expectation">
+            <h4>📯 Updates and exclusive previews</h4>
+            <p>
+              Get the latest news and updates directly from the Unison team, and
+              find out what's ahead for the Unison ecosystem.
+            </p>
+          </div>
+
+          <hr>
+
+          <p>
+            Unison Forall is a community gathering, a celebration of new
+            technical ideas, and a chance to connect with Unison developers from
+            around the world. So, 
+            <a href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NnN1YnVhaGYyb2tvZm1zczhqZ2VrYWQ5YzAgY19kdGJhNWVpZHVtaWV1MnZ2NnB1NWo0NTUxNEBn&tmsrc=c_dtba5eidumieu2vv6pu5j45514%40group.calendar.google.com">
+              mark your calendar</a>, <a href="https://drahilgwy2i.typeform.com/unisonForall24">grab your virtual seat</a>, and join us at Unison Forall! We're excited to see you there!
+          </p>
+        </div>
+      </div>
+
       <div class="talks">
-        <h3>Talks</h3>
+        <h2>Talks & Speakers</h2>
         <div class="talk-cards">
           <div class="card">
             <h2>Busy Beaver Problem </h2>
-            <h3>Daan van Berkel</h3>
-            <div>
-              <p>Turing machines are a universal computing model that are
-                very capable. But even they have there limitations. Some
-                functions are uncomputable.
-              </p>
+            <h3>
+              <div class="avatar" style="background-image: url(/assets/unison-forall-2024/dvberkel.jpg)"></div> 
+              Daan van Berkel
+            </h3>
+            <hr>
+            <p>Turing machines are a universal computing model that are
+              very capable. But even they have there limitations. Some
+              functions are uncomputable.
+            </p>
 
-              <p>One class of functions is called the busy beaver problem;
-                for a Turing machine of a number of states. How many steps
-                can they take before they halt?
-              </p>
-            </div>
+            <p>One class of functions is called the busy beaver problem;
+              for a Turing machine of a number of states. How many steps
+              can they take before they halt?
+            </p>
           </div>
 
           <div class="card">
             <h2>Full Stack Web Development with Unison, htmx, and Web Components</h2>
-            <h3>Tavish Pegram</h3>
-            <div>
-              <p>Make modern web applications with Unison using the “WUH?” stack!</p>
-            </div>
+            <h3>
+              <div class="avatar" style="background-image: url(/assets/unison-forall-2024/tavish.jpg)"></div> 
+              Tavish Pegram
+            </h3>
+            <hr>
+            <p>Make modern web applications with Unison using the “WUH?” stack!</p>
           </div>
 
           <div class="card">
             <h2>UIs in Unison</h2>
-            <h3>Dan Freeman</h3>
-            <div>
-              <p>CLIs and cloud services are right in Unison’s wheelhouse,
-                but often you want to put a GUI in front of the end user.
-                What does that look like in the Unison ecosystem?
-              </p>
+            <h3>
+              <div class="avatar" style="background-image: url(/assets/unison-forall-2024/dfreeman.jpg)"></div> 
+              Dan Freeman
+            </h3>
+            <hr>
+            <p>CLIs and cloud services are right in Unison’s wheelhouse,
+              but often you want to put a GUI in front of the end user.
+              What does that look like in the Unison ecosystem?
+            </p>
 
-              <p>
-                This talk will survey approaches to building Unison UIs
-                today, then speculate (wildly!) on what might be possible in
-                the future 🔮
-              </p>
-            </div>
+            <p>
+              This talk will survey approaches to building Unison UIs
+              today, then speculate (wildly!) on what might be possible in
+              the future 🔮
+            </p>
           </div>
           <div class="card">
             <h2>Boost your command-line applications with potions!</h2>
-            <h3>Eric Torreborre</h3>
-            <div>
-              <p>
-                This talk presents <code>potions</code>, a library for parsing
-                command-line arguments: its features, how Unison is leveraged
-                for its implementation (abilities anyone?) and some of the
-                paper cuts that hurt during its development.
-              </p>
-            </div>
+            <h3>
+              <div class="avatar" style="background-image: url(/assets/unison-forall-2024/etorreborre.jpg)"></div> 
+              Eric Torreborre
+            </h3>
+            <hr>
+            <p>
+              This talk presents <code>potions</code>, a library for parsing
+              command-line arguments: its features, how Unison is leveraged
+              for its implementation (abilities anyone?) and some of the
+              paper cuts that hurt during its development.
+            </p>
+          </div>
+          <div class="card">
+            <h2>State of the Unison 2024</h2>
+            <h3>
+              <div class="avatar" style="background-image: url(/assets/unison-forall-2024/pchiusano.jpg)"></div> 
+              Paul Chiusano
+            </h3>
+            <hr>
+            <p>
+              The past, present, and future of Unison. What we've learned over the years and what I'm excited about for Unison's future.
+            </p>
+          </div>
+          <div class="card">
+            <h2>Distributed streaming on Unison Cloud</h2>
+            <h3>
+              <div class="avatar" style="background-image: url(/assets/unison-forall-2024/fabio.jpg)"></div> 
+              Fabio Labella
+            </h3>
+            <hr>
+            <p>
+              In this talk we’ll look at the implementation of KLogs, a
+              distributed streaming library built entirely on Unison Cloud.
+            </p>
+            <p>
+              We’ll start our journey in the beautiful landscape of functional programming
+              APIs, and then take an ability handler to the perilous world of distributed
+              systems, a world where we need fences, leases, shards and view changes to make
+              our system scalable and resilient. We will learn how to implement those
+              standard techniques on Unison Cloud, and then discuss the unique optimisations
+              enabled  by its innovative combination of features.
+            </p>
           </div>
         </div>
       </div>
