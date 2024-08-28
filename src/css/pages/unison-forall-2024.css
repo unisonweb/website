@@ -4,8 +4,8 @@
   padding-bottom: 4rem;
 }
 
-#unison-forall-2024 a:not(.button),
-#unison-forall-2024 a:not(.button):visited {
+#unison-forall-2024 main a:not(.button),
+#unison-forall-2024 main a:not(.button):visited {
   color: var(--color-blue-1);
 }
 

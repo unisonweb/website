@@ -663,6 +663,10 @@ body.modal-open {
     right: auto;
     left: 50%;
   }
+
+  #main-header #main-nav {
+    gap: 0.5rem;
+  }
 }
 
 @media only screen and (max-width: 650px) {
@@ -679,11 +683,18 @@ body.modal-open {
   }
 
   #main-header #secondary-nav .social-links {
-    gap: 0.5rem;
+    gap: 0.25rem;
+  }
+
+  #main-header nav section {
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
 @media only screen and (max-width: 450px) {
+
   #main-header nav a#logo {
     margin: 0;
   }
