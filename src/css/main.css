@@ -629,6 +629,18 @@ body.modal-open {
     margin-bottom: 1rem;
   }
 
+
+  #main-header .announcement {
+    font-size: 0.75rem;
+    margin-top: 1rem;
+    padding: 1rem;
+  }
+
+  #main-header .announcement img,
+  #main-header .announcement .button {
+    display: none;
+  }
+
   #main-header #main-nav {
     flex-direction: column;
     gap: 1.5rem;
@@ -678,6 +690,10 @@ body.modal-open {
     display: none;
   }
 
+  #main-header .announcement {
+    display: none;
+  }
+
   #main-header nav .button .button_label {
     display: none;
   }
@@ -694,7 +710,6 @@ body.modal-open {
 }
 
 @media only screen and (max-width: 450px) {
-
   #main-header nav a#logo {
     margin: 0;
   }
