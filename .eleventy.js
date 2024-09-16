@@ -47,7 +47,7 @@ function next(link) {
   return paginationItem("next", link);
 }
 
-module.exports = function (config) {
+module.exports = function(config) {
   // Exclusively use .eleventyignore, to make sure src/docs are used as source
   config.setUseGitIgnore(false);
 
@@ -148,6 +148,21 @@ module.exports = function (config) {
       return author.name;
     } else {
       return titleCase(authorTag.replaceAll("-", " "));
+    }
+  });
+
+  const markdown = require("markdown-it")({
+    html: true,
+    breaks: true,
+    linkify: true,
+  });
+
+  config.addFilter("markdown", (raw) => {
+    if (raw && raw.length) {
+      return markdown.renderInline(raw);
+    }
+    else {
+      return raw;
     }
   });
 

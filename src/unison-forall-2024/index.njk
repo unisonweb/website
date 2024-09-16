@@ -116,155 +116,37 @@ title: Unison Forall 2024
           </div>
         </div>
 
-        <div class="talks">
-          <h2>Talks & Speakers</h2>
-          <div class="talk-cards">
-            <div class="card">
-              <h2>Busy Beaver Problem </h2>
-              <h3>
-                <div class="avatar" style="background-image: url(/assets/unison-forall-2024/dvberkel.jpg)"></div>
-                Daan van Berkel
-              </h3>
-              <hr>
-              <p>Turing machines are a universal computing model that are
-                very capable. But even they have their limitations. Some
-                functions are uncomputable.
-              </p>
+        <div class="schedule">
+          <h2>Schedule</h2>
 
-              <p>One class of functions is called the busy beaver problem;
-                for a Turing machine of a number of states. How many steps
-                can they take before they halt?
-              </p>
+          <div class="schedule-table">
+            {%- for event in conf2024.events %}
+            {% if event.speaker %}
+            <div class="card schedule-slot">
+            {% else %}
+            <div class="card schedule-slot break">
+            {% endif %}
+              <div class="schedule-time-range">
+                <span class="schedule-time">{{event.start}}</span>
+                <span class="schedule-time-separator">-</span>
+                <span class="schedule-time">{{event.end}}</span>
+              </div>
+              <div class="schedule-description">
+                <h3>{{event.title}}</h3>
+                {% if event.details %}
+                <div>{{ event.details | markdown | safe }}</div>
+                {% endif %}
+              </div>
+              {% if event.speaker %}
+              <div class="schedule-speaker">
+                <div class="speaker-photo" style="background-image: url({{event.speakerPhotoUrl}})"></div>
+                <h4>{{event.speaker}}</h4>
+              </div>
+              {% endif %}
             </div>
-
-            <div class="card">
-              <h2>Full Stack Web Development with Unison, htmx, and Web Components</h2>
-              <h3>
-                <div class="avatar" style="background-image: url(/assets/unison-forall-2024/tavish.jpg)"></div>
-                Tavish Pegram
-              </h3>
-              <hr>
-              <p>Make modern web applications with Unison using the “WUH?” stack!</p>
-            </div>
-
-            <div class="card">
-              <h2>UIs in Unison</h2>
-              <h3>
-                <div class="avatar" style="background-image: url(/assets/unison-forall-2024/dfreeman.jpg)"></div>
-                Dan Freeman
-              </h3>
-              <hr>
-              <p>CLIs and cloud services are right in Unison’s wheelhouse,
-                but often you want to put a GUI in front of the end user.
-                What does that look like in the Unison ecosystem?
-              </p>
-
-              <p>
-                This talk will survey approaches to building Unison UIs
-                today, then speculate (wildly!) on what might be possible in
-                the future 🔮
-              </p>
-            </div>
-            <div class="card">
-              <h2>Boost your command-line applications with potions!</h2>
-              <h3>
-                <div class="avatar" style="background-image: url(/assets/unison-forall-2024/etorreborre.jpg)"></div>
-                Eric Torreborre
-              </h3>
-              <hr>
-              <p>
-                This talk presents <code>potions</code>, a library for parsing
-                command-line arguments: its features, how Unison is leveraged
-                for its implementation (abilities anyone?) and some of the
-                paper cuts that hurt during its development.
-              </p>
-            </div>
-            <div class="card">
-              <h2>Toward a rich and graphical UCM</h2>
-              <h3>
-                <div class="avatar" style="background-image: url(/assets/unison-forall-2024/hojberg.jpg)"></div>
-                Simon Højberg
-              </h3>
-              <hr>
-              <p>
-                A look to the future where we'll explore the next progression
-                of the Unison Codebase Manager (UCM): a rich, graphical, and
-                keyboard-driven modern UI. How common tasks like type-checking,
-                project and branch navigation, definition management, and yes,
-                editing, could work in a different setting than the terminal.
-              </p>
-            </div>
-            <div class="card">
-              <h2>Distributed streaming on Unison Cloud</h2>
-              <h3>
-                <div class="avatar" style="background-image: url(/assets/unison-forall-2024/fabio.jpg)"></div>
-                Fabio Labella
-              </h3>
-              <hr>
-              <p>
-                In this talk we’ll look at the implementation of KLogs, a
-                distributed streaming library built entirely on Unison Cloud.
-              </p>
-              <p>
-                We’ll start our journey in the beautiful landscape of
-                functional programming APIs, and then take an ability handler
-                to the perilous world of distributed systems, a world where we
-                need <em>fences</em>, <em>leases</em>, <em>shards</em> and
-                <em>view changes</em> to make our system scalable and
-                resilient. We will learn how to implement those standard
-                techniques on Unison Cloud, and then discuss the unique
-                optimisations enabled  by its innovative combination of
-                features.
-              </p>
-            </div>
-            <div class="card">
-              <h2>Fun with Actors in Unison</h2>
-              <h3>
-                <div class="avatar" style="background-image: url(/assets/unison-forall-2024/alvaro.jpg)"></div>
-                Alvaro Carrasco
-              </h3>
-              <hr>
-              <p>
-                Implementing akka/erlang-style actors/processes in unison.
-                Unison’s “abilities” provide for a very natural and ergonomic
-                experience for using actors. We’ll go through the
-                implementation, live-code some demos, and explore some runtime
-                visualizations.
-              </p>
-            </div>
-            <div class="card">
-              <h2>How to Learn a Language (without ever using it)</h2>
-              <h3>
-                <div class="avatar" style="background-image: url(/assets/unison-forall-2024/kyleg.jpg)"></div>
-                Kyle Goetz
-              </h3>
-              <hr>
-              <p>
-                Language parsing is indispensable for software development. It
-                enables various functionalities like syntax checking, code
-                navigation, refactoring, and static analysis. Tree Sitter is a
-                parser generator and incremental parsing library. This talk
-                will cover how parsing a language works and how the Tree Sitter
-                grammar for Unison was written.
-              </p>
-            </div>
-            <div class="card">
-              <h2>Backpropagation in Unison: A Friendly Introduction</h2>
-              <h3>
-                <div class="avatar" style="background-image: url(/assets/unison-forall-2024/gerardf.jpg)"></div>
-                Gerard Finol
-              </h3>
-              <hr>
-              <p>
-                Backpropagation is the backbone of training neural networks,
-                but how does it actually work? In this session, we’ll break
-                down the essentials of backpropagation in a relaxed,
-                approachable way, explaining the core concepts and the
-                intuition behind the math. We’ll conclude with a dive into how
-                to implement backpropagation in Unison.
-              </p>
-            </div>
+            {%- endfor %}
           </div>
+
         </div>
       </div>
     </main>
