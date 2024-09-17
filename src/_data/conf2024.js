@@ -87,7 +87,7 @@ We’ll start our journey in the beautiful landscape of functional programming A
     {
       start: "3:50",
       end: "4:30pm",
-      title: "Backpropagation in Unison: A Friendly Introduction:  3:50 - 4:30 PM",
+      title: "Backpropagation in Unison: A Friendly Introduction",
       details: `Backpropagation is the backbone of training neural networks, but how does it actually work? In this session, we’ll break down the essentials of backpropagation in a relaxed, approachable way, explaining the core concepts and the intuition behind the math. We’ll conclude with a dive into how to implement backpropagation in Unison.`,
       speaker: "Gerard Finol",
       speakerPhotoUrl: "/assets/unison-forall-2024/gerardf.jpg"
