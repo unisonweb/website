@@ -347,8 +347,19 @@
   margin-bottom: 1em;
 }
 
+
 .unison-doc ol:last-child,
 .unison-doc ul:last-child {
+  margin-bottom: 0;
+}
+
+.unison-doc ol li,
+.unison-doc ul li {
+  margin-bottom: 0.5em;
+}
+
+.unison-doc ol li:last-child,
+.unison-doc ul li:last-child {
   margin-bottom: 0;
 }
 
