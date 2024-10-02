@@ -55,9 +55,9 @@ module.exports = {
       speakerPhotoUrl: "/assets/unison-forall-2024/etorreborre.jpg"
     },
     {
-      start: "2:05",
+      start: "1:35",
       end: "2:35 PM",
-      title: "30 minute break",
+      title: "hour break",
     },
     {
       start: "2:35",
