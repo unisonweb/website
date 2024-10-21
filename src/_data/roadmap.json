@@ -27,8 +27,8 @@
       "areas": ["cloud", "performance"]
     },
     {
-      "title": "Daemons: long-running resillient background tasks",
-      "description": "A powerful building block for scheduled jobs, distributed event processing, resillient workflows and more.",
+      "title": "Daemons: long-running resilient background tasks",
+      "description": "A powerful building block for scheduled jobs, distributed event processing, resilient workflows and more.",
       "areas": ["cloud"]
     },
     {
