@@ -10,19 +10,14 @@
   },
   "recently": [
     {
-      "title": "JIT compiler beta release",
-      "description": "Compile Unison to native code.",
-      "areas": ["runtime", "performance"]
-    },
-    {
-      "title": "Redesigned merge algorithm",
-      "description": "Branch merges that 'Just Work'.",
-      "areas": ["ucm"]
-    },
-    {
-      "title": "Structural hyperlinked diffs",
-      "description": "Structural hyperlinked diffs for Contributions on Unison Share.",
+      "title": "UCM quality of life improvements",
+      "description": "Examples: per project undo and reflog, fast shallow clones, bugfixes and performance improvements.",
       "areas": ["unison-share", "ucm"]
+    },
+    {
+      "title": "Code search on Unison Share",
+      "description": "Search across all projects on Unison Share.\n\nImplemented using an open source Unison library, running atop Unison Cloud.",
+      "areas": ["unison-share", "cloud"]
     }
   ],
   "now": [
@@ -32,20 +27,8 @@
       "areas": ["cloud", "performance"]
     },
     {
-      "title": "UCM quality of life improvements",
-      "description": "Examples: per project undo and reflog, fast shallow clones, bugfixes and performance improvements.",
-      "areas": ["unison-share", "ucm"]
-    },
-    {
       "title": "Daemons: long-running resillient background tasks",
       "description": "A powerful building block for scheduled jobs, distributed event processing, resillient workflows and more.",
-      "areas": ["cloud"]
-    }
-  ],
-  "next": [
-    {
-      "title": "Scheduled jobs and cloud cron",
-      "description": "Open source library for resilient scheduled jobs and recurring jobs.",
       "areas": ["cloud"]
     },
     {
@@ -54,14 +37,31 @@
       "areas": ["cloud"]
     },
     {
-      "title": "Code search on Unison Share",
-      "description": "Search across all projects on Unison Share.\n\nImplemented using an open source Unison library, running atop Unison Cloud.",
+      "title": "Graphical UCM v1",
+      "description": "All the same functionality as UCM, but in a rich UI.\n\n• Command palette with typeahead.\n• Hyperlinked code viewing.\n• Structural diffs.",
+      "areas": ["ucm"]
+    },
+    {
+      "title": "Interpreter performance improvement",
+      "description": "Low hanging performance improvements in the Unison interpreter.",
+      "areas": ["core-language"]
+    }
+  ],
+  "next": [
+    {
+      "title": "Contributions v2",
+      "description": "Next version of change management on Share with better diffs and support for code review.",
+      "areas": ["unison-share"]
+    },
+    {
+      "title": "Project Collaboration",
+      "description": "Organization support and project collaborators.",
       "areas": ["unison-share", "cloud"]
     },
     {
-      "title": "Graphical UCM",
-      "description": "All the same functionality as UCM, but in a rich UI.\n\n• Command palette with typeahead.\n• Hyperlinked code viewing.\n• Structural diffs.",
-      "areas": ["ucm"]
+      "title": "Dependents in Unison Share",
+      "description": "View dependents and dependencies of definitions in Unison Share.",
+      "areas": ["unison-share"]
     }
   ],
   "later": [
@@ -71,9 +71,19 @@
       "areas": ["unison-share", "ucm"]
     },
     {
+      "title": "Scheduled jobs and cloud cron",
+      "description": "Open source library for resilient scheduled jobs and recurring jobs.",
+      "areas": ["cloud"]
+    },
+    {
       "title": "Proper record types",
       "description": "Support for extensible records; an extension to the syntax and the type system.",
       "areas": ["core-language"]
+    },
+    {
+      "title": "Notifications",
+      "description": "A fully configurable notification system for Unison Share.",
+      "areas": ["unison-share"]
     }
   ]
 }

@@ -7,7 +7,8 @@
     "dev": "eleventy --serve --port 2345",
     "preBuild": "./build.mjs",
     "build": "./build.mjs && eleventy",
-    "deploy:prod": "netlify deploy --prod --build"
+    "deploy:prod": "netlify deploy --prod --build",
+    "deploy:preview": "netlify deploy --build --context deploy-preview"
   },
   "repository": {
     "type": "git",
