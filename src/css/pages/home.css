@@ -182,19 +182,6 @@
   display: none;
 }
 
-#home #hero .install.install-mac .apple-silicon {
-  font-size: 0.875rem;
-  margin-top: 1rem;
-  opacity: 0.75;
-}
-
-#home #hero .install.install-mac .apple-silicon abbr {
-  cursor: help;
-}
-#home #hero .install.install-mac .apple-silicon a {
-  text-decoration: underline;
-}
-
 #home #hero .install .prompt {
   height: 2.5rem;
   position: absolute;
