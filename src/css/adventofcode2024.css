@@ -56,7 +56,7 @@
 }
 
 .details {
-  width: 38rem;
+  max-width: 38rem;
   margin: auto;
   margin-bottom: 5rem;
   display: flex;
@@ -64,6 +64,7 @@
   gap: 1rem;
   font-size: 1.125rem;
   text-align: justify;
+  padding: 0 1.5rem;
 }
 
 .details a {
@@ -77,15 +78,9 @@
 }
 
 @media only screen and (max-width: 1024px) {
-  #adventofcode2024 .hero,
-  .conference-details,
-  .schedule {
+  #adventofcode2024 .hero {
     width: 100%;
     padding: 0 1.5rem;
-  }
-
-  .conference-description {
-    width: 100%;
   }
 }
 
@@ -100,33 +95,5 @@
 
   #adventofcode2024 .hero footer img {
     max-width: 75%;
-  }
-
-  #adventofcode2024 .hero .text h2 {
-    font-size: 0.875rem;
-    font-weight: normal;
-  }
-
-  #adventofcode2024 .schedule-slot {
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: flex-start;
-  }
-
-  #adventofcode2024 .schedule-time-range,
-  #adventofcode2024 .schedule-description,
-  #adventofcode2024 .schedule-speaker {
-    width: auto;
-  }
-
-  #adventofcode2024 .schedule-speaker {
-    flex-direction: row;
-    gap: 0.5rem;
-  }
-
-  #adventofcode2024 .schedule-speaker .speaker-photo {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 1rem;
   }
 }
