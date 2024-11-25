@@ -24,29 +24,104 @@ title: Unison Advent of Code 2024
           <section class="text">
             <h1>🎄 <br>'Tis the season</h1>
             <div class="description card">
-              Every year the Unison community joins to solve daily programming puzzles. This year is no different.
-              <br>Join us as we learn and enjoy the holiday spirits together.
+              Every Advent of Code the Unison community joins together to solve daily programming puzzles. This year is no different.
+              <br><br>Join us as we learn and enjoy the holiday spirit together.
             </div>
             <div class="actions">
-              <a class="contained button large default" target="_blank" href="https://unison-lang.org/discord">Discord</a>
+              <a class="contained button large default primary-mono" target="_blank" href="https://unison-lang.org/discord">Join our Discord</a>
               <a class="contained button large default" target="_blank" href="https://share.unison-lang.org/@unison/advent-of-code">Template Project</a>
             </div>
           </section>
         </article>
+        <hr>
         <div class="details">
-          <h3>A bit about Unison, for the uninitiated</h3>
+          <h3>🎄 Season's Greetings, Programmers! 🎄</h3>
+          <p>
+            This December, we invite you to tackle this year’s Advent of Code puzzles using the Unison programming language! It’s the perfect opportunity to explore a unique language and connect with a friendly community of fellow enthusiasts. Here’s a bit more about Unison and how you can join in.
+          </p>
+
+          <h3>What makes Unison different?</h3>
+          <p>
+            Unison is a statically typed functional programming language that
+            <a href="docs/the-big-idea/" target="_blank">reimagines how code is saved, shared, and executed.</a> 
+            It might look familiar for folks who are fans of Python's
+            whitespacing rules or who are familiar with ML-style languages: 
+          </p>
+
+          <pre><code>myResult : Nat 
+myResult = Nat.range 0 10
+  |> List.map (x -> x + 100)
+  |> List.filter isEven
+  |> List.foldLeft (acc n -> acc * n ) 1</code></pre>
 
           <p>
-            Unison is a general-purpose, statically typed functional programming
-            language in which functions are saved and identified by a hash of
-            their AST, not as text values on a file system.
-            <a href="https://www.unison-lang.org/docs/the-big-idea/">
-              We think this decision has radical consequences
-            </a>
-            and built everything from <a href="https://share.unison-lang.org/">
-              our code hosting tooling
-            </a> and <a href="https://www.unison.cloud/">cloud platform</a>
-            to suit this new programming model. 😎
+            But unlike traditional languages, Unison assigns a unique hash to
+            every definition based on its *content.* Your code is saved
+            programmatically by its hash, not as a bag of text on the file
+            system. 
+          </p>
+
+          <p>
+            Because of this core difference, Unison can provide a seamless
+            developer experience for managing dependencies, deploying and
+            running code, and scaling applications in distributed systems.
+          </p>
+
+          <p>
+            Check out what Unison Code looks like in our <a href="/docs/at-a-glance" target="_blank">at-a-glance guide</a>.
+          </p>
+
+          <h3>Kick Off with the Unison Advent of Code Template</h3>
+          <p>
+            Unison's dedicated <strong>Advent of Code template project</strong>
+            makes solving puzzles a breeze! With this template, you can:
+          </p>
+
+          <ul>
+            <li>Authenticate with the Advent of Code platform and download your puzzle inputs</li>
+            <li>Solve and submit puzzles directly within the Unison Codebase Manager and your IDE</li>
+          </ul>
+
+          <p>
+            No need to hop between tools or juggle files—Unison simplifies
+            everything.
+          </p>
+          <p>Start your adventure with the <a
+            href="https://share.unison-lang.org/@unison/advent-of-code"
+          target="_blank">Unison AdventOfCode Template project</a>.
+          </p>
+
+          <h3>Collaborate and Share</h3>
+          <p>
+            Dive into thoughtfully crafted solution write-ups and Unison Docs
+            from past participants, or write your own. In Unison, documentation
+            is code. You can include typechecked, running code in your docs. 
+          </p>
+
+          <p>
+            Check out some highlights from 2023 and 2022 and help us continue
+            this awesome tradition!
+          </p>
+
+          <ul>
+            <li><a href="/blog/advent-of-code-a-look-back/" target="_blank">Write-ups from 2023</a></li>
+            <li><a href="/blog/advent-of-code-highlights2022/" target="_blank">Write-ups from 2022</a></li>
+          </ul>
+
+          <p>
+            Looking for tips or help? Join our <strong>Advent of Code community channels:</strong>
+          <p>
+
+          <ul>
+            <li><a href="https://unison-lang.org/discord" target="_blank"><strong>Discord:</strong></a> Collaborative live through discussion</li>
+            <li><a href"" target="_blank"><strong>Community leaderboard:</strong></a> Use the code: <em><code>96155-309fe9eb</code></em>.</li>
+          </ul>
+
+          <h3>Ready to begin?</h3>
+          <p>
+            <a href="/docs/quickstart/" target="_blank">Download Unison</a> 
+            and brush up on your puzzle-solving skills. We’re excited to have
+            you join us in making this Advent season one to remember.
           </p>
         </div>
       </div>
