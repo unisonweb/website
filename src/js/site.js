@@ -133,7 +133,7 @@
   });
 
   const $autocomplete = one("#autocomplete");
-  const $searchButton = one("#autocomplete .toggle");
+  const $searchButton = one("#search-button");
   const $body = one("body");
 
   one(".aa-InputWrapperPrefix").innerHTML =
