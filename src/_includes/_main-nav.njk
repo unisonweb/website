@@ -19,14 +19,7 @@
       <a href="https://unison.cloud" target="_blank" class="cloud tooltip-trigger" data-tooltip-content-id="unison-cloud-tooltip">
         Cloud
       </a>
-      <a class="aoc-nav" href="/adventofcode2024" {% if '/adventofcode2024' in page.url %}aria-current="page"{% endif %}>
-        <span class="size-medium-plus">🎄 Advent of Code 2024</span>
-        <span class="size-small-only">Advent of Code</span>
-        <div class="aoc-callout">
-          🎁 Solve holiday puzzles with Unison
-          <img width="42" src="/assets/handdrawn-arrow-right.svg">
-        </div>
-      </a>
+      {% // include "_aoc-nav-item.njk" %}
     </section>
 
     <section id="secondary-nav">
