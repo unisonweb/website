@@ -1,0 +1,713 @@
+<script>
+  function rand(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  class WrappedCardGrid extends HTMLElement {
+    connectedCallback() {
+      this.community();
+    }
+
+    community() {
+      const wordSoup = this.querySelector(".community .word-soup");
+      const words = this.querySelectorAll(".community .word-soup .word");
+      let inFocus = words.length / 2 - 1; // start in the middle
+
+      const animate = () => {
+        words.forEach(w => w.classList.remove("focus"));
+
+        words[inFocus].classList.add("focus");
+        inFocus = inFocus + 1;
+
+        if (inFocus === words.length) {
+          inFocus = 0;
+        }
+      }
+
+      setInterval(animate, 1500);
+    }
+  }
+
+  customElements.define("wrapped-card-grid", WrappedCardGrid);
+</script>
+<template webc:root>
+  <wrapped-card
+    @title="Language & tooling development"
+    class="wrapped_1-2 wrapped_color_pale-pink"
+  >
+    <wrapped-icon slot="icon" color="pink" size="small">
+      <icon-cli></icon-cli>
+    </wrapped-icon>
+    <p slot="description">
+      We shipped new tools and features for every part of the programming experience,
+      from how you download libraries, to faster runtime performance, to how your codebase stores its history.
+    </p>
+    <div slot="graphic" class="kpis">
+      <wrapped-kpi-group>
+        <wrapped-kpi kpi="3069" label="Commits"></wrapped-kpi>
+        <wrapped-kpi kpi="436" label="PRs merged"></wrapped-kpi>
+        <wrapped-kpi kpi="17" label="Releases"></wrapped-kpi>
+        <wrapped-kpi kpi="9414" label="Release downloads"></wrapped-kpi>
+      </wrapped-kpi-group>
+    </div>
+  </wrapped-card>
+
+  <wrapped-card
+    @title="Unison Share"
+    class="wrapped_1-2 wrapped_color_pale-purple"
+  >
+    <wrapped-icon slot="icon" color="purple" size="small">
+      <icon-unison-mark></icon-unison-mark>
+    </wrapped-icon>
+    <p slot="description">
+      Unison programmers have been building a dynamic ecosystem
+      of projects and apps. Whether
+      you’ve authored multiple libraries this year or just created your
+      first hello-world, you’re in good company.
+    </p>
+    <div slot="graphic" class="kpis">
+      <wrapped-kpi-group>
+        <wrapped-kpi kpi="422" label="New projects"></wrapped-kpi>
+        <wrapped-kpi kpi="258" label="Contributions"></wrapped-kpi>
+        <wrapped-kpi kpi="923" label="Project releases"></wrapped-kpi>
+        <wrapped-kpi kpi="54930" label="Project downloads"></wrapped-kpi>
+      </wrapped-kpi-group>
+    </div>
+  </wrapped-card>
+
+  <wrapped-card
+    @title="Unison Cloud"
+    class="unison-cloud wrapped_3-3 wrapped_color_blue"
+  >
+    <wrapped-icon slot="icon" color="blue" size="small">
+      <icon-cloud></icon-cloud>
+    </wrapped-icon>
+
+    <p slot="description">
+      Did we mention, we released a whole Cloud computing platform in 2024? That's right, Unison Cloud hasn't yet turned 1, and already, we've added <strong>new storage</strong>
+      capabilities and <strong>distributed computing primitives</strong> for building and
+      deploying <strong>web applications</strong>.
+      <br><br><a href="https://unison.cloud/signup" class="button medium primary-mono contained" target="_blank">
+        Signup for free
+      </a>
+    </p>
+
+    <div slot="graphic">
+      <div class="cloud-graphic">
+        <div class="code-example"><http-code-example></http-code-example></div>
+        <div class="clouds">
+          <cloud-background></cloud-background>
+        </div>
+      </div>
+    </div>
+  </wrapped-card>
+
+  <wrapped-card
+    @title="Community"
+    class="wrapped_2-3 community wrapped_color_pale-green">
+    <wrapped-icon slot="icon" color="green" size="small">
+      <icon-wireframe-globe></icon-wireframe-globe>
+    </wrapped-icon>
+
+    <p slot="description">
+      You are the best part of Unison's year. We are constantly inspired by the community of friendly, helpful, and intrepid Unison programmers. <strong>Thank you for being here!</strong>
+    </p>
+
+    <div slot="graphic">
+      <a href="https://unison-lang.org/discord" class="button medium contained primary-mono" target="_blank">
+        Join our Discord
+      </a>
+
+      <div class="word-soup">
+        <span class="word">Launched a newsletter</span>
+        <span class="word">1128 new people in Discord</span>
+        <span class="word">Unison Share open sourced</span>
+        <span class="word">Advent of Code</span>
+        <span class="word">Community survey</span>
+        <span class="word">Community meetup in the Netherlands</span>
+      </div>
+    </div>
+  </wrapped-card>
+
+  <wrapped-card
+    @title="Top contributors"
+    class="wrapped_1-3 top-contributors wrapped_color_pale-yellow">
+
+    <wrapped-icon slot="icon" color="orange" size="small">
+      <icon-trophy></icon-trophy>
+    </wrapped-icon>
+
+    <div slot="description">
+      <p> Hats off to these prolific public project creators: </p>
+
+      <ol>
+        <li>
+          <a target="_blank" href="https://share.unison-lang.org/@alvaroc1">
+            <img width="24" height="24" src="https://avatars.githubusercontent.com/u/107395?v=4">
+            <span>alvaroc1</span>
+          </a>
+        </li>
+        <li>
+          <a target="_blank" href="https://share.unison-lang.org/@kylegoetz">
+            <img width="24" height="24" src="https://avatars.githubusercontent.com/u/8161573?v=4">
+            <span>kylegoetz</span>
+          </a>
+        </li>
+        <li>
+          <a target="_blank" href="https://share.unison-lang.org/@tapegram">
+            <img width="24" height="24" src="https://avatars.githubusercontent.com/u/1281274?v=4">
+            <span>tapegram</span>
+          </a>
+        </li>
+        <li>
+          <a target="_blank" href="https://share.unison-lang.org/@dvberkel">
+            <img width="24" height="24" src="https://avatars.githubusercontent.com/u/493347?v=4">
+            <span>dvberkel</span>
+          </a>
+        </li>
+        <li>
+          <a target="_blank" href="https://share.unison-lang.org/@etorreborre">
+            <img width="24" height="24" src="https://avatars.githubusercontent.com/u/10988?v=4">
+            <span>etorreborre</span>
+          </a>
+        </li>
+        <li>
+          <a target="_blank" href="https://share.unison-lang.org/@dfreeman">
+            <img width="24" height="24" src="https://avatars.githubusercontent.com/u/108688?v=4">
+            <span>dfreeman</span>
+          </a>
+        </li>
+      </ol>
+    </div>
+
+    <div slot="graphic"></div>
+  </wrapped-card>
+
+  <wrapped-card
+    @title="Unison Forall"
+    class="unison-forall wrapped_1-3 wrapped_color_pale-purple"
+  >
+    <p slot="description">
+      We hosted the second iteration of Unison's very own programming language conference, with talks from folks around the world!
+    </p>
+
+    <div slot="graphic" class="unison-forall-graphic">
+      <a href="https://www.youtube.com/watch?v=5l5MJIZLQ2M&list=PLQ0IlHfOk1GjQah6kjsknDpOQZDpf5iYP" class="button medium primary-mono contained" target="_blank">
+        Watch on YouTube
+      </a>
+    </div>
+  </wrapped-card>
+
+  <wrapped-card
+    @title="Shipped in 2024"
+    class="wrapped_2-3 shipped wrapped_color_pale-blue">
+    <wrapped-icon slot="icon" color="yellow" size="small">
+      <icon-rocket></icon-rocket>
+    </wrapped-icon>
+    <p slot="description">
+      We focused on collaboration, performance, and discovery this year.
+    </p>
+
+    <div slot="graphic" class="shipped-graphic">
+      <div class="word-soup">
+        <div class="word-group">
+          <div class="words">
+            <span class="word filler"></span>
+            <span class="word filler"></span>
+            <span class="word">🔎 New search on share</span>
+            <span class="word filler"></span>
+            <span class="word filler"></span>
+            <span class="word">🚅 Performance improvements</span>
+            <span class="word filler"></span>
+          </div>
+          <div class="words" aria-hidden="true">
+            <span class="word filler"></span>
+            <span class="word filler"></span>
+            <span class="word">🔎 New search on share</span>
+            <span class="word filler"></span>
+            <span class="word filler"></span>
+            <span class="word">🚅 Performance improvements</span>
+            <span class="word filler"></span>
+          </div>
+        </div>
+        <div class="word-group">
+          <div class="words">
+            <span class="word filler"></span>
+            <span class="word filler"></span>
+            <span class="word">⬇️  New <code>lib.install</code> command</span>
+            <span class="word filler"></span>
+            <span class="word">🔃 Improved <code>update</code> and <code>merge</code> commands</span>
+          </div>
+          <div class="words" aria-hidden="true">
+            <span class="word filler"></span>
+            <span class="word filler"></span>
+            <span class="word">⬇️  New <code>lib.install</code> command</span>
+            <span class="word filler"></span>
+            <span class="word">🔃 Improved <code>update</code> and <code>merge</code> commands</span>
+          </div>
+        </div>
+        <div class="word-group">
+          <div class="words">
+            <span class="word">🧑‍🎓 Unison Cloud learning portal</span>
+            <span class="word filler"></span>
+            <span class="word">↔️ Diffs on Share</span>
+            <span class="word filler"></span>
+            <span class="word filler"></span>
+          </div>
+          <div class="words" aria-hidden="true">
+            <span class="word">🧑‍🎓 Unison Cloud learning portal</span>
+            <span class="word filler"></span>
+            <span class="word">↔️ Diffs on Share</span>
+            <span class="word filler"></span>
+            <span class="word filler"></span>
+          </div>
+        </div>
+        <div class="word-group">
+          <div class="words">
+            <span class="word filler"></span>
+            <span class="word">📣 Blog engine</span>
+            <span class="word filler"></span>
+            <span class="word">🎟️ Tickets on Share</span>
+            <span class="word filler"></span>
+            <span class="word filler"></span>
+            <span class="word">🥇 Operator precedence</span>
+            <span class="word filler"></span>
+          </div>
+          <div class="words" aria-hidden="true">
+            <span class="word filler"></span>
+            <span class="word">📣 Blog engine</span>
+            <span class="word filler"></span>
+            <span class="word">🎟️ Tickets on Share</span>
+            <span class="word filler"></span>
+            <span class="word filler"></span>
+            <span class="word">🥇 Operator precedence</span>
+            <span class="word filler"></span>
+          </div>
+        </div>
+        <div class="word-group">
+          <div class="words">
+            <span class="word filler"></span>
+            <span class="word">📜 Project based history</span>
+            <span class="word filler"></span>
+            <span class="word filler"></span>
+            <span class="word">📁 <code>namespace</code> scratch file pragma</span>
+          </div>
+          <div class="words" aria-hidden="true">
+            <span class="word filler"></span>
+            <span class="word">📜 Project based history</span>
+            <span class="word filler"></span>
+            <span class="word filler"></span>
+            <span class="word">📁 <code>namespace</code> scratch file pragma</span>
+          </div>
+        </div>
+        <div class="word-group">
+          <div class="words">
+            <span class="word filler"></span>
+            <span class="word filler"></span>
+            <span class="word">📝 <code>edit</code> and <code>edit.new</code> commands </span>
+            <span class="word filler"></span>
+            <span class="word">🔍 <code>text.find</code> command</span>
+            <span class="word filler"></span>
+            <span class="word">🤖 JIT prerelease</span>
+          </div>
+          <div class="words" aria-hidden="true">
+            <span class="word filler"></span>
+            <span class="word filler"></span>
+            <span class="word">📝 <code>edit</code> and <code>edit.new</code> commands </span>
+            <span class="word filler"></span>
+            <span class="word">🔍 <code>text.find</code> command</span>
+            <span class="word filler"></span>
+            <span class="word">🤖 JIT prerelease</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </wrapped-card>
+  <wrapped-card
+    @title="What we're up to in 2025"
+    class="wrapped_2-3 next-2025 wrapped_color_space"
+  >
+    <wrapped-icon slot="icon" color="purple" size="small">
+      <icon-crystal-ball></icon-crystal-ball>
+    </wrapped-icon>
+    <p slot="description">
+      We're investing in a new UI to manage and write Unison code, organizational support for collaborating with teams, more Unison libraries, and core language improvements, like record types and runtime performance boosts. It's going to be a great year. Join us!
+    </p>
+    <div slot="graphic">
+      <a href="https://unison-lang.org/roadmap" class="button medium primary-mono contained" target="_blank">
+        Follow our roadmap
+      </a>
+      <div class="word-soup">
+        <span class="word">UCM Desktop</span>
+        <span class="word">Improved record types</span>
+        <span class="word">Unison Share notifications</span>
+        <span class="word">Scheduled jobs and cron</span>
+        <span class="word">Contribution code review</span>
+        <span class="word">BYOC: Bring your own Cloud</span>
+        <span class="word">Find usages on Unison Share</span>
+        <span class="word">Organizations on Unison Share</span>
+      </div>
+    </div>
+  </wrapped-card>
+  <wrapped-card
+    @title="Help shape the future of Unison"
+    class="wrapped_1-3 help-shape ">
+
+    <wrapped-icon slot="icon" color="dark-gray" size="small">
+      <icon-unison-mark></icon-unison-mark>
+    </wrapped-icon>
+    <div slot="description">
+      <p>
+        Stay up to date; join the community.
+      </p>
+      <div class="ctas">
+        <a href="https://unison-lang.org/discord" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+          <icon-discord></icon-discord>
+          Join Discord
+        </a>
+        <a href="https://bsky.app/intent/compose?text=Unison 2024 Wrapped is here! ✨ A look back at a year of Unison features, contributions, and achievements and a peek at what’s to come. @unison-lang.org https://unison-lang.org/wrapped2024" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+          <icon-bluesky></icon-bluesky> Share on Bluesky
+        </a>
+      </div>
+    </div>
+
+    <div slot="graphic">
+    </div>
+  </wrapped-card>
+</template>
+
+<style webc:scoped>
+  :host {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  :host .unison-cloud .code-example {
+    position: absolute;
+    right: 0;
+    bottom: -3rem;
+    width: 38rem;
+    height: min-content;
+    display: flex;
+    align-self: flex-end;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 12px;
+    transition: all 0.5s cubic-bezier(0.41, 1.88, 0.44, 0.96);
+  }
+
+  :host .unison-cloud .button {
+    background: var(--color-blue-1);
+  }
+
+  :host .unison-cloud .cloud-graphic:hover .code-example {
+    transform: translateY(-1rem);
+  }
+
+  :host .unison-cloud .cloud-graphic:hover .clouds {
+    top: 14rem;
+  }
+
+  :host .unison-cloud .wrapped_content {
+    width: 26rem;
+    height: 22rem;
+    z-index: 1;
+  }
+
+  :host .unison-cloud .clouds {
+    transition: all 1s cubic-bezier(0.41, 1.88, 0.44, 0.96);
+    top: 9rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-30%);
+    bottom: 0;
+    filter: blur(1.25rem);
+  }
+
+  :host .community {
+    background-image: url(/assets/wrapped2024/community.svg);
+    background-repeat: no-repeat;
+    background-position: 10rem -4rem;
+  }
+
+  :host .community .wrapped_content {
+    width: 22rem;
+  }
+
+  :host .community .button {
+    margin-left: 2rem;
+    background: var(--color-green-0);
+  }
+
+  :host .community .word-soup {
+    position: absolute;
+    bottom: 2rem;
+    right: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 1.25rem;
+    gap: 1rem;
+    justify-content: flex-end;
+    color: var(--color-green-0);
+    font-weight: 700;
+    margin-bottom: 2rem;
+    width: 26rem;
+  }
+
+  :host .community .word-soup .word {
+    filter: blur(0.5rem);
+    opacity: 0.75;
+    transition: all 0.5s;
+  }
+
+  :host .community .word-soup .word.focus {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale3d(1.2, 1.2, 1.2);
+    padding: 0 1rem;
+  }
+
+  :host .shipped .shipped-graphic {
+    background-color: linear-gradient(var(--color-blue-2), var(--color-blue-1));
+    background-image: url(/assets/wrapped2024/waves.svg);
+    background-repeat: no-repeat;
+    padding-top: 5rem;
+    margin-top: -2rem;
+  }
+
+  :host .shipped .word-soup {
+    --gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    gap: var(--gap);
+    justify-content: center;
+    font-weight: 500;
+    padding: 1rem;
+    height: 14rem;
+  }
+
+  :host .shipped .word-soup .word-group {
+    display: flex; 
+    gap: var(--gap);
+  }
+
+  :host .shipped .word-soup .words {
+    display: flex;
+    gap: var(--gap);
+    min-width: 100%;
+    flex-shrink: 0;
+    justify-content: space-around;
+    overflow: hidden;
+    animation: scrollx 25s linear infinite;
+  }
+
+  :host .shipped .word-soup .word {
+    flex-shrink: 0;
+    display: flex;
+    gap: 0.25rem;
+    line-height: 1;
+    opacity: 1;
+    color: var(--color-blue-5);
+    background: var(--color-blue-1);
+    padding: 0.3rem 0.5rem;
+    border-radius: 1.5rem;
+  }
+
+  :host .shipped .word-soup .word code {
+    line-height: 1;
+  }
+
+  :host .shipped .word-soup .word.filler {
+    opacity: 0.4;
+    background: var(--color-blue-1);
+    width: 7rem;
+  }
+
+  :host .shipped .word-soup .word.filler:nth-child(odd) {
+    width: 3rem;
+  }
+
+  @keyframes scrollx {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  :host .top-contributors ol {
+    margin-left: 0;
+    margin-top: 1rem;
+    list-style-type: none;
+  }
+
+  :host .top-contributors li {
+    padding: 0.25rem 0;
+    font-size: 1.125rem;
+  }
+
+  :host .top-contributors li a {
+    color: var(--color-blue-1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+  }
+
+  :host .top-contributors li img {
+    border-radius: 0.75rem;
+    box-shadow: 
+      0 0 0 1px rgba(255, 255, 255, 1),
+      0 0 0 2px rgba(0, 0, 0, 0.15);
+  }
+
+  :host .unison-forall-graphic {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 18rem;
+    padding-left: 2rem;
+    background-image: url(/assets/unison-forall.png);
+    background-repeat: no-repeat;
+    background-position: 0rem -1rem;
+    background-size: 250%;
+  }
+
+  :host .unison-forall .button {
+    background: var(--color-purple-2);
+  }
+
+  :host .next-2025 .wrapped_text p {
+    opacity: 0.75;
+  }
+
+  :host .next-2025 .button {
+    background: var(--color-purple-4);
+    color: var(--color-purple-1);
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  :host .next-2025 .word-soup {
+    --gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    gap: var(--gap);
+    font-weight: 500;
+    padding-top: 0.5rem;
+    height: 2.5rem;
+    overflow: hidden;
+    top: 93px;
+    left: 21rem;
+    position: absolute;
+  }
+
+  :host .next-2025 .word-soup .word:first-child {
+    animation: scrolly 14s cubic-bezier(0.41, 1.5, 0.44, 0.96) infinite;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+  }
+
+  @keyframes scrolly {
+    0% { margin-top: 0; }
+    10% { margin-top: -2.5rem; }
+    20% { margin-top: -5rem; }
+    30% { margin-top: -7.5rem; }
+    40% { margin-top: -10rem; }
+    50% { margin-top: -12.5rem; }
+    60% { margin-top: -15rem; }
+    70% { margin-top: -17.5rem; }
+    90% { margin-top: 0; }
+    100% { margin-top: 0; }
+  }
+
+  :host .next-2025 .word-soup .word {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    line-height: 1;
+    opacity: 1;
+    transition: all 0.5s;
+    color: var(--color-purple-5);
+    background: var(--color-gray-darken-30);
+    padding: 0.3rem 0.75rem;
+    border-radius: 1.5rem;
+    border: 2px solid var(--color-purple-1);
+    width: min-content;
+    flex-grow: 0;
+    flex-shrink: 0;
+    white-space: nowrap;
+    height: 2rem;
+  }
+
+  :host .help-shape .ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  :host .help-shape .button {
+    display: flex;
+    flex-grow: 0;
+    width: fit-content;
+  }
+
+  @media only screen and (max-width: 1023px) {
+    :host {
+      margin: 0 4rem;
+      flex-direction: column;
+    }
+
+    :host .unison-cloud .cloud-graphic {
+      display: none;
+    }
+
+    :host .community {
+      padding-bottom: 8rem;
+    }
+
+    :host .unison-forall {
+      padding-bottom: 16rem;
+    }
+    :host .unison-forall .button {
+      margin-top: 2rem;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    :host {
+      margin: 0 2rem;
+    }
+
+    :host .unison-cloud .wrapped_content {
+      width: auto;
+      height: auto;
+    }
+
+    :host .community {
+      padding-bottom: 2rem;
+    }
+
+    :host .next-2025 .word-soup,
+    :host .community .word-soup {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 496px) {
+    :host {
+      margin: 0 1.5rem;
+    }
+
+  }
+</style>

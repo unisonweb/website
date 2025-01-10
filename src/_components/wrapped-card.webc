@@ -1,0 +1,150 @@
+<section webc:root @attributes class="wrapped">
+  <div class="wrapped_content">
+    <slot name="icon"></slot>
+    <div class="wrapped_text">
+      <h2 @text="title"></h2>
+      <slot name="description"></slot>
+    </div>
+  </div>
+  <slot name="graphic"></slot>
+</section>
+
+<style webc:scoped>
+  :host {
+    display: flex;
+    flex-direction: column;
+    height: -webkit-fit-available;
+    position: relative;
+    background: var(--color-gray-lighten-55);
+    border-radius: 0.75rem;
+    font-weight: 500;
+    color: var(--color-gray-base);
+    font-size: 1rem;
+    overflow: clip;
+    --wrapped-kpi-border-color: var(--color-gray-darken-20-transparent);
+    --wrapped-kpi-color: var(--color-gray-base);
+  }
+
+  :host header {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  :host.wrapped_color_blue {
+    background: linear-gradient(145deg,
+      var(--color-blue-5),
+      var(--color-blue-2)
+    );
+    --wrapped-kpi-border-color: var(--color-blue-1);
+    --wrapped-kpi-color: var(--color-blue-2);
+  }
+
+  :host.wrapped_color_pale-blue {
+    background: var(--color-blue-5);
+    --wrapped-kpi-border-color: var(--color-blue-4);
+    --wrapped-kpi-color: var(--color-blue-2);
+  }
+
+  :host.wrapped_color_pale-purple {
+    background: var(--color-purple-6);
+    --wrapped-kpi-border-color: var(--color-purple-5);
+    --wrapped-kpi-color: var(--color-purple-1);
+  }
+
+  :host.wrapped_color_pale-pink {
+    background: var(--color-pink-5);
+    --wrapped-kpi-border-color: var(--color-pink-1-25pct);
+    --wrapped-kpi-color: var(--color-pink-0);
+  }
+
+  :host.wrapped_color_pale-green {
+    background: var(--color-green-5);
+    --wrapped-kpi-border-color: var(--color-green-4);
+  }
+
+  :host.wrapped_color_pale-yellow {
+    background: var(--color-orange-5);
+    --wrapped-kpi-border-color: var(--color-orange-4);
+  }
+
+  :host.wrapped_color_space {
+    background-color: var(--color-gray-darken-30);
+    background-image: url(/assets/wrapped2024/nebular.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: var(--color-gray-lighten-100);
+  }
+
+  :host.wrapped_color_space h2 {
+    color: var(--color-gray-lighten-100);
+  }
+
+  :host.wrapped_3-3 {
+    width: 100%;
+    flex-direction: row;
+  }
+
+  :host.wrapped_2-3 {
+    width: calc(66.666% - 0.75rem);
+  }
+
+  :host.wrapped_1-3 {
+    width: calc(33.333% - 0.75rem);
+  }
+
+  :host:nth-child(7).wrapped_1-3 {
+    width: calc(33.333% - 1.5rem);
+  }
+
+  :host.wrapped_1-2 {
+    width: calc(50% - 0.75rem);
+  }
+
+  :host .wrapped_content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  :host .wrapped_text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  :host h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--color-gray-darken-20);
+    text-wrap: balance;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  :host.wrapped_1-3 h2 {
+    font-size: 1.5rem;
+  }
+
+  :host p {
+    margin: 0;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+
+  :host .wrapped_content {
+    padding: 2rem;
+  }
+
+  @media only screen and (max-width: 1023px) {
+    :host.wrapped_3-3,
+    :host.wrapped_2-3,
+    :host.wrapped_1-3,
+    :host.wrapped_1-2,
+    :host:nth-child(7).wrapped_1-3 {
+      width: 100%;
+      flex-direction: column;
+    }
+  }
+</style>
