@@ -1,0 +1,11 @@
+<template webc:root>
+  <slot></slot>
+</template>
+
+<style webc:scoped>
+  :host {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+</style>

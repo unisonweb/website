@@ -1,0 +1,110 @@
+<section webc:root @attributes class="wrapped">
+  <div class="wrapped_content">
+    <slot name="icon"></slot>
+    <div class="wrapped_text">
+      <h3 @text="title"></h3>
+      <slot name="description"></slot>
+    </div>
+  </div>
+  <slot name="graphic"></slot>
+</section>
+
+<style webc:scoped>
+  :host {
+    display: flex;
+    flex-direction: column;
+    height: -webkit-fit-available;
+    position: relative;
+    background: var(--color-gray-lighten-55);
+    border-radius: 0.75rem;
+    font-weight: 500;
+    color: var(--color-gray-base);
+    font-size: 1rem;
+    overflow: clip;
+  }
+
+  :host header {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  :host.wrapped_color_pale-blue {
+    background: var(--color-blue-5);
+  }
+
+  :host.wrapped_color_pale-purple {
+    background: var(--color-purple-6);
+  }
+
+  :host.wrapped_color_pale-yellow {
+    background: var(--color-orange-5);
+  }
+
+  :host.wrapped_3-3 {
+    width: 100%;
+    flex-direction: row;
+  }
+
+  :host.wrapped_2-3 {
+    width: calc(66.666% - 0.75rem);
+  }
+
+  :host.wrapped_1-3 {
+    width: calc(33.333% - 0.75rem);
+  }
+
+  :host:nth-child(7).wrapped_1-3 {
+    width: calc(33.333% - 1.5rem);
+  }
+
+  :host.wrapped_1-2 {
+    width: calc(50% - 0.75rem);
+  }
+
+  :host .wrapped_content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  :host .wrapped_text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  :host h3 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--color-gray-darken-20);
+    text-wrap: balance;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  :host.wrapped_1-3 h3 {
+    font-size: 1.5rem;
+  }
+
+  :host p {
+    margin: 0;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+
+  :host .wrapped_content {
+    padding: 2rem;
+  }
+
+  @media only screen and (max-width: 1023px) {
+    :host.wrapped_3-3,
+    :host.wrapped_2-3,
+    :host.wrapped_1-3,
+    :host:nth-child(7).wrapped_1-3 {
+      width: 100%;
+      flex-direction: column;
+    }
+  }
+</style>

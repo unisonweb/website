@@ -1,0 +1,199 @@
+<script>
+  class WrappedCardGrid extends HTMLElement {
+    connectedCallback() {
+    }
+  }
+
+  customElements.define("wrapped-card-grid", WrappedCardGrid);
+</script>
+<template webc:root>
+  <wrapped-card
+    @title="Language & tooling development"
+    class="wrapped_1-2"
+  >
+    <wrapped-icon slot="icon" color="pink" size="small">
+      <icon-cli></icon-cli>
+    </wrapped-icon>
+    <p slot="description">
+      Describe HTTP and WebSocket deployments with a single function call. No
+      building containers, managing VMs, or other cloud infra management. Spend
+      your time writing service logic, not fixing YAML.
+    </p>
+    <div slot="graphic" class="kpis">
+      <wrapped-kpi-group>
+        <wrapped-kpi kpi="48" label="test"></wrapped-kpi>
+        <wrapped-kpi kpi="48" label="test"></wrapped-kpi>
+        <wrapped-kpi kpi="48" label="test"></wrapped-kpi>
+        <wrapped-kpi kpi="48" label="test"></wrapped-kpi>
+      </wrapped-kpi-group>
+    </div>
+  </wrapped-card>
+
+  <wrapped-card
+    @title="Unison Share"
+    class="wrapped_1-2 wrapped_color_pale-purple"
+  >
+    <wrapped-icon slot="icon" color="purple" size="small">
+      <icon-unison-mark></icon-unison-mark>
+    </wrapped-icon>
+    <p slot="description">
+      Describe HTTP and WebSocket deployments with a single function call. No
+      building containers, managing VMs, or other cloud infra management. Spend
+      your time writing service logic, not fixing YAML.
+    </p>
+    <div slot="graphic" class="kpis">
+      <wrapped-kpi kpi="48" label="test"></wrapped-kpi>
+      <wrapped-kpi-group>
+        <wrapped-kpi kpi="48" label="test"></wrapped-kpi>
+        <wrapped-kpi kpi="48" label="test"></wrapped-kpi>
+        <wrapped-kpi kpi="48" label="test"></wrapped-kpi>
+        <wrapped-kpi kpi="48" label="test"></wrapped-kpi>
+      </wrapped-kpi-group>
+    </div>
+  </wrapped-card>
+
+  <wrapped-card
+    @title="Unison Cloud"
+    class="unison-cloud wrapped_3-3 wrapped_color_pale-blue"
+  >
+    <wrapped-icon slot="icon" color="pale-blue" size="small">
+      <icon-cloud></icon-cloud>
+    </wrapped-icon>
+    <p slot="description">
+      Describe HTTP and WebSocket deployments with a single function call. No
+      building containers, managing VMs, or other cloud infra management. Spend
+      your time writing service logic, not fixing YAML.
+    </p>
+    <div slot="graphic"></div>
+  </wrapped-card>
+
+  <wrapped-card 
+    @title="Community"
+    class="wrapped_2-3">
+    <wrapped-icon slot="icon" color="green" size="small">
+      <icon-wireframe-globe></icon-wireframe-globe>
+    </wrapped-icon>
+
+    <p slot="description">
+      All service deployments are immutable and get a unique content-addressed hash. Named
+      services have a stable URL and can point to any service version. Easily
+      promote a deployment to production or rollback to an earlier version.
+    </p>
+
+    <div slot="graphic"></div>
+  </wrapped-card>
+
+  <wrapped-card 
+    @title="Top contributors"
+    class="wrapped_1-3">
+
+    <wrapped-icon slot="icon" color="yellow" size="small">
+      <icon-dependency></icon-dependency>
+    </wrapped-icon>
+
+    <p slot="description">
+      1-2 sentence blurb
+    </p>
+
+    <div slot="graphic"></div>
+  </wrapped-card>
+
+  <wrapped-card
+    @title="Unison Forall"
+    class="unison-forall wrapped_1-3"
+  >
+    <p slot="description">
+      Logs produced by your services or batch jobs are consolidated and easily
+      viewable in the Unison Cloud UI. You can also stream or filter your logs
+      with the full power of a programming language.
+    </p>
+
+    <div slot="graphic" class="unison-forall-graphic"></div>
+  </wrapped-card>
+
+  <wrapped-card
+    @title="Shipped in 2024"
+    class="durable-storage wrapped_2-3 wrapped_color_pale-yellow"
+  >
+    <wrapped-icon slot="icon" color="orange" size="small">
+      <icon-bolt-lightning></icon-bolt-lightning>
+    </wrapped-icon>
+    <p slot="description">
+      Getting data into and and out of storage is usually a tedious layer of
+      boilerplate in your application. With Unison Cloud, any value may be
+      saved in our transactional storage layer. Your access to storage is
+      statically typed and checked by Unison's typechecker.
+    </p>
+
+    <div class="durable-storage-code-example"></div>
+  </wrapped-card>
+  <wrapped-card
+    @title="2025"
+    class="wrapped_3-3"
+  >
+    <wrapped-icon slot="icon" color="purple" size="small">
+      <icon-crystal-ball></icon-crystal-ball>
+    </wrapped-icon>
+    <p slot="description">
+      Describe HTTP and WebSocket deployments with a single function call. No
+      building containers, managing VMs, or other cloud infra management. Spend
+      your time writing service logic, not fixing YAML.
+    </p>
+    <div slot="graphic"></div>
+  </wrapped-card>
+</template>
+
+<style webc:scoped>
+  :host {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  :host .unison-cloud .code-example {
+    position: absolute;
+    right: 0;
+    bottom: -3rem;
+    width: 38rem;
+    height: min-content;
+    display: flex;
+    align-self: flex-end;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 12px;
+    transition: all 0.5s cubic-bezier(0.41, 1.88, 0.44, 0.96);
+    overflow: clip;
+  }
+
+  :host .unison-cloud .code-example:hover {
+    transform: translateY(-1rem);
+  }
+
+  :host .unison-cloud .wrapped_content {
+    width: 26rem;
+    height: 22rem;
+  }
+
+  :host .unison-cloud.expanded .code-example {
+    overflow: initial;
+  }
+
+  :host .unison-forall {
+  }
+
+  :host .unison-forall-graphic {
+    height: 20rem;
+    background-image: url(/assets/unison-forall.png);
+    background-repeat: no-repeat;
+    background-size: 250%;
+  }
+
+  @media only screen and (max-width: 1023px) {
+  }
+
+  @media only screen and (max-width: 768px) {
+  }
+
+  @media only screen and (max-width: 496px) {
+  }
+</style>

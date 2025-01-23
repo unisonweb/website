@@ -1,0 +1,12 @@
+<template webc:root>
+  <h3 @text="kpi"></h3>
+  <h4 @text="label"></h4>
+</template>
+
+<style webc:scoped>
+  :host {
+    width: 50%;
+    text-align: center;
+    padding: 2rem;
+  }
+</style>

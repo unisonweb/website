@@ -35,5 +35,8 @@
     "ramda": "^0.27.1",
     "recursive-copy": "^2.0.13",
     "yaml": "^2.0.0-9"
+  },
+  "dependencies": {
+    "@11ty/eleventy-plugin-webc": "^0.11.2"
   }
 }
