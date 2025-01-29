@@ -120,7 +120,7 @@
 
       <div class="word-soup">
         <span class="word">Launched a newsletter</span>
-        <span class="word">1128 new people in Discord</span>
+        <span class="word">824 new people in Discord</span>
         <span class="word">Unison Share open sourced</span>
         <span class="word">Advent of Code</span>
         <span class="word">Community survey</span>
@@ -490,7 +490,7 @@
   }
 
   :host .shipped .word-soup .word-group {
-    display: flex; 
+    display: flex;
     gap: var(--gap);
   }
 
@@ -561,7 +561,7 @@
 
   :host .top-contributors li img {
     border-radius: 0.75rem;
-    box-shadow: 
+    box-shadow:
       0 0 0 1px rgba(255, 255, 255, 1),
       0 0 0 2px rgba(0, 0, 0, 0.15);
   }
