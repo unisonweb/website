@@ -6,6 +6,7 @@ const authors = require("./src/authors.json");
 const leftArrow = fs.readFileSync("./src/assets/icon-arrow-left.svg");
 const rightArrow = fs.readFileSync("./src/assets/icon-arrow-right.svg");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
+const pluginWebc = require("@11ty/eleventy-plugin-webc");
 
 function titleCase(str) {
   return str
@@ -50,6 +51,10 @@ function next(link) {
 module.exports = function(config) {
   // Exclusively use .eleventyignore, to make sure src/docs are used as source
   config.setUseGitIgnore(false);
+
+  config.addPlugin(pluginWebc, {
+    components: "src/_components/**/*.webc",
+  });
 
   // Layouts
   config.addLayoutAlias("base", "base.njk");

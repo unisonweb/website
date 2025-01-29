@@ -1,0 +1,22 @@
+<template webc:root>
+  <svg
+    width="100%"
+    height="100%"
+    viewBox="0 0 14 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <slot></slot>
+  </svg>
+</template>
+
+<style webc:scoped="icon">
+  :host {
+    display: inline-block;
+    font-size: 0.875rem;
+    width: 1em;
+    height: 1em;
+    color: var(--color-main-fg);
+    transition: all 0.2s;
+  }
+</style>

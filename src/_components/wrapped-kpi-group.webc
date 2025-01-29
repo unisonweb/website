@@ -1,0 +1,28 @@
+<template webc:root>
+  <slot></slot>
+</template>
+
+<style webc:scoped>
+  :host {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 2rem 2rem;
+  }
+
+  :host .wrapped-kpi {
+    width: 50%;
+  }
+
+  :host .wrapped-kpi:nth-child(odd) {
+    border-right: 1px solid var(--wrapped-kpi-border-color);
+  }
+
+  :host .wrapped-kpi:nth-child(1) {
+    border-bottom: 1px solid var(--wrapped-kpi-border-color);
+  }
+
+  :host .wrapped-kpi:nth-child(2) {
+    border-bottom: 1px solid var(--wrapped-kpi-border-color);
+  }
+</style>
