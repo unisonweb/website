@@ -6,15 +6,15 @@
     <meta charset="utf-8" />
     <meta
       name="description"
-      content="A friendly programming language from the future."
+      content="Our 2024 in review."
     />
     <meta
       name="twitter:description"
-      content="A friendly programming language from the future."
+      content="Our 2024 in review."
     />
     <meta
       property="og:description"
-      content="A friendly programming language from the future."
+      content="Our 2024 in review."
     />
     <meta
       name="viewport"
@@ -23,17 +23,17 @@
 
     <meta name="theme-color" content="#ffffff" />
 
-    <meta property="og:title" content="Unison programming language" />
-    <meta name="twitter:title" content="Unison programming language" />
+    <meta property="og:title" content="Unison Wrapped 2024" />
+    <meta name="twitter:title" content="Unison Wrapped 2024" />
 
     <meta property="og:type" content="blog" />
     <meta property="og:url" content="https://unison-lang.org" />
     <meta
       property="og:image"
-      content="https://unison-lang.org/assets/unison-social.png"
+      content="https://unison-lang.org/assets/unison-wrapped-2024-social.png"
     />
     <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="1200" />
+    <meta property="og:image:height" content="627" />
 
     <meta name="twitter:card" content="summary" />
     <meta
