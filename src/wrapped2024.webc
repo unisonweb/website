@@ -1,3 +1,19 @@
+---
+tags: blog
+permalink: wrapped2024/index.html
+authors:
+  - simon-højberg
+  - rebecca-mark
+categories:
+  - highlights
+date: 2025-01-29T00:00:00.000Z
+featuredImage: /assets/unison-wrapped-2024-social.png
+status: published
+summary: "We've had an unforgettable year of Unison features, contributions, and achievements. Take a look back at what we've accomplished and get a peek at what’s to come. 🔮"
+title: Unison Wrapped 2024
+eleventyExcludeFromCollections: false
+---
+
 <!DOCTYPE html>
 
 <html lang="en">
