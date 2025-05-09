@@ -28,6 +28,9 @@ PR's are gratefully accepted through the regular [Unison code contribution workf
 Ensure all dependencies are installed by running `npm install` (node v17+
 recommended).
 
+Run `ucm --codebase-create .` and then `clone @unison/website` inside `ucm` to
+initialize the required Unison `Doc`.
+
 ## Running the website locally
 
 `npm start` will both build and start a local version of the website.
