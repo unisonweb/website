@@ -10,21 +10,14 @@
   },
   "recently": [
     {
-      "title": "UCM quality of life improvements",
-      "description": "Examples: per project undo and reflog, fast shallow clones, bugfixes and performance improvements.",
-      "areas": ["unison-share", "ucm"]
+      "title": "UCM desktop v1",
+      "description": "A desktop application for browsing Unison code",
+      "areas": ["ucm"]
     },
     {
-      "title": "Code search on Unison Share",
-      "description": "Search across all projects on Unison Share.\n\nImplemented using an open source Unison library, running atop Unison Cloud.",
-      "areas": ["unison-share", "cloud"]
-    }
-  ],
-  "now": [
-    {
-      "title": "JIT compilation: Milestone 1",
-      "description": "Use JIT compiler for all nodes on Unison Cloud.",
-      "areas": ["cloud", "performance"]
+      "title": "Interpreter performance improvements",
+      "description": "Low hanging performance improvements in the Unison interpreter.",
+      "areas": ["core-language"]
     },
     {
       "title": "Daemons: long-running resilient background tasks",
@@ -32,26 +25,9 @@
       "areas": ["cloud"]
     },
     {
-      "title": "Distributed event processing",
-      "description": "Open source library for distributed event processing, streaming map-reduce, and lots more.",
+      "title": "Distributed stream processing",
+      "description": "Open source library for distributed stream processing, streaming map-reduce, and lots more.",
       "areas": ["cloud"]
-    },
-    {
-      "title": "Graphical UCM v1",
-      "description": "All the same functionality as UCM, but in a rich UI.\n\n• Command palette with typeahead.\n• Hyperlinked code viewing.\n• Structural diffs.",
-      "areas": ["ucm"]
-    },
-    {
-      "title": "Interpreter performance improvement",
-      "description": "Low hanging performance improvements in the Unison interpreter.",
-      "areas": ["core-language"]
-    }
-  ],
-  "next": [
-    {
-      "title": "Contributions v2",
-      "description": "Next version of change management on Share with better diffs and support for code review.",
-      "areas": ["unison-share"]
     },
     {
       "title": "Project Collaboration",
@@ -59,9 +35,48 @@
       "areas": ["unison-share", "cloud"]
     },
     {
+      "title": "Notifications",
+      "description": "A fully configurable notification system for Unison Share.",
+      "areas": ["unison-share"]
+    }
+  ],
+  "now": [
+    {
+      "title": "Unison Cloud BYOC",
+      "description": "Run Unison Cloud clusters on your own infrastructure.",
+      "areas": ["cloud", "performance"]
+    },
+    {
+      "title": "Contributions v2",
+      "description": "Next version of change management on Share with better diffs and support for code review.",
+      "areas": ["unison-share"]
+    },
+    {
       "title": "Dependents in Unison Share",
       "description": "View dependents and dependencies of definitions in Unison Share.",
       "areas": ["unison-share"]
+    },
+    {
+      "title": "UCM workflow improvements",
+      "description": "Rename-aware merges, better deletion refactoring support, branch diffs, and more.",
+      "areas": ["ucm"]
+    },
+    {
+      "title": "Unison MCP server",
+      "description": "Rich support for Unison coding assistants",
+      "areas": ["ucm"]
+    }
+  ],
+  "next": [
+    {
+      "title": "UCM desktop v2",
+      "description": "Improve terminal interaction and code editing",
+      "areas": ["ucm"]
+    },
+    {
+      "title": "Unison FFI",
+      "description": "Call C functions directly from Unison.",
+      "areas": ["core-language"]
     }
   ],
   "later": [
@@ -71,19 +86,19 @@
       "areas": ["unison-share", "ucm"]
     },
     {
+      "title": "Unison JIT",
+      "description": "LLVM-compile Unison functions on the fly.",
+      "areas": ["core-language"]
+    },
+    {
       "title": "Scheduled jobs and cloud cron",
       "description": "Open source library for resilient scheduled jobs and recurring jobs.",
       "areas": ["cloud"]
     },
     {
-      "title": "Proper record types",
-      "description": "Support for extensible records; an extension to the syntax and the type system.",
+      "title": "Record types",
+      "description": "First-class records support; an extension to the syntax and the type system.",
       "areas": ["core-language"]
-    },
-    {
-      "title": "Notifications",
-      "description": "A fully configurable notification system for Unison Share.",
-      "areas": ["unison-share"]
     }
   ]
 }
