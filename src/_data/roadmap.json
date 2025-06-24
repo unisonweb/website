@@ -15,7 +15,7 @@
       "areas": ["ucm"]
     },
     {
-      "title": "Interpreter performance improvement",
+      "title": "Interpreter performance improvements",
       "description": "Low hanging performance improvements in the Unison interpreter.",
       "areas": ["core-language"]
     },
@@ -25,8 +25,8 @@
       "areas": ["cloud"]
     },
     {
-      "title": "Distributed event processing",
-      "description": "Open source library for distributed event processing, streaming map-reduce, and lots more.",
+      "title": "Distributed stream processing",
+      "description": "Open source library for distributed stream processing, streaming map-reduce, and lots more.",
       "areas": ["cloud"]
     },
     {
@@ -42,8 +42,8 @@
   ],
   "now": [
     {
-      "title": "JIT compilation: Milestone 1",
-      "description": "Use JIT compiler for all nodes on Unison Cloud.",
+      "title": "Unison Cloud BYOC",
+      "description": "Run Unison Cloud clusters on your own infrastructure.",
       "areas": ["cloud", "performance"]
     },
     {
@@ -55,6 +55,16 @@
       "title": "Dependents in Unison Share",
       "description": "View dependents and dependencies of definitions in Unison Share.",
       "areas": ["unison-share"]
+    },
+    {
+      "title": "UCM workflow improvements",
+      "description": "Rename-aware merges, better deletion refactoring support, branch diffs, and more.",
+      "areas": ["ucm"]
+    },
+    {
+      "title": "Unison MCP server",
+      "description": "Rich support for Unison coding assistants",
+      "areas": ["ucm"]
     }
   ],
   "next": [
@@ -63,6 +73,11 @@
       "description": "Improve terminal interaction and code editing",
       "areas": ["ucm"]
     },
+    {
+      "title": "Unison FFI",
+      "description": "Call C functions directly from Unison.",
+      "areas": ["core-language"]
+    }
   ],
   "later": [
     {
@@ -71,14 +86,19 @@
       "areas": ["unison-share", "ucm"]
     },
     {
+      "title": "Unison JIT",
+      "description": "LLVM-compile Unison functions on the fly.",
+      "areas": ["core-language"]
+    },
+    {
       "title": "Scheduled jobs and cloud cron",
       "description": "Open source library for resilient scheduled jobs and recurring jobs.",
       "areas": ["cloud"]
     },
     {
-      "title": "Proper record types",
-      "description": "Support for extensible records; an extension to the syntax and the type system.",
+      "title": "Record types",
+      "description": "First-class records support; an extension to the syntax and the type system.",
       "areas": ["core-language"]
-    },
+    }
   ]
 }
