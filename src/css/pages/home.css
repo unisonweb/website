@@ -161,41 +161,107 @@
   opacity: 0.75;
 }
 
-#home #hero .sub-text {
+#home #install-instructions {
   display: flex;
   flex-direction: column;
   gap: 2.625rem;
   padding: 3.25rem 14rem;
   font-size: 1.125rem;
-  border-top: 1px solid rgba(81, 82, 88, 0.25);
   align-items: center;
+  text-align: center;
+  margin-top: 1.5rem;
+  transition: background 0.4s;
+  width: var(--hero-width);
+  background: var(--color-blue-5);
+  position: relative;
+  border-radius: 0.75rem;
 }
 
-#home #hero .install {
+#home #install-instructions .ucm-desktop {
+  border-radius: 0.75rem;
+  position: absolute;
+  height: 12rem;
+  background: linear-gradient(
+    to bottom,
+    var(--color-blue-5),
+    var(--color-blue-5),
+    var(--color-purple-5)
+  );
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+#home #install-instructions .ucm-desktop .callout {
+  position: relative;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  z-index: 3;
+}
+
+#home #install-instructions .ucm-desktop .callout a {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#home #install-instructions .ucm-desktop .screenshot {
+  overflow: hidden;
+  margin: 0 auto;
+  height: 12rem;
+}
+
+#home #install-instructions .ucm-desktop .download-ucm-desktop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 3rem;
+  text-align: center;
+  z-index: 2;
+}
+
+#home #install-instructions .ucm-desktop .screenshot:after {
+  position: absolute;
+  height: 16rem;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    transparent,
+    var(--color-blue-4)
+  );
+  z-index: 1;
+  content: " ";
+}
+
+#home #install-instructions .install {
   position: relative;
   text-align: center;
   width: 32rem;
+  height: 16rem;
 }
 
-#home #hero .install.install-mac,
-#home #hero .install.install-linux {
+#home #install-instructions .install.install-mac,
+#home #install-instructions .install.install-linux {
   display: none;
 }
 
-#home #hero .install.install-mac .apple-silicon {
+#home #install-instructions .install.install-mac .apple-silicon {
   font-size: 0.875rem;
   margin-top: 1rem;
   opacity: 0.75;
 }
 
-#home #hero .install.install-mac .apple-silicon abbr {
+#home #install-instructions .install.install-mac .apple-silicon abbr {
   cursor: help;
 }
-#home #hero .install.install-mac .apple-silicon a {
+#home #install-instructions .install.install-mac .apple-silicon a {
   text-decoration: underline;
 }
 
-#home #hero .install .prompt {
+#home #install-instructions .install .prompt {
   height: 2.5rem;
   position: absolute;
   top: 0;
@@ -207,7 +273,7 @@
   align-items: center;
 }
 
-#home #hero .install input {
+#home #install-instructions .install input {
   height: 2.5rem;
   padding: 0 2.75rem 0 2rem;
   background: var(--color-transparent);
@@ -220,15 +286,15 @@
   position: relative;
 }
 
-#home #hero .install.install-mac input {
+#home #install-instructions .install.install-mac input {
   width: 32rem;
 }
 
-#home #hero .install.install-linux input {
+#home #install-instructions .install.install-linux input {
   width: 40rem;
 }
 
-#home #hero .install .copy-installation-command {
+#home #install-instructions .install .copy-installation-command {
   position: absolute;
   top: 0;
   right: 0;
@@ -242,20 +308,20 @@
   transition: all 0.3s;
 }
 
-#home #hero .install .copy-installation-command:hover {
+#home #install-instructions .install .copy-installation-command:hover {
   background: rgba(81, 82, 88, 0.1);
 }
 
-#home #hero .install .copy-installation-command:hover .icon {
+#home #install-instructions .install .copy-installation-command:hover .icon {
   color: var(--color-gray-darken-30);
 }
 
-#home #hero .install .copy-installation-command .icon {
+#home #install-instructions .install .copy-installation-command .icon {
   color: var(--color-gray-darken-10);
   width: 1.5rem;
   height: 1.5rem;
 }
-#home #hero .install .copy-installation-command .icon svg {
+#home #install-instructions .install .copy-installation-command .icon svg {
   width: 1.5rem;
   height: 1.5rem;
 }
@@ -607,8 +673,22 @@
     --flow-width: 100vw;
   }
 
-  #home #hero {
+  #home #hero,
+  #home #install-instructions {
     border-radius: 0;
+  }
+
+  #home #install-instructions {
+    margin-top: 1px;
+    padding: 1rem;
+  }
+
+  #home #install-instructions .ucm-desktop {
+    display: none;
+  }
+
+  #home #install-instructions .install {
+    height: auto;
   }
 
   #home #hero h1 {
