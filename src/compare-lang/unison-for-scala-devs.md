@@ -1,6 +1,8 @@
-# Unison for Scala devs
-
-Note - this is in progress still!
+---
+layout: "compare-lang"
+title: "Unison for Scala devs"
+description: "Comparing structures and patterns between Unison and Scala"
+---
 
 # Quickstart example
 
@@ -22,15 +24,15 @@ case class ConversionResponse(from: String, to: String, input: Double, result: D
 object UnitConverterService extends IOApp {
 
   def convertTemperature(from: String, to: String, value: Double): Either[String, Double] =
-	  (from, to) match {
-	    case ("celsius", "fahrenheit")  => Right(value * 9 / 5 + 32)
-	    case ("fahrenheit", "celsius")  => Right((value - 32) * 5 / 9)
-	    case ("celsius", "kelvin")      => Right(value + 273.15)
-	    case ("kelvin", "celsius")      => Right(value - 273.15)
-	    case ("fahrenheit", "kelvin")   => Right((value - 32) * 5 / 9 + 273.15)
-	    case ("kelvin", "fahrenheit")   => Right((value - 273.15) * 9 / 5 + 32)
-	    case _ => Left("Unsupported conversion")
-	  }
+    (from, to) match {
+      case ("celsius", "fahrenheit")  => Right(value * 9 / 5 + 32)
+      case ("fahrenheit", "celsius")  => Right((value - 32) * 5 / 9)
+      case ("celsius", "kelvin")      => Right(value + 273.15)
+      case ("kelvin", "celsius")      => Right(value - 273.15)
+      case ("fahrenheit", "kelvin")   => Right((value - 32) * 5 / 9 + 273.15)
+      case ("kelvin", "fahrenheit")   => Right((value - 273.15) * 9 / 5 + 32)
+      case _ => Left("Unsupported conversion")
+    }
 
   val convertTempRoute = HttpRoutes.of[IO] {
     case req @ GET -> Root / "convert" / "temperature" =>
@@ -84,7 +86,7 @@ unit-converter-service/main> ls lib
   4. unison_routes_6_3_0/ (122370 terms, 3276 types)
 ```
 
-```haskell
+```unison
 type ConversionResponse = {from: Text, to: Text, input: Float, result: Float}
 
 ConversionResponse.toJson : ConversionResponse -> Json
@@ -99,14 +101,14 @@ ConversionResponse.toJson = cases
 
 convertTemperature : Text -> Text -> Float -> Either Text Float
 convertTemperature from to value =
-	  match (from, to) with
-	    ("celsius", "fahrenheit")  -> Right(value * 9.0 / 5.0 + 32.0)
-	    ("fahrenheit", "celsius")  -> Right((value - 32.0) * 5.0 / 9.0)
-	    ("celsius", "kelvin")      -> Right(value + 273.15)
-	    ("kelvin", "celsius")      -> Right(value - 273.15)
-	    ("fahrenheit", "kelvin")   -> Right((value - 32.0) * 5.0 / 9.0 + 273.15)
-	    ("kelvin", "fahrenheit")   -> Right((value - 273.15) * 9.0 / 5.0 + 32.0)
-	    _ -> Left("Unsupported conversion")
+  match (from, to) with
+    ("celsius", "fahrenheit")  -> Right(value * 9.0 / 5.0 + 32.0)
+    ("fahrenheit", "celsius")  -> Right((value - 32.0) * 5.0 / 9.0)
+    ("celsius", "kelvin")      -> Right(value + 273.15)
+    ("kelvin", "celsius")      -> Right(value - 273.15)
+    ("fahrenheit", "kelvin")   -> Right((value - 32.0) * 5.0 / 9.0 + 273.15)
+    ("kelvin", "fahrenheit")   -> Right((value - 273.15) * 9.0 / 5.0 + 32.0)
+    _ -> Left("Unsupported conversion")
 
 convertTempRoute : '{Route} ()
 convertTempRoute = do
@@ -144,7 +146,9 @@ Unison variables can be defined at the top-level of a program. There is no keywo
 
 The type signature of a value or function appears _above_ \*\*\*\*the definition instead of interspersed with the names of the function parameters. Both Scala and Unison support type inference, so these type signatures are optional.
 
-```haskell
+<div class="side-by-side"><div>
+
+```unison
 aText : Text
 aText = "A Text value"
 
@@ -169,6 +173,9 @@ theUnitVal = ()
 
 Type arguments in signatures are delimited by spaces, not square brackets.
 
+</div>
+<div>
+
 ```scala
 val aString : String = "A String value"
 
@@ -189,18 +196,21 @@ val theUnitVal : Unit = ()
 
 Unison does not have an analog to the `var` keyword in Scala.
 
+</div></div>
+
 ## Functions
 
 Functions in Unison type signatures are represented with the single arrow `->`. Multiple arguments are represented with currying instead of comma-delimited argument lists.
 
 There is no special keyword for differentiating a variable from a function in Unison.
 
-```haskell
+<div class="side-by-side"><div>
+
+```unison
 splitDigitsOn : Char -> Text -> [Text]
 splitDigitsOn delim text =
   Text.split delim text
     |> List.map (cell -> Text.filter isDigit cell)
-
 ```
 
 Unison is a _whitespace-significant_ language, so the function body is scoped by newlines and indentation.
@@ -208,6 +218,8 @@ Unison is a _whitespace-significant_ language, so the function body is scoped by
 Lambdas are introduced with parens: `(arg1 arg2 -> impl)`. The arrow `->` separates the arguments of the lambda from its body.
 
 The `|>` operator emulates the chaining of `.split` and `.map` in Scala.
+
+</div><div>
 
 ```scala
 def splitDigitsOn(delim : Char, text : String) : List[String] = {
@@ -219,21 +231,22 @@ def splitDigitsOn(delim : Char, text : String) : List[String] = {
 
 Scala uses _dot notation_ syntax, as in `text.split`, to call `split` on the `text` argument. Unison takes the `text` value as an argument to another function, `Text.split`.
 
-It’s a common Scala-flavored mistake to forget to supply the last argument to Unison functions like `List.map` because of this convention.
+It's a common Scala-flavored mistake to forget to supply the last argument to Unison functions like `List.map` because of this convention.
+
+</div></div>
 
 ### Calling functions `f x y` vs `f(x, y)`
 
+<div class="side-by-side"><div>
 During function application, arguments are separated by _spaces_:
 
-```haskell
+```unison
 digits = splitDigitsOn ?| "abc12|def34|56|78"
 ```
 
 Since commas are not used to explicitly separate arguments, parenthesis disambiguate the order in which functions should be applied.
 
-```haskell
-digits = splitDigitsOn ?| ("abc12|" ++ "def34|56|78")
-```
+</div><div>
 
 Arguments are provided in parens, separated by commas:
 
@@ -241,38 +254,58 @@ Arguments are provided in parens, separated by commas:
 val digits = splitDigitsOn('|', "abc12|def34|56|78")
 ```
 
+</div></div>
+
+<div class="side-by-side"><div>
+
+```unison
+digits = splitDigitsOn ?| ("abc12|" ++ "def34|56|78")
+```
+
+</div><div>
+
 ```scala
 val digits = splitDigitsOn('|', "abc12|" ++ "def34|56|78")
 ```
+
+</div></div>
 
 ### Generic types in functions
 
 Generic types are represented with _lowercase letters_ in Unison. You do not need to introduce type variables for a polymorphic function in square brackets before using them.
 
-```haskell
+<div class="side-by-side"><div>
+
+```unison
 identity : a -> a
 identity a = a
 ```
+
+</div><div>
 
 ```scala
 def identity[A](a: A): A = a
 ```
 
+</div></div>
+
 ### Delayed computations and laziness
+
+<div class="side-by-side"><div>
 
 Unison **delayed computations** are functions with no arguments (thunks.)
 
 In type signatures, they’re indicated with the single quote syntax sugar `'a`, short for `() -> a`. In the body of a function, they are introduced with the `'` or `do` keyword.
 
-```haskell
+```unison
 computeTwice : '{IO, Exception} Nat -> Nat
 computeTwice x =
-	x() + x()
+  x() + x()
 
 expensiveComputation : '{IO, Exception} Nat
 expensiveComputation = do
-	printLine("Running...")
-	42
+  printLine("Running...")
+  42
 
 computeTwice(expensiveComputation())
 
@@ -282,6 +315,8 @@ computeTwice(expensiveComputation())
 They are commonly used in conjunction with our effect system, abilities, since top-level values cannot run arbitrary effects outside of a function.
 
 Unison has special syntax for forcing a thunk, `()`. Scala does not.
+
+</div><div>
 
 Scala has **non-forced function arguments** using **call-by-name parameters** (`=> T`). Scala defers the value **every time** the parameter is used inside the function.
 
@@ -312,40 +347,51 @@ println(expensiveComputation)
 // Prints the message only once
 ```
 
+</div></div>
+
 ## Comments and docs
 
 Unison comments **are not persisted** to the Unison codebase. To save a note to your future self or colleagues, use a string literal or use a Unison `Doc` expression.
 
-```haskell
+<div class="side-by-side"><div>
+
+```unison
 -- A singe line comment.
 
 {-
-	A multi-line comment.
+  A multi-line comment.
 
-	Comments are not saved in the codebase!
+  Comments are not saved in the codebase!
 -}
 
 myTerm =
-	_ = "This text literal will
-	be saved to the codebase"
-	"foo"
+  _ = "This text literal will
+  be saved to the codebase"
+  "foo"
 ```
+
+</div><div>
 
 ```scala
 // A single line comment.
 
 /*
-	A multi-line comment.
+  A multi-line comment.
 */
 
 ```
+
+</div></div>
 
 ### Documentation
 
 Unison `Doc` elements are first-class elements in the Unison language. They are dynamically linked to the Unison terms that they describe, can run live examples, and will respond to changes in the codebase.
 
-```haskell
+<div class="side-by-side"><div>
 
+{% raw %}
+
+````unison
 {{This Unison {type Doc} describes something called {myTerm}.
 
 @signature{myTerm, Map.fromList}
@@ -353,16 +399,12 @@ Unison `Doc` elements are first-class elements in the Unison language. They are 
 It can evaluate pure code for dynamic examples:
 
 ```
-
 myTerm
-
 ```
 
 ```
-
 Map.fromList [(1, "a"), (2, "b"), (3, myTerm)]
-|> Map.get 3
-
+  |> Map.get 3
 ```
 
 If you change the implementation of `myTerm`,
@@ -370,16 +412,18 @@ this document will change automatically.
 
 }}
 myTerm =
-	_ = "This text literal will
-	be saved to the codebase"
-	"foo"
+  _ = "This text literal will
+  be saved to the codebase"
+  "foo"
+````
 
-```
+{% endraw %}
 
 If a Doc element is created above a term or type, it will automatically share the name of the term or type suffixed with `.doc` .
 
-```scala
+</div><div>
 
+```scala
 /** A Scala Doc for the term below.
 
 With annotations it can automatically update some information about
@@ -389,6 +433,8 @@ It cannot run live snippets of the code it describes.
 */
 val myTerm = "foo"
 ```
+
+</div></div>
 
 ## Defining and using types
 
@@ -402,7 +448,9 @@ Unison’s type system diverges from Scala’s, since Scala has more varied lang
 
 ### Type declarations
 
-```haskell
+<div class="side-by-side"><div>
+
+```unison
 type Floor = Floor Nat Boolean
 
 type Direction = Up | Down
@@ -411,16 +459,17 @@ floor2: Floor
 floor2 = Floor 2 false
 up : Direction
 up = Direction.Up
-
 ```
 
 The `type` keyword introduces a new type. Its data constructors are separated by `|` on the right of the equals sign. Think of data constructors as **functions** which produce values of the given type.
 
-```haskell
+```unison
 -- the Floor type has one data constructor,
 -- a function that looks like this
 Floor.Floor : Nat -> Boolean -> Floor
 ```
+
+</div><div>
 
 ```scala
 case class Floor(number: Int, isPrivate : Boolean)
@@ -431,18 +480,21 @@ case object Down extends Direction
 
 val floor2 : Floor = Floor(2, false)
 val up : Direction = Up
-
 ```
+
+</div></div>
 
 ### Record types and case classes
 
 Unison record types are similar to case classes in spirit. They’re both used to store named fields, and they automatically provide functions for setting and extracting values from the type by field name.
 
-```haskell
+<div class="side-by-side"><div>
+
+```unison
 type Elevator = {
-	currentFloor : Floor,
-	direction: Direction,
-	requests : [Foor]
+  currentFloor : Floor,
+  direction: Direction,
+  requests : [Foor]
 }
 
 elevator = Elevator (Floor 3 false) Down [(Floor 2 false)]
@@ -453,11 +505,13 @@ Elevator.direction.set Up elevator
 Elevator.currentFloor.modify(cases (Floor n p) -> Floor (n + 1) p) elevator
 ```
 
+</div><div>
+
 ```scala
 case class Elevator(
-    currentFloor: Floor,
-    direction: Direction,
-    requests: List[Floor]
+  currentFloor: Floor,
+  direction: Direction,
+  requests: List[Floor]
 )
 
 val elevator = Elevator(Floor(3, false), Down, List(Floor(2, false)))
@@ -469,17 +523,23 @@ elevator.copy(direction = Up)
 
 Case classes don’t have a `modify` function for their fields
 
+</div></div>
+
 ### Wrapper data constructors and tagged unions
 
 Say we need to add a type for the panel inside an elevator to better model the requests a user might issue. A user can still request a `Floor`, but they can also make an emergency call and handle the doors.
 
-```haskell
+<div class="side-by-side"><div>
+
+```unison
 type Floor = Floor Nat Boolean
 
 type PanelButton = FloorB Floor | DoorOpen | DoorClose | Emergency
 ```
 
 In Unison, if we wanted to keep our `Floor` type separate from the new `PanelButton` type (since some business logic may only deal with the `Floor` and not the panel), we would introduce a wrapper data constructor in our `PanelButton` type.
+
+</div><div>
 
 ```scala
 sealed trait PanelButton
@@ -490,6 +550,8 @@ case class Floor(number: Int, isPrivate : Boolean) extends PanelButton
 ```
 
 In Scala, you can add a trait and say that the existing `Floor` case class is a variant of the `PanelButton` type. This is a “tagged union,” because each case in the `PanelButton` trait is tagged with its own type.
+
+</div></div>
 
 ### Quick reference - type feature comparison
 
@@ -513,21 +575,25 @@ In Scala, you can add a trait and say that the existing `Floor` case class is a 
 
 ### Data types and literals
 
-```haskell
+<div class="side-by-side"><div>
+
+```unison
 type Person = Person Text Nat
 
 toText : Person -> Text
 toText person = match person with
-	Person n a -> "Name: " ++ n ++ (", Age: " ++ (toText a))
+  Person n a -> "Name: " ++ n ++ (", Age: " ++ (toText a))
 ```
 
 In Unison, the `match ... with` syntax can be replaced with `cases` :
 
-```haskell
+```unison
 toText : Person -> Text
 toText = cases
-	Person n a -> "Name: " ++ n ++ (", Age: " ++ (toText a))
+  Person n a -> "Name: " ++ n ++ (", Age: " ++ (toText a))
 ```
+
+</div><div>
 
 ```scala
 case class Person(name: String, age: Int)
@@ -537,23 +603,21 @@ def toString(person: Person): String = person match {
 }
 ```
 
+</div></div>
+
 ### Pattern guards and `@` binding
 
-```haskell
+<div class="side-by-side"><div>
+
+```unison
 categorizeNumber : Int -> Text
 categorizeNumber n = match n with
-	n | n > +0 -> "Positive number"
-	0 -> "Zero"
-	n | n < +0 "Negative number"
+  n | n > +0 -> "Positive number"
+  0 -> "Zero"
+  n | n < +0 "Negative number"
 ```
 
-```haskell
-type User Text Nat
-
-userTuple : User -> (User, Text)
-userTuple user = match user with
-	u @ User n a ->  (u, n)
-```
+</div><div>
 
 ```scala
 def categorizeNumber(num: Int): String = num match {
@@ -563,6 +627,20 @@ def categorizeNumber(num: Int): String = num match {
 }
 ```
 
+</div></div>
+
+<div class="side-by-side"><div>
+
+```unison
+type User Text Nat
+
+userTuple : User -> (User, Text)
+userTuple user = match user with
+  u @ User n a ->  (u, n)
+```
+
+</div><div>
+
 ```scala
 case class User(name: String, age: Int)
 
@@ -571,11 +649,15 @@ def userTuple(user : User): (User, String) = user match {
 }
 ```
 
+</div></div>
+
 ### Data constructors vs dynamic type checking inside pattern matches
 
 Unison does not support dynamic type checks in pattern matches.
 
-```haskell
+<div class="side-by-side"><div>
+
+```unison
 type Box t = Box t
 
 describeBox : Box t -> Text
@@ -585,7 +667,7 @@ describeBox b = match b with
 
 Instead, Unison pattern matches on the data constructors of the type:
 
-```haskell
+```unison
 type Box t = BoxNat Nat | BoxText Text | BoxOther t
 
 describeBox : Box t -> Text
@@ -594,6 +676,8 @@ describeBox b = match b with
   (BoxText _) -> "Box of a Text"
   (BoxOther _) -> "Box of something else"
 ```
+
+</div><div>
 
 ```scala
 case class Box[T](value: T)
@@ -605,11 +689,15 @@ def describeBox[T](box: Box[T]): String = box match {
 }
 ```
 
+</div></div>
+
 ### List pattern matching
 
 The Unison `List` type is a finger tree, not a cons list, so it supports fast prepending (`+:`) and appending ( `:+`).
 
-```haskell
+<div class="side-by-side"><div>
+
+```unison
 List.uncons : [a] -> Optional (a, [a])
 List.uncons list = match list with
     x +: xs -> Some (x, xs)
@@ -617,14 +705,16 @@ List.uncons list = match list with
 
 List.slidingPairs : [a] -> [(a,a)]
 List.slidingPairs list =
-	loop acc = cases
-		[fst, sec] ++ tail ->
-			loop (acc :+ (fst, sec)) (sec +: tail)
-		_ -> acc
-	loop [] list
+  loop acc = cases
+    [fst, sec] ++ tail ->
+      loop (acc :+ (fst, sec)) (sec +: tail)
+    _ -> acc
+  loop [] list
 ```
 
 Pattern match on a list of `n` elements with the regular list constructor `[fst, second]`
+
+</div><div>
 
 ```scala
 def uncons[A](list: List[A]): Option[(A, List[A])] = list match {
@@ -641,27 +731,49 @@ def slidingPairs[A](list: List[A]): List[(A, A)] = {
 }
 ```
 
+</div></div>
+
 ## Program entry points
 
 A runnable “main” function in Unison is a delayed computation (a thunk) which can perform the `IO` and `Exception` abilities (think “effects”).
 
-```haskell
+<div class="side-by-side"><div>
+
+```unison
 main : '{IO, Exception} ()
 main = do
-	printLine "Hello world!"
+  printLine "Hello world!"
 
 mainWithArgs : '{IO, Exception} ()
 mainWithArgs = do
-	args : [Text]
-	args = IO.getArgs()
-	printLine ("program args: " ++ (Text.join ", " args))
+  args : [Text]
+  args = IO.getArgs()
+  printLine ("program args: " ++ (Text.join ", " args))
 ```
+
+</div><div>
+
+```scala
+object Main extends App {
+    println("Hello world!")
+}
+
+object Main {
+  def main(args : Array[String]) Unit = {
+    println("Hello world!")
+  }
+}
+```
+
+</div></div>
+
+<div class="side-by-side"><div>
 
 ### Watch expressions
 
 Unison does not have a traditional REPL. Our tool, the UCM watches for changes to any `.u` files in the directory it is launched in, and prints out the result of any “watch expressions” (lines starting with `>`) in those files.
 
-```haskell
+```unison
 factorial n = product (range 1 (n + 1))
 
 > factorial 3
@@ -669,7 +781,7 @@ factorial n = product (range 1 (n + 1))
 
 UCM will print out:
 
-```haskell
+```unison
 > factorial 3
   ⧨
   6
@@ -677,17 +789,7 @@ UCM will print out:
 
 Also see [writing tests in Unison](https://youtu.be/nJbXstiE3qU).
 
-```scala
-object Main extends App {
-	println("Hello world!")
-}
-
-object Main {
-	def main(args : Array[String]) Unit = {
-		println("Hello world!")
-	}
-}
-```
+</div><div>
 
 ### vs the REPL
 
@@ -698,3 +800,5 @@ x: Int = 42
 scala> x + 10
 res0: Int = 52
 ```
+
+</div></div>

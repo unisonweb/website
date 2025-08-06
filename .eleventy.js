@@ -48,7 +48,7 @@ function next(link) {
   return paginationItem("next", link);
 }
 
-module.exports = function(config) {
+module.exports = function (config) {
   // Exclusively use .eleventyignore, to make sure src/docs are used as source
   config.setUseGitIgnore(false);
 
@@ -165,8 +165,7 @@ module.exports = function(config) {
   config.addFilter("markdown", (raw) => {
     if (raw && raw.length) {
       return markdown.renderInline(raw);
-    }
-    else {
+    } else {
       return raw;
     }
   });
