@@ -1,0 +1,700 @@
+# Unison for Scala devs
+
+Note - this is in progress still!
+
+# Quickstart example
+
+## Scala http service
+
+```scala
+import cats.effect._
+import org.http4s._
+import org.http4s.dsl.io._
+import org.http4s.implicits._
+import org.http4s.blaze.server._
+import org.http4s.circe._
+import io.circe.syntax._
+import io.circe.generic.auto._
+import scala.util.Try
+
+case class ConversionResponse(from: String, to: String, input: Double, result: Double)
+
+object UnitConverterService extends IOApp {
+
+  def convertTemperature(from: String, to: String, value: Double): Either[String, Double] =
+	  (from, to) match {
+	    case ("celsius", "fahrenheit")  => Right(value * 9 / 5 + 32)
+	    case ("fahrenheit", "celsius")  => Right((value - 32) * 5 / 9)
+	    case ("celsius", "kelvin")      => Right(value + 273.15)
+	    case ("kelvin", "celsius")      => Right(value - 273.15)
+	    case ("fahrenheit", "kelvin")   => Right((value - 32) * 5 / 9 + 273.15)
+	    case ("kelvin", "fahrenheit")   => Right((value - 273.15) * 9 / 5 + 32)
+	    case _ => Left("Unsupported conversion")
+	  }
+
+  val convertTempRoute = HttpRoutes.of[IO] {
+    case req @ GET -> Root / "convert" / "temperature" =>
+      val queryParams = req.params
+      val from = queryParams.get("from")
+      val to = queryParams.get("to")
+      val value = queryParams.get("value").flatMap(v => Try(v.toDouble).toOption)
+
+      (from, to, value) match {
+        case (Some(f), Some(t), Some(v)) =>
+          convertTemperature(f.toLowerCase, t.toLowerCase, v) match {
+            case Right(result) =>
+              Ok(ConversionResponse(f, t, v, result).asJson)
+            case Left(error)   => BadRequest(error)
+          }
+        case _ => BadRequest("Missing or invalid query parameters")
+      }
+  }
+
+  override def run(args: List[String]): IO[ExitCode] = {
+    BlazeServerBuilder[IO]
+      .bindHttp(8080, "localhost")
+      .withHttpApp(convertTempRoute.orNotFound)
+      .serve
+      .compile
+      .drain
+      .as(ExitCode.Success)
+  }
+}
+```
+
+## Unison http service
+
+Instead of describing your dependencies in an sbt file, libraries are managed by with the `lib.install` command in the UCM.
+
+```bash
+scratch/main> project.create unit-converter-service
+unit-converter-service/main> lib.install @unison/http
+unit-converter-service/main> lib.install @unison/routes
+unit-converter-service/main> lib.install @unison/json
+```
+
+The libraries will be installed in the `lib` namespace, viewable with the `ls` command.
+
+```bash
+unit-converter-service/main> ls lib
+
+  1. base/                (7481 terms, 182 types)
+  2. unison_http_3_8_0/   (23224 terms, 636 types)
+  3. unison_json_1_2_3/   (7294 terms, 184 types)
+  4. unison_routes_6_3_0/ (122370 terms, 3276 types)
+```
+
+```haskell
+type ConversionResponse = {from: Text, to: Text, input: Float, result: Float}
+
+ConversionResponse.toJson : ConversionResponse -> Json
+ConversionResponse.toJson = cases
+  ConversionResponse from to input result ->
+    Json.object [
+      ("from", Json.text from),
+      ("to", Json.text to),
+      ("input", Json.float input),
+      ("result", Json.float result)
+    ]
+
+convertTemperature : Text -> Text -> Float -> Either Text Float
+convertTemperature from to value =
+	  match (from, to) with
+	    ("celsius", "fahrenheit")  -> Right(value * 9.0 / 5.0 + 32.0)
+	    ("fahrenheit", "celsius")  -> Right((value - 32.0) * 5.0 / 9.0)
+	    ("celsius", "kelvin")      -> Right(value + 273.15)
+	    ("kelvin", "celsius")      -> Right(value - 273.15)
+	    ("fahrenheit", "kelvin")   -> Right((value - 32.0) * 5.0 / 9.0 + 273.15)
+	    ("kelvin", "fahrenheit")   -> Right((value - 273.15) * 9.0 / 5.0 + 32.0)
+	    _ -> Left("Unsupported conversion")
+
+convertTempRoute : '{Route} ()
+convertTempRoute = do
+  Route.noCapture GET (s "convert" Parser./ (s "temperature"))
+  queryParams = request.query()
+  from = Map.get "from" queryParams |> Optional.flatMap List.head
+  to = Map.get "to" queryParams |> Optional.flatMap List.head
+  value =
+    Map.get "value" queryParams
+      |> Optional.flatMap List.head
+      |> Optional.flatMap Float.fromText
+  match (from, to, value) with
+    (Some f, Some t, Some v) ->
+      match convertTemperature f t v with
+        Right result ->
+          resp = ConversionResponse f t v result
+          respond.ok.json (ConversionResponse.toJson resp)
+        Left error -> respond.badRequest.text error
+    _ -> respond.badRequest.text "Missing or invalid query parameters"
+
+unitConversionService : '{IO, Exception}()
+unitConversionService = do
+  service = convertTempRoute Route.<|> do respond.notFound.text "not found"
+  stop = serveSimple service 8080
+  printLine "Server running on port 8080. Press <enter> to stop."
+  _ = readLine()
+  stop()
+```
+
+# Core language features
+
+## Named variables
+
+Unison variables can be defined at the top-level of a program. There is no keyword to introduce a value and all values are immutable. (Though there is a separate [mutable reference type](https://share.unison-lang.org/@unison/base/code/releases/4.1.1/latest/types/mutable/Ref) supporting atomic modification).
+
+The type signature of a value or function appears _above_ \*\*\*\*the definition instead of interspersed with the names of the function parameters. Both Scala and Unison support type inference, so these type signatures are optional.
+
+```haskell
+aText : Text
+aText = "A Text value"
+
+aChar : Char
+aChar = ?a
+
+aNat : Nat
+aNat = 123
+
+aList : List Int -- also represented as [Int]
+aList = [+1, +2, -3, -4, +0]
+
+someVal : Optional Boolean
+someVal = Some true
+noneVal = None
+
+theUnitVal : ()
+theUnitVal = ()
+```
+
+`Nat` is the type for positive integers, `Int` is for signed integers.
+
+Type arguments in signatures are delimited by spaces, not square brackets.
+
+```scala
+val aString : String = "A String value"
+
+val aChar : Char = 'a'
+
+val anInt : Int = 123
+
+val aList : List[Int] = List(1, 2, -3, -4, 0)
+
+var aVariable = 0
+aVariable + 3
+
+val someVal : Option[Boolean] = Some(true)
+val noneVal = None
+
+val theUnitVal : Unit = ()
+```
+
+Unison does not have an analog to the `var` keyword in Scala.
+
+## Functions
+
+Functions in Unison type signatures are represented with the single arrow `->`. Multiple arguments are represented with currying instead of comma-delimited argument lists.
+
+There is no special keyword for differentiating a variable from a function in Unison.
+
+```haskell
+splitDigitsOn : Char -> Text -> [Text]
+splitDigitsOn delim text =
+  Text.split delim text
+    |> List.map (cell -> Text.filter isDigit cell)
+
+```
+
+Unison is a _whitespace-significant_ language, so the function body is scoped by newlines and indentation.
+
+Lambdas are introduced with parens: `(arg1 arg2 -> impl)`. The arrow `->` separates the arguments of the lambda from its body.
+
+The `|>` operator emulates the chaining of `.split` and `.map` in Scala.
+
+```scala
+def splitDigitsOn(delim : Char, text : String) : List[String] = {
+  text.split(delim)
+    .map(cell => cell.filter(_.isDigit))
+    .toList
+}
+```
+
+Scala uses _dot notation_ syntax, as in `text.split`, to call `split` on the `text` argument. Unison takes the `text` value as an argument to another function, `Text.split`.
+
+It’s a common Scala-flavored mistake to forget to supply the last argument to Unison functions like `List.map` because of this convention.
+
+### Calling functions `f x y` vs `f(x, y)`
+
+During function application, arguments are separated by _spaces_:
+
+```haskell
+digits = splitDigitsOn ?| "abc12|def34|56|78"
+```
+
+Since commas are not used to explicitly separate arguments, parenthesis disambiguate the order in which functions should be applied.
+
+```haskell
+digits = splitDigitsOn ?| ("abc12|" ++ "def34|56|78")
+```
+
+Arguments are provided in parens, separated by commas:
+
+```scala
+val digits = splitDigitsOn('|', "abc12|def34|56|78")
+```
+
+```scala
+val digits = splitDigitsOn('|', "abc12|" ++ "def34|56|78")
+```
+
+### Generic types in functions
+
+Generic types are represented with _lowercase letters_ in Unison. You do not need to introduce type variables for a polymorphic function in square brackets before using them.
+
+```haskell
+identity : a -> a
+identity a = a
+```
+
+```scala
+def identity[A](a: A): A = a
+```
+
+### Delayed computations and laziness
+
+Unison **delayed computations** are functions with no arguments (thunks.)
+
+In type signatures, they’re indicated with the single quote syntax sugar `'a`, short for `() -> a`. In the body of a function, they are introduced with the `'` or `do` keyword.
+
+```haskell
+computeTwice : '{IO, Exception} Nat -> Nat
+computeTwice x =
+	x() + x()
+
+expensiveComputation : '{IO, Exception} Nat
+expensiveComputation = do
+	printLine("Running...")
+	42
+
+computeTwice(expensiveComputation())
+
+-- Prints the message twice
+```
+
+They are commonly used in conjunction with our effect system, abilities, since top-level values cannot run arbitrary effects outside of a function.
+
+Unison has special syntax for forcing a thunk, `()`. Scala does not.
+
+Scala has **non-forced function arguments** using **call-by-name parameters** (`=> T`). Scala defers the value **every time** the parameter is used inside the function.
+
+```scala
+def computeTwice(x: => Int): Int = x + x
+
+def expensiveComputation(): Int = {
+  println("Running...")
+  42
+}
+
+computeTwice(expensiveComputation())
+
+// Prints the message twice
+```
+
+Scala’s `lazy` values are different from delayed computations because they **memoize** the value once evaluated.
+
+```scala
+lazy val expensiveComputation: Int = {
+  println("Computing...")
+  42
+}
+
+println(expensiveComputation)
+println(expensiveComputation)
+
+// Prints the message only once
+```
+
+## Comments and docs
+
+Unison comments **are not persisted** to the Unison codebase. To save a note to your future self or colleagues, use a string literal or use a Unison `Doc` expression.
+
+```haskell
+-- A singe line comment.
+
+{-
+	A multi-line comment.
+
+	Comments are not saved in the codebase!
+-}
+
+myTerm =
+	_ = "This text literal will
+	be saved to the codebase"
+	"foo"
+```
+
+```scala
+// A single line comment.
+
+/*
+	A multi-line comment.
+*/
+
+```
+
+### Documentation
+
+Unison `Doc` elements are first-class elements in the Unison language. They are dynamically linked to the Unison terms that they describe, can run live examples, and will respond to changes in the codebase.
+
+```haskell
+
+{{This Unison {type Doc} describes something called {myTerm}.
+
+@signature{myTerm, Map.fromList}
+
+It can evaluate pure code for dynamic examples:
+
+```
+
+myTerm
+
+```
+
+```
+
+Map.fromList [(1, "a"), (2, "b"), (3, myTerm)]
+|> Map.get 3
+
+```
+
+If you change the implementation of `myTerm`,
+this document will change automatically.
+
+}}
+myTerm =
+	_ = "This text literal will
+	be saved to the codebase"
+	"foo"
+
+```
+
+If a Doc element is created above a term or type, it will automatically share the name of the term or type suffixed with `.doc` .
+
+```scala
+
+/** A Scala Doc for the term below.
+
+With annotations it can automatically update some information about
+its inputs and outputs.
+
+It cannot run live snippets of the code it describes.
+*/
+val myTerm = "foo"
+```
+
+## Defining and using types
+
+Unison’s type system diverges from Scala’s, since Scala has more varied language constructs to express type hierarchies and uses implicit parameters to a variety of ends.
+
+- Scala supports sub-typing, therefore generic types can express variance relationships, `+A` `-B`. Unison does not have sub-typing and its types are invariant.
+- Scala’s type system includes more complex ways of expressing type hierarchies through traits, objects, and classes.
+- Scala has more options than Unison for type casting and dynamic type inference.
+- Unison does not support typeclasses. Scala has typeclasses via the `implicit` / `given` syntax.
+- Unison uses algebraic effects (called Abilities, more on that later) for effect management.
+
+### Type declarations
+
+```haskell
+type Floor = Floor Nat Boolean
+
+type Direction = Up | Down
+
+floor2: Floor
+floor2 = Floor 2 false
+up : Direction
+up = Direction.Up
+
+```
+
+The `type` keyword introduces a new type. Its data constructors are separated by `|` on the right of the equals sign. Think of data constructors as **functions** which produce values of the given type.
+
+```haskell
+-- the Floor type has one data constructor,
+-- a function that looks like this
+Floor.Floor : Nat -> Boolean -> Floor
+```
+
+```scala
+case class Floor(number: Int, isPrivate : Boolean)
+
+sealed trait Direction
+case object Up extends Direction
+case object Down extends Direction
+
+val floor2 : Floor = Floor(2, false)
+val up : Direction = Up
+
+```
+
+### Record types and case classes
+
+Unison record types are similar to case classes in spirit. They’re both used to store named fields, and they automatically provide functions for setting and extracting values from the type by field name.
+
+```haskell
+type Elevator = {
+	currentFloor : Floor,
+	direction: Direction,
+	requests : [Foor]
+}
+
+elevator = Elevator (Floor 3 false) Down [(Floor 2 false)]
+
+Elevator.currentFloor elevator
+
+Elevator.direction.set Up elevator
+Elevator.currentFloor.modify(cases (Floor n p) -> Floor (n + 1) p) elevator
+```
+
+```scala
+case class Elevator(
+    currentFloor: Floor,
+    direction: Direction,
+    requests: List[Floor]
+)
+
+val elevator = Elevator(Floor(3, false), Down, List(Floor(2, false)))
+
+elevator.currentFloor
+
+elevator.copy(direction = Up)
+```
+
+Case classes don’t have a `modify` function for their fields
+
+### Wrapper data constructors and tagged unions
+
+Say we need to add a type for the panel inside an elevator to better model the requests a user might issue. A user can still request a `Floor`, but they can also make an emergency call and handle the doors.
+
+```haskell
+type Floor = Floor Nat Boolean
+
+type PanelButton = FloorB Floor | DoorOpen | DoorClose | Emergency
+```
+
+In Unison, if we wanted to keep our `Floor` type separate from the new `PanelButton` type (since some business logic may only deal with the `Floor` and not the panel), we would introduce a wrapper data constructor in our `PanelButton` type.
+
+```scala
+sealed trait PanelButton
+case object DoorOpen extends PanelButton
+case object DoorClose extends PanelButton
+case object Emergency extends PanelButton
+case class Floor(number: Int, isPrivate : Boolean) extends PanelButton
+```
+
+In Scala, you can add a trait and say that the existing `Floor` case class is a variant of the `PanelButton` type. This is a “tagged union,” because each case in the `PanelButton` trait is tagged with its own type.
+
+### Quick reference - type feature comparison
+
+| **Feature**                             | **Unison**                                                                  | **Scala**                                                                               |
+| --------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Generic types / parametric polymorphism | Yes. Generic type parameters are inferred, introduced by lowercase letters. | Yes. Generic type parameters must be explicitly declared before use `[A]` in functions. |
+| Subtyping                               | No.                                                                         | Yes.                                                                                    |
+| Record types                            | Yes. Single data constructor types with named fields.                       | Yes. Case classes                                                                       |
+| Typeclasses                             | No                                                                          | Yes. Typeclasses via traits and implicit / given syntax.                                |
+| GADTs                                   | No                                                                          | Yes. GADT’s via sealed traits and case classes                                          |
+| Higher-kinded types                     | Yes. But in the absence of typeclasses, less common.                        |
+
+`type Functor f = 
+   Functor (forall a b . (a -> b) -> f a -> f b))` | Yes
+
+`trait Functor[F[_]] { 
+  def map[A,B](f: A => B)(fa: F[A]): F[B] }` |
+| Type aliases | No\* (supports only simple aliases, not arbitrary type-level functions) | Yes |
+
+## Pattern matching
+
+### Data types and literals
+
+```haskell
+type Person = Person Text Nat
+
+toText : Person -> Text
+toText person = match person with
+	Person n a -> "Name: " ++ n ++ (", Age: " ++ (toText a))
+```
+
+In Unison, the `match ... with` syntax can be replaced with `cases` :
+
+```haskell
+toText : Person -> Text
+toText = cases
+	Person n a -> "Name: " ++ n ++ (", Age: " ++ (toText a))
+```
+
+```scala
+case class Person(name: String, age: Int)
+
+def toString(person: Person): String = person match {
+  case Person(n, a) => s"Name: $n, Age: $a"
+}
+```
+
+### Pattern guards and `@` binding
+
+```haskell
+categorizeNumber : Int -> Text
+categorizeNumber n = match n with
+	n | n > +0 -> "Positive number"
+	0 -> "Zero"
+	n | n < +0 "Negative number"
+```
+
+```haskell
+type User Text Nat
+
+userTuple : User -> (User, Text)
+userTuple user = match user with
+	u @ User n a ->  (u, n)
+```
+
+```scala
+def categorizeNumber(num: Int): String = num match {
+  case n if n > 0  => "Positive number"
+  case 0           => "Zero"
+  case n if n < 0  => "Negative number"
+}
+```
+
+```scala
+case class User(name: String, age: Int)
+
+def userTuple(user : User): (User, String) = user match {
+  case u @ User(n, a) => (u, n)
+}
+```
+
+### Data constructors vs dynamic type checking inside pattern matches
+
+Unison does not support dynamic type checks in pattern matches.
+
+```haskell
+type Box t = Box t
+
+describeBox : Box t -> Text
+describeBox b = match b with
+  Box _ -> "Cannot get type information from generic type t"
+```
+
+Instead, Unison pattern matches on the data constructors of the type:
+
+```haskell
+type Box t = BoxNat Nat | BoxText Text | BoxOther t
+
+describeBox : Box t -> Text
+describeBox b = match b with
+  (BoxNat _) -> "Box of a Nat"
+  (BoxText _) -> "Box of a Text"
+  (BoxOther _) -> "Box of something else"
+```
+
+```scala
+case class Box[T](value: T)
+
+def describeBox[T](box: Box[T]): String = box match {
+  case Box(_: Int)    => "Box of an integer"
+  case Box(_: String) => "Box of a string"
+  case _              => "Box of something else"
+}
+```
+
+### List pattern matching
+
+The Unison `List` type is a finger tree, not a cons list, so it supports fast prepending (`+:`) and appending ( `:+`).
+
+```haskell
+List.uncons : [a] -> Optional (a, [a])
+List.uncons list = match list with
+    x +: xs -> Some (x, xs)
+    []      -> None
+
+List.slidingPairs : [a] -> [(a,a)]
+List.slidingPairs list =
+	loop acc = cases
+		[fst, sec] ++ tail ->
+			loop (acc :+ (fst, sec)) (sec +: tail)
+		_ -> acc
+	loop [] list
+```
+
+Pattern match on a list of `n` elements with the regular list constructor `[fst, second]`
+
+```scala
+def uncons[A](list: List[A]): Option[(A, List[A])] = list match {
+  case x :: xs => Some((x, xs))
+  case Nil     => None
+}
+
+def slidingPairs[A](list: List[A]): List[(A, A)] = {
+  def loop(remaining: List[A], acc: List[(A, A)]): List[(A, A)] = remaining match {
+    case fst :: sec :: tail => loop(sec :: tail, (fst, sec) :: acc)
+    case _ => acc.reverse
+  }
+  loop(list, Nil)
+}
+```
+
+## Program entry points
+
+A runnable “main” function in Unison is a delayed computation (a thunk) which can perform the `IO` and `Exception` abilities (think “effects”).
+
+```haskell
+main : '{IO, Exception} ()
+main = do
+	printLine "Hello world!"
+
+mainWithArgs : '{IO, Exception} ()
+mainWithArgs = do
+	args : [Text]
+	args = IO.getArgs()
+	printLine ("program args: " ++ (Text.join ", " args))
+```
+
+### Watch expressions
+
+Unison does not have a traditional REPL. Our tool, the UCM watches for changes to any `.u` files in the directory it is launched in, and prints out the result of any “watch expressions” (lines starting with `>`) in those files.
+
+```haskell
+factorial n = product (range 1 (n + 1))
+
+> factorial 3
+```
+
+UCM will print out:
+
+```haskell
+> factorial 3
+  ⧨
+  6
+```
+
+Also see [writing tests in Unison](https://youtu.be/nJbXstiE3qU).
+
+```scala
+object Main extends App {
+	println("Hello world!")
+}
+
+object Main {
+	def main(args : Array[String]) Unit = {
+		println("Hello world!")
+	}
+}
+```
+
+### vs the REPL
+
+```scala
+scala> val x = 42
+x: Int = 42
+
+scala> x + 10
+res0: Int = 52
+```
