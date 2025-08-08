@@ -4,140 +4,6 @@ title: "Unison for Scala devs"
 description: "Comparing structures and patterns between Unison and Scala"
 ---
 
-# Quickstart example
-
-## Scala http service
-
-```scala
-import cats.effect._
-import org.http4s._
-import org.http4s.dsl.io._
-import org.http4s.implicits._
-import org.http4s.blaze.server._
-import org.http4s.circe._
-import io.circe.syntax._
-import io.circe.generic.auto._
-import scala.util.Try
-
-case class ConversionResponse(from: String, to: String, input: Double, result: Double)
-
-object UnitConverterService extends IOApp {
-
-  def convertTemperature(from: String, to: String, value: Double): Either[String, Double] =
-    (from, to) match {
-      case ("celsius", "fahrenheit")  => Right(value * 9 / 5 + 32)
-      case ("fahrenheit", "celsius")  => Right((value - 32) * 5 / 9)
-      case ("celsius", "kelvin")      => Right(value + 273.15)
-      case ("kelvin", "celsius")      => Right(value - 273.15)
-      case ("fahrenheit", "kelvin")   => Right((value - 32) * 5 / 9 + 273.15)
-      case ("kelvin", "fahrenheit")   => Right((value - 273.15) * 9 / 5 + 32)
-      case _ => Left("Unsupported conversion")
-    }
-
-  val convertTempRoute = HttpRoutes.of[IO] {
-    case req @ GET -> Root / "convert" / "temperature" =>
-      val queryParams = req.params
-      val from = queryParams.get("from")
-      val to = queryParams.get("to")
-      val value = queryParams.get("value").flatMap(v => Try(v.toDouble).toOption)
-
-      (from, to, value) match {
-        case (Some(f), Some(t), Some(v)) =>
-          convertTemperature(f.toLowerCase, t.toLowerCase, v) match {
-            case Right(result) =>
-              Ok(ConversionResponse(f, t, v, result).asJson)
-            case Left(error)   => BadRequest(error)
-          }
-        case _ => BadRequest("Missing or invalid query parameters")
-      }
-  }
-
-  override def run(args: List[String]): IO[ExitCode] = {
-    BlazeServerBuilder[IO]
-      .bindHttp(8080, "localhost")
-      .withHttpApp(convertTempRoute.orNotFound)
-      .serve
-      .compile
-      .drain
-      .as(ExitCode.Success)
-  }
-}
-```
-
-## Unison http service
-
-Instead of describing your dependencies in an sbt file, libraries are managed by with the `lib.install` command in the UCM.
-
-```bash
-scratch/main> project.create unit-converter-service
-unit-converter-service/main> lib.install @unison/http
-unit-converter-service/main> lib.install @unison/routes
-unit-converter-service/main> lib.install @unison/json
-```
-
-The libraries will be installed in the `lib` namespace, viewable with the `ls` command.
-
-```bash
-unit-converter-service/main> ls lib
-
-  1. base/                (7481 terms, 182 types)
-  2. unison_http_3_8_0/   (23224 terms, 636 types)
-  3. unison_json_1_2_3/   (7294 terms, 184 types)
-  4. unison_routes_6_3_0/ (122370 terms, 3276 types)
-```
-
-```unison
-type ConversionResponse = {from: Text, to: Text, input: Float, result: Float}
-
-ConversionResponse.toJson : ConversionResponse -> Json
-ConversionResponse.toJson = cases
-  ConversionResponse from to input result ->
-    Json.object [
-      ("from", Json.text from),
-      ("to", Json.text to),
-      ("input", Json.float input),
-      ("result", Json.float result)
-    ]
-
-convertTemperature : Text -> Text -> Float -> Either Text Float
-convertTemperature from to value =
-  match (from, to) with
-    ("celsius", "fahrenheit")  -> Right(value * 9.0 / 5.0 + 32.0)
-    ("fahrenheit", "celsius")  -> Right((value - 32.0) * 5.0 / 9.0)
-    ("celsius", "kelvin")      -> Right(value + 273.15)
-    ("kelvin", "celsius")      -> Right(value - 273.15)
-    ("fahrenheit", "kelvin")   -> Right((value - 32.0) * 5.0 / 9.0 + 273.15)
-    ("kelvin", "fahrenheit")   -> Right((value - 273.15) * 9.0 / 5.0 + 32.0)
-    _ -> Left("Unsupported conversion")
-
-convertTempRoute : '{Route} ()
-convertTempRoute = do
-  Route.noCapture GET (s "convert" Parser./ (s "temperature"))
-  queryParams = request.query()
-  from = Map.get "from" queryParams |> Optional.flatMap List.head
-  to = Map.get "to" queryParams |> Optional.flatMap List.head
-  value =
-    Map.get "value" queryParams
-      |> Optional.flatMap List.head
-      |> Optional.flatMap Float.fromText
-  match (from, to, value) with
-    (Some f, Some t, Some v) ->
-      match convertTemperature f t v with
-        Right result ->
-          resp = ConversionResponse f t v result
-          respond.ok.json (ConversionResponse.toJson resp)
-        Left error -> respond.badRequest.text error
-    _ -> respond.badRequest.text "Missing or invalid query parameters"
-
-unitConversionService : '{IO, Exception}()
-unitConversionService = do
-  service = convertTempRoute Route.<|> do respond.notFound.text "not found"
-  stop = serveSimple service 8080
-  printLine "Server running on port 8080. Press <enter> to stop."
-  _ = readLine()
-  stop()
-```
-
 # Core language features
 
 ## Named variables
@@ -564,10 +430,10 @@ In Scala, you can add a trait and say that the existing `Floor` case class is a 
 | GADTs                                   | No                                                                          | Yes. GADT’s via sealed traits and case classes                                          |
 | Higher-kinded types                     | Yes. But in the absence of typeclasses, less common.                        |
 
-`type Functor f = 
+`type Functor f =
    Functor (forall a b . (a -> b) -> f a -> f b))` | Yes
 
-`trait Functor[F[_]] { 
+`trait Functor[F[_]] {
   def map[A,B](f: A => B)(fa: F[A]): F[B] }` |
 | Type aliases | No\* (supports only simple aliases, not arbitrary type-level functions) | Yes |
 
@@ -802,3 +668,137 @@ res0: Int = 52
 ```
 
 </div></div>
+
+# Quickstart example
+
+## Scala http service
+
+```scala
+import cats.effect._
+import org.http4s._
+import org.http4s.dsl.io._
+import org.http4s.implicits._
+import org.http4s.blaze.server._
+import org.http4s.circe._
+import io.circe.syntax._
+import io.circe.generic.auto._
+import scala.util.Try
+
+case class ConversionResponse(from: String, to: String, input: Double, result: Double)
+
+object UnitConverterService extends IOApp {
+
+  def convertTemperature(from: String, to: String, value: Double): Either[String, Double] =
+    (from, to) match {
+      case ("celsius", "fahrenheit")  => Right(value * 9 / 5 + 32)
+      case ("fahrenheit", "celsius")  => Right((value - 32) * 5 / 9)
+      case ("celsius", "kelvin")      => Right(value + 273.15)
+      case ("kelvin", "celsius")      => Right(value - 273.15)
+      case ("fahrenheit", "kelvin")   => Right((value - 32) * 5 / 9 + 273.15)
+      case ("kelvin", "fahrenheit")   => Right((value - 273.15) * 9 / 5 + 32)
+      case _ => Left("Unsupported conversion")
+    }
+
+  val convertTempRoute = HttpRoutes.of[IO] {
+    case req @ GET -> Root / "convert" / "temperature" =>
+      val queryParams = req.params
+      val from = queryParams.get("from")
+      val to = queryParams.get("to")
+      val value = queryParams.get("value").flatMap(v => Try(v.toDouble).toOption)
+
+      (from, to, value) match {
+        case (Some(f), Some(t), Some(v)) =>
+          convertTemperature(f.toLowerCase, t.toLowerCase, v) match {
+            case Right(result) =>
+              Ok(ConversionResponse(f, t, v, result).asJson)
+            case Left(error)   => BadRequest(error)
+          }
+        case _ => BadRequest("Missing or invalid query parameters")
+      }
+  }
+
+  override def run(args: List[String]): IO[ExitCode] = {
+    BlazeServerBuilder[IO]
+      .bindHttp(8080, "localhost")
+      .withHttpApp(convertTempRoute.orNotFound)
+      .serve
+      .compile
+      .drain
+      .as(ExitCode.Success)
+  }
+}
+```
+
+## Unison http service
+
+Instead of describing your dependencies in an sbt file, libraries are managed by with the `lib.install` command in the UCM.
+
+```bash
+scratch/main> project.create unit-converter-service
+unit-converter-service/main> lib.install @unison/http
+unit-converter-service/main> lib.install @unison/routes
+unit-converter-service/main> lib.install @unison/json
+```
+
+The libraries will be installed in the `lib` namespace, viewable with the `ls` command.
+
+```bash
+unit-converter-service/main> ls lib
+
+  1. base/                (7481 terms, 182 types)
+  2. unison_http_3_8_0/   (23224 terms, 636 types)
+  3. unison_json_1_2_3/   (7294 terms, 184 types)
+  4. unison_routes_6_3_0/ (122370 terms, 3276 types)
+```
+
+```unison
+type ConversionResponse = {from: Text, to: Text, input: Float, result: Float}
+
+ConversionResponse.toJson : ConversionResponse -> Json
+ConversionResponse.toJson = cases
+  ConversionResponse from to input result ->
+    Json.object [
+      ("from", Json.text from),
+      ("to", Json.text to),
+      ("input", Json.float input),
+      ("result", Json.float result)
+    ]
+
+convertTemperature : Text -> Text -> Float -> Either Text Float
+convertTemperature from to value =
+  match (from, to) with
+    ("celsius", "fahrenheit")  -> Right(value * 9.0 / 5.0 + 32.0)
+    ("fahrenheit", "celsius")  -> Right((value - 32.0) * 5.0 / 9.0)
+    ("celsius", "kelvin")      -> Right(value + 273.15)
+    ("kelvin", "celsius")      -> Right(value - 273.15)
+    ("fahrenheit", "kelvin")   -> Right((value - 32.0) * 5.0 / 9.0 + 273.15)
+    ("kelvin", "fahrenheit")   -> Right((value - 273.15) * 9.0 / 5.0 + 32.0)
+    _ -> Left("Unsupported conversion")
+
+convertTempRoute : '{Route} ()
+convertTempRoute = do
+  Route.noCapture GET (s "convert" Parser./ (s "temperature"))
+  queryParams = request.query()
+  from = Map.get "from" queryParams |> Optional.flatMap List.head
+  to = Map.get "to" queryParams |> Optional.flatMap List.head
+  value =
+    Map.get "value" queryParams
+      |> Optional.flatMap List.head
+      |> Optional.flatMap Float.fromText
+  match (from, to, value) with
+    (Some f, Some t, Some v) ->
+      match convertTemperature f t v with
+        Right result ->
+          resp = ConversionResponse f t v result
+          respond.ok.json (ConversionResponse.toJson resp)
+        Left error -> respond.badRequest.text error
+    _ -> respond.badRequest.text "Missing or invalid query parameters"
+
+unitConversionService : '{IO, Exception}()
+unitConversionService = do
+  service = convertTempRoute Route.<|> do respond.notFound.text "not found"
+  stop = serveSimple service 8080
+  printLine "Server running on port 8080. Press <enter> to stop."
+  _ = readLine()
+  stop()
+```
