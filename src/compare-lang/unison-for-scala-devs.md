@@ -6,11 +6,11 @@ description: "Comparing structures and patterns between Unison and Scala"
 
 # Core language features
 
-## Named variables
+## Variables
 
-Unison variables can be defined at the top-level of a program. There is no keyword to introduce a value and all values are immutable. (Though there is a separate [mutable reference type](https://share.unison-lang.org/@unison/base/code/releases/4.1.1/latest/types/mutable/Ref) supporting atomic modification).
+Unison variables can be defined at the top-level of a program. There is no keyword to introduce a value and all values are immutable.
 
-The type signature of a value or function appears _above_ \*\*\*\*the definition instead of interspersed with the names of the function parameters. Both Scala and Unison support type inference, so these type signatures are optional.
+The type signature of a value or function appears _above_ the definition instead of interspersed with the names of the function parameters. Both Scala and Unison support type inference, so these type signatures are optional.
 
 <div class="side-by-side"><div>
 
@@ -104,7 +104,7 @@ It's a common Scala-flavored mistake to forget to supply the last argument to Un
 ### Calling functions `f x y` vs `f(x, y)`
 
 <div class="side-by-side"><div>
-During function application, arguments are separated by _spaces_:
+During function application, arguments are separated by __spaces__:
 
 ```unison
 digits = splitDigitsOn ?| "abc12|def34|56|78"
@@ -136,7 +136,7 @@ val digits = splitDigitsOn('|', "abc12|" ++ "def34|56|78")
 
 </div></div>
 
-### Generic types in functions
+### Generic types
 
 Generic types are represented with _lowercase letters_ in Unison. You do not need to introduce type variables for a polymorphic function in square brackets before using them.
 
@@ -304,13 +304,13 @@ val myTerm = "foo"
 
 ## Defining and using types
 
-Unison’s type system diverges from Scala’s, since Scala has more varied language constructs to express type hierarchies and uses implicit parameters to a variety of ends.
+### Type system differences
 
 - Scala supports sub-typing, therefore generic types can express variance relationships, `+A` `-B`. Unison does not have sub-typing and its types are invariant.
 - Scala’s type system includes more complex ways of expressing type hierarchies through traits, objects, and classes.
 - Scala has more options than Unison for type casting and dynamic type inference.
 - Unison does not support typeclasses. Scala has typeclasses via the `implicit` / `given` syntax.
-- Unison uses algebraic effects (called Abilities, more on that later) for effect management.
+- Unison uses algebraic effects (called Abilities) for effect management.
 
 ### Type declarations
 
@@ -426,15 +426,9 @@ In Scala, you can add a trait and say that the existing `Floor` case class is a 
 | Generic types / parametric polymorphism | Yes. Generic type parameters are inferred, introduced by lowercase letters. | Yes. Generic type parameters must be explicitly declared before use `[A]` in functions. |
 | Subtyping                               | No.                                                                         | Yes.                                                                                    |
 | Record types                            | Yes. Single data constructor types with named fields.                       | Yes. Case classes                                                                       |
-| Typeclasses                             | No                                                                          | Yes. Typeclasses via traits and implicit / given syntax.                                |
-| GADTs                                   | No                                                                          | Yes. GADT’s via sealed traits and case classes                                          |
-| Higher-kinded types                     | Yes. But in the absence of typeclasses, less common.                        |
-
-`type Functor f =
-   Functor (forall a b . (a -> b) -> f a -> f b))` | Yes
-
-`trait Functor[F[_]] {
-  def map[A,B](f: A => B)(fa: F[A]): F[B] }` |
+| Typeclasses                             | No.                                                                         | Yes. Typeclasses via traits and implicit / given syntax.                                |
+| GADTs                                   | No.                                                                         | Yes. GADT’s via sealed traits and case classes                                          |
+| Higher-kinded types                     | Yes. But in the absence of typeclasses, less common.                        | Yes.
 | Type aliases | No\* (supports only simple aliases, not arbitrary type-level functions) | Yes |
 
 ## Pattern matching
