@@ -669,7 +669,7 @@ res0: Int = 52
 
 </div></div>
 
-# Quickstart example
+# HTTP Service example
 
 ## Scala http service
 
@@ -678,7 +678,7 @@ import cats.effect._
 import org.http4s._
 import org.http4s.dsl.io._
 import org.http4s.implicits._
-import org.http4s.blaze.server._
+import org.http4s.ember.server._
 import org.http4s.circe._
 import io.circe.syntax._
 import io.circe.generic.auto._
@@ -686,7 +686,7 @@ import scala.util.Try
 
 case class ConversionResponse(from: String, to: String, input: Double, result: Double)
 
-object UnitConverterService extends IOApp {
+object UnitConverterService extends IOApp.Simple {
 
   def convertTemperature(from: String, to: String, value: Double): Either[String, Double] =
     (from, to) match {
@@ -717,15 +717,12 @@ object UnitConverterService extends IOApp {
       }
   }
 
-  override def run(args: List[String]): IO[ExitCode] = {
-    BlazeServerBuilder[IO]
-      .bindHttp(8080, "localhost")
+  def run: IO[Unit] =
+    EmberServerBuilder
+      .default[IO]
       .withHttpApp(convertTempRoute.orNotFound)
-      .serve
-      .compile
-      .drain
-      .as(ExitCode.Success)
-  }
+      .build
+      .useForever
 }
 ```
 
@@ -746,9 +743,9 @@ The libraries will be installed in the `lib` namespace, viewable with the `ls` c
 unit-converter-service/main> ls lib
 
   1. base/                (7481 terms, 182 types)
-  2. unison_http_3_8_0/   (23224 terms, 636 types)
-  3. unison_json_1_2_3/   (7294 terms, 184 types)
-  4. unison_routes_6_3_0/ (122370 terms, 3276 types)
+  2. unison_http_4_0_0/   (24792 terms, 642 types)
+  3. unison_json_1_3_5/   (8184 terms, 189 types)
+  4. unison_routes_6_3_3/ (127000 terms, 3311 types)
 ```
 
 ```unison
