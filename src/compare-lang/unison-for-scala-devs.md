@@ -4,147 +4,13 @@ title: "Unison for Scala devs"
 description: "Comparing structures and patterns between Unison and Scala"
 ---
 
-# Quickstart example
-
-## Scala http service
-
-```scala
-import cats.effect._
-import org.http4s._
-import org.http4s.dsl.io._
-import org.http4s.implicits._
-import org.http4s.blaze.server._
-import org.http4s.circe._
-import io.circe.syntax._
-import io.circe.generic.auto._
-import scala.util.Try
-
-case class ConversionResponse(from: String, to: String, input: Double, result: Double)
-
-object UnitConverterService extends IOApp {
-
-  def convertTemperature(from: String, to: String, value: Double): Either[String, Double] =
-    (from, to) match {
-      case ("celsius", "fahrenheit")  => Right(value * 9 / 5 + 32)
-      case ("fahrenheit", "celsius")  => Right((value - 32) * 5 / 9)
-      case ("celsius", "kelvin")      => Right(value + 273.15)
-      case ("kelvin", "celsius")      => Right(value - 273.15)
-      case ("fahrenheit", "kelvin")   => Right((value - 32) * 5 / 9 + 273.15)
-      case ("kelvin", "fahrenheit")   => Right((value - 273.15) * 9 / 5 + 32)
-      case _ => Left("Unsupported conversion")
-    }
-
-  val convertTempRoute = HttpRoutes.of[IO] {
-    case req @ GET -> Root / "convert" / "temperature" =>
-      val queryParams = req.params
-      val from = queryParams.get("from")
-      val to = queryParams.get("to")
-      val value = queryParams.get("value").flatMap(v => Try(v.toDouble).toOption)
-
-      (from, to, value) match {
-        case (Some(f), Some(t), Some(v)) =>
-          convertTemperature(f.toLowerCase, t.toLowerCase, v) match {
-            case Right(result) =>
-              Ok(ConversionResponse(f, t, v, result).asJson)
-            case Left(error)   => BadRequest(error)
-          }
-        case _ => BadRequest("Missing or invalid query parameters")
-      }
-  }
-
-  override def run(args: List[String]): IO[ExitCode] = {
-    BlazeServerBuilder[IO]
-      .bindHttp(8080, "localhost")
-      .withHttpApp(convertTempRoute.orNotFound)
-      .serve
-      .compile
-      .drain
-      .as(ExitCode.Success)
-  }
-}
-```
-
-## Unison http service
-
-Instead of describing your dependencies in an sbt file, libraries are managed by with the `lib.install` command in the UCM.
-
-```bash
-scratch/main> project.create unit-converter-service
-unit-converter-service/main> lib.install @unison/http
-unit-converter-service/main> lib.install @unison/routes
-unit-converter-service/main> lib.install @unison/json
-```
-
-The libraries will be installed in the `lib` namespace, viewable with the `ls` command.
-
-```bash
-unit-converter-service/main> ls lib
-
-  1. base/                (7481 terms, 182 types)
-  2. unison_http_3_8_0/   (23224 terms, 636 types)
-  3. unison_json_1_2_3/   (7294 terms, 184 types)
-  4. unison_routes_6_3_0/ (122370 terms, 3276 types)
-```
-
-```unison
-type ConversionResponse = {from: Text, to: Text, input: Float, result: Float}
-
-ConversionResponse.toJson : ConversionResponse -> Json
-ConversionResponse.toJson = cases
-  ConversionResponse from to input result ->
-    Json.object [
-      ("from", Json.text from),
-      ("to", Json.text to),
-      ("input", Json.float input),
-      ("result", Json.float result)
-    ]
-
-convertTemperature : Text -> Text -> Float -> Either Text Float
-convertTemperature from to value =
-  match (from, to) with
-    ("celsius", "fahrenheit")  -> Right(value * 9.0 / 5.0 + 32.0)
-    ("fahrenheit", "celsius")  -> Right((value - 32.0) * 5.0 / 9.0)
-    ("celsius", "kelvin")      -> Right(value + 273.15)
-    ("kelvin", "celsius")      -> Right(value - 273.15)
-    ("fahrenheit", "kelvin")   -> Right((value - 32.0) * 5.0 / 9.0 + 273.15)
-    ("kelvin", "fahrenheit")   -> Right((value - 273.15) * 9.0 / 5.0 + 32.0)
-    _ -> Left("Unsupported conversion")
-
-convertTempRoute : '{Route} ()
-convertTempRoute = do
-  Route.noCapture GET (s "convert" Parser./ (s "temperature"))
-  queryParams = request.query()
-  from = Map.get "from" queryParams |> Optional.flatMap List.head
-  to = Map.get "to" queryParams |> Optional.flatMap List.head
-  value =
-    Map.get "value" queryParams
-      |> Optional.flatMap List.head
-      |> Optional.flatMap Float.fromText
-  match (from, to, value) with
-    (Some f, Some t, Some v) ->
-      match convertTemperature f t v with
-        Right result ->
-          resp = ConversionResponse f t v result
-          respond.ok.json (ConversionResponse.toJson resp)
-        Left error -> respond.badRequest.text error
-    _ -> respond.badRequest.text "Missing or invalid query parameters"
-
-unitConversionService : '{IO, Exception}()
-unitConversionService = do
-  service = convertTempRoute Route.<|> do respond.notFound.text "not found"
-  stop = serveSimple service 8080
-  printLine "Server running on port 8080. Press <enter> to stop."
-  _ = readLine()
-  stop()
-```
-
 # Core language features
 
-## Named variables
+## Variables
 
-Unison variables can be defined at the top-level of a program. There is no keyword to introduce a value and all values are immutable. (Though there is a separate [mutable reference type](https://share.unison-lang.org/@unison/base/code/releases/4.1.1/latest/types/mutable/Ref) supporting atomic modification).
+Unison variables can be defined at the top-level of a program. There is no keyword to introduce a value and all values are immutable.
 
-The type signature of a value or function appears _above_ \*\*\*\*the definition instead of interspersed with the names of the function parameters. Both Scala and Unison support type inference, so these type signatures are optional.
+The type signature of a value or function appears _above_ the definition instead of interspersed with the names of the function parameters. Both Scala and Unison support type inference, so these type signatures are optional.
 
 <div class="side-by-side"><div>
 
@@ -235,10 +101,11 @@ It's a common Scala-flavored mistake to forget to supply the last argument to Un
 
 </div></div>
 
-### Calling functions `f x y` vs `f(x, y)`
+### Calling functions
 
 <div class="side-by-side"><div>
-During function application, arguments are separated by _spaces_:
+
+During function application, arguments are separated by spaces:
 
 ```unison
 digits = splitDigitsOn ?| "abc12|def34|56|78"
@@ -248,7 +115,7 @@ Since commas are not used to explicitly separate arguments, parenthesis disambig
 
 </div><div>
 
-Arguments are provided in parens, separated by commas:
+Arguments are provided in parentheses, separated by commas:
 
 ```scala
 val digits = splitDigitsOn('|', "abc12|def34|56|78")
@@ -270,7 +137,7 @@ val digits = splitDigitsOn('|', "abc12|" ++ "def34|56|78")
 
 </div></div>
 
-### Generic types in functions
+### Generic types
 
 Generic types are represented with _lowercase letters_ in Unison. You do not need to introduce type variables for a polymorphic function in square brackets before using them.
 
@@ -289,7 +156,7 @@ def identity[A](a: A): A = a
 
 </div></div>
 
-### Delayed computations and laziness
+### Delayed evaluation
 
 <div class="side-by-side"><div>
 
@@ -314,11 +181,11 @@ computeTwice(expensiveComputation())
 
 They are commonly used in conjunction with our effect system, abilities, since top-level values cannot run arbitrary effects outside of a function.
 
-Unison has special syntax for forcing a thunk, `()`. Scala does not.
+The syntax for forcing a thunk in Unison is `()`.
 
 </div><div>
 
-Scala has **non-forced function arguments** using **call-by-name parameters** (`=> T`). Scala defers the value **every time** the parameter is used inside the function.
+Scala has non-forced function arguments using **call-by-name parameters** (`=> T`). Scala defers the value every time the parameter is used inside the function.
 
 ```scala
 def computeTwice(x: => Int): Int = x + x
@@ -333,7 +200,7 @@ computeTwice(expensiveComputation())
 // Prints the message twice
 ```
 
-Scala’s `lazy` values are different from delayed computations because they **memoize** the value once evaluated.
+Scala’s `lazy` values are different from delayed computations because they _memoize_ the value once evaluated.
 
 ```scala
 lazy val expensiveComputation: Int = {
@@ -349,9 +216,93 @@ println(expensiveComputation)
 
 </div></div>
 
+## Organizing code
+
+### Packages
+
+<div class="side-by-side"><div>
+
+Unison uses **namespaces** to organize code. They're created with the `namespace` keyword at the top of a scratch file or with prefixed name segments separated by a dot.
+
+```unison
+namespace models
+
+type User = User Text Nat
+```
+
+```unison
+type models.User = User Text Nat
+
+models.User.toJson : User -> Json
+models.User.toJson user = [...]
+
+models.User.fromJson : Json -> Optional User
+models.User.fromJson json = [...]
+
+type models.UserPreferences = UserPreferences [Text]
+
+models.UserPreferences.top : UserPreferences -> Text
+models.UserPreferences.top prefs = [...]
+```
+</div>
+
+<div>
+
+Scala uses **packages** to organize code. They're defined at the top of a file with the `package` keyword.
+
+```scala
+package models
+
+class User {...}
+
+class UserPreferences {...}
+```
+</div></div>
+
+### Imports
+
+Unison uses the `use` keyword to import definitions while Scala uses the `import` keyword. Both Unison and Scala support imports at the top-level of the file and scoped to definitions.
+
+<div class="side-by-side"><div>
+
+```unison
+-- imports everything in the `models.User` namespace
+use models.User
+-- imports the `User` and `UserPreferences` namespaces
+use models User UserPreferences
+-- imports specific terms from the `models.User` namespace
+use models.User toJson fromJson
+```
+
+```unison
+sqrtplus1 : Float -> Float
+sqrtplus1 x =
+  use Float sqrt
+  sqrt x + 1.0
+```
+</div>
+
+<div>
+
+```scala
+// imports everything in the `models` package
+import models.*
+// imports specific members from the `models` package
+import models.{User, UserPreferences}
+// Scala supports renaming imports, Unison does not.
+import models.UserPreferences as UPrefs
+```
+
+```scala
+def sqrtplus1(x: Int) =
+  import scala.math.sqrt
+  sqrt(x) + 1.0
+```
+</div></div>
+
 ## Comments and docs
 
-Unison comments **are not persisted** to the Unison codebase. To save a note to your future self or colleagues, use a string literal or use a Unison `Doc` expression.
+Unison comments _are not persisted_ to the Unison codebase. To save a note to your future self or colleagues, use a string literal or use a Unison `Doc` expression.
 
 <div class="side-by-side"><div>
 
@@ -378,7 +329,6 @@ myTerm =
 /*
   A multi-line comment.
 */
-
 ```
 
 </div></div>
@@ -392,24 +342,24 @@ Unison `Doc` elements are first-class elements in the Unison language. They are 
 {% raw %}
 
 ````unison
-{{This Unison {type Doc} describes something called {myTerm}.
+{{
+  This Unison {type Doc} describes something called {myTerm}.
 
-@signature{myTerm, Map.fromList}
+  @signature{myTerm, Map.fromList}
 
-It can evaluate pure code for dynamic examples:
+  It can evaluate pure code for dynamic examples:
 
-```
-myTerm
-```
+  ```
+  myTerm
+  ```
 
-```
-Map.fromList [(1, "a"), (2, "b"), (3, myTerm)]
-  |> Map.get 3
-```
+  ```
+  Map.fromList [(1, "a"), (2, "b"), (3, myTerm)]
+    |> Map.get 3
+  ```
 
-If you change the implementation of `myTerm`,
-this document will change automatically.
-
+  If you change the implementation of `myTerm`,
+  this document will change automatically.
 }}
 myTerm =
   _ = "This text literal will
@@ -426,8 +376,8 @@ If a Doc element is created above a term or type, it will automatically share th
 ```scala
 /** A Scala Doc for the term below.
 
-With annotations it can automatically update some information about
-its inputs and outputs.
+With annotations it can automatically update some
+information about its inputs and outputs.
 
 It cannot run live snippets of the code it describes.
 */
@@ -438,13 +388,13 @@ val myTerm = "foo"
 
 ## Defining and using types
 
-Unison’s type system diverges from Scala’s, since Scala has more varied language constructs to express type hierarchies and uses implicit parameters to a variety of ends.
+### Type system differences
 
 - Scala supports sub-typing, therefore generic types can express variance relationships, `+A` `-B`. Unison does not have sub-typing and its types are invariant.
 - Scala’s type system includes more complex ways of expressing type hierarchies through traits, objects, and classes.
 - Scala has more options than Unison for type casting and dynamic type inference.
 - Unison does not support typeclasses. Scala has typeclasses via the `implicit` / `given` syntax.
-- Unison uses algebraic effects (called Abilities, more on that later) for effect management.
+- Unison uses algebraic effects (called Abilities) for effect management.
 
 ### Type declarations
 
@@ -461,7 +411,9 @@ up : Direction
 up = Direction.Up
 ```
 
-The `type` keyword introduces a new type. Its data constructors are separated by `|` on the right of the equals sign. Think of data constructors as **functions** which produce values of the given type.
+The `type` keyword introduces a new type. Its **data constructors** are separated by `|` on the right of the equals sign.
+
+Think of data constructors as functions which produce values of the given type.
 
 ```unison
 -- the Floor type has one data constructor,
@@ -484,9 +436,9 @@ val up : Direction = Up
 
 </div></div>
 
-### Record types and case classes
+### Case classes
 
-Unison record types are similar to case classes in spirit. They’re both used to store named fields, and they automatically provide functions for setting and extracting values from the type by field name.
+Unison **record types** are similar to **case classes** in spirit. They’re both used to store named fields, and they automatically provide functions for setting and extracting values from the type by field name.
 
 <div class="side-by-side"><div>
 
@@ -525,7 +477,7 @@ Case classes don’t have a `modify` function for their fields
 
 </div></div>
 
-### Wrapper data constructors and tagged unions
+### Tagged unions
 
 Say we need to add a type for the panel inside an elevator to better model the requests a user might issue. A user can still request a `Floor`, but they can also make an emergency call and handle the doors.
 
@@ -560,15 +512,9 @@ In Scala, you can add a trait and say that the existing `Floor` case class is a 
 | Generic types / parametric polymorphism | Yes. Generic type parameters are inferred, introduced by lowercase letters. | Yes. Generic type parameters must be explicitly declared before use `[A]` in functions. |
 | Subtyping                               | No.                                                                         | Yes.                                                                                    |
 | Record types                            | Yes. Single data constructor types with named fields.                       | Yes. Case classes                                                                       |
-| Typeclasses                             | No                                                                          | Yes. Typeclasses via traits and implicit / given syntax.                                |
-| GADTs                                   | No                                                                          | Yes. GADT’s via sealed traits and case classes                                          |
-| Higher-kinded types                     | Yes. But in the absence of typeclasses, less common.                        |
-
-`type Functor f = 
-   Functor (forall a b . (a -> b) -> f a -> f b))` | Yes
-
-`trait Functor[F[_]] { 
-  def map[A,B](f: A => B)(fa: F[A]): F[B] }` |
+| Typeclasses                             | No.                                                                         | Yes. Typeclasses via traits and implicit / given syntax.                                |
+| GADTs                                   | No.                                                                         | Yes. GADT’s via sealed traits and case classes                                          |
+| Higher-kinded types                     | Yes. But in the absence of typeclasses, less common.                        | Yes.
 | Type aliases | No\* (supports only simple aliases, not arbitrary type-level functions) | Yes |
 
 ## Pattern matching
@@ -651,7 +597,7 @@ def userTuple(user : User): (User, String) = user match {
 
 </div></div>
 
-### Data constructors vs dynamic type checking inside pattern matches
+### Type checking inside pattern matches
 
 Unison does not support dynamic type checks in pattern matches.
 
@@ -733,7 +679,7 @@ def slidingPairs[A](list: List[A]): List[(A, A)] = {
 
 </div></div>
 
-## Program entry points
+## Running programs
 
 A runnable “main” function in Unison is a delayed computation (a thunk) which can perform the `IO` and `Exception` abilities (think “effects”).
 
@@ -787,8 +733,6 @@ UCM will print out:
   6
 ```
 
-Also see [writing tests in Unison](https://youtu.be/nJbXstiE3qU).
-
 </div><div>
 
 ### vs the REPL
@@ -802,3 +746,134 @@ res0: Int = 52
 ```
 
 </div></div>
+
+# HTTP Service example
+
+## Scala http service
+
+```scala
+import cats.effect._
+import org.http4s._
+import org.http4s.dsl.io._
+import org.http4s.implicits._
+import org.http4s.ember.server._
+import org.http4s.circe._
+import io.circe.syntax._
+import io.circe.generic.auto._
+import scala.util.Try
+
+case class ConversionResponse(from: String, to: String, input: Double, result: Double)
+
+object UnitConverterService extends IOApp.Simple {
+
+  def convertTemperature(from: String, to: String, value: Double): Either[String, Double] =
+    (from, to) match {
+      case ("celsius", "fahrenheit")  => Right(value * 9 / 5 + 32)
+      case ("fahrenheit", "celsius")  => Right((value - 32) * 5 / 9)
+      case ("celsius", "kelvin")      => Right(value + 273.15)
+      case ("kelvin", "celsius")      => Right(value - 273.15)
+      case ("fahrenheit", "kelvin")   => Right((value - 32) * 5 / 9 + 273.15)
+      case ("kelvin", "fahrenheit")   => Right((value - 273.15) * 9 / 5 + 32)
+      case _ => Left("Unsupported conversion")
+    }
+
+  val convertTempRoute = HttpRoutes.of[IO] {
+    case req @ GET -> Root / "convert" / "temperature" =>
+      val queryParams = req.params
+      val from = queryParams.get("from")
+      val to = queryParams.get("to")
+      val value = queryParams.get("value").flatMap(v => Try(v.toDouble).toOption)
+
+      (from, to, value) match {
+        case (Some(f), Some(t), Some(v)) =>
+          convertTemperature(f.toLowerCase, t.toLowerCase, v) match {
+            case Right(result) =>
+              Ok(ConversionResponse(f, t, v, result).asJson)
+            case Left(error)   => BadRequest(error)
+          }
+        case _ => BadRequest("Missing or invalid query parameters")
+      }
+  }
+
+  def run: IO[Unit] =
+    EmberServerBuilder
+      .default[IO]
+      .withHttpApp(convertTempRoute.orNotFound)
+      .build
+      .useForever
+}
+```
+
+## Unison http service
+
+Instead of describing your dependencies in an sbt file, libraries are managed by with the `lib.install` command in the UCM.
+
+```bash
+scratch/main> project.create unit-converter-service
+unit-converter-service/main> lib.install @unison/http
+unit-converter-service/main> lib.install @unison/routes
+unit-converter-service/main> lib.install @unison/json
+```
+
+The libraries will be installed in the `lib` namespace, viewable with the `ls` command.
+
+```bash
+unit-converter-service/main> ls lib
+
+  1. base/                (7481 terms, 182 types)
+  2. unison_http_4_0_0/   (24792 terms, 642 types)
+  3. unison_json_1_3_5/   (8184 terms, 189 types)
+  4. unison_routes_6_3_3/ (127000 terms, 3311 types)
+```
+
+```unison
+type ConversionResponse = {from: Text, to: Text, input: Float, result: Float}
+
+ConversionResponse.toJson : ConversionResponse -> Json
+ConversionResponse.toJson = cases
+  ConversionResponse from to input result ->
+    Json.object [
+      ("from", Json.text from),
+      ("to", Json.text to),
+      ("input", Json.float input),
+      ("result", Json.float result)
+    ]
+
+convertTemperature : Text -> Text -> Float -> Either Text Float
+convertTemperature from to value =
+  match (from, to) with
+    ("celsius", "fahrenheit")  -> Right(value * 9.0 / 5.0 + 32.0)
+    ("fahrenheit", "celsius")  -> Right((value - 32.0) * 5.0 / 9.0)
+    ("celsius", "kelvin")      -> Right(value + 273.15)
+    ("kelvin", "celsius")      -> Right(value - 273.15)
+    ("fahrenheit", "kelvin")   -> Right((value - 32.0) * 5.0 / 9.0 + 273.15)
+    ("kelvin", "fahrenheit")   -> Right((value - 273.15) * 9.0 / 5.0 + 32.0)
+    _ -> Left("Unsupported conversion")
+
+convertTempRoute : '{Route} ()
+convertTempRoute = do
+  Route.noCapture GET (s "convert" Parser./ (s "temperature"))
+  queryParams = request.query()
+  from = Map.get "from" queryParams |> Optional.flatMap List.head
+  to = Map.get "to" queryParams |> Optional.flatMap List.head
+  value =
+    Map.get "value" queryParams
+      |> Optional.flatMap List.head
+      |> Optional.flatMap Float.fromText
+  match (from, to, value) with
+    (Some f, Some t, Some v) ->
+      match convertTemperature f t v with
+        Right result ->
+          resp = ConversionResponse f t v result
+          respond.ok.json (ConversionResponse.toJson resp)
+        Left error -> respond.badRequest.text error
+    _ -> respond.badRequest.text "Missing or invalid query parameters"
+
+unitConversionService : '{IO, Exception}()
+unitConversionService = do
+  service = convertTempRoute Route.<|> do respond.notFound.text "not found"
+  stop = serveSimple service 8080
+  printLine "Server running on port 8080. Press <enter> to stop."
+  _ = readLine()
+  stop()
+```
