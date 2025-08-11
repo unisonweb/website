@@ -12,6 +12,8 @@ Unison variables can be defined at the top-level of a program. There is no keywo
 
 The type signature of a value or function appears _above_ the definition instead of interspersed with the names of the function parameters. Both Scala and Unison support type inference, so these type signatures are optional.
 
+### Basic types
+
 <div class="side-by-side"><div>
 
 ```unison
@@ -26,6 +28,9 @@ aNat = 123
 
 aList : List Int -- also represented as [Int]
 aList = [+1, +2, -3, -4, +0]
+
+aMap : Map Text Nat
+aMap = Map.fromList [("a", 1), ("b", 2), ("c", 3)]
 
 someVal : Optional Boolean
 someVal = Some true
@@ -51,13 +56,17 @@ val anInt : Int = 123
 
 val aList : List[Int] = List(1, 2, -3, -4, 0)
 
-var aVariable = 0
-aVariable + 3
+aMap : Map[String, Int] = Map("a" -> 1, "b" -> 2, "c" -> 3)
+anotherMap = Map(("a", 1), ("b", 2), ("c", 3))
 
 val someVal : Option[Boolean] = Some(true)
 val noneVal = None
 
 val theUnitVal : Unit = ()
+
+var aVariable = 0
+aVariable + 3
+
 ```
 
 Unison does not have an analog to the `var` keyword in Scala.
@@ -220,15 +229,22 @@ println(expensiveComputation)
 
 ### Packages
 
-<div class="side-by-side"><div>
+Unison uses **namespaces** to organize code, which are similar to Scala **packages**.
 
-Unison uses **namespaces** to organize code. They're created with the `namespace` keyword at the top of a scratch file or with prefixed name segments separated by a dot.
+<div class="side-by-side"><div>
 
 ```unison
 namespace models
 
 type User = User Text Nat
+
+models.User.toJson : User -> Json
+models.User.toJson user = [...]
+
+type UserPreferences = UserPreferences [Text]
 ```
+
+It's more common to see namespaces fully prefixed by their dot-separated name segments in a `scratch.u` file:
 
 ```unison
 type models.User = User Text Nat
@@ -236,19 +252,11 @@ type models.User = User Text Nat
 models.User.toJson : User -> Json
 models.User.toJson user = [...]
 
-models.User.fromJson : Json -> Optional User
-models.User.fromJson json = [...]
-
 type models.UserPreferences = UserPreferences [Text]
-
-models.UserPreferences.top : UserPreferences -> Text
-models.UserPreferences.top prefs = [...]
 ```
 </div>
 
 <div>
-
-Scala uses **packages** to organize code. They're defined at the top of a file with the `package` keyword.
 
 ```scala
 package models
@@ -515,7 +523,7 @@ In Scala, you can add a trait and say that the existing `Floor` case class is a 
 | Typeclasses                             | No.                                                                         | Yes. Typeclasses via traits and implicit / given syntax.                                |
 | GADTs                                   | No.                                                                         | Yes. GADT’s via sealed traits and case classes                                          |
 | Higher-kinded types                     | Yes. But in the absence of typeclasses, less common.                        | Yes.
-| Type aliases | No\* (supports only simple aliases, not arbitrary type-level functions) | Yes |
+| Type aliases                            | No                                                                          | Yes |
 
 ## Pattern matching
 
@@ -695,6 +703,10 @@ mainWithArgs = do
   args : [Text]
   args = IO.getArgs()
   printLine ("program args: " ++ (Text.join ", " args))
+
+pureMain : '{} Nat
+pureMain = do
+  42
 ```
 
 </div><div>
@@ -713,11 +725,11 @@ object Main {
 
 </div></div>
 
+### The REPL
+
+Unison uses **watch expressions** to interactively evaluate code, instead of a traditional **REPL**. The Unison Codebase Manager (UCM) watches for changes to `.u` files and evaluates any lines starting with `>`.
+
 <div class="side-by-side"><div>
-
-### Watch expressions
-
-Unison does not have a traditional REPL. Our tool, the UCM watches for changes to any `.u` files in the directory it is launched in, and prints out the result of any “watch expressions” (lines starting with `>`) in those files.
 
 ```unison
 factorial n = product (range 1 (n + 1))
@@ -735,7 +747,6 @@ UCM will print out:
 
 </div><div>
 
-### vs the REPL
 
 ```scala
 scala> val x = 42
