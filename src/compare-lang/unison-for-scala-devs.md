@@ -101,7 +101,7 @@ It's a common Scala-flavored mistake to forget to supply the last argument to Un
 
 </div></div>
 
-### Calling functions `f x y` vs `f(x, y)`
+### Calling functions
 
 <div class="side-by-side"><div>
 
@@ -156,7 +156,7 @@ def identity[A](a: A): A = a
 
 </div></div>
 
-### Delayed computations and laziness
+### Delayed evaluation
 
 <div class="side-by-side"><div>
 
@@ -200,7 +200,7 @@ computeTwice(expensiveComputation())
 // Prints the message twice
 ```
 
-Scala’s `lazy` values are different from delayed computations because they __memoize__ the value once evaluated.
+Scala’s `lazy` values are different from delayed computations because they _memoize_ the value once evaluated.
 
 ```scala
 lazy val expensiveComputation: Int = {
