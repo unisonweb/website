@@ -104,7 +104,8 @@ It's a common Scala-flavored mistake to forget to supply the last argument to Un
 ### Calling functions `f x y` vs `f(x, y)`
 
 <div class="side-by-side"><div>
-During function application, arguments are separated by __spaces__:
+
+During function application, arguments are separated by spaces:
 
 ```unison
 digits = splitDigitsOn ?| "abc12|def34|56|78"
@@ -114,7 +115,7 @@ Since commas are not used to explicitly separate arguments, parenthesis disambig
 
 </div><div>
 
-Arguments are provided in parens, separated by commas:
+Arguments are provided in parentheses, separated by commas:
 
 ```scala
 val digits = splitDigitsOn('|', "abc12|def34|56|78")
@@ -180,11 +181,11 @@ computeTwice(expensiveComputation())
 
 They are commonly used in conjunction with our effect system, abilities, since top-level values cannot run arbitrary effects outside of a function.
 
-Unison has special syntax for forcing a thunk, `()`. Scala does not.
+The syntax for forcing a thunk in Unison is `()`.
 
 </div><div>
 
-Scala has **non-forced function arguments** using **call-by-name parameters** (`=> T`). Scala defers the value **every time** the parameter is used inside the function.
+Scala has non-forced function arguments using **call-by-name parameters** (`=> T`). Scala defers the value every time the parameter is used inside the function.
 
 ```scala
 def computeTwice(x: => Int): Int = x + x
@@ -199,7 +200,7 @@ computeTwice(expensiveComputation())
 // Prints the message twice
 ```
 
-Scala’s `lazy` values are different from delayed computations because they **memoize** the value once evaluated.
+Scala’s `lazy` values are different from delayed computations because they __memoize__ the value once evaluated.
 
 ```scala
 lazy val expensiveComputation: Int = {
@@ -215,9 +216,93 @@ println(expensiveComputation)
 
 </div></div>
 
+## Organizing code
+
+### Packages
+
+<div class="side-by-side"><div>
+
+Unison uses **namespaces** to organize code. They're created with the `namespace` keyword at the top of a scratch file or with prefixed name segments separated by a dot.
+
+```unison
+namespace models
+
+type User = User Text Nat
+```
+
+```unison
+type models.User = User Text Nat
+
+models.User.toJson : User -> Json
+models.User.toJson user = [...]
+
+models.User.fromJson : Json -> Optional User
+models.User.fromJson json = [...]
+
+type models.UserPreferences = UserPreferences [Text]
+
+models.UserPreferences.top : UserPreferences -> Text
+models.UserPreferences.top prefs = [...]
+```
+</div>
+
+<div>
+
+Scala uses **packages** to organize code. They're defined at the top of a file with the `package` keyword.
+
+```scala
+package models
+
+class User {...}
+
+class UserPreferences {...}
+```
+</div></div>
+
+### Imports
+
+Unison uses the `use` keyword to import definitions while Scala uses the `import` keyword. Both Unison and Scala support imports at the top-level of the file and scoped to definitions.
+
+<div class="side-by-side"><div>
+
+```unison
+-- imports everything in the `models.User` namespace
+use models.User
+-- imports the `User` and `UserPreferences` namespaces
+use models User UserPreferences
+-- imports specific terms from the `models.User` namespace
+use models.User toJson fromJson
+```
+
+```unison
+sqrtplus1 : Float -> Float
+sqrtplus1 x =
+  use Float sqrt
+  sqrt x + 1.0
+```
+</div>
+
+<div>
+
+```scala
+// imports everything in the `models` package
+import models.*
+// imports specific members from the `models` package
+import models.{User, UserPreferences}
+// Scala supports renaming imports, Unison does not.
+import models.UserPreferences as UPrefs
+```
+
+```scala
+def sqrtplus1(x: Int) =
+  import scala.math.sqrt
+  sqrt(x) + 1.0
+```
+</div></div>
+
 ## Comments and docs
 
-Unison comments **are not persisted** to the Unison codebase. To save a note to your future self or colleagues, use a string literal or use a Unison `Doc` expression.
+Unison comments _are not persisted_ to the Unison codebase. To save a note to your future self or colleagues, use a string literal or use a Unison `Doc` expression.
 
 <div class="side-by-side"><div>
 
@@ -244,7 +329,6 @@ myTerm =
 /*
   A multi-line comment.
 */
-
 ```
 
 </div></div>
@@ -258,24 +342,24 @@ Unison `Doc` elements are first-class elements in the Unison language. They are 
 {% raw %}
 
 ````unison
-{{This Unison {type Doc} describes something called {myTerm}.
+{{
+  This Unison {type Doc} describes something called {myTerm}.
 
-@signature{myTerm, Map.fromList}
+  @signature{myTerm, Map.fromList}
 
-It can evaluate pure code for dynamic examples:
+  It can evaluate pure code for dynamic examples:
 
-```
-myTerm
-```
+  ```
+  myTerm
+  ```
 
-```
-Map.fromList [(1, "a"), (2, "b"), (3, myTerm)]
-  |> Map.get 3
-```
+  ```
+  Map.fromList [(1, "a"), (2, "b"), (3, myTerm)]
+    |> Map.get 3
+  ```
 
-If you change the implementation of `myTerm`,
-this document will change automatically.
-
+  If you change the implementation of `myTerm`,
+  this document will change automatically.
 }}
 myTerm =
   _ = "This text literal will
@@ -292,8 +376,8 @@ If a Doc element is created above a term or type, it will automatically share th
 ```scala
 /** A Scala Doc for the term below.
 
-With annotations it can automatically update some information about
-its inputs and outputs.
+With annotations it can automatically update some
+information about its inputs and outputs.
 
 It cannot run live snippets of the code it describes.
 */
@@ -327,7 +411,9 @@ up : Direction
 up = Direction.Up
 ```
 
-The `type` keyword introduces a new type. Its data constructors are separated by `|` on the right of the equals sign. Think of data constructors as **functions** which produce values of the given type.
+The `type` keyword introduces a new type. Its **data constructors** are separated by `|` on the right of the equals sign.
+
+Think of data constructors as functions which produce values of the given type.
 
 ```unison
 -- the Floor type has one data constructor,
@@ -350,9 +436,9 @@ val up : Direction = Up
 
 </div></div>
 
-### Record types and case classes
+### Case classes
 
-Unison record types are similar to case classes in spirit. They’re both used to store named fields, and they automatically provide functions for setting and extracting values from the type by field name.
+Unison **record types** are similar to **case classes** in spirit. They’re both used to store named fields, and they automatically provide functions for setting and extracting values from the type by field name.
 
 <div class="side-by-side"><div>
 
@@ -391,7 +477,7 @@ Case classes don’t have a `modify` function for their fields
 
 </div></div>
 
-### Wrapper data constructors and tagged unions
+### Tagged unions
 
 Say we need to add a type for the panel inside an elevator to better model the requests a user might issue. A user can still request a `Floor`, but they can also make an emergency call and handle the doors.
 
@@ -511,7 +597,7 @@ def userTuple(user : User): (User, String) = user match {
 
 </div></div>
 
-### Data constructors vs dynamic type checking inside pattern matches
+### Type checking inside pattern matches
 
 Unison does not support dynamic type checks in pattern matches.
 
@@ -593,7 +679,7 @@ def slidingPairs[A](list: List[A]): List[(A, A)] = {
 
 </div></div>
 
-## Program entry points
+## Running programs
 
 A runnable “main” function in Unison is a delayed computation (a thunk) which can perform the `IO` and `Exception` abilities (think “effects”).
 
@@ -646,8 +732,6 @@ UCM will print out:
   ⧨
   6
 ```
-
-Also see [writing tests in Unison](https://youtu.be/nJbXstiE3qU).
 
 </div><div>
 
