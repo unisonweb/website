@@ -86,7 +86,7 @@ Side-by-side examples can be made like this:
 <div class="side-by-side">
 	<div>
 
-		Unison example here
+    Unison example here
 
     ```
     a + b
@@ -95,7 +95,7 @@ Side-by-side examples can be made like this:
 	</div>
 	<div>
 
-		Other language example here
+    Other language example here
 
     ```
     a + b
