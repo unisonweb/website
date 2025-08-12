@@ -1,8 +1,6 @@
 # 📚 Contributing a "Unison for XYZ language" Guide
 
-# Welcome!
-
-We’d love your help in growing a library of **comparison guides** between Unison and other programming languages. These documents are designed to help experienced developers in other programming languages quickly get oriented in Unison by showing side-by-side examples.
+We’d love your help in growing a library of **language guides** for Unison newcomers from other programming languages. These docs are designed to help developers in other programming languages quickly get oriented in Unison by showing side-by-side examples.
 
 These documents are not exhaustive language manuals — they focus on the **core syntax, types, idioms, and issues** a new Unison user is most likely to run into, given the conventions of the compared language.
 
@@ -21,7 +19,13 @@ We're looking for guides for languages that represent a range of paradigms and e
 If it has a large community, a well-known syntax, and is not Unison, we want to see it!
 We're hoping to start with languages that are different enough from Unison that folks have some hurdles to clear.
 
-If you have any questions, feel free to reach out to us on the [Unison Discord](https://www.unison-lang.org/discord).
+### How do I help?
+
+If you would like to add a new language guide, check out the `language-guide` issue type in this repo and create a ticket.
+
+If your language guide is in flight and you want to collaborate, chat with us in [#libraries](https://www.unison-lang.org/discord) in Discord.
+
+If you have any questions, or want help developing the guides, feel free to reach out to us on the [Unison Discord](https://www.unison-lang.org/discord).
 
 ## Style and Structure Guidelines
 
@@ -60,7 +64,7 @@ If you have any questions, feel free to reach out to us on the [Unison Discord](
     - **Right column:** Language XYZ
 - Align equivalent code examples line-by-line as much as possible
 
-## HTML template conventions
+### HTML template conventions
 
 Your language guides should be located/named like this:
 
@@ -81,10 +85,22 @@ Side-by-side examples can be made like this:
 ```
 <div class="side-by-side">
 	<div>
+
 		Unison example here
+
+    ```
+    a + b
+    ```
+
 	</div>
 	<div>
+
 		Other language example here
+
+    ```
+    a + b
+    ```
+
 	</div
 </div>
 ```
