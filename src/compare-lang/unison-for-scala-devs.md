@@ -38,6 +38,9 @@ noneVal = None
 
 theUnitVal : ()
 theUnitVal = ()
+
+notImplemented : [Boolean]
+notImplemented = todo "a placeholder"
 ```
 
 `Nat` is the type for positive integers, `Int` is for signed integers.
@@ -56,13 +59,14 @@ val anInt : Int = 123
 
 val aList : List[Int] = List(1, 2, -3, -4, 0)
 
-aMap : Map[String, Int] = Map("a" -> 1, "b" -> 2, "c" -> 3)
-anotherMap = Map(("a", 1), ("b", 2), ("c", 3))
+aMap : Map[String, Int] = Map(("a", 1), ("b", 2), ("c", 3))
 
 val someVal : Option[Boolean] = Some(true)
 val noneVal = None
 
 val theUnitVal : Unit = ()
+
+val notImplemented : List[Boolean] = ???
 
 var aVariable = 0
 aVariable + 3
@@ -188,9 +192,7 @@ computeTwice(expensiveComputation())
 -- Prints the message twice
 ```
 
-They are commonly used in conjunction with our effect system, abilities, since top-level values cannot run arbitrary effects outside of a function.
-
-The syntax for forcing a thunk in Unison is `()`.
+The syntax for forcing a thunk in Unison is `x()` or `!x`.
 
 </div><div>
 
@@ -238,8 +240,8 @@ namespace models
 
 type User = User Text Nat
 
-models.User.toJson : User -> Json
-models.User.toJson user = [...]
+User.toJson : User -> Json
+User.toJson user = todo "unimplemented"
 
 type UserPreferences = UserPreferences [Text]
 ```
@@ -250,7 +252,7 @@ It's more common to see namespaces fully prefixed by their dot-separated name se
 type models.User = User Text Nat
 
 models.User.toJson : User -> Json
-models.User.toJson user = [...]
+models.User.toJson user = todo "unimplemented"
 
 type models.UserPreferences = UserPreferences [Text]
 ```
@@ -261,9 +263,13 @@ type models.UserPreferences = UserPreferences [Text]
 ```scala
 package models
 
-class User {...}
+case class User(name: String, age: Int)
 
-class UserPreferences {...}
+object User {
+  def toJson(user: User): String = ???
+}
+
+case class UserPreferences (preferences: List[String])
 ```
 </div></div>
 
@@ -293,7 +299,7 @@ sqrtplus1 x =
 <div>
 
 ```scala
-// imports everything in the `models` package
+// imports everything in the `models` package.
 import models.*
 // imports specific members from the `models` package
 import models.{User, UserPreferences}
@@ -396,14 +402,6 @@ val myTerm = "foo"
 
 ## Defining and using types
 
-### Type system differences
-
-- Scala supports sub-typing, therefore generic types can express variance relationships, `+A` `-B`. Unison does not have sub-typing and its types are invariant.
-- Scala’s type system includes more complex ways of expressing type hierarchies through traits, objects, and classes.
-- Scala has more options than Unison for type casting and dynamic type inference.
-- Unison does not support typeclasses. Scala has typeclasses via the `implicit` / `given` syntax.
-- Unison uses algebraic effects (called Abilities) for effect management.
-
 ### Type declarations
 
 <div class="side-by-side"><div>
@@ -441,6 +439,8 @@ case object Down extends Direction
 val floor2 : Floor = Floor(2, false)
 val up : Direction = Up
 ```
+
+Scala’s type system includes more complex ways of expressing type hierarchies through traits, objects, and classes.
 
 </div></div>
 
@@ -513,7 +513,12 @@ In Scala, you can add a trait and say that the existing `Floor` case class is a 
 
 </div></div>
 
-### Quick reference - type feature comparison
+### Type system comparison
+
+- Scala supports sub-typing, therefore generic types can express variance relationships, `+A` `-B`. Unison does not have sub-typing and its types are invariant.
+- Scala has more options than Unison for type casting and dynamic type inference.
+- Unison does not support typeclasses. Scala has typeclasses via the `implicit` / `given` syntax.
+- Unison uses algebraic effects (called Abilities) for effect management.
 
 | **Feature**                             | **Unison**                                                                  | **Scala**                                                                               |
 | --------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
@@ -539,7 +544,7 @@ toText person = match person with
   Person n a -> "Name: " ++ n ++ (", Age: " ++ (toText a))
 ```
 
-In Unison, the `match ... with` syntax can be replaced with `cases` :
+In Unison, the `match ... with` syntax can be replaced with `cases`:
 
 ```unison
 toText : Person -> Text
@@ -607,7 +612,7 @@ def userTuple(user : User): (User, String) = user match {
 
 ### Type checking inside pattern matches
 
-Unison does not support dynamic type checks in pattern matches.
+Unison _does not_ support dynamic type checks in pattern matches.
 
 <div class="side-by-side"><div>
 
