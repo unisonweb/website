@@ -127,6 +127,30 @@
     background: var(--color-doc-bg);
   }
 
+  #main-content {
+    margin-top: 0;
+  }
+
+  .main-content .toc ul {
+    list-style-type: none;
+  }
+
+  .main-content .toc ul a {
+    text-decoration: underline;
+  }
+
+  .main-content .toc ul a:hover {
+    color: var(--color-blue-1);
+  }
+
+  .main-content .toc ul li {
+    margin: 0;
+  }
+
+  .main-content .toc ul:first-child {
+    margin-left: 0;
+  }
+
   .main-content pre code::-webkit-scrollbar {
     height: 0.375rem;
   }

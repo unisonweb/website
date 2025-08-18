@@ -1,4 +1,6 @@
 const R = require("ramda");
+const markdownItAnchor = require("markdown-it-anchor");
+const markdownItTOC = require("markdown-it-table-of-contents");
 const fs = require("fs");
 const { parse } = require("date-fns");
 const { format, utcToZonedTime } = require("date-fns-tz");
@@ -160,7 +162,23 @@ module.exports = function (config) {
     html: true,
     breaks: true,
     linkify: true,
-  });
+  })
+    .use(markdownItAnchor, {
+      permalink: markdownItAnchor.permalink.ariaHidden({
+        placement: "after",
+        class: "direct-link",
+        symbol: "#",
+      }),
+      level: [1, 2, 3, 4],
+      slugify: config.getFilter("slug"),
+    })
+    .use(markdownItTOC, {
+      includeLevel: [2, 3, 4],
+      containerClass: "toc",
+      markerPattern: /^\[\[toc\]\]/im,
+    });
+
+  config.setLibrary("md", markdown);
 
   config.addFilter("markdown", (raw) => {
     if (raw && raw.length) {

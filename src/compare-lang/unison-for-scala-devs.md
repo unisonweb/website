@@ -4,6 +4,8 @@ title: "Unison for Scala devs"
 description: "Comparing structures and patterns between Unison and Scala"
 ---
 
+[[toc]]
+
 # Core language features
 
 ## Variables
@@ -256,6 +258,7 @@ models.User.toJson user = todo "unimplemented"
 
 type models.UserPreferences = UserPreferences [Text]
 ```
+
 </div>
 
 <div>
@@ -271,6 +274,7 @@ object User {
 
 case class UserPreferences (preferences: List[String])
 ```
+
 </div></div>
 
 ### Imports
@@ -294,6 +298,7 @@ sqrtplus1 x =
   use Float sqrt
   sqrt x + 1.0
 ```
+
 </div>
 
 <div>
@@ -312,6 +317,7 @@ def sqrtplus1(x: Int) =
   import scala.math.sqrt
   sqrt(x) + 1.0
 ```
+
 </div></div>
 
 ## Comments and docs
@@ -527,8 +533,8 @@ In Scala, you can add a trait and say that the existing `Floor` case class is a 
 | Record types                            | Yes. Single data constructor types with named fields.                       | Yes. Case classes                                                                       |
 | Typeclasses                             | No.                                                                         | Yes. Typeclasses via traits and implicit / given syntax.                                |
 | GADTs                                   | No.                                                                         | Yes. GADT’s via sealed traits and case classes                                          |
-| Higher-kinded types                     | Yes. But in the absence of typeclasses, less common.                        | Yes.
-| Type aliases                            | No                                                                          | Yes |
+| Higher-kinded types                     | Yes. But in the absence of typeclasses, less common.                        | Yes.                                                                                    |
+| Type aliases                            | No                                                                          | Yes                                                                                     |
 
 ## Pattern matching
 
@@ -751,7 +757,6 @@ UCM will print out:
 ```
 
 </div><div>
-
 
 ```scala
 scala> val x = 42
