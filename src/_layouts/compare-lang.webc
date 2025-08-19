@@ -67,8 +67,10 @@
   <body>
     <main>
       <page-header></page-header>
-      <div id="main-content">
+      <header class="content-header">
         <h1 class="title" @text="title"></h1>
+      </header>
+      <div id="main-content">
         <div class="content main-content" @raw="content"></div>
       </div>
     </main>
@@ -94,7 +96,7 @@
     flex-direction: column;
     gap: 3rem;
 
-    --main-content-width: min(84rem, 100%);
+    --main-content-width: min(78rem, 100%);
   }
 
   .title {
@@ -115,6 +117,7 @@
     scrollbar-color: var(--color-doc-subtle-fg) var(--color-transparent);
     overflow: auto;
     width: 100%;
+    font-size: var(--font-size-medium);
   }
 
   .main-content {
@@ -129,6 +132,12 @@
 
   #main-content {
     margin-top: 0;
+  }
+
+  .content-header {
+    text-align: center;
+    border-bottom: 1px solid var(--color-gray-lighten-50);
+    padding-bottom: 2rem;
   }
 
   .main-content .toc ul {

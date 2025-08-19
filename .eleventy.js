@@ -164,16 +164,12 @@ module.exports = function (config) {
     linkify: true,
   })
     .use(markdownItAnchor, {
-      permalink: markdownItAnchor.permalink.ariaHidden({
-        placement: "after",
-        class: "direct-link",
-        symbol: "#",
-      }),
+      permalink: markdownItAnchor.permalink.headerLink(),
       level: [1, 2, 3, 4],
       slugify: config.getFilter("slug"),
     })
     .use(markdownItTOC, {
-      includeLevel: [2, 3, 4],
+      includeLevel: [1, 2, 3],
       containerClass: "toc",
       markerPattern: /^\[\[toc\]\]/im,
     });
