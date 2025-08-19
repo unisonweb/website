@@ -88,7 +88,7 @@ Side-by-side examples can be made like this:
 
     Unison example here
 
-    ```
+    ```unison
     a + b
     ```
 
@@ -97,7 +97,7 @@ Side-by-side examples can be made like this:
 
     Other language example here
 
-    ```
+    ```otherLanguage
     a + b
     ```
 
