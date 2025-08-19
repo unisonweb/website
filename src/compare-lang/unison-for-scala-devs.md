@@ -19,16 +19,40 @@ The type signature of a value or function appears _above_ the definition instead
 <div class="side-by-side"><div>
 
 ```unison
+aNat : Nat
+aNat = 123
+
+anInt : Int
+anInt = +789
+
 aText : Text
 aText = "A Text value"
 
 aChar : Char
 aChar = ?a
+```
 
-aNat : Nat
-aNat = 123
+</div>
+<div>
 
-aList : List Int -- also represented as [Int]
+```scala
+val anInt : Int = 123
+
+val aString : String = "A String value"
+
+val aChar : Char = 'a'
+```
+
+In Scala, positive integers are created without the `+`. In Unison, `Nat` is the type for positive integers, all `Int` literals in Unison must include `+` or `-`.
+
+</div></div>
+
+<div class="side-by-side">
+
+<div>
+
+```unison
+aList : [Int]
 aList = [+1, +2, -3, -4, +0]
 
 aMap : Map Text Nat
@@ -38,6 +62,9 @@ someVal : Optional Boolean
 someVal = Some true
 noneVal = None
 
+eitherVal : Either Text Nat
+eitherVal = Right 2468 |> Either.mapRight (n -> n + 1)
+
 theUnitVal : ()
 theUnitVal = ()
 
@@ -45,26 +72,20 @@ notImplemented : [Boolean]
 notImplemented = todo "a placeholder"
 ```
 
-`Nat` is the type for positive integers, `Int` is for signed integers.
-
 Type arguments in signatures are delimited by spaces, not square brackets.
 
 </div>
 <div>
 
 ```scala
-val aString : String = "A String value"
-
-val aChar : Char = 'a'
-
-val anInt : Int = 123
-
 val aList : List[Int] = List(1, 2, -3, -4, 0)
 
-aMap : Map[String, Int] = Map(("a", 1), ("b", 2), ("c", 3))
+val aMap : Map[String, Int] = Map(("a", 1), ("b", 2), ("c", 3))
 
 val someVal : Option[Boolean] = Some(true)
 val noneVal = None
+
+val eitherVal : Either[String, Int] = Right(2468).map(_ + 1)
 
 val theUnitVal : Unit = ()
 
@@ -72,12 +93,12 @@ val notImplemented : List[Boolean] = ???
 
 var aVariable = 0
 aVariable + 3
-
 ```
 
 Unison does not have an analog to the `var` keyword in Scala.
 
-</div></div>
+</div>
+</div>
 
 ## Functions
 
@@ -112,7 +133,7 @@ def splitDigitsOn(delim : Char, text : String) : List[String] = {
 
 Scala uses _dot notation_ syntax, as in `text.split`, to call `split` on the `text` argument. Unison takes the `text` value as an argument to another function, `Text.split`.
 
-It's a common Scala-flavored mistake to forget to supply the last argument to Unison functions like `List.map` because of this convention.
+It's a common mistake to forget to supply the last argument to Unison functions like `List.map` because of this convention.
 
 </div></div>
 
@@ -338,7 +359,7 @@ Unison comments _are not persisted_ to the Unison codebase. To save a note to yo
 myTerm =
   _ = "This text literal will
   be saved to the codebase"
-  "foo"
+  123 + 456
 ```
 
 </div><div>
@@ -384,7 +405,7 @@ Unison `Doc` elements are first-class elements in the Unison language. They are 
 myTerm =
   _ = "This text literal will
   be saved to the codebase"
-  "foo"
+  123 + 456
 ````
 
 {% endraw %}
@@ -401,7 +422,7 @@ information about its inputs and outputs.
 
 It cannot run live snippets of the code it describes.
 */
-val myTerm = "foo"
+val myTerm = 123 + 456
 ```
 
 </div></div>
@@ -534,7 +555,7 @@ In Scala, you can add a trait and say that the existing `Floor` case class is a 
 | Typeclasses                             | No.                                                                         | Yes. Typeclasses via traits and implicit / given syntax.                                |
 | GADTs                                   | No.                                                                         | Yes. GADT’s via sealed traits and case classes                                          |
 | Higher-kinded types                     | Yes. But in the absence of typeclasses, less common.                        | Yes.                                                                                    |
-| Type aliases                            | No                                                                          | Yes                                                                                     |
+| Type aliases                            | No.                                                                         | Yes.                                                                                    |
 
 ## Pattern matching
 
