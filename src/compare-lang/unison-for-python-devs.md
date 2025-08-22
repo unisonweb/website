@@ -6,7 +6,7 @@ description: "Comparing syntax and patterns between Unison and Python"
 
 [[toc]]
 
-# Variables
+# Variables and expressions
 
 <div class="side-by-side">
 <div>
@@ -280,6 +280,38 @@ Python uses `None` as the type for functions that do not explicitly return somet
 
 </div></div>
 
+# Comments
+
+<div class="side-by-side"><div>
+
+```unison
+-- This is a single-line comment in Unison
+
+{- This is a
+   multi-line comment
+   in Unison -}
+```
+
+Caveat: Unison comments are not saved to the codebase as part of the definition. Create a string literal if you would like to include a note that is saved with the implementation.
+
+``` unison
+myFunc : Nat -> Nat
+myFunc n =
+  _ = "This function doubles a number"
+  n * 2
+```
+</div><div>
+
+```python
+# This is a single-line comment in Python
+
+"""This is a
+   multi-line comment
+   in Python"""
+```
+
+</div></div>
+
 # Functions
 
 ## The basics
@@ -452,9 +484,7 @@ Python uses `if` in a `case` clause for the same purpose.
 </div>
 </div>
 
-# Objects and classes
-
-🌌🔭 While this is a vast topic, here are a few differences between Unison and Python in terms of object-oriented programming (OOP) and functional programming (FP) patterns.
+# Classes and types
 
 <div class="side-by-side"><div>
 
@@ -485,7 +515,7 @@ These functions accept the the `Elevator` type as an argument and return a new `
 
 </div><div>
 
-## Methods and instance variables
+## Classes and methods
 
 Python uses __classes__ to __encapsulate__ both data and behavior. Methods are defined within classes and operate on the data contained in instances of those classes.
 
@@ -511,7 +541,6 @@ class Elevator:
 This class defines an `Elevator` with methods to move up, move down, and go to a specific floor. The state of the elevator is stored and changed in instance variables.
 
 </div></div>
-
 
 <div class="side-by-side"><div>
 
@@ -546,12 +575,43 @@ e.move_up()
 e.move_down()
 ```
 
-In Python, dot notation is used to call methods on objects. Each method call can modify the object's internal state (mutating it in place) or return a new value. Unlike Unison's `|>` operator, there is no implicit piping of results—each call operates on the object referenced by the variable.
+In Python, dot notation is used to call methods on objects. Each method call can modify the object's internal state (mutating it in place) or return a new value.
 
 </div></div>
+
+## Record types
+
+Unison's record types are similar to Python's dataclasses or namedtuples. They are used to group related data together, and provide concise dot-syntax for getting and setting fields.
+
+<div class="side-by-side"><div>
+
+```unison
+type Point = {x : Int, y : Int}
+```
+
+This defines a `Point` type with two fields, `x` and `y`, both of type `Int`. You can create instances of this type and access or modify its fields using generated functions.
+
+</div><div>
+
+```python
+from dataclasses import dataclass
+from typing import NamedTuple
+
+@dataclass
+class Point:
+  x: int
+  y: int
+
+class Point(NamedTuple):
+  x: int
+  y: int
+```
+
+The `@dataclass` decorator automatically generates special methods like `__init__()` and `__repr__()` for the class. `NamedTuple` creates an immutable class with similar benefits.
 
 ## Inheritance
 
 In Python, extending the behavior of a class can be accomplished via subclassing or __inheritance__.
 
 All Unison types are __invariant__, meaning they cannot be subclassed or extended. However, you can define new types that contain other types.
+
