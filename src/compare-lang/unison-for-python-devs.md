@@ -130,7 +130,7 @@ aList : List Nat
 aList = [1, 2, 3, 4, 5]
 
 aMap : Map Text Text
-aMap = [("🍎", "value1"), ("🫐", "100"), ("🍐", "true")] |> Map.fromList
+aMap = Map.fromList [("🍎", "a"), ("🫐", "100"), ("🍐", "true")]
 
 aSet : Set Int
 aSet = Set.fromList [+1, -2, +3, -4, +5]
@@ -138,7 +138,7 @@ aSet = Set.fromList [+1, -2, +3, -4, +5]
 
 Unison does not have special syntax for creating `Maps` or `Sets`, so they are often created from a list of tuples.
 
-In Unison, the following does not mutate the original `Map`. It creates a new `Map` and binds it to a variable:
+In Unison, the following does not mutate the original `Map`. Inserting the new key and value creates a new `Map` and binds it to a variable:
 
 ```unison
 map1 = Map.fromList [("💙", 1), ("🩷", 12), ("💚", 35)]
@@ -157,6 +157,8 @@ a_dict = {"🍎": "value1", "🫐": 100, "🍐": True}
 
 a_frozen_set = frozenset([1, -2, 3, -4, 5])
 ```
+
+Dictionary keys in Python must be hashable. In Unison there is no restriction on key types in a `Map`.
 
 In Python, you might use `frozenset` or tuples for immutable collections. This operation on a dictionary will change the original collection.
 
@@ -214,7 +216,7 @@ Lambdas in Python can't include local variable definitions or mupltiple expressi
 </div></div>
 
 ## Optional values
-Unison has a type called `Optional` that can either be `Some value` or `None`. It's is similar to Python's `Optional` union type from the `typing` module.
+Unison has a type called `Optional` that can either be `Some value` or `None`. It's is similar to Python's `Optional` type from the `typing` module.
 
 <div class="side-by-side">
 <div>
@@ -292,12 +294,12 @@ Python uses `None` as the type for functions that do not explicitly return somet
    in Unison -}
 ```
 
-Caveat: Unison comments are not saved to the codebase as part of the definition. Create a string literal if you would like to include a note that is saved with the implementation.
+⚠️ Unison comments are not saved to the codebase as part of the definition. Create a string literal if you would like to include a note that is saved with the implementation.
 
 ``` unison
 myFunc : Nat -> Nat
 myFunc n =
-  _ = "This function doubles a number"
+  _ = "This expression doubles a number"
   n * 2
 ```
 </div><div>
@@ -367,6 +369,57 @@ hooray("Hello", "world")
 ```
 
 In Python, functions are called with parentheses and arguments are separated by commas.
+</div></div>
+
+## Function arguments
+
+### Default arguments
+
+<div class="side-by-side"><div>
+
+``` unison
+hooray : Text -> Text -> Optional Nat -> Text
+hooray a b num =
+  repeat = Optional.getOrElse 1 num
+  Text.repeat repeat (a ++ b ++ "!!!")
+```
+
+Unison does not allow default values for function arguments. Instead you might use the `Optional` type to indicate that an argument is optional, and then provide a default value inside the function body.
+
+</div><div>
+
+```python
+def hooray(a: str, b: str, repeat: int = 1) -> str:
+  combined = a + b + "!!!"
+  return combined * repeat
+```
+
+Python allows default values for function arguments, which can be specified in the function definition.
+
+</div></div>
+
+### Variadic arguments
+
+<div class="side-by-side"><div>
+
+```unison
+hoorayMany : [Text] -> Text
+hoorayMany texts =
+  Text.intercalate " " texts ++ "!!!"
+```
+
+Unison does not have built-in support for variadic functions. Instead, you can accept a list of values as an argument.
+
+</div><div>
+
+```python
+def hooray_many(*texts: str) -> str:
+  combined = " ".join(texts) + "!!!"
+  return combined
+```
+
+Python supports variadic functions using the `*args` syntax, which allows you to pass a variable number of arguments to a function.
+
 </div></div>
 
 # Control flow
@@ -506,7 +559,7 @@ moveDown e =
 goToFloor : Nat -> Elevator -> Elevator
 goToFloor requested e =
   if requested <= topFloor e then
-    Elevator.set (currentFloor -> floor) e
+    Elevator.set requested e
   else
     e
 ```
@@ -581,7 +634,7 @@ In Python, dot notation is used to call methods on objects. Each method call can
 
 ## Record types
 
-Unison's record types are similar to Python's dataclasses or namedtuples. They are used to group related data together, and provide concise dot-syntax for getting and setting fields.
+Unison's record types are similar to Python's dataclasses or namedtuples. They are used to group related data together with named fields, and provide concise dot-syntax for getting and setting fields.
 
 <div class="side-by-side"><div>
 
@@ -589,7 +642,24 @@ Unison's record types are similar to Python's dataclasses or namedtuples. They a
 type Point = {x : Int, y : Int}
 ```
 
-This defines a `Point` type with two fields, `x` and `y`, both of type `Int`. You can create instances of this type and access or modify its fields using generated functions.
+This defines a `Point` type with two fields, `x` and `y`, both of type `Int`. Defining a record type creates the following accessor and modifier functions:
+
+```unison
+Point.x        : Point -> Int
+Point.x.modify : (Int ->{g} Int) -> Point ->{g} Point
+Point.x.set    : Int -> Point -> Point
+Point.y        : Point -> Int
+Point.y.modify : (Int ->{g} Int) -> Point ->{g} Point
+Point.y.set    : Int -> Point -> Point
+```
+
+While the following notation looks similar to method calls on an instance of a class, Unison record types are __immutable__. To "change" a field in a record, you create a new record with the updated value using the generated `set` or `modify` functions.
+
+```unison
+p1 = Point 3 4
+p2 = Point.x.set 10 p1
+-- p2 is now Point 10 4, p1 is still Point 3 4
+```
 
 </div><div>
 
