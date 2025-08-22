@@ -294,7 +294,7 @@ Python uses `None` as the type for functions that do not explicitly return somet
    in Unison -}
 ```
 
-⚠️ Unison comments are not saved to the codebase as part of the definition. Create a string literal if you would like to include a note that is saved with the implementation.
+Unison comments are not saved to the codebase as part of the definition. Create a string literal if you would like to include a note that is saved with the implementation.
 
 ``` unison
 myFunc : Nat -> Nat
@@ -537,34 +537,40 @@ Python uses `if` in a `case` clause for the same purpose.
 </div>
 </div>
 
-# Classes and types
+# Data modeling
+
+🌌🔭This topic is vast, but here are some of the key differences between Unison and Python when it comes to modeling data.
 
 <div class="side-by-side"><div>
 
-## Data types and functions
+## Types and functions
 
-Unison does not have classes in the same way that Python does. Instead, we use __data types__ which structure and contain data and __functions__ to transform them.
+Unison does not have classes in the same way that Python does. There are no instance methods, no constructors, and no `self` or `this` references. Instead, we use __data types__ which structure and contain data and __functions__ which transform them to describe behavior.
+
+This is a __type declaration__ for an `Elevator` that tracks the current floor and the top floor of the building:
 
 ```unison
-type Elevator = {currentFloor : Nat, topFloor : Nat}
-
-moveUp : Elevator -> Elevator
-moveUp e =
-  Elevator.modify (currentFloor -> if currentFloor < topFloor e then currentFloor + 1 else currentFloor) e
-
-moveDown : Elevator -> Elevator
-moveDown e =
-  Elevator.modify (currentFloor -> if currentFloor > 0 then currentFloor - 1 else currentFloor) e
-
-goToFloor : Nat -> Elevator -> Elevator
-goToFloor requested e =
-  if requested <= topFloor e then
-    Elevator.set requested e
-  else
-    e
+type Elevator = Elevator Nat Nat
 ```
 
 These functions accept the the `Elevator` type as an argument and return a new `Elevator` with updated state.
+
+```unison
+moveUp : Elevator -> Elevator
+moveUp e = match e with
+  Elevator currentFloor topFloor | currentFloor < topFloor -> Elevator (currentFloor + 1) topFloor
+  _ -> e
+
+moveDown : Elevator -> Elevator
+moveDown e = match e with
+  Elevator currentFloor topFloor | currentFloor > 0 -> Elevator (currentFloor - 1) topFloor
+  _ -> e
+
+goToFloor : Nat -> Elevator -> Elevator
+goToFloor requested e = match e with
+  Elevator _ topFloor | floor <= topFloor -> Elevator requested topFloor
+  _ -> e
+```
 
 </div><div>
 
@@ -599,16 +605,7 @@ This class defines an `Elevator` with methods to move up, move down, and go to a
 
 ### Pipe operator
 
-```unison
-Elevator 0 10
-  |> goToFloor 5
-  |> moveUp
-  |> moveDown
-```
-
-In Unison, the `|>` operator is used to pipe the result of one expression into the next as its argument. Each transformation is applied in sequence, allowing for a clear flow of data through inputs and outputs without intermediate variables.
-
-With intermediate variables, the same example would look like this:
+In Unison, we use __function composition__ to chain function calls together and advance the state of a program.
 
 ``` unison
 e0 = Elevator 0 10
@@ -617,9 +614,22 @@ e2 = moveUp e1
 e3 = moveUp e2
 ```
 
+Since the intermediate variables `e1`, `e2`, and `e3` are not needed, we often use the pipe operator `|>` to pass the result of one function directly into the next:
+
+```unison
+Elevator 0 10
+  |> goToFloor 5
+  |> moveUp
+  |> moveDown
+```
+
+Each transformation is applied in sequence, allowing for a clear flow of data through the inputs and outputs of functions.
+
 </div><div>
 
 ### Dot notation
+
+The dot notation in Python expresses method calls on an object which may _mutate_ the object's internal state.
 
 ```python
 e = Elevator()
@@ -628,7 +638,7 @@ e.move_up()
 e.move_down()
 ```
 
-In Python, dot notation is used to call methods on objects. Each method call can modify the object's internal state (mutating it in place) or return a new value.
+No arguments are passed to the methods because the `Elevator` instance `e` is implicitly passed as a reference to the methods via `self`.
 
 </div></div>
 
@@ -679,9 +689,18 @@ class Point(NamedTuple):
 
 The `@dataclass` decorator automatically generates special methods like `__init__()` and `__repr__()` for the class. `NamedTuple` creates an immutable class with similar benefits.
 
-## Inheritance
+</div></div>
 
-In Python, extending the behavior of a class can be accomplished via subclassing or __inheritance__.
+## Extending behavior
 
-All Unison types are __invariant__, meaning they cannot be subclassed or extended. However, you can define new types that contain other types.
+<div class="side-by-side"><div>
 
+### Generics and parametric polymorphism
+
+All Unison types are __invariant__, meaning they cannot be subclassed or extended. However, you can define new types that contain other types, or use __parametric polymorphism__ to create generic types and functions.
+
+</div><div>
+
+### Duck typing and inheritance
+
+</div></div>
