@@ -53,6 +53,8 @@ a_reassignment = "new value"
 
 Python variables are __mutable__ references to values.
 
+Python uses the `int` type for both positive and negative whole numbers. In Unison, it's common to use `Nat` for non-negative integers and `Int` for integers that may be negative. All numeric values using Unison's `Int` type must be signed with either a `+` or `-` prefix.
+
 </div>
 </div>
 
@@ -60,7 +62,7 @@ Python variables are __mutable__ references to values.
 
 ```unison
 aNumber : Int
-aNumber = "🚫 A string being assigned to an Int won't compile"
+aNumber = "🔤 A string being assigned to an Int won't compile"
 ```
 
 Unison is a __statically typed language__, so every definition has a type at compile time. Type signatures can be inferred, but they are often found above the term for clarity. Unison uses `:` to separate the name of the term from its type.
@@ -232,7 +234,6 @@ Unison has a type called `Optional` that can either be `Some value` or `None`. I
 ```unison
 optionalSome : Optional Text
 optionalSome = Some "Hello, world!"
-
 optionalNone : Optional Text
 optionalNone = None
 
@@ -338,7 +339,7 @@ hooray a b  =
 
 * Unison does not have a special keyword for defining a function.
 * In the type signature, arguments are separated by arrows, with the last type being the return type of the entire function.
-* There are no explicit return statements in Unison. The _last expression_ in a function is the return value.
+* There are no explicit return statements in Unison. __The last expression in a function is the return value.__
 
 </div><div>
 
@@ -349,7 +350,7 @@ def hooray(a: str, b: str) -> int:
 
 * Python defines functions using the `def` keyword
 * When type hints are provided, they're located inline with the function arguments.
-* The `return` keyword is used to _explicitly_ return a value from a function.
+* The `return` keyword is used to __explicitly return a value from a function.__
 
 </div></div>
 
@@ -379,9 +380,7 @@ hooray("Hello", "world")
 In Python, functions are called with parentheses and arguments are separated by commas.
 </div></div>
 
-## Function arguments
-
-### Default arguments
+## Default and variadic arguments
 
 <div class="side-by-side"><div>
 
@@ -405,8 +404,6 @@ def hooray(a: str, b: str, repeat: int = 1) -> str:
 Python allows default values for function arguments, which can be specified in the function definition.
 
 </div></div>
-
-### Variadic arguments
 
 <div class="side-by-side"><div>
 
@@ -545,6 +542,53 @@ Python uses `if` in a `case` clause for the same purpose.
 </div>
 </div>
 
+## Exception handling
+
+Both Python and Unison use exceptions for error handling and can propagate them up the call stack, but exceptions in Unison are [tracked by the type system as an __ability__](https://www.unison-lang.org/docs/fundamentals/abilities/). In Python, a function may freely perform any side effects, like throwing exceptions, or calling an external API, or reading from disk. We'll use Exceptions as an example of effect management, sinch they are common in both languages.
+
+<div class="side-by-side"><div>
+
+```unison
+safeDivide : Int -> Int ->{Exception} Int
+safeDivide a b =
+  use Int /
+  if b === +0 then Exception.raise (failure "cannot divide by zero" b)
+  else a / b
+```
+
+In Unison, we can `catch` the exception, by turning it into an `Either` data type:
+
+```unison
+runWithCatch : Int -> Int -> Optional Int
+runWithCatch a b =
+  result : Either Faliure Int
+  result = catch do safeDivide a b
+  match result with
+    Right value -> Some value
+    Left err -> None
+```
+
+Alternatively, we can continue to propagate the exception to the caller:
+
+```
+```
+
+</div><div>
+
+```python
+def safe_divide(a, b):
+  if b == 0:
+    raise ValueError("Cannot divide by zero")
+  return a / b
+
+def run_with_catch(a, b):
+  try:
+    safe_divide(a, b)
+  except ValueError as e:
+    print(f"Error: {e}")
+    return None
+```
+
 # Data modeling
 
 🌌🔭This topic is vast, but here are some of the key differences between Unison and Python when it comes to modeling data.
@@ -655,7 +699,7 @@ No arguments are passed to the methods because the `Elevator` instance `e` is im
 
 ## Record types
 
-Unison's __record types__ are similar to Python's __dataclasses__ or `NamedTuples`. They are used to group related data together with named fields, and provide concise dot-syntax for getting and setting fields.
+Unison's __record types__ are similar to Python's immutable `NamedTuples`. They are used to group related data together with named fields, and provide concise dot-syntax for getting and setting fields.
 
 <div class="side-by-side"><div>
 
@@ -677,28 +721,25 @@ Point.y.set    : Int -> Point -> Point
 While the following notation looks similar to method calls on an instance of a class, Unison record types are _immutable_. To "change" a field in a record, you create a new record with the updated value using the generated `set` or `modify` functions.
 
 ```unison
-p1 = Point 3 4
-p2 = Point.x.set 10 p1
--- p2 is now Point 10 4, p1 is still Point 3 4
+p1 = Point +3 -4
+x = Point.x p1
+p2 = Point.x.set +10 p1
+-- p2 is now Point +10 -4, p1 is still Point +3 -4
 ```
 
 </div><div>
 
 ```python
-from dataclasses import dataclass
 from typing import NamedTuple
-
-@dataclass
-class Point:
-  x: int
-  y: int
 
 class Point(NamedTuple):
   x: int
   y: int
-```
 
-The `@dataclass` decorator automatically generates special methods like `__init__()` and `__repr__()` for the class. `NamedTuple` creates an immutable class with similar benefits.
+p1 = Point(3, -4)
+x = p1.x  # Accessing the x field
+p2 = p1._replace(x=10)  # Creating a new Point with an updated x field
+```
 
 </div></div>
 
@@ -707,6 +748,8 @@ The `@dataclass` decorator automatically generates special methods like `__init_
 <div class="side-by-side"><div>
 
 ### Parametric polymorphism
+
+In Unison, __generic types__ allow you to write functions that can operate on any type. They're represented by lowercase letters in type signatures.
 
 ```unison
 printTwice : (a -> Text) -> a -> {IO, Exception} ()
@@ -728,11 +771,9 @@ main = do
   printTwice RoboDuck.quack RoboDuck
 ```
 
-In Unison, __generic types__ allow you to write functions that can operate on any type. They're represented by lowercase letters in type signatures.
-
 In the example above, `printTwice` is a function that takes two arguments: _a function_ that converts a value of any type `a` to `Text`, and a value of type `a`. Because `a` is used as the __type variable__ for both parameters, the same type must be used in both places when calling `printTwice`.
 
-In functional languages, we call the ability to write functions that operate on types independently of their content __parametric polymorphism__.
+In functional languages, we call the ability to write functions that operate on types independently of their content: __parametric polymorphism__.
 
 </div><div>
 
@@ -762,16 +803,13 @@ Python uses __duck-typing__ to write functions or methods that operate on any ob
 
 ### Algebraic data types
 
-Unison does not support inheritance or subtyping. All types are __invariant__. But you can use __algebraic data types__ to say that a particular type may be created in several different ways:
+Unison does not support inheritance or subtyping. All types are _invariant_. But you can use __algebraic data types__ to say that a particular type may be created in several different ways:
 
 ```unison
 type Duck = AnimalDuck | RoboDuck Text | ToyDuck Text
-
-
 ```
 
-The `type` declaration means that the `Duck` type has three _data constructors_. We might chose to have a regular "AnimalDuck" which does not have a special noise; the other two data constructors (`RoboDuck` and `ToyDuck`) take a `Text` argument representing the special behavior of that case (a quack prefix in this example).
-
+The `type` declaration means that the `Duck` type has three _data constructors_. The "AnimalDuck" which does not have a special noise, but the other two data constructors (`RoboDuck` and `ToyDuck`) take a `Text` argument representing the special behavior of that case (a quack prefix in this example).
 
 ```unison
 Duck.toText : Duck -> Text
@@ -781,22 +819,22 @@ Duck.toText d = match d with
   ToyDuck prefix -> prefix ++ " Quack!"
 ```
 
-The `Duck.toText` function uses __pattern matching__ on the data type to determine which kind duck it received and return the appropriate text.
+The `Duck.toText` function uses _pattern matching_ on the data type to determine which kind of duck it received and return the appropriate text.
 
-```
+```unison
 quacks = do
   printTwice Duck.toText Duck.AnimalDuck
   printTwice Duck.toText (Duck.RoboDuck "Electronic")
   printTwice Duck.toText (Duck.ToyDuck "Squeaky")
 ```
 
-Our existing `printTwice` function would happily function with values of `Duck`, `RoboDuck`, and `ToyDuck` because they all are all of type `Duck`.
+Note that `Duck.AnimalDuck`, `Duck.RoboDuck`, and `Duck.ToyDuck` are used to create values with the `Duck` type. They are not distinct types themselves.
 
 </div><div>
 
-### Inheritance and Subtyping
+### Inheritance and subtyping
 
-Let's say we wanted to use __inheritance__ to create different types of ducks that share a common interface for quacking:
+Let's say we wanted to use __subtypes__ to create different types of ducks that share a common interface for quacking:
 
 ```python
 class Duck:
@@ -822,7 +860,7 @@ class ToyDuck(Duck):
 
 ```
 
-In Python, classes can inherit from other classes, allowing for __subtyping__ and code reuse.
+While two of these subclasses (`Roboduck` and `ToyDuck`) have an additional instance variable, the other simply inherits its behavior from its parent.
 
 ```
 quack_twice(AnimalDuck())
@@ -830,6 +868,90 @@ quack_twice(RoboDuck("Electronic"))
 quack_twice(ToyDuck("Squeaky"))
 ```
 
-Our existing `quack_twice` function would happily function with instances of `AnimalDuck`, `RoboDuck`, and `ToyDuck` because they all share the same interface.
 </div></div>
 
+# Running programs
+
+A runnable “main” function in Unison can be any delayed computation (a thunk) which can perform the `IO` and `Exception` abilities (think “effects”).
+
+<div class="side-by-side"><div>
+
+```unison
+main : '{IO, Exception} ()
+main = do
+  printLine "Hello world!"
+
+mainWithArgs : '{IO, Exception} ()
+mainWithArgs = do
+  args : [Text]
+  args = IO.getArgs()
+  printLine ("program args: " ++ (Text.join ", " args))
+
+pureMain : '{} Nat
+pureMain = do
+  42
+```
+
+Unison _does not evaluate any code_ until you explicitly tell it to, so a "main" function is just another function in your codebase until you invoke it with the `run` command with the UCM.
+
+```ucm
+myProject/main> run main
+
+  Hello world!
+```
+
+</div><div>
+
+The Python interpreter _starts executing code_ from the top of the file, so it uses the __name__ and __main__ built-in variables to determine if the script is being run directly or imported as a module.
+
+```python
+## In a file called my_script.py
+
+def my_main():
+  print("Hello world!")
+
+if __name__ == "__main__":
+  my_main()
+```
+
+``` bash
+$ python my_script.py
+
+  Hello world!
+```
+
+</div></div>
+
+### The REPL
+
+Unison uses **watch expressions** to interactively evaluate code, instead of a traditional REPL. The Unison Codebase Manager (UCM) watches for changes to `.u` files and evaluates any lines starting with `>` in the file.
+
+Everything in your file and in your current project is available to use in watch expressions.
+
+<div class="side-by-side"><div>
+
+```unison
+factorial n = product (range 1 (n + 1))
+
+> factorial 3
+```
+
+UCM will print out:
+
+```unison
+> factorial 3
+  ⧨
+  6
+```
+
+</div><div>
+
+Python has a traditional **REPL** that allows you to enter and evaluate code interactively.
+
+```python
+>>> factorial = lambda n: 1 if n == 0 else n * factorial(n - 1)
+>>> factorial(3)
+6
+```
+
+</div></div>
