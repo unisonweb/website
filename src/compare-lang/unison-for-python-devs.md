@@ -1,7 +1,7 @@
 ---
 layout: "compare-lang"
 title: "Unison for Python devs"
-description: "Comparing syntax and patterns between Unison and Python"
+description: "Comparing syntax and patterns between Unison and Python 3"
 ---
 
 [[toc]]
@@ -26,6 +26,14 @@ aBoolean = true || false
 ```
 
 Unison terms can be defined at the top level of a program. Unlike Python variables, all Unison terms are __immutable__.
+
+``` unison
+aFunction =
+  noReassignments = "Initial value"
+  noReassignments = "🚫 Will not compile, variable is ambiguous."
+```
+
+That means once a variable is introduced, it cannot be changed or reassigned by the program. If you want to update a value, you create a new term which copies the old value and applies the change.
 
 </div>
 <div>
@@ -52,7 +60,7 @@ Python variables are __mutable__ references to values.
 
 ```unison
 aNumber : Int
-aNumber = "🚫 This is a string, so it won't compile"
+aNumber = "🚫 A string being assigned to an Int won't compile"
 ```
 
 Unison is a __statically typed language__, so every definition has a type at compile time. Type signatures can be inferred, but they are often found above the term for clarity. Unison uses `:` to separate the name of the term from its type.
@@ -66,7 +74,7 @@ a_str = 123  # Now it's an int!
 type(a_str)
 ```
 
-In Python, type hints can be used to indicate the expected type of a variable, but they are not enforced at runtime. Python is __dynamically typed__, so a variable can change its type at any time.
+In Python 3, type hints can be used to indicate the expected type of a variable, but they are not enforced at runtime. Python is __dynamically typed__, so a variable can change its type at any time.
 
 </div>
 </div>
@@ -558,17 +566,20 @@ These functions accept the the `Elevator` type as an argument and return a new `
 ```unison
 moveUp : Elevator -> Elevator
 moveUp e = match e with
-  Elevator currentFloor topFloor | currentFloor < topFloor -> Elevator (currentFloor + 1) topFloor
+  Elevator currentFloor topFloor | currentFloor < topFloor ->
+    Elevator (currentFloor + 1) topFloor
   _ -> e
 
 moveDown : Elevator -> Elevator
 moveDown e = match e with
-  Elevator currentFloor topFloor | currentFloor > 0 -> Elevator (currentFloor - 1) topFloor
+  Elevator currentFloor topFloor | currentFloor > 0 ->
+    Elevator (currentFloor - 1) topFloor
   _ -> e
 
 goToFloor : Nat -> Elevator -> Elevator
 goToFloor requested e = match e with
-  Elevator _ topFloor | floor <= topFloor -> Elevator requested topFloor
+  Elevator _ topFloor | floor <= topFloor ->
+    Elevator requested topFloor
   _ -> e
 ```
 
@@ -603,9 +614,9 @@ This class defines an `Elevator` with methods to move up, move down, and go to a
 
 <div class="side-by-side"><div>
 
-### Pipe operator
+### Function composition
 
-In Unison, we use __function composition__ to chain function calls together and advance the state of a program.
+In Unison, we use __function composition__ to chain function calls together and advance the state of a program. The outputs of one function become the inputs to the next.
 
 ``` unison
 e0 = Elevator 0 10
@@ -644,7 +655,7 @@ No arguments are passed to the methods because the `Elevator` instance `e` is im
 
 ## Record types
 
-Unison's record types are similar to Python's dataclasses or namedtuples. They are used to group related data together with named fields, and provide concise dot-syntax for getting and setting fields.
+Unison's __record types__ are similar to Python's __dataclasses__ or `NamedTuples`. They are used to group related data together with named fields, and provide concise dot-syntax for getting and setting fields.
 
 <div class="side-by-side"><div>
 
@@ -663,7 +674,7 @@ Point.y.modify : (Int ->{g} Int) -> Point ->{g} Point
 Point.y.set    : Int -> Point -> Point
 ```
 
-While the following notation looks similar to method calls on an instance of a class, Unison record types are __immutable__. To "change" a field in a record, you create a new record with the updated value using the generated `set` or `modify` functions.
+While the following notation looks similar to method calls on an instance of a class, Unison record types are _immutable_. To "change" a field in a record, you create a new record with the updated value using the generated `set` or `modify` functions.
 
 ```unison
 p1 = Point 3 4
@@ -691,16 +702,59 @@ The `@dataclass` decorator automatically generates special methods like `__init_
 
 </div></div>
 
-## Extending behavior
+## Generic behavior
 
 <div class="side-by-side"><div>
 
-### Generics and parametric polymorphism
+### Parametric polymorphism
 
-All Unison types are __invariant__, meaning they cannot be subclassed or extended. However, you can define new types that contain other types, or use __parametric polymorphism__ to create generic types and functions.
+```unison
+printTwice : (a -> Text) -> a -> {IO, Exception} ()
+printTwice toText x =
+  printLine (toText x)
+  printLine (toText x)
+
+type Duck = Duck
+type RoboDuck = RoboDuck
+
+Duck.quack : Duck -> Text
+Duck.quack _ = "Quack!"
+
+RoboDuck.quack : RoboDuck -> Text
+RoboDuck.quack _ = "Electronic Quack!"
+
+main = do
+  printTwice Duck.quack Duck
+  printTwice RoboDuck.quack RoboDuck
+```
+
+In Unison, __generic types__ allow you to write functions that can operate on any type. They're represented by lowercase letters in type signatures.
+
+In the example above, `printTwice` is a function that takes two arguments: _a function_ that converts a value of any type `a` to `Text`, and a value of type `a`. Because `a` is used as the __type variable__ for both parameters, the same type must be used in both places when calling `printTwice`.
+
+In functional languages, we call this  __parametric polymorphism__.
 
 </div><div>
 
-### Duck typing and inheritance
+### Duck-typing
+
+```python
+def quack_twice(thing):
+    thing.quack()
+    thing.quack()
+
+class Duck:
+    def quack(self): print("Quack!")
+
+class RoboDuck:
+    def quack(self): print("Electronic Quack!")
+
+quack_twice(Duck())
+quack_twice(RobotDuck())
+
+```
+
+Python uses __duck-typing__ to write functions or methods that operate on any object, which means that the expression `thing.quack` will succeed if the object a has a `quack` method, regardless of what it is.
 
 </div></div>
+
