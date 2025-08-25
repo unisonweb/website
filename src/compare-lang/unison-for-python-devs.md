@@ -732,7 +732,7 @@ In Unison, __generic types__ allow you to write functions that can operate on an
 
 In the example above, `printTwice` is a function that takes two arguments: _a function_ that converts a value of any type `a` to `Text`, and a value of type `a`. Because `a` is used as the __type variable__ for both parameters, the same type must be used in both places when calling `printTwice`.
 
-In functional languages, we call this  __parametric polymorphism__.
+In functional languages, we call the ability to write functions that operate on types independently of their content __parametric polymorphism__.
 
 </div><div>
 
@@ -740,14 +740,14 @@ In functional languages, we call this  __parametric polymorphism__.
 
 ```python
 def quack_twice(thing):
-    thing.quack()
-    thing.quack()
+    print(thing.quack())
+    print(thing.quack())
 
 class Duck:
-    def quack(self): print("Quack!")
+    def quack(self): return "Quack!"
 
 class RoboDuck:
-    def quack(self): print("Electronic Quack!")
+    def quack(self): return "Electronic Quack!"
 
 quack_twice(Duck())
 quack_twice(RobotDuck())
@@ -756,5 +756,80 @@ quack_twice(RobotDuck())
 
 Python uses __duck-typing__ to write functions or methods that operate on any object, which means that the expression `thing.quack` will succeed if the object a has a `quack` method, regardless of what it is.
 
+</div></div>
+
+<div class="side-by-side"><div>
+
+### Algebraic data types
+
+Unison does not support inheritance or subtyping. All types are __invariant__. But you can use __algebraic data types__ to say that a particular type may be created in several different ways:
+
+```unison
+type Duck = AnimalDuck | RoboDuck Text | ToyDuck Text
+
+
+```
+
+The `type` declaration means that the `Duck` type has three _data constructors_. We might chose to have a regular "AnimalDuck" which does not have a special noise; the other two data constructors (`RoboDuck` and `ToyDuck`) take a `Text` argument representing the special behavior of that case (a quack prefix in this example).
+
+
+```unison
+Duck.toText : Duck -> Text
+Duck.toText d = match d with
+  AnimalDuck -> "Quack!"
+  RoboDuck prefix -> prefix ++ " Quack!"
+  ToyDuck prefix -> prefix ++ " Quack!"
+```
+
+The `Duck.toText` function uses __pattern matching__ on the data type to determine which kind duck it received and return the appropriate text.
+
+```
+quacks = do
+  printTwice Duck.toText Duck.AnimalDuck
+  printTwice Duck.toText (Duck.RoboDuck "Electronic")
+  printTwice Duck.toText (Duck.ToyDuck "Squeaky")
+```
+
+Our existing `printTwice` function would happily function with values of `Duck`, `RoboDuck`, and `ToyDuck` because they all are all of type `Duck`.
+
+</div><div>
+
+### Inheritance and Subtyping
+
+Let's say we wanted to use __inheritance__ to create different types of ducks that share a common interface for quacking:
+
+```python
+class Duck:
+    def quack(self) -> str:
+        return "Quack!"
+
+class AnimalDuck(Duck):
+    pass
+
+class RoboDuck(Duck):
+    def __init__(self, prefix: str):
+        self.prefix = prefix
+
+    def quack(self) -> str:
+        return f"{self.prefix} Quack!"
+
+class ToyDuck(Duck):
+    def __init__(self, prefix: str):
+        self.prefix = prefix
+
+    def quack(self) -> str:
+        return f"{self.prefix} Quack!"
+
+```
+
+In Python, classes can inherit from other classes, allowing for __subtyping__ and code reuse.
+
+```
+quack_twice(AnimalDuck())
+quack_twice(RoboDuck("Electronic"))
+quack_twice(ToyDuck("Squeaky"))
+```
+
+Our existing `quack_twice` function would happily function with instances of `AnimalDuck`, `RoboDuck`, and `ToyDuck` because they all share the same interface.
 </div></div>
 
