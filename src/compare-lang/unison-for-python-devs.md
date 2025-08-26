@@ -924,21 +924,21 @@ Renaming or moving definitions between namespaces is common, so don't let the lo
 
 </div><div>
 
-In Python, a file defines a __module__. A module can contain functions, classes, and variables for scoping and imports.
+In Python, a file defines a __module__ and a directory can define a __package__ containing many modules (or sub-packages). The module contains the functions, classes, and variables for the program.
 
 ```python
-# in a file called ./database/user_model.py
+# in a file called ./database/usermodel.py
 
 from typing import Optional
 
 def get_user_name(user_id: int) -> Optional[str]:
-  # implementation goes here
+  ...
 
 def get_user_age(user_id: int) -> Optional[int]:
-  # implementation goes here
+  ...
 ```
 
-Unlike Python, Unison does not use the file system to organize or save code. It is stored via the UCM so definitions can be moved between namespaces without changing the file structure.
+Unlike Python, Unison does not use the file system to organize or save code so the distinction between a package and module is not relevant.
 
 </div></div>
 
@@ -981,13 +981,13 @@ api.getUserAgeJson userId =
 In Python, you can use the `import` statement to bring in modules or specific definitions from modules.
 
 ```python
-# imports the entire user_model module
-from database import user_model
+# imports the entire usermodel module
+from database import usermodel
 
-print(user_model.get_user_name(1))
+print(usermodel.get_user_name(1))
 
-# imports specific functions from the user_model module
-from database.user_model import get_user_name, get_user_age
+# imports specific functions from the usermodel module
+from database.usermodel import get_user_name, get_user_age
 
 print(get_user_name(1))
 ```
