@@ -1,7 +1,7 @@
 ---
 layout: "compare-lang"
 title: "Unison for Scala devs"
-description: "Comparing structures and patterns between Unison and Scala"
+description: "Comparing syntax and patterns between Unison and Scala"
 ---
 
 [[toc]]
@@ -300,9 +300,19 @@ case class UserPreferences (preferences: List[String])
 
 ### Imports
 
-Unison uses the `use` keyword to import definitions while Scala uses the `import` keyword. Both Unison and Scala support imports at the top-level of the file and scoped to definitions.
-
 <div class="side-by-side"><div>
+
+Unison will attempt to match a function name to a definition without extra import statements based on the types of the arguments you provide.
+
+```unison
+foo.uniqueFunctionName : Nat -> Nat -> Nat
+foo.uniqueFunctionName a b = a + b
+
+bar.baz =
+  uniqueFunctionName 1 2
+```
+
+If there is any ambiguity, Unison will prompt you to disambiguate. You can use the `use` keyword to tell Unison which term you want to import.
 
 ```unison
 -- imports everything in the `models.User` namespace
@@ -313,6 +323,8 @@ use models User UserPreferences
 use models.User toJson fromJson
 ```
 
+The `use` keyword can also be used inside a function body for local scoping:
+
 ```unison
 sqrtplus1 : Float -> Float
 sqrtplus1 x =
@@ -320,9 +332,17 @@ sqrtplus1 x =
   sqrt x + 1.0
 ```
 
-</div>
+Or you can refer to the qualified name of a term, disambiguating it by adding namespace prefixes:
 
-<div>
+```unison
+sqrtplus1 : Float -> Float
+sqrtplus1 x =
+  Float.sqrt x + 1.0
+```
+
+</div><div>
+
+Scala uses the `import` keyword to bring code into scope.
 
 ```scala
 // imports everything in the `models` package.
@@ -332,6 +352,8 @@ import models.{User, UserPreferences}
 // Scala supports renaming imports, Unison does not.
 import models.UserPreferences as UPrefs
 ```
+
+Both Unison and Scala support imports at the top-level of the file and scoped to definitions.
 
 ```scala
 def sqrtplus1(x: Int) =
