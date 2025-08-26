@@ -338,6 +338,7 @@
     flex: 1;
     height: fit-content;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     gap: 1.5rem;
   }
@@ -359,14 +360,18 @@
       width: calc(100vw - 4rem);
     }
 
-    .main-content pre code {
-      width: auto;
+    .side-by-side > * {
+      width: 100%;
     }
   }
 
   @media only screen and (max-width: 1023px) {
     :host main {
       width: 100%;
+    }
+
+    :host .content-header {
+      margin-top: 3rem;
     }
   }
 </style>
