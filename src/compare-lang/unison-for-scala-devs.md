@@ -12,7 +12,7 @@ description: "Comparing syntax and patterns between Unison and Scala"
 
 Unison variables can be defined at the top-level of a program. There is no keyword to introduce a value and all values are immutable.
 
-The type signature of a value or function appears _above_ the definition instead of interspersed with the names of the function parameters. Both Scala and Unison support type inference, so these type signatures are optional.
+The type signature of a value or function appears _above_ the definition instead of being interspersed with the names of the function parameters. Both Scala and Unison support type inference, so these type signatures are optional.
 
 ### Basic types
 
@@ -43,7 +43,7 @@ val aString : String = "A String value"
 val aChar : Char = 'a'
 ```
 
-In Scala, positive integers are created without the `+`. In Unison, `Nat` is the type for positive integers, all `Int` literals in Unison must include `+` or `-`.
+In Scala, positive integers are created without the `+`. In Unison, `Nat` is the type for positive integers. All `Int` literals in Unison must include `+` or `-`.
 
 </div></div>
 
@@ -147,7 +147,7 @@ During function application, arguments are separated by spaces:
 digits = splitDigitsOn ?| "abc12|def34|56|78"
 ```
 
-Since commas are not used to explicitly separate arguments, parenthesis disambiguate the order in which functions should be applied.
+Since commas are not used to explicitly separate arguments, parentheses disambiguate the order in which functions should be applied.
 
 </div><div>
 
@@ -365,7 +365,7 @@ def sqrtplus1(x: Int) =
 
 ## Comments and docs
 
-Unison comments _are not persisted_ to the Unison codebase. To save a note to your future self or colleagues, use a string literal or use a Unison `Doc` expression.
+Unison comments _are not persisted_ in the Unison codebase. To save a note to your future self or colleagues, use a string literal or use a Unison `Doc` expression.
 
 <div class="side-by-side"><div>
 
@@ -432,14 +432,14 @@ myTerm =
 
 {% endraw %}
 
-If a Doc element is created above a term or type, it will automatically share the name of the term or type suffixed with `.doc` .
+If a Doc element is created above a term or type, it will automatically share the name of the term or type suffixed with `.doc`.
 
 </div><div>
 
 ```scala
 /** A Scala Doc for the term below.
 
-With annotations it can automatically update some
+With annotations, it can automatically update some
 information about its inputs and outputs.
 
 It cannot run live snippets of the code it describes.
@@ -468,7 +468,7 @@ up = Direction.Up
 
 The `type` keyword introduces a new type. Its **data constructors** are separated by `|` on the right of the equals sign.
 
-Think of data constructors as functions which produce values of the given type.
+Think of data constructors as functions that produce values of the given type.
 
 ```unison
 -- the Floor type has one data constructor,
@@ -575,7 +575,7 @@ In Scala, you can add a trait and say that the existing `Floor` case class is a 
 | Subtyping                               | No.                                                                         | Yes.                                                                                    |
 | Record types                            | Yes. Single data constructor types with named fields.                       | Yes. Case classes                                                                       |
 | Typeclasses                             | No.                                                                         | Yes. Typeclasses via traits and implicit / given syntax.                                |
-| GADTs                                   | No.                                                                         | Yes. GADT’s via sealed traits and case classes                                          |
+| GADTs                                   | No.                                                                         | Yes. GADTs via sealed traits and case classes                                          |
 | Higher-kinded types                     | Yes. But in the absence of typeclasses, less common.                        | Yes.                                                                                    |
 | Type aliases                            | No.                                                                         | Yes.                                                                                    |
 

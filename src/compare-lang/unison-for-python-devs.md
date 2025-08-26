@@ -33,7 +33,7 @@ aFunction =
   noReassignments = "🚫 Will not compile, variable is ambiguous."
 ```
 
-That means once a variable is introduced, it cannot be changed or reassigned by the program. If you want to update a value, you create a new term which copies the old value and applies the change.
+That means once a variable is introduced, it cannot be changed or reassigned by the program. To update a value, you create a new term that copies the old value and applies the change.
 
 </div>
 <div>
@@ -86,7 +86,7 @@ In Python 3, type hints can be used to indicate the expected type of a variable,
 <div class="side-by-side">
 <div>
 
-Unison's tuple type can hold an arbitary fixed number of values, each of potentially different types. Tuple elements are accessed using `at1`, `at2`, etc. for the first, second, and subsequent elements.
+Unison's tuple type can hold an arbitrary fixed number of values, each of potentially different types. Tuple elements are accessed using `at1`, `at2`, etc., for the first, second, and subsequent elements.
 
 ```unison
 aTuple : (Text, Nat, Int)
@@ -96,7 +96,7 @@ first = at1 aTuple
 second = at2 aTuple
 ```
 
-You cannot unpack a tuple at the top level of a file, outside of a function body, however, _inside_ a function body, for local variable assignments, you can decompose a tuple like this:
+You cannot unpack a tuple at the top level of a file, outside of a function body. However, _inside_ a function body, for local variable assignments, you can decompose a tuple like this:
 
 ```unison
 foo =
@@ -168,7 +168,7 @@ a_dict = {"🍎": "value1", "🫐": 100, "🍐": True}
 a_frozen_set = frozenset([1, -2, 3, -4, 5])
 ```
 
-Dictionary keys in Python must be hashable. In Unison there is no restriction on key types in a `Map`.
+Dictionary keys in Python must be hashable. In Unison, there is no restriction on key types in a `Map`.
 
 In Python, you might use `frozenset` or tuples for immutable collections. This operation on a dictionary will change the original collection.
 
@@ -327,7 +327,7 @@ myFunc n =
 
 ## The basics
 
-Unison and Python are both whitespace significant languages. Indentation is used to indicate blocks of code, such as function bodies and control flow statements.
+Unison and Python are both whitespace-significant languages. Indentation is used to indicate blocks of code, such as function bodies and control flow statements.
 
 <div class="side-by-side"><div>
 
@@ -391,7 +391,7 @@ hooray a b num =
   Text.repeat repeat (a ++ b ++ "!!!")
 ```
 
-Unison does not allow default values for function arguments. Instead you might use the `Optional` type to indicate that an argument is optional, and then provide a default value inside the function body.
+Unison does not allow default values for function arguments. Instead, you might use the `Optional` type to indicate that an argument is optional, and then provide a default value inside the function body.
 
 </div><div>
 
@@ -566,7 +566,7 @@ safeDivide a b =
   else a / b
 ```
 
-In Unison, we use special functions called __ability handlers__ to manage effects. Here, we use the `catch` function to turn the potential exception into the `Either` data-type.
+In Unison, we use special functions called __ability handlers__ to manage effects. Here, we use the `catch` function to turn the potential exception into the `Either` data type.
 
 ```unison
 catchSafeDivide : Nat -> Nat -> Either Failure Nat
@@ -574,7 +574,7 @@ catchSafeDivide a b =
   catch do safeDivide a b
 ```
 
-Alternatively, we can continue to propagate the exception to the caller by including `{Exception}` in enclosing function's ability set:
+Alternatively, we can continue to propagate the exception to the caller by including `{Exception}` in the enclosing function's ability set:
 
 ```unison
 callingSafeDivide : '{Exception} Text
@@ -609,7 +609,7 @@ def run_with_catch(a, b):
     return None
 ```
 
-Python's **try...except** blocks are similar to _ability handler_ functions in Unison in that they specify that a code block may be performing an effect and then specify how the runtime should respond. However, `try...except` are built in to the Python language, whereas Unison handler functions are generalizeable and developer defined.
+Python's **try...except** blocks are similar to _ability handler_ functions in Unison in that they specify that a code block may be performing an effect and then specify how the runtime should respond. However, `try...except` is built into the Python language, whereas Unison handler functions are generalizable and defined by developers.
 
 </div></div>
 
@@ -629,7 +629,7 @@ This is a __type declaration__ for an `Elevator` that tracks the current floor a
 type Elevator = Elevator Nat Nat
 ```
 
-These functions accept the the `Elevator` type as an argument and return a new `Elevator` with updated state.
+These functions accept the `Elevator` type as an argument and return a new `Elevator` with updated state.
 
 ```unison
 moveUp : Elevator -> Elevator
@@ -708,7 +708,7 @@ Each transformation is applied in sequence, allowing for a clear flow of data th
 
 ### Dot notation
 
-The dot notation in Python expresses method calls on an object which may _mutate_ the object's internal state.
+The dot notation in Python expresses method calls on an object that may _mutate_ the object's internal state.
 
 ```python
 e = Elevator()
@@ -832,7 +832,7 @@ Unison does not support inheritance or subtyping. All types are _invariant_. But
 type Duck = AnimalDuck | RoboDuck Text | ToyDuck Text
 ```
 
-The `type` declaration means that the `Duck` type has three _data constructors_. The "AnimalDuck" which does not have a special noise, but the other two data constructors (`RoboDuck` and `ToyDuck`) take a `Text` argument representing the special behavior of that case (a quack prefix in this example).
+The `type` declaration means that the `Duck` type has three _data constructors_. The `AnimalDuck` does not make a special noise, but the other two data constructors (`RoboDuck` and `ToyDuck`) take a `Text` argument representing the specific behavior of that case (a quack prefix in this example).
 
 ```unison
 Duck.toText : Duck -> Text
@@ -897,7 +897,7 @@ quack_twice(ToyDuck("Squeaky"))
 
 <div class="side-by-side"><div>
 
-In Unison, a __namespace__ is a collection of related definitions, which can be functions, types, or other namespaces. Namespaces are introduced by giving terms a dot-separated prefix when when they are defined:
+In Unison, a __namespace__ is a collection of related definitions, which can be functions, types, or other namespaces. Namespaces are introduced by giving terms a dot-separated prefix when they are defined:
 
 ```unison
 database.userModel.getUserName : Nat -> Optional Text
