@@ -262,7 +262,6 @@ In Python, `None` is a singleton object representing the absence of a value at r
 
 </div></div>
 
-
 <div class="side-by-side"><div>
 
 ### Unit
@@ -284,7 +283,7 @@ Unison uses the `Unit` type, `()`, to represent a function that does not return 
 
 ```python
 def greet(name: str) -> None:
-  print "Hello " + name
+  print("Hello " + name)
 ```
 
 Python uses `None` as the type for functions that do not explicitly return something.
@@ -815,7 +814,7 @@ class RoboDuck:
   def quack(self): return "Electronic Quack!"
 
 quack_twice(Duck())
-quack_twice(RobotDuck())
+quack_twice(RoboDuck())
 ```
 
 Python uses __duck-typing__ to write functions or methods that operate on any object, which means that the expression `thing.quack` will succeed if the object a has a `quack` method, regardless of what it is.
