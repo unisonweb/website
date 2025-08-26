@@ -544,43 +544,63 @@ Python uses `if` in a `case` clause for the same purpose.
 
 ## Exception handling
 
-Both Python and Unison use exceptions for error handling and can propagate them up the call stack, but exceptions in Unison are [tracked by the type system as an __ability__](https://www.unison-lang.org/docs/fundamentals/abilities/). In Python, a function may freely perform any side effects, like throwing exceptions, or calling an external API, or reading from disk. We'll use Exceptions as an example of effect management, sinch they are common in both languages.
+Both Python and Unison use exceptions for error handling and can propagate them up the call stack, but exceptions in Unison are [tracked by the type system as an __ability__](https://www.unison-lang.org/docs/fundamentals/abilities/).
+
+The key difference is how each language treats effects (operations that go beyond pure computation) like:
+
+* Throwing exceptions
+* Printing to the console
+* Reading or writing files
+* Making network requests
 
 <div class="side-by-side"><div>
+
+In Unison, the effects a function may perform are part of its type signature. `{Exception}` indicates that this function might throw an exception.
 
 ```unison
 safeDivide : Int -> Int ->{Exception} Int
 safeDivide a b =
   use Int /
-  if b === +0 then Exception.raise (failure "cannot divide by zero" b)
+  if b === +0
+  then Exception.raise (failure "cannot divide by zero" b)
   else a / b
 ```
 
-In Unison, we can `catch` the exception, by turning it into an `Either` data type:
+In Unison, we use special functions called __ability handlers__ to manage effects. Here, we use the `catch` function to turn the potential exception into the `Either` data-type.
 
 ```unison
-runWithCatch : Int -> Int -> Optional Int
-runWithCatch a b =
-  result : Either Faliure Int
-  result = catch do safeDivide a b
-  match result with
-    Right value -> Some value
-    Left err -> None
+catchSafeDivide : Int -> Int -> Either Failure Int
+catchSafeDivide a b =
+  catch do safeDivide a b
 ```
 
-Alternatively, we can continue to propagate the exception to the caller:
+Alternatively, we can continue to propagate the exception to the caller by including `{Exception}` in enclosing function's ability set:
 
+```unison
+callingSafeDivide : '{Exception} Text
+callingSafeDivide = do
+  (Int.toText (safeDivide 10 0))
 ```
-```
+
+At the entry point of a Unison program, only the `IO` and `Exception` abilities are allowed. All other effects must be handled by:
+
+* Converting them into pure data (e.g., `Either` or `Optional`)
+* Translating them into `{IO}` or `{Exception}`
 
 </div><div>
+
+In Python, there is no type signature enforcing that `safe_divide` can raise `ValueError`. These and other effects are not checked by the interpreter.
 
 ```python
 def safe_divide(a, b):
   if b == 0:
     raise ValueError("Cannot divide by zero")
   return a / b
+```
 
+In Python, exceptions can be caught using `try` and `except` blocks.
+
+```python
 def run_with_catch(a, b):
   try:
     safe_divide(a, b)
@@ -588,6 +608,10 @@ def run_with_catch(a, b):
     print(f"Error: {e}")
     return None
 ```
+
+Python's **try...except** blocks are similar to _ability handler_ functions in Unison in that they specify that a code block may be performing an effect and then specify how the runtime should respond. However, `try...except` are built in to the Python language, whereas Unison handler functions are generalizeable and developer defined.
+
+</div></div>
 
 # Data modeling
 
@@ -635,21 +659,21 @@ Python uses __classes__ to __encapsulate__ both data and behavior. Methods are d
 
 ```python
 class Elevator:
-    def __init__(self, current_floor: int = 0, top_floor: int = 10):
-        self.current_floor = current_floor
-        self.top_floor = top_floor
+  def __init__(self, current_floor: int = 0, top_floor: int = 10):
+    self.current_floor = current_floor
+    self.top_floor = top_floor
 
-    def move_up(self):
-        if self.current_floor < self.top_floor:
-            self.current_floor += 1
+  def move_up(self):
+    if self.current_floor < self.top_floor:
+        self.current_floor += 1
 
-    def move_down(self):
-        if self.current_floor > 0:
-            self.current_floor -= 1
+  def move_down(self):
+    if self.current_floor > 0:
+        self.current_floor -= 1
 
-    def go_to_floor(self, floor: int):
-        if 0 <= floor <= self.top_floor:
-            self.current_floor = floor
+  def go_to_floor(self, floor: int):
+    if 0 <= floor <= self.top_floor:
+        self.current_floor = floor
 ```
 
 This class defines an `Elevator` with methods to move up, move down, and go to a specific floor. The state of the elevator is stored and changed in instance variables.
@@ -781,14 +805,14 @@ In functional languages, we call the ability to write functions that operate on 
 
 ```python
 def quack_twice(thing):
-    print(thing.quack())
-    print(thing.quack())
+  print(thing.quack())
+  print(thing.quack())
 
 class Duck:
-    def quack(self): return "Quack!"
+  def quack(self): return "Quack!"
 
 class RoboDuck:
-    def quack(self): return "Electronic Quack!"
+  def quack(self): return "Electronic Quack!"
 
 quack_twice(Duck())
 quack_twice(RobotDuck())
@@ -828,7 +852,7 @@ quacks = do
   printTwice Duck.toText (Duck.ToyDuck "Squeaky")
 ```
 
-Note that `Duck.AnimalDuck`, `Duck.RoboDuck`, and `Duck.ToyDuck` are used to create values with the `Duck` type. They are not distinct types themselves.
+Note that `Duck.AnimalDuck`, `Duck.RoboDuck`, and `Duck.ToyDuck` are functions that are used to create values with the `Duck` type when provided with their respective arguments. They are not distinct types themselves.
 
 </div><div>
 
@@ -838,31 +862,31 @@ Let's say we wanted to use __subtypes__ to create different types of ducks that 
 
 ```python
 class Duck:
-    def quack(self) -> str:
-        return "Quack!"
+  def quack(self) -> str:
+    return "Quack!"
 
 class AnimalDuck(Duck):
-    pass
+  pass
 
 class RoboDuck(Duck):
-    def __init__(self, prefix: str):
-        self.prefix = prefix
+  def __init__(self, prefix: str):
+    self.prefix = prefix
 
-    def quack(self) -> str:
-        return f"{self.prefix} Quack!"
+  def quack(self) -> str:
+    return f"{self.prefix} Quack!"
 
 class ToyDuck(Duck):
-    def __init__(self, prefix: str):
-        self.prefix = prefix
+  def __init__(self, prefix: str):
+    self.prefix = prefix
 
-    def quack(self) -> str:
-        return f"{self.prefix} Quack!"
+  def quack(self) -> str:
+    return f"{self.prefix} Quack!"
 
 ```
 
 While two of these subclasses (`Roboduck` and `ToyDuck`) have an additional instance variable, the other simply inherits its behavior from its parent.
 
-```
+```python
 quack_twice(AnimalDuck())
 quack_twice(RoboDuck("Electronic"))
 quack_twice(ToyDuck("Squeaky"))
@@ -870,11 +894,112 @@ quack_twice(ToyDuck("Squeaky"))
 
 </div></div>
 
-# Running programs
-
-A runnable “main” function in Unison can be any delayed computation (a thunk) which can perform the `IO` and `Exception` abilities (think “effects”).
+# Modules
 
 <div class="side-by-side"><div>
+
+In Unison, a __namespace__ is a collection of related definitions, which can be functions, types, or other namespaces. Namespaces are introduced by giving terms a dot-separated prefix when when they are defined:
+
+```unison
+database.userModel.getUserName : Nat -> Optional Text
+database.userModel.getUserName userId = todo "getUserName"
+
+database.userModel.getUserAge : Nat -> Optional Nat
+database.userModel.getUserAge userId = todo "getUserAge"
+```
+
+These two functions are in the `database.userModel` namespace.
+
+You can also provide namespace scoping at the top of a file:
+
+```unison
+namespace database.userModel
+  getUserName : Nat -> Optional Text
+  getUserName userId = todo "getUserEmail"
+
+  getUserAge : Nat -> Optional Nat
+  getUserAge userId = todo "getUserAge"
+```
+
+Renaming or moving definitions between namespaces is common, so don't let the long prefixes above intimidate you.
+
+</div><div>
+
+In Python, a file defines a __module__. A module can contain functions, classes, and variables for scoping and imports.
+
+```python
+# in a file called ./database/user_model.py
+
+from typing import Optional
+
+def get_user_name(user_id: int) -> Optional[str]:
+  # implementation goes here
+
+def get_user_age(user_id: int) -> Optional[int]:
+  # implementation goes here
+```
+
+Unlike Python, Unison does not use the file system to organize or save code. It is stored via the UCM so definitions can be moved between namespaces without changing the file structure.
+
+</div></div>
+
+## Imports
+
+<div class="side-by-side"><div>
+
+In Unison, you can use the `use` keyword to bring definitions from other namespaces into the current namespace. You can import an entire namespace or specific definitions.
+
+```unison
+{- Imports everything from the `database.userModel`
+   namespace for use in the file -}
+use database.userModel
+
+{- Use getUserName and getUserAge without the
+   full namespace prefix -}
+api.getUserNameJson : Nat -> Json
+api.getUserNameJson userId =
+  getUserName userId
+  todo "..."
+
+-- Only imports the getUserAge definition
+use database.userModel getUserAge
+
+-- Imports both getUserAge and getUserName definitions
+use database.userModel getUserAge getUserName
+```
+
+Or you can fully qualify the name of the definition you want to use:
+
+```unison
+api.getUserAgeJson : Nat -> Json
+api.getUserAgeJson userId =
+  database.userModel.getUserAge userId
+  todo "..."
+```
+
+</div><div>
+
+In Python, you can use the `import` statement to bring in modules or specific definitions from modules.
+
+```python
+# imports the entire user_model module
+from database import user_model
+
+print(user_model.get_user_name(1))
+
+# imports specific functions from the user_model module
+from database.user_model import get_user_name, get_user_age
+
+print(get_user_name(1))
+```
+
+</div></div>
+
+# Running programs
+
+<div class="side-by-side"><div>
+
+Unison _does not evaluate any code_ until you explicitly tell it to, so a "main" function is just another function in your codebase until you invoke it with the `run` command in the UCM or via the shell.
 
 ```unison
 main : '{IO, Exception} ()
@@ -892,20 +1017,20 @@ pureMain = do
   42
 ```
 
-Unison _does not evaluate any code_ until you explicitly tell it to, so a "main" function is just another function in your codebase until you invoke it with the `run` command with the UCM.
-
 ```ucm
 myProject/main> run main
 
   Hello world!
 ```
 
+A runnable "main" function in Unison can be any [delayed computation](https://www.unison-lang.org/docs/fundamentals/values-and-functions/delayed-computations/) (a thunk) which can perform the `IO` and `Exception` abilities (think "effects").
+
 </div><div>
 
-The Python interpreter _starts executing code_ from the top of the file, so it uses the __name__ and __main__ built-in variables to determine if the script is being run directly or imported as a module.
+The Python interpreter _starts executing code_ from the top of the file, so it uses the `__name__` and `__main__` built-in variables to determine if the script is being run directly or imported as a module.
 
 ```python
-## In a file called my_script.py
+# In a file called my_script.py
 
 def my_main():
   print("Hello world!")
@@ -924,9 +1049,11 @@ $ python my_script.py
 
 ### The REPL
 
-Unison uses **watch expressions** to interactively evaluate code, instead of a traditional REPL. The Unison Codebase Manager (UCM) watches for changes to `.u` files and evaluates any lines starting with `>` in the file.
+Unison uses **watch expressions** to interactively evaluate code, instead of a traditional REPL. Watch expressions let you test and explore code directly in your source files.
 
-Everything in your file and in your current project is available to use in watch expressions.
+The Unison Codebase Manager (UCM) watches for changes to `.u` files and evaluates any lines starting with `>` in the file as a watch expression. The expressions must be "pure", meaning they cannot perform side effects like `IO` or throwing exceptions.
+
+Everything in your file and in your current project is in scope.
 
 <div class="side-by-side"><div>
 
