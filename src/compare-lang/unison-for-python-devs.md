@@ -197,10 +197,10 @@ List.map (x -> x * 2) [1, 2, 3]
 Lambdas in Unison can include local variable assignments and multiple expressions:
 
 ```unison
-List.foldLeft 0 (acc x -> let
+List.foldLeft (acc x -> let
   double = x * 2
   acc + double
-) [1, 2, 3]
+) 0 [1, 2, 3]
 ```
 
 The `let` keyword is a way of starting a code block in Unison.
@@ -240,8 +240,8 @@ optionalNone = None
 foo : Optional Text -> Text
 foo bar =
   match bar with
-  | Some text -> "Value provided: " ++ text
-  | None -> "No value provided"
+    Some text -> "Value provided: " ++ text
+    None -> "No value provided"
 ```
 
 The `match` expression is used to destructure the `Optional` type. You cannot use the value inside an `Optional` without pattern matching on it or using a function that unwraps the `Optional` type.
@@ -410,7 +410,7 @@ Python allows default values for function arguments, which can be specified in t
 ```unison
 hoorayMany : [Text] -> Text
 hoorayMany texts =
-  Text.intercalate " " texts ++ "!!!"
+  Text.join " " texts ++ "!!!"
 ```
 
 Unison does not have built-in support for variadic functions. Instead, you can accept a list of values as an argument.
@@ -558,10 +558,10 @@ The key difference is how each language treats effects (operations that go beyon
 In Unison, the effects a function may perform are part of its type signature. `{Exception}` indicates that this function might throw an exception.
 
 ```unison
-safeDivide : Int -> Int ->{Exception} Int
+safeDivide : Nat -> Nat ->{Exception} Nat
 safeDivide a b =
   use Int /
-  if b === +0
+  if b === 0
   then Exception.raise (failure "cannot divide by zero" b)
   else a / b
 ```
@@ -569,7 +569,7 @@ safeDivide a b =
 In Unison, we use special functions called __ability handlers__ to manage effects. Here, we use the `catch` function to turn the potential exception into the `Either` data-type.
 
 ```unison
-catchSafeDivide : Int -> Int -> Either Failure Int
+catchSafeDivide : Nat -> Nat -> Either Failure Nat
 catchSafeDivide a b =
   catch do safeDivide a b
 ```
@@ -579,7 +579,7 @@ Alternatively, we can continue to propagate the exception to the caller by inclu
 ```unison
 callingSafeDivide : '{Exception} Text
 callingSafeDivide = do
-  (Int.toText (safeDivide 10 0))
+  (Nat.toText (safeDivide 10 5))
 ```
 
 At the entry point of a Unison program, only the `IO` and `Exception` abilities are allowed. All other effects must be handled by:
@@ -646,7 +646,7 @@ moveDown e = match e with
 
 goToFloor : Nat -> Elevator -> Elevator
 goToFloor requested e = match e with
-  Elevator _ topFloor | floor <= topFloor ->
+  Elevator _ topFloor | requested <= topFloor ->
     Elevator requested topFloor
   _ -> e
 ```
@@ -816,7 +816,6 @@ class RoboDuck:
 
 quack_twice(Duck())
 quack_twice(RobotDuck())
-
 ```
 
 Python uses __duck-typing__ to write functions or methods that operate on any object, which means that the expression `thing.quack` will succeed if the object a has a `quack` method, regardless of what it is.
@@ -852,7 +851,7 @@ quacks = do
   printTwice Duck.toText (Duck.ToyDuck "Squeaky")
 ```
 
-Note that `Duck.AnimalDuck`, `Duck.RoboDuck`, and `Duck.ToyDuck` are functions that are used to create values with the `Duck` type when provided with their respective arguments. They are not distinct types themselves.
+Note that `AnimalDuck`, `RoboDuck`, and `ToyDuck` are functions that are used to create values with the `Duck` type when provided with their respective arguments. They are not distinct types themselves.
 
 </div><div>
 
@@ -958,7 +957,7 @@ use database.userModel
    full namespace prefix -}
 api.getUserNameJson : Nat -> Json
 api.getUserNameJson userId =
-  getUserName userId
+  name = getUserName userId
   todo "..."
 
 -- Only imports the getUserAge definition
@@ -1058,7 +1057,7 @@ Everything in your file and in your current project is in scope.
 <div class="side-by-side"><div>
 
 ```unison
-factorial n = product (range 1 (n + 1))
+factorial n = Nat.product (range 1 (n + 1))
 
 > factorial 3
 ```
