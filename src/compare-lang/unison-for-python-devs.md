@@ -760,8 +760,9 @@ class Point(NamedTuple):
   y: int
 
 p1 = Point(3, -4)
-x = p1.x  # Accessing the x field
-p2 = p1._replace(x=10)  # Creating a new Point with an updated x field
+x = p1.x # Accessing the x field
+p2 = p1._replace(x=10)
+# Creating a new Point with an updated x field
 ```
 
 </div></div>
@@ -1047,21 +1048,19 @@ $ python my_script.py
 
 ### The REPL
 
-Unison uses **watch expressions** to interactively evaluate code, instead of a traditional REPL. Watch expressions let you test and explore code directly in your source files.
+Unison uses **watch expressions** to interactively evaluate code, instead of a traditional **REPL**. Watch expressions let you test and explore code directly in your source files.
+
+<div class="side-by-side"><div>
 
 The Unison Codebase Manager (UCM) watches for changes to `.u` files and evaluates any lines starting with `>` in the file as a watch expression. The expressions must be "pure", meaning they cannot perform side effects like `IO` or throwing exceptions.
 
-Everything in your file and in your current project is in scope.
-
-<div class="side-by-side"><div>
 
 ```unison
 factorial n = Nat.product (range 1 (n + 1))
 
 > factorial 3
 ```
-
-UCM will print out:
+Everything in your file and in your current UCM project is in scope. The UCM will print to the console like this:
 
 ```unison
 > factorial 3
@@ -1071,7 +1070,7 @@ UCM will print out:
 
 </div><div>
 
-Python has a traditional **REPL** that allows you to enter and evaluate code interactively.
+Python has a traditional REPL that allows you to enter and evaluate code interactively.
 
 ```python
 >>> factorial = lambda n: 1 if n == 0 else n * factorial(n - 1)
