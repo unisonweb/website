@@ -170,7 +170,7 @@ a_frozen_set = frozenset([1, -2, 3, -4, 5])
 
 Dictionary keys in Python must be hashable. In Unison, there is no restriction on key types in a `Map`.
 
-In Python, you might use `frozenset` or tuples for immutable collections. This operation on a dictionary will change the original collection.
+In Python, you might use `frozenset` or tuples for immutable collections. This operation on a dictionary will change the original collection:
 
 ```python
 map_1 = {"💙": 1, "🩷": 12, "💚": 35}
@@ -565,7 +565,7 @@ safeDivide a b =
   else a / b
 ```
 
-In Unison, we use special functions called __ability handlers__ to manage effects. Here, we use the `catch` function to turn the potential exception into the `Either` data type.
+We use special functions called __ability handlers__ to manage effects. Here, we use the `catch` function to turn the potential exception into the `Either` data type.
 
 ```unison
 catchSafeDivide : Nat -> Nat -> Either Failure Nat
@@ -767,13 +767,13 @@ p2 = p1._replace(x=10)
 
 </div></div>
 
-## Generic behavior
+## Behavioral abstraction
 
 <div class="side-by-side"><div>
 
 ### Parametric polymorphism
 
-In Unison, __generic types__ allow you to write functions that can operate on any type. They're represented by lowercase letters in type signatures.
+In Unison we use __generic types__ to write functions that can operate on any type. They're represented by lowercase letters in type signatures.
 
 ```unison
 printTwice : (a -> Text) -> a -> {IO, Exception} ()
@@ -797,7 +797,7 @@ main = do
 
 In the example above, `printTwice` is a function that takes two arguments: _a function_ that converts a value of any type `a` to `Text`, and a value of type `a`. Because `a` is used as the __type variable__ for both parameters, the same type must be used in both places when calling `printTwice`.
 
-In functional languages, we call the ability to write functions that operate on types independently of their content: __parametric polymorphism__.
+In functional languages, we call the ability to write functions that operate on types independently of their content __parametric polymorphism__.
 
 </div><div>
 
@@ -826,13 +826,13 @@ Python uses __duck-typing__ to write functions or methods that operate on any ob
 
 ### Algebraic data types
 
-Unison does not support inheritance or subtyping. All types are _invariant_. But you can use __algebraic data types__ to say that a particular type may be created in several different ways:
+Unison does not support inheritance or subtyping. All types are _invariant_. But you can use __algebraic data types__ to say that a particular type may be created in several different ways, each of which ultimately has different behavior.
 
 ```unison
 type Duck = AnimalDuck | RoboDuck Text | ToyDuck Text
 ```
 
-The `type` declaration means that the `Duck` type has three _data constructors_. The `AnimalDuck` does not make a special noise, but the other two data constructors (`RoboDuck` and `ToyDuck`) take a `Text` argument representing the specific behavior of that case (a quack prefix in this example).
+The `type` declaration means that the `Duck` type has three _data constructors_. The `AnimalDuck` does not make a special noise, but the other two data constructors (`RoboDuck` and `ToyDuck`) take a `Text` argument representing the specific behavior of that case (a quack prefix in this example). Note that `AnimalDuck`, `RoboDuck`, and `ToyDuck` are functions that are used to create values with the `Duck` type when provided with their respective arguments. They are not distinct types themselves.
 
 ```unison
 Duck.toText : Duck -> Text
@@ -842,7 +842,7 @@ Duck.toText d = match d with
   ToyDuck prefix -> prefix ++ " Quack!"
 ```
 
-The `Duck.toText` function uses _pattern matching_ on the data type to determine which kind of duck it received and return the appropriate text.
+The `Duck.toText` function uses _pattern matching_ on the data type to determine which kind of duck it received and return the appropriate text. The difference in their behavior is wholly dependent on the values they're constructed with and the functions that inspect their structure.
 
 ```unison
 quacks = do
@@ -851,13 +851,11 @@ quacks = do
   printTwice Duck.toText (Duck.ToyDuck "Squeaky")
 ```
 
-Note that `AnimalDuck`, `RoboDuck`, and `ToyDuck` are functions that are used to create values with the `Duck` type when provided with their respective arguments. They are not distinct types themselves.
-
 </div><div>
 
 ### Inheritance and subtyping
 
-Let's say we wanted to use __subtypes__ to create different types of ducks that share a common interface for quacking:
+Python classes can use __inheritance__ to express relationships between objects and share behavior. Let's say we wanted to use __subtypes__ to create different types of ducks that share a common interface for quacking:
 
 ```python
 class Duck:
@@ -883,7 +881,7 @@ class ToyDuck(Duck):
 
 ```
 
-While two of these subclasses (`Roboduck` and `ToyDuck`) have an additional instance variable, the other simply inherits its behavior from its parent.
+While two of these subclasses (`Roboduck` and `ToyDuck`) have an additional instance variable, the other simply inherits its "quack-ing" behavior from its parent.
 
 ```python
 quack_twice(AnimalDuck())
@@ -946,7 +944,18 @@ Unlike Python, Unison does not use the file system to organize or save code so t
 
 <div class="side-by-side"><div>
 
-In Unison, you can use the `use` keyword to bring definitions from other namespaces into the current namespace. You can import an entire namespace or specific definitions.
+Unison differs from Python in that you do not, by default, need to import definitions from other namespaces to use them. If a definition exists in your current project and its name is unambiguous, you can use it directly.
+
+```unison
+foo.uniqueName : Nat -> Nat
+foo.uniqueName n = n + 1
+
+-- works without an import or namespace prefix
+bar.baz =
+  uniqueName 1
+```
+
+If you need to specify where a definition comes from, the `use` keyword brings definitions from other namespaces into the current namespace. You can import an entire namespace or specific definitions.
 
 ```unison
 {- Imports everything from the `database.userModel`
