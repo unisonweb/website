@@ -955,7 +955,7 @@ bar.baz =
   uniqueName 1
 ```
 
-If you need to specify where a definition comes from, the `use` keyword brings definitions from other namespaces into the current namespace. You can import an entire namespace or specific definitions.
+If you need to specify where a definition comes from, the `use` keyword brings definitions from other namespaces into scope. You can import an entire namespace or specific definitions.
 
 ```unison
 {- Imports everything from the `database.userModel`
