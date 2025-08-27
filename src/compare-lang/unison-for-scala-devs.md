@@ -1,7 +1,7 @@
 ---
 layout: "compare-lang"
 title: "Unison for Scala devs"
-description: "Comparing structures and patterns between Unison and Scala"
+description: "Comparing syntax and patterns between Unison and Scala"
 ---
 
 [[toc]]
@@ -12,7 +12,7 @@ description: "Comparing structures and patterns between Unison and Scala"
 
 Unison variables can be defined at the top-level of a program. There is no keyword to introduce a value and all values are immutable.
 
-The type signature of a value or function appears _above_ the definition instead of interspersed with the names of the function parameters. Both Scala and Unison support type inference, so these type signatures are optional.
+The type signature of a value or function appears _above_ the definition instead of being interspersed with the names of the function parameters. Both Scala and Unison support type inference, so these type signatures are optional.
 
 ### Basic types
 
@@ -43,7 +43,7 @@ val aString : String = "A String value"
 val aChar : Char = 'a'
 ```
 
-In Scala, positive integers are created without the `+`. In Unison, `Nat` is the type for positive integers, all `Int` literals in Unison must include `+` or `-`.
+In Scala, positive integers are created without the `+`. In Unison, `Nat` is the type for positive integers. All `Int` literals in Unison must include `+` or `-`.
 
 </div></div>
 
@@ -147,7 +147,7 @@ During function application, arguments are separated by spaces:
 digits = splitDigitsOn ?| "abc12|def34|56|78"
 ```
 
-Since commas are not used to explicitly separate arguments, parenthesis disambiguate the order in which functions should be applied.
+Since commas are not used to explicitly separate arguments, parentheses disambiguate the order in which functions should be applied.
 
 </div><div>
 
@@ -300,9 +300,19 @@ case class UserPreferences (preferences: List[String])
 
 ### Imports
 
-Unison uses the `use` keyword to import definitions while Scala uses the `import` keyword. Both Unison and Scala support imports at the top-level of the file and scoped to definitions.
-
 <div class="side-by-side"><div>
+
+Unison will attempt to match a function name to a definition without extra import statements based on the types of the arguments you provide.
+
+```unison
+foo.uniqueFunctionName : Nat -> Nat -> Nat
+foo.uniqueFunctionName a b = a + b
+
+bar.baz =
+  uniqueFunctionName 1 2
+```
+
+If there is any ambiguity, Unison will prompt you to disambiguate. You can use the `use` keyword to tell Unison which term you want to import.
 
 ```unison
 -- imports everything in the `models.User` namespace
@@ -313,6 +323,8 @@ use models User UserPreferences
 use models.User toJson fromJson
 ```
 
+The `use` keyword can also be used inside a function body for local scoping:
+
 ```unison
 sqrtplus1 : Float -> Float
 sqrtplus1 x =
@@ -320,9 +332,17 @@ sqrtplus1 x =
   sqrt x + 1.0
 ```
 
-</div>
+Or you can refer to the qualified name of a term, disambiguating it by adding namespace prefixes:
 
-<div>
+```unison
+sqrtplus1 : Float -> Float
+sqrtplus1 x =
+  Float.sqrt x + 1.0
+```
+
+</div><div>
+
+Scala uses the `import` keyword to bring code into scope.
 
 ```scala
 // imports everything in the `models` package.
@@ -332,6 +352,8 @@ import models.{User, UserPreferences}
 // Scala supports renaming imports, Unison does not.
 import models.UserPreferences as UPrefs
 ```
+
+Both Unison and Scala support imports at the top-level of the file and scoped to definitions.
 
 ```scala
 def sqrtplus1(x: Int) =
@@ -343,7 +365,7 @@ def sqrtplus1(x: Int) =
 
 ## Comments and docs
 
-Unison comments _are not persisted_ to the Unison codebase. To save a note to your future self or colleagues, use a string literal or use a Unison `Doc` expression.
+Unison comments _are not persisted_ in the Unison codebase. To save a note to your future self or colleagues, use a string literal or use a Unison `Doc` expression.
 
 <div class="side-by-side"><div>
 
@@ -410,14 +432,14 @@ myTerm =
 
 {% endraw %}
 
-If a Doc element is created above a term or type, it will automatically share the name of the term or type suffixed with `.doc` .
+If a Doc element is created above a term or type, it will automatically share the name of the term or type suffixed with `.doc`.
 
 </div><div>
 
 ```scala
 /** A Scala Doc for the term below.
 
-With annotations it can automatically update some
+With annotations, it can automatically update some
 information about its inputs and outputs.
 
 It cannot run live snippets of the code it describes.
@@ -446,7 +468,7 @@ up = Direction.Up
 
 The `type` keyword introduces a new type. Its **data constructors** are separated by `|` on the right of the equals sign.
 
-Think of data constructors as functions which produce values of the given type.
+Think of data constructors as functions that produce values of the given type.
 
 ```unison
 -- the Floor type has one data constructor,
@@ -553,7 +575,7 @@ In Scala, you can add a trait and say that the existing `Floor` case class is a 
 | Subtyping                               | No.                                                                         | Yes.                                                                                    |
 | Record types                            | Yes. Single data constructor types with named fields.                       | Yes. Case classes                                                                       |
 | Typeclasses                             | No.                                                                         | Yes. Typeclasses via traits and implicit / given syntax.                                |
-| GADTs                                   | No.                                                                         | Yes. GADT’s via sealed traits and case classes                                          |
+| GADTs                                   | No.                                                                         | Yes. GADTs via sealed traits and case classes                                          |
 | Higher-kinded types                     | Yes. But in the absence of typeclasses, less common.                        | Yes.                                                                                    |
 | Type aliases                            | No.                                                                         | Yes.                                                                                    |
 
