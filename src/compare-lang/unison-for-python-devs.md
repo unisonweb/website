@@ -226,7 +226,7 @@ Lambdas in Python can't include local variable definitions or mupltiple expressi
 </div></div>
 
 ## Optional values
-Unison has a type called `Optional` that can either be `Some value` or `None`. It's is similar to Python's `Optional` type from the `typing` module.
+Unison has a type called `Optional` that can either be `Some value` or `None`. It's similar to Python's `Optional` type from the `typing` module.
 
 <div class="side-by-side">
 <div>
@@ -343,7 +343,7 @@ hooray a b  =
 </div><div>
 
 ```python
-def hooray(a: str, b: str) -> int:
+def hooray(a: str, b: str) -> str:
   return a + b + "!!!"
 ```
 
