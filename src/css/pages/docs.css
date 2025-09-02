@@ -313,7 +313,6 @@ main#docs .where-to-next h2 {
   display: none;
 }
 
-
 @media only screen and (max-width: 1439px) {
   main#docs #main-content {
     position: static;
@@ -347,6 +346,12 @@ main#docs .where-to-next h2 {
   main#docs #index .unison-doc {
     background: var(--color-gray-lighten-50);
   }
+
+  #autocomplete-search {
+    top: 3rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
 }
 
 @media only screen and (max-width: 1264px) {
@@ -378,12 +383,6 @@ main#docs .where-to-next h2 {
 
   #autocomplete {
     --autocomplete-width: 100vw - 6rem;
-  }
-
-  #autocomplete-search {
-    top: 3rem;
-    max-height: calc(100vh - 2rem);
-    overflow-y: auto;
   }
 
   main#docs #toggle-index {
