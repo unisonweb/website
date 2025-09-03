@@ -221,7 +221,7 @@ Here's the same expression using the `map` function and a lambda:
 list(map(lambda x: x * 2, [1, 2, 3]))
 ```
 
-Lambdas in Python can't include local variable definitions or mupltiple expressions, so they are typically used for simple transformations.
+Lambdas in Python can't include local variable definitions or multiple expressions, so they are typically used for simple transformations.
 
 </div></div>
 
