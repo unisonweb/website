@@ -6,7 +6,7 @@ description: "Comparing syntax and patterns between Unison and Java"
 
 [[toc]]
 
-## Variables and basic types
+# Variables and basic types
 
 <div class="side-by-side"><div>
 
@@ -43,7 +43,7 @@ int anInt = +123;
 boolean aBoolean = true || false;
 ```
 
-Java expects a semicolon at the end of each statement, Unison does not.
+Java expects a semicolon at the end of each statement.
 
 
 </div></div>
@@ -87,8 +87,6 @@ In Unison, you cannot reassign or update a variable in a program once it has bee
 
 </div><div>
 
-<div>
-
 ```java
 String aReassignment = "Initial value";
 aReassignment = "New value"; // ok
@@ -103,6 +101,81 @@ final String constantValue = "I cannot be changed";
 private String privateValue = "Accessible only within this class";
 protected String protectedValue = "Package and subclasses";
 public String publicValue = "Accessible from anywhere";
+```
+
+</div></div>
+
+## Collections
+
+<div class="side-by-side"><div>
+
+There are no interfaces for collections in Unison. Our standard library provides a variety of distinct collection types, like `List`, `Set`, and `Map`, and more specialized collections like `NonEmptyList` and `NatMap`.
+
+```unison
+aList : List Nat
+aList = [1, 2, 3, 4, 5]
+
+aSet : Set Text
+aSet = Set.fromList ["🍎", "🍌", "🍒"]
+
+aMap : Map Text Int
+aMap = Map.fromList [("📘", +2), ("📙", -4), ("📔", +3)]
+```
+
+Collections in Unison are **immutable** by default.
+
+</div><div>
+
+Java Collections are arranged in a hierarchy, with interfaces like `List`, `Set`, and `Map` which define basic operations for common data structures, and classes like `ArrayList`, `HashSet`, and `HashMap` to instantiate them.
+
+```java
+List<Integer> aList = List.of(1, 2, 3, 4, 5);
+
+Set<String> aSet = Set.of("🍎", "🍌", "🍒");
+
+Map<String, Integer> aMap = Map.of("📘", 2, "📙", -4, "📔", 3);
+```
+
+Java collections are **mutable** by default, but you can create immutable collections using factory methods like these from the `List`, `Set`, and `Map` interfaces.
+
+</div></div>
+
+### Modifying collections
+
+<div class="side-by-side"><div>
+
+If you're coming from a Java background, you might be used to modifying collections in place. In Unison, since collections are immutable, you create copies of the original with the desired changes.
+
+```unison
+map1 = Map.fromList [("📘", +2), ("📙", -4), ("📔", +3)]
+map2 = Map.insert "📗" +5 map1
+map3 = Map.delete "📙" map2
+```
+Because the outputs to the modification functions return new maps, you can chain them together with the `|>` operator instead of creating intermediate variables:
+
+```unison
+map3 = Map.fromList [("📘", +2), ("📙", -4), ("📔", +3)]
+  |> Map.insert "📗" +5
+  |> Map.delete "📙"
+```
+</div><div>
+
+In Java, you can modify collections in place if they are mutable.
+
+```java
+Map<String, Integer> map1 = new HashMap<>();
+map1.put("📘", 2);
+map1.put("📙", -4);
+map1.put("📔", +3);
+map1.put("📗", +5);
+map1.remove("📙");
+```
+
+Attempting to modify an immutable collection will throw an `UnsupportedOperationException`.
+
+```java
+List<Integer> aList = List.of(1, 2, 3, 4, 5);
+aList.add(6); // Throws UnsupportedOperationException
 ```
 
 </div></div>
