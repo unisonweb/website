@@ -6,7 +6,7 @@ description: "Comparing syntax and patterns between Unison and Java"
 
 [[toc]]
 
-# Variables and basic types
+# Variables and basic expressions
 
 <div class="side-by-side"><div>
 
@@ -177,5 +177,114 @@ Attempting to modify an immutable collection will throw an `UnsupportedOperation
 List<Integer> aList = List.of(1, 2, 3, 4, 5);
 aList.add(6); // Throws UnsupportedOperationException
 ```
+
+</div></div>
+
+### Iterating over collections
+
+<div class="side-by-side"><div>
+
+In Unison, iteration is expressed through **higher-order functions** like `map`, `filter`, and `fold`. Instead of writing loops, you pass a function that describes how to transform or combine elements.
+
+```unison
+-- Double every number
+List.map (n -> n * 2) [1, 2, 3]
+-- [2, 4, 6]
+
+-- Keep only even numbers
+List.filter (n -> n % 2 == 0) [1, 2, 3, 4]
+-- [2, 4]
+
+-- Sum up a list
+List.foldLeft (acc n -> acc + n) 0 [1, 2, 3, 4]
+-- 10
+```
+
+This style avoids explicit indexing and mutation. Iteration is __declarative__: you say what to do with each element, not how to step through the collection.
+
+
+
+</div><div>
+
+In Java, the traditional approach uses the `Iterable` pattern, either with an __explicit loop__ or an enhanced for-loop:
+
+```
+List<Integer> numbers = List.of(1, 2, 3, 4, 5);
+
+for (int i = 0; i < numbers.size(); i++) {
+    int n = numbers.get(i);
+    System.out.println(n * 2);
+}
+
+for (int n : numbers) {
+    System.out.println(n * 2);
+}
+```
+
+Here, iteration is __imperative__: you describe how to step through each element and also describe the transformation to apply.
+
+```java
+List<Integer> doubled =
+    numbers.stream()
+           .map(n -> n * 2)
+           .toList();
+
+List<Integer> evens =
+    numbers.stream()
+           .filter(n -> n % 2 == 0)
+           .toList();
+
+int sum =
+    numbers.stream()
+           .reduce(0, (acc, n) -> acc + n);
+```
+
+Since Java 8, collections also support lambdas and streams, which bring them closer to Unison’s functional style.
+
+</div></div>
+
+### Lambdas
+
+<div class="side-by-side"><div>
+
+The argument surrounded by parentheses is an anonymous function (or lambda).
+
+```unison
+List.foldLeft (acc n -> acc + n) 0 [1, 2, 3, 4]
+```
+
+The function above takes two arguments: `acc` (the accumulator) and `n` (the current element). The function body is to the right of the `->`.
+
+```unison
+List.map (n -> let
+  doubled = n * 2
+  Debug.trace "Processing" (Nat.toText n)
+  doubled
+) [1, 2, 3]
+```
+
+The function body can be a single expression or a block of expressions using `let` and whitespace to delimit them.
+
+</div><div>
+
+```java
+int sum =
+    numbers.stream()
+           .reduce(0, (acc, n) -> acc + n);
+```
+
+Java 8's lambda syntax is similar to Unison's, but multiple arguments are separated by commas within parentheses.
+
+```java
+numbers.stream()
+       .map(n -> {
+           int doubled = n * 2;
+           System.out.println("Processing " + n);
+           return doubled;
+       })
+       .toList();
+```
+
+Curly braces `{}` are used to define a block of statements, and `return` is required to return a value from the block.
 
 </div></div>
