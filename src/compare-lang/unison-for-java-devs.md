@@ -69,7 +69,7 @@ int exampleMethod() {
 }
 ```
 
-Java(10+) local variables can use `var` for type inference, but the method return type must always be explicitly declared.
+Since Java 10, local variables can use `var` for type inference, but the method return type must always be explicitly declared.
 
 </div></div>
 
@@ -160,7 +160,7 @@ map3 = Map.fromList [("📘", +2), ("📙", -4), ("📔", +3)]
 ```
 </div><div>
 
-In Java, you can modify collections in place if they are mutable.
+In Java, it's common to modify mutable collections in place.
 
 ```java
 Map<String, Integer> map1 = new HashMap<>();
@@ -288,3 +288,188 @@ numbers.stream()
 Curly braces `{}` are used to define a block of statements, and `return` is required to return a value from the block.
 
 </div></div>
+
+## Nullability
+
+<div class="side-by-side"><div>
+
+In Unison, all values are **non-nullable** by default. This means you don't have to worry about null pointer exceptions. Instead, values that might be absent are represented by a type, called `Optional`.
+
+```unison
+someValue : Optional Nat
+someValue = Some 42
+
+noneValue : Optional Nat
+noneValue = None
+```
+
+Optional values _must be unwrapped_ to access the value contained in them. We use functions like `Optional.map`, `Optional.fold`, or pattern matching to transform or handle the absence of a value.
+
+```unison
+opt: Optional Text
+opt = Some "value"
+
+Optional.map (str -> Debug.trace "Got value:" str) opt
+```
+
+</div><div>
+
+In Java, you often have to check for **null** before using a value. Failure to do so can lead to `NullPointerException`s.
+
+```java
+Integer value = getValue();
+if (value != null) {
+    System.out.println(value);
+}
+```
+
+Java 8 introduced the `Optional` class:
+
+```java
+Optional<String> opt = Optional.of("some value");
+
+opt.ifPresent(str -> System.out.println(str));
+```
+
+The `ifPresent` method is similar to `Optional.map` in Unison.
+
+</div></div>
+
+# Method and function syntax
+
+<div class="side-by-side"><div>
+
+Unison is a functional language, so we use **functions** to describe program behavior. Here are some simple function examples:
+
+```unison
+Nat.add : Nat -> Nat -> Nat
+Nat.add x y = x + y
+
+Nat.sum : [Nat] -> Nat
+Nat.sum ns =
+  List.foldLeft (acc n -> acc + n) 0 ns
+```
+
+* Type signatures are located above the function name, not inline.
+* The return type of the function is the _last_ type to the right of the `->`.
+* Multiple parameters are delimited in the signature by `->`, not commas.
+* In the definition, parameters are listed after the function name, separated by spaces. The function body follows the `=`.
+* The function body is whitespace-delimited. Blocks of code are indented at the same level to represent lexical scope.
+* There is no explicit return statement; the value of the last expression in the function body is returned.
+
+</div><div>
+
+Java is an object-oriented language, so **methods** that belong to classes are used to describe program behavior. Static methods can be called without creating an instance of a class, so let's use them to introduce basic syntax differences.
+
+```java
+class MathUtils {
+    public static int add(int x, int y) {
+        return x + y;
+    }
+
+    public static int sum(List<Integer> ns) {
+        return ns.stream().reduce(0, (acc, n) -> acc + n);
+    }
+}
+```
+
+* Type signatures are inline, with the access modifier and return type preceding the method name.
+* Multiple parameters are delimited by commas within parentheses.
+* The function body is enclosed in curly braces `{}`.
+* An explicit `return` statement is required to return a value.
+
+</div></div>
+
+## Calling methods and functions
+
+<div class="side-by-side"><div>
+
+In Unison, functions are called without parentheses or commas separating their arguments. Parentheses are only needed to group expressions or clarify precedence.
+
+```unison
+result1 = Nat.add 2 3
+result2 = Nat.sum [1, 2, 3, 4, 5]
+result3 = Nat.add (Nat.sum [1, 2]) 3
+```
+
+</div><div>
+
+In Java, method arguments are separated by commas within parentheses.
+
+```java
+int result1 = MathUtils.add(2, 3);
+int result2 = MathUtils.sum(List.of(1, 2, 3, 4, 5));
+int result3 = MathUtils.add(MathUtils.sum(List.of(1, 2)), 3);
+```
+
+</div></div>
+
+## Encapsulation and function composition
+
+<div class="side-by-side"><div>
+
+Functions are standalone terms, defined at the top level of a file or within other functions. Instead of mutating the state of an instance of a class, functions accept the values that they operate on, describe some behavior or transformation, and then return new values.
+
+```unison
+greeter.getName : '{IO, Exception} Text
+greeter.getName = do
+  printLine "What is your name?"
+  name = readLine()
+
+greeter.greet : Text -> '{IO, Exception} ()
+greeter.greet name =
+  if Text.isEmpty name then
+    printLine "Hello, stranger!"
+  else
+    printLine ("Hello, " ++ name ++ "!")
+```
+
+```unison
+main : '{IO, Exception} ()
+main = do
+  name = greeter.getName()
+  greeter.greet name
+```
+
+A program is built by chaining together, or _composing_, the inputs and outputs of many functions.
+
+</div><div>
+
+Java uses classes to _encapsulate data and behavior_. Methods belong to a class, and can access or modify the data enclosed in it. They describe the set of behaviors that an instance of the class may perform.
+
+```java
+import java.util.Scanner;
+
+public class Greeter {
+    private String name;
+
+    public void getName() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("What is your name?");
+        this.name = scanner.nextLine();
+    }
+
+    public void greet() {
+        if (this.name != null && !this.name.isEmpty()) {
+            System.out.println("Hello, " + this.name + "!");
+        } else {
+            System.out.println("Hello, stranger!");
+        }
+    }
+}
+```
+
+In Java programs, you create instances of classes and invoke methods on them:
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    Greeter greeter = new Greeter();
+    greeter.getName();
+    greeter.greet();
+  }
+}
+```
+
+</div></div>
+
