@@ -6,6 +6,42 @@ description: "Comparing syntax and patterns between Unison and Java"
 
 [[toc]]
 
+# Comments
+
+<div class="side-by-side"><div>
+
+Unison comments are **not saved as a part of the function**, so they can be used as temporary notes while working, however, they will not be saved to the codebase as a part of the function definition.
+
+```unison
+-- This is a single-line comment
+
+{- This is a multi-line comment
+   spanning multiple lines -}
+```
+
+If you want to leave a note to your future self or others, use a string literal instead:
+
+```unison
+aFunction =
+  _ = "This is a magic number, don't change it"
+  42 + 1
+```
+
+</div><div>
+
+Java uses `//` for single-line comments and `/* ... */` for multi-line comments. Java code is saved to the file system, so comments are part of the codebase.
+
+```java
+// This is a single-line comment
+
+/*
+   This is a multi-line comment
+   spanning multiple lines
+*/
+```
+
+</div></div>
+
 # Variables and basic expressions
 
 <div class="side-by-side"><div>
@@ -73,7 +109,6 @@ Since Java 10, local variables can use `var` for type inference, but the method 
 
 </div></div>
 
-
 ### Access modifiers
 
 <div class="side-by-side"><div>
@@ -109,7 +144,7 @@ public String publicValue = "Accessible from anywhere";
 
 <div class="side-by-side"><div>
 
-There are no interfaces for collections in Unison. Our standard library provides a variety of distinct collection types, like `List`, `Set`, and `Map`, and more specialized collections like `NonEmptyList` and `NatMap`.
+There are no interfaces for collections in Unison. Our standard library provides a variety of distinct collection types, like `List`, `Set`, and `Map`.
 
 ```unison
 aList : List Nat
@@ -136,7 +171,7 @@ Set<String> aSet = Set.of("🍎", "🍌", "🍒");
 Map<String, Integer> aMap = Map.of("📘", 2, "📙", -4, "📔", 3);
 ```
 
-Java collections are **mutable** by default, but you can create immutable collections using factory methods like these from the `List`, `Set`, and `Map` interfaces.
+Java collections are **mutable** by default, but you can create immutable collections using factory methods from the `List`, `Set`, and `Map` interfaces.
 
 </div></div>
 
@@ -144,7 +179,7 @@ Java collections are **mutable** by default, but you can create immutable collec
 
 <div class="side-by-side"><div>
 
-If you're coming from a Java background, you might be used to modifying collections in place. In Unison, since collections are immutable, you create copies of the original with the desired changes.
+In Unison, since collections are immutable, you create copies of the original with the desired changes.
 
 ```unison
 map1 = Map.fromList [("📘", +2), ("📙", -4), ("📔", +3)]
@@ -201,8 +236,6 @@ List.foldLeft (acc n -> acc + n) 0 [1, 2, 3, 4]
 ```
 
 This style avoids explicit indexing and mutation. Iteration is __declarative__: you say what to do with each element, not how to step through the collection.
-
-
 
 </div><div>
 
@@ -417,7 +450,7 @@ greeter.getName = do
   name = readLine()
 
 greeter.greet : Text -> '{IO, Exception} ()
-greeter.greet name =
+greeter.greet name = do
   if Text.isEmpty name then
     printLine "Hello, stranger!"
   else
@@ -459,7 +492,7 @@ public class Greeter {
 }
 ```
 
-In Java programs, you create instances of classes and invoke methods on them:
+In Java programs, you create instances of classes and invoke methods on them, changing their internal state and performing actions.
 
 ```java
 public class Main {
@@ -473,3 +506,145 @@ public class Main {
 
 </div></div>
 
+# Control flow
+
+## Conditionals
+
+<div class="side-by-side"><div>
+
+In Unison, conditionals are expressions that control the flow of execution and return values. A conditional expression has three parts: the `if` condition which must be a `Boolean`, the `then` branch, and the `else` branch.
+
+```unison
+sign : Int -> Text
+sign n =
+  if n > 0 then
+    "positive"
+  else if n < 0 then
+    "negative"
+  else
+    "zero"
+```
+
+In Unison, you cannot have an `if` without an `else` branch. This will fail to compile and you cannot save it to your codebase:
+
+```unison
+nope : Nat -> Text
+nope n =
+  if n > 0 then
+    "positive"
+  -- 🚫 Will not compile, missing else branch.
+```
+
+</div><div>
+
+In Java, conditionals are statements that control the flow of execution. The `if` statement has a condition followed by a block of code, `{}`, for the "then" branch, and optionally an `else` branch.
+
+```java
+String sign(int n) {
+    if (n > 0) {
+        return "positive";
+    } else if (n < 0) {
+        return "negative";
+    } else {
+        return "zero";
+    }
+}
+```
+
+In Java, you can have an `if` statement without an `else` branch:
+
+```java
+String maybePositive(int n) {
+    if (n > 0) {
+        return "positive";
+    }
+    return "not positive";
+}
+```
+
+</div></div>
+
+## Switch statements and pattern matching
+
+<div class="side-by-side"><div>
+
+In Unison, **pattern matching** directs the flow of execution by branching on the shape and/or content of a value, without nesting or chaining multiple if/else conditions.
+
+```unison
+cardSuit : Nat -> Text
+cardSuit n =
+  match n with
+    1 -> "Hearts"
+    2 -> "Diamonds"
+    3 -> "Clubs"
+    4 -> "Spades"
+    _ -> "Invalid suit"
+```
+
+The `_` wildcard pattern matches any value not matched by previous patterns. A `match` _expression must be exhaustive_, meaning all possible inputs must be handled.
+
+</div><div>
+
+Java **switch statements** provide a way to execute different branches of code based on a value. However, they are less flexible than Unison's pattern matching.
+
+```java
+String cardSuit(int n) {
+    switch (n) {
+        case 1:
+            return "Hearts";
+        case 2:
+            return "Diamonds";
+        case 3:
+            return "Clubs";
+        case 4:
+            return "Spades";
+        default:
+            return "Invalid suit";
+    }
+}
+```
+
+`default` is slightly different from Unison's `_` wildcard pattern, as a switch statement which does not contain explicit `return` statements or `break` statements will run the `default` case.
+
+Switch statements _do not need to be exhaustive_, so if a value does not match any case and there is no `default`, the program simply continues after the switch block.
+
+</div></div>
+
+### Pattern guards
+
+<div class="side-by-side"><div>
+
+In Unison, pattern matching can include guards, which are additional boolean conditions following `|` in the pattern that must be satisfied for a pattern to match.
+
+```unison
+grade : Nat -> Text
+grade score =
+  match score with
+    s | s >= 90 -> "A"
+    s | s >= 80 -> "B"
+    s | s >= 70 -> "C"
+    s | s >= 60 -> "D"
+    _ -> "F"
+```
+
+</div><div>
+
+Java switch statements do not support guards. You would need to use if/else statements for similar functionality.
+
+```java
+String grade(int score) {
+    if (score >= 90) {
+        return "A";
+    } else if (score >= 80) {
+        return "B";
+    } else if (score >= 70) {
+        return "C";
+    } else if (score >= 60) {
+        return "D";
+    } else {
+        return "F";
+    }
+}
+```
+
+</div></div>
