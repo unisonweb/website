@@ -10,7 +10,7 @@ description: "Comparing syntax and patterns between Unison and Java"
 
 <div class="side-by-side"><div>
 
-Unison comments are **not saved as a part of the function**, so they can be used as temporary notes while working, however, they will not be saved to the codebase as a part of the function definition.
+Unison comments are **not saved as a part of the function**, so they can be used as temporary notes while working, however, they do not persist in the codebase.
 
 ```unison
 -- This is a single-line comment
@@ -326,7 +326,7 @@ Curly braces `{}` are used to define a block of statements, and `return` is requ
 
 <div class="side-by-side"><div>
 
-In Unison, all values are **non-nullable** by default. This means you don't have to worry about null pointer exceptions. Instead, values that might be absent are represented by a type, called `Optional`.
+In Unison, all values are **non-nullable** by default. Instead, values that might be absent are represented by a type, called `Optional`.
 
 ```unison
 someValue : Optional Nat
@@ -501,6 +501,193 @@ public class Main {
     greeter.getName();
     greeter.greet();
   }
+}
+```
+
+</div></div>
+
+# Data modeling
+
+<div class="side-by-side"><div>
+
+## Data types
+
+Unison does not have classes, so there are no instance methods, no instance variables, no `new` constructor keyword, and no `this` keyword. Instead, we use data types to model how data is structured and functions to model behavior.
+
+A type can represent data with multiple variants (when a type can be created in one way or another) and data with multiple fields (when a type has several attributes), often in combination:
+
+```unison
+type JsonValue
+  = JsonNull
+  | JsonBoolean Bool
+  | JsonNumber Float
+  | JsonString Text
+  | JsonArray (List JsonValue)
+  | JsonObject (Map Text JsonValue)
+```
+
+This `JsonValue` type can represent any JSON data structure. Each variant corresponds to a different kind of JSON value, and some variants (like `JsonArray` and `JsonObject`) contain a reference to the same type, allowing for nested structures.
+
+Functions can then be defined to operate on this data type, such as a function to serialize a `JsonValue` to a JSON string:
+
+```unison
+JsonValue.toJson : JsonValue -> Text
+JsonValue.toJson value =
+  match value with
+    JsonNull -> "null"
+    JsonBoolean b -> if b then "true" else "false"
+    JsonNumber n -> Float.toText n
+    JsonString s -> "\"" ++ Text.replace "\"" "\\\"" s ++ "\""
+    JsonArray arr -> "[" ++ List.intercalate ", " (List.map JsonValue.toJson arr) ++ "]"
+    JsonObject obj -> "{" ++ Map.toList obj |> List.map (pair -> "\"" ++ pair.key ++ "\": " ++ JsonValue.toJson pair.value) |> List.intercalate ", " ++ "}"
+```
+
+</div><div>
+
+## Classes and hierarchies
+
+In Java, classes and class hierarchies are used to model data and behavior. Overriding methods in subclasses allows for polymorphism, and interfaces define shared behavior across different classes.
+
+This example models the same JSON data structure as above, using an abstract class and concrete subclasses:
+
+```java
+
+import java.util.*;
+
+abstract class JsonValue {
+    public abstract String toJson();
+}
+
+class JsonNull extends JsonValue {
+    @Override
+    public String toJson() {
+        return "null";
+    }
+}
+
+class JsonBoolean extends JsonValue {
+    private final boolean value;
+    public JsonBoolean(boolean value) { this.value = value; }
+
+    @Override
+    public String toJson() {
+        return Boolean.toString(value);
+    }
+}
+
+class JsonNumber extends JsonValue {
+    private final double value;
+    public JsonNumber(double value) { this.value = value; }
+
+    @Override
+    public String toJson() {
+        return Double.toString(value);
+    }
+}
+
+class JsonString extends JsonValue {
+    private final String value;
+    public JsonString(String value) { this.value = value; }
+
+    @Override
+    public String toJson() {
+        return "\"" + value.replace("\"", "\\\"") + "\"";
+    }
+}
+
+class JsonArray extends JsonValue {
+    private final List<JsonValue> values = new ArrayList<>();
+
+    public void add(JsonValue v) { values.add(v); }
+
+    @Override
+    public String toJson() {
+        return "[" + values.stream()
+                           .map(JsonValue::toJson)
+                           .reduce((a, b) -> a + ", " + b)
+                           .orElse("") + "]";
+    }
+}
+
+class JsonObject extends JsonValue {
+    private final Map<String, JsonValue> fields = new LinkedHashMap<>();
+
+    public void put(String key, JsonValue value) { fields.put(key, value); }
+
+    @Override
+    public String toJson() {
+        return "{" + fields.entrySet().stream()
+                           .map(e -> "\"" + e.getKey() + "\":" + e.getValue().toJson())
+                           .reduce((a, b) -> a + ", " + b)
+                           .orElse("") + "}";
+    }
+}
+```
+
+</div></div>
+
+
+## Record types
+
+<div class="side-by-side"><div>
+
+Unison has **record types** for modeling immutable single constructor types with named fields.
+
+```unison
+type Point = {
+  x : Int,
+  y : Int
+  }
+```
+
+Defining a record type in Unison automatically creates get, set, and modify functions for each field.
+
+```unison
+Point.x        : Point -> Int
+Point.x.modify : (Int ->{g} Int) -> Point ->{g} Point
+Point.x.set    : Int -> Point -> Point
+Point.y        : Point -> Int
+Point.y.modify : (Int ->{g} Int) -> Point ->{g} Point
+Point.y.set    : Int -> Point -> Point
+```
+
+Modifying a field returns a new record with the updated value, leaving the original unchanged.
+
+```unison
+pointA : Point
+pointA = Point +20 -60
+
+pointB = Point.x.set +30 pointA
+pointC = Point.y.modify (yVal -> yVal + +80) pointB
+```
+
+</div><div>
+
+Since Java 16, **record classes** provide a concise way to create simple "data carrier" classes with immutable fields.
+
+```java
+public record Point(int x, int y) {}
+```
+
+Without records, you would typically use a regular class with private fields and public getters:
+
+```java
+public class Point {
+    private final int x;
+    private final int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }
 ```
 
