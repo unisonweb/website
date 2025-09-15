@@ -518,6 +518,33 @@ public class Main {
 
 </div></div>
 
+## First-class functions
+
+<div class="side-by-side"><div>
+
+In Unison, functions are **first-class citizens**, meaning they can be passed as arguments to other functions, returned from functions, and assigned to variables.
+
+In a signature, the function type is written as `(i -> o)`, with parentheses to indicate the argument is a function.
+
+```unison
+applyTwice : (a -> a) -> a -> a
+applyTwice f x =
+  (f (f x))
+```
+
+</div><div>
+
+In Java, functions are not first-class citizens. You can pass a `Function <A, B>` object as an argument to a method; however, in Java, you might employ a different pattern for code reuse, such as passing objects that implement a specific interface.
+
+```java
+import java.util.function.Function;
+public static <A> A applyTwice(Function<A, A> f, A x) {
+    return f.apply(f.apply(x));
+}
+```
+
+</div></div>
+
 # Data modeling
 
 An in-depth guide to the differences in data modeling between functional languages like Unison and object-oriented languages like Java is out of scope for now, but here are some high-level differences.
@@ -626,7 +653,6 @@ JsonValue aJsonArrayValue = aJsonArray; // Upcast to JsonValue
 
 </div></div>
 
-
 ## Record types
 
 <div class="side-by-side"><div>
@@ -693,7 +719,7 @@ public class Point {
 
 </div></div>
 
-# Generics
+## Generics
 
 <div class="side-by-side"><div>
 
@@ -712,6 +738,8 @@ Box.prettyPrint : Box a -> (a -> Text) -> Text
 Box.prettyPrint box toStringFunc =
   "Box(" ++ toStringFunc (Box.value box) ++ ")"
 ```
+
+All types in Unison are invariant; so concepts like type bounds do not apply.
 
 ```unison
 -- Type `Box Boolean` is inferred
@@ -751,10 +779,12 @@ public <T> String prettyPrint(Box<T> box, Function<T, String> toStringFunc) {
 }
 ```
 
+Because Java supports more complex type hierarchies than Unison, Java code might employ wildcard types like `<?>` or bounded type parameters like `<T extends Number>`. These concepts do not have direct equivalents in Unison.
+
 ```java
 // Type Box<Boolean> is inferred with diamond operator <>
 boolBox = new Box<>(true);
-natBox = new Box<Int>(42);
+intBox = new Box<Int>(42);
 prettyPrint(boolBox, Object::toString);
 ```
 
