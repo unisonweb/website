@@ -1031,3 +1031,78 @@ String grade(int score) {
 ```
 
 </div></div>
+
+## Exception handling
+
+<div class="side-by-side"><div>
+
+In Unison, exceptions are an **ability** that work similarly to Java's checked exceptions. Functions that may throw exceptions must declare the `Exception` ability in their type signature, `{Exception}`.
+
+```unison
+safeDiv : Nat -> Nat -> {Exception} Nat
+safeDiv x y =
+  if y == 0 then
+    Exception.raiseFailure
+      (typeLink ArithmeticException) "Divide by zero" (x, y)
+  else x / y
+```
+
+The calling function must handle the exception. One way to do this is by applying functions like `Exception.catch`, which translate the exception into a value of `Either` `Left`, representing a failure, or `Right`, enclosing the successful result:
+
+```unison
+leftValue : Either Failure Nat
+leftValue = Exception.catch do safeDiv 10 0
+-- Returns: Left (Failure ArithmeticException "Divide by zero" (10, 0))
+
+rightValue : Either Failure Nat
+rightValue = Exception.catch do safeDiv 10 2
+-- Returns: Right 5
+```
+
+Or, the calling function can also propagate the exception by declaring the `Exception` ability in its own type signature:
+
+```unison
+callUnsafeDiv : Nat -> Nat -> '{Exception} Nat
+callUnsafeDiv x y = do
+  result = safeDiv x y
+  -- Might never reach here if an exception is raised
+  Debug.trace "Result is:" (Nat.toText result)
+  result
+```
+
+The "type" of the exception is less important in Unison than in Java, since the thing that appears in the type signature is just `Exception`, but you can raise and catch exceptions of different types, communicating different failure modes.
+
+</div><div>
+
+In Java, exceptions are part of the language's error handling mechanism. Methods that may throw checked exceptions must declare them in their `throws` clause.
+
+```java
+public int safeDiv(int x, int y) throws ArithmeticException {
+    if (y == 0) {
+        throw new ArithmeticException("Divide by zero");
+    }
+    return x / y;
+}
+```
+
+When calling a method that throws a checked exception, you must either handle the exception with a `try-catch` block or declare it in your own method's `throws` clause.
+
+```java
+public void callUnsafeDiv(int x, int y) {
+    try {
+        int result = safeDiv(x, y);
+        System.out.println("Result is: " + result);
+    } catch (ArithmeticException e) {
+        System.out.println("Error: " + e.getMessage());
+    }
+}
+
+public void propagateException(int x, int y) throws ArithmeticException {
+    int result = safeDiv(x, y);
+    System.out.println("Result is: " + result);
+}
+```
+
+Java distinguishes recoverable exceptions from unchecked exceptions, which do not need to be declared or caught. Unison does not make this distinction; all exceptions are treated the same way.
+
+</div></div>
