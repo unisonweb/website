@@ -425,6 +425,7 @@ result2 = Nat.sum [1, 2, 3, 4, 5]
 result3 = Nat.add (Nat.sum [1, 2]) 3
 ```
 
+
 </div><div>
 
 In Java, method arguments are separated by commas within parentheses.
@@ -437,38 +438,34 @@ int result3 = MathUtils.add(MathUtils.sum(List.of(1, 2)), 3);
 
 </div></div>
 
-## Encapsulation and function composition
-
 <div class="side-by-side"><div>
 
-Functions are standalone terms, defined at the top level of a file or within other functions. Instead of mutating the state of an instance of a class, functions accept the values that they operate on, describe some behavior or transformation, and then return new values.
+## Namespaced functions
+
+Functions are standalone terms, defined at the top level of a program, within **namespaces**, or within other functions. Instead of mutating the state of an instance of a class, functions accept the values that they operate on, describe some behavior or transformation, and then return new values.
 
 ```unison
-greeter.getName : '{IO, Exception} Text
-greeter.getName = do
+Greeter.getName : '{IO, Exception} Text
+Greeter.getName = do
   printLine "What is your name?"
   name = readLine()
 
-greeter.greet : Text -> '{IO, Exception} ()
-greeter.greet name = do
+Greeter.greet : Text -> '{IO, Exception} ()
+Greeter.greet name = do
   if Text.isEmpty name then
     printLine "Hello, stranger!"
   else
     printLine ("Hello, " ++ name ++ "!")
 ```
 
-```unison
-main : '{IO, Exception} ()
-main = do
-  name = greeter.getName()
-  greeter.greet name
-```
+The functions above are defined in the `Greeter` namespace, delimited by the dot prefix in the function name. **Namespacing** helps organize related functions together, but does not imply any state or behavior is shared between them.
 
-A program is built by chaining together, or _composing_, the inputs and outputs of many functions.
 
 </div><div>
 
-Java uses classes to _encapsulate data and behavior_. Methods belong to a class, and can access or modify the data enclosed in it. They describe the set of behaviors that an instance of the class may perform.
+## Class methods
+
+Java uses **classes** to _encapsulate data and behavior_. **Methods** belong to a class, and describe the set of behaviors that an instance of the class may perform.
 
 ```java
 import java.util.Scanner;
@@ -492,7 +489,24 @@ public class Greeter {
 }
 ```
 
-In Java programs, you create instances of classes and invoke methods on them, changing their internal state and performing actions.
+</div></div>
+
+<div class="side-by-side"><div>
+
+Despite looking similar to Java method calls, due to the `Greeter.` prefix, when calling the `Greeter.greet` function in Unison, we explicitly pass in the `name` value that it operates on.
+
+```unison
+main : '{IO, Exception} ()
+main = do
+  name = Greeter.getName()
+  Greeter.greet name
+```
+
+A program is built by chaining together, or _composing_, the inputs and outputs of many functions.
+
+</div><div>
+
+In Java programs, you create instances of classes and invoke methods on them, changing the state of the object or performing actions based on that state.
 
 ```java
 public class Main {
@@ -505,6 +519,7 @@ public class Main {
 ```
 
 </div></div>
+
 
 # Data modeling
 
