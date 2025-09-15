@@ -439,7 +439,7 @@ int result3 = MathUtils.add(MathUtils.sum(List.of(1, 2)), 3);
 
 <div class="side-by-side"><div>
 
-## Namespaced functions
+## Functions
 
 Functions are standalone terms, defined at the top level of a program, within **namespaces**, or within other functions. Instead of mutating the state of an instance of a class, functions accept the values that they operate on, describe some behavior or transformation, and then return new values.
 
@@ -461,7 +461,7 @@ The functions above are defined in the `Greeter` namespace, delimited by the dot
 
 </div><div>
 
-## Class methods
+## Methods
 
 Java uses **classes** to _encapsulate data and behavior_. **Methods** belong to a class, and describe the set of behaviors that an instance of the class may perform.
 
@@ -790,6 +790,47 @@ prettyPrint(boolBox, Object::toString);
 
 </div></div>
 
+## Interfaces and behavioral abstraction
+
+<div class="side-by-side"><div>
+
+Unison's approach to behavioral abstraction is through **higher-order functions** and **abilities**, though abilities have more uses than just defining a contract for behavior.
+
+
+```unison
+Drawable.draw : Shape -> '{IO, Exception} ()
+
+type Shape
+  = Circle { radius : Float }
+  | Square { side : Float }
+```
+
+
+
+</div><div>
+
+Java uses **interfaces**, abstract classes, and basic inheritance to define contracts that classes can implement, allowing for polymorphism and code reuse.
+
+```java
+interface Drawable {
+    void draw();
+}
+
+class Circle implements Drawable {
+    public void draw() {
+        // Draw a circle
+    }
+}
+
+class Square implements Drawable {
+    public void draw() {
+        // Draw a square
+    }
+}
+```
+
+</div></div>
+
 # Control flow
 
 ## Conditionals
@@ -894,11 +935,69 @@ Switch statements _do not need to be exhaustive_, so if a value does not match a
 
 </div></div>
 
+### Decomposing values
+
+<div class="side-by-side"><div>
+
+In Unison, we use structural pattern matching to decompose values, extracting fields from data types, and matching on specific variants of a type.
+
+```unison
+type Shape = Circle Float | Square Float | Rectangle Float Float
+
+area : Shape -> Float
+area shape =
+  match shape with
+    Circle r -> 3.14 * r * r
+    Square s -> s * s
+    Rectangle w h -> w * h
+```
+
+Since there's no `.radius` method on `Circle` or no `.side` method on `Square`, pattern matching is one of the primary ways we access the values contained in a data type.
+
+</div><div>
+
+Newer Java 17+ versions support pattern matching on `sealed` interfaces in `switch` statements:
+
+```java
+sealed interface Shape permits Circle, Square, Rectangle { }
+
+record Circle(double radius) implements Shape { }
+record Square(double side) implements Shape { }
+record Rectangle(double width, double height) implements Shape { }
+
+// inside some class
+static double area(Shape shape) {
+        return switch (shape) {
+            case Circle c -> Math.PI * c.radius() * c.radius();
+            case Square s -> s.side() * s.side();
+            case Rectangle r -> r.width() * r.height();
+        };
+    }
+```
+
+In older Java versions, you might employ `instanceOf` checks in `if/else` statements to achieve similar behavior:
+
+```java
+static double area(Shape shape) {
+    if (shape instanceof Circle c) {
+        return Math.PI * c.radius() * c.radius();
+    } else if (shape instanceof Square s) {
+        return s.side() * s.side();
+    } else if (shape instanceof Rectangle r) {
+        return r.width() * r.height();
+    } else {
+        throw new IllegalArgumentException("Unknown shape: " + shape);
+    }
+}
+```
+
+</div></div>
+
 ### Pattern guards
 
 <div class="side-by-side"><div>
 
-In Unison, pattern matching can include guards, which are additional boolean conditions following `|` in the pattern that must be satisfied for a pattern to match.
+Pattern matching can include guards, which are additional boolean conditions following `|` in the pattern that must be satisfied for a pattern to match.
 
 ```unison
 grade : Nat -> Text
