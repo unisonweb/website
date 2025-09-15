@@ -508,13 +508,15 @@ public class Main {
 
 # Data modeling
 
+An in-depth guide to the differences in data modeling between functional languages like Unison and object-oriented languages like Java is out of scope for now, but here are some high-level differences.
+
 <div class="side-by-side"><div>
 
 ## Data types
 
-Unison does not have classes, so there are no instance methods, no instance variables, no `new` constructor keyword, and no `this` keyword. Instead, we use data types to model how data is structured and functions to model behavior.
+Unison does not have classes, so there are no instance methods, no instance variables, no `new` constructor keyword, and no `this` keyword. Instead, we use **data types** to model how data is structured and **functions** to model behavior.
 
-A type can represent data with multiple variants (when a type can be created in one way or another) and data with multiple fields (when a type has several attributes), often in combination:
+A type can represent data with multiple variants (when a type can be created in one way or another) and data with multiple fields (when a type has several attributes), often in combination. Here's a simple example of a data type representing JSON values:
 
 ```unison
 type JsonValue
@@ -526,45 +528,52 @@ type JsonValue
   | JsonObject (Map Text JsonValue)
 ```
 
-This `JsonValue` type can represent any JSON data structure. Each variant corresponds to a different kind of JSON value, and some variants (like `JsonArray` and `JsonObject`) contain a reference to the same type, allowing for nested structures.
+This `JsonValue` type can represent any JSON data structure. Each variant is separated by `|`, and some variants (like `JsonArray` and `JsonObject`) contain a reference to the same type, allowing for nested structures.
 
-Functions can then be defined to operate on this data type, such as a function to serialize a `JsonValue` to a JSON string:
+Functions can then be defined to operate on this data type, such as a function to serialize a `JsonValue` to a string:
 
 ```unison
 JsonValue.toJson : JsonValue -> Text
 JsonValue.toJson value =
   match value with
     JsonNull -> "null"
-    JsonBoolean b -> if b then "true" else "false"
+    JsonBoolean b -> Boolean.toText b
     JsonNumber n -> Float.toText n
     JsonString s -> "\"" ++ Text.replace "\"" "\\\"" s ++ "\""
-    JsonArray arr -> "[" ++ List.intercalate ", " (List.map JsonValue.toJson arr) ++ "]"
-    JsonObject obj -> "{" ++ Map.toList obj |> List.map (pair -> "\"" ++ pair.key ++ "\": " ++ JsonValue.toJson pair.value) |> List.intercalate ", " ++ "}"
+    JsonArray arr -> "[" ++ Text.join ", " (List.map JsonValue.toJson arr) ++ "]"
+    JsonObject obj -> "{" ++ Map.toList obj |> List.map (cases (key, value) -> "\"" ++ key ++ "\": " ++ JsonValue.toJson value) |> Text.join ", " ++ "}"
 ```
+
+Rather than overriding the `toString` method on each variant, we define a single function that handles all cases using pattern matching.
+
+```unison
+aJsonString : JsonValue
+aJsonString = JsonString "Hello, world!"
+
+aJsonNumber : JsonValue
+aJsonNumber = JsonNumber 42.0
+
+aJsonArray : JsonValue
+aJsonArray = JsonArray [aJsonString, aJsonNumber]
+```
+
+There is **no subclassing** in the Unison type system. All these values have the same type, `JsonValue`.
 
 </div><div>
 
 ## Classes and hierarchies
 
-In Java, classes and class hierarchies are used to model data and behavior. Overriding methods in subclasses allows for polymorphism, and interfaces define shared behavior across different classes.
-
-This example models the same JSON data structure as above, using an abstract class and concrete subclasses:
+In Java, **classes** and **class hierarchies** are used to model data and behavior. Overriding methods in subclasses allows for ad-hoc polymorphism.
 
 ```java
-
-import java.util.*;
-
 abstract class JsonValue {
     public abstract String toJson();
 }
+```
 
-class JsonNull extends JsonValue {
-    @Override
-    public String toJson() {
-        return "null";
-    }
-}
+Each Json type might be implemented as a subclass which implements the `toJson` method to handle its specific serialization logic:
 
+```java
 class JsonBoolean extends JsonValue {
     private final boolean value;
     public JsonBoolean(boolean value) { this.value = value; }
@@ -575,25 +584,7 @@ class JsonBoolean extends JsonValue {
     }
 }
 
-class JsonNumber extends JsonValue {
-    private final double value;
-    public JsonNumber(double value) { this.value = value; }
-
-    @Override
-    public String toJson() {
-        return Double.toString(value);
-    }
-}
-
-class JsonString extends JsonValue {
-    private final String value;
-    public JsonString(String value) { this.value = value; }
-
-    @Override
-    public String toJson() {
-        return "\"" + value.replace("\"", "\\\"") + "\"";
-    }
-}
+// Similar implementations for JsonNull, JsonNumber, JsonString...
 
 class JsonArray extends JsonValue {
     private final List<JsonValue> values = new ArrayList<>();
@@ -608,20 +599,17 @@ class JsonArray extends JsonValue {
                            .orElse("") + "]";
     }
 }
+```
 
-class JsonObject extends JsonValue {
-    private final Map<String, JsonValue> fields = new LinkedHashMap<>();
+Creating an instance of a class involves using the `new` keyword, and all instances can be treated as their subclasses or the common superclass type, `JsonValue`, with casting if needed.
 
-    public void put(String key, JsonValue value) { fields.put(key, value); }
-
-    @Override
-    public String toJson() {
-        return "{" + fields.entrySet().stream()
-                           .map(e -> "\"" + e.getKey() + "\":" + e.getValue().toJson())
-                           .reduce((a, b) -> a + ", " + b)
-                           .orElse("") + "}";
-    }
-}
+```java
+JsonValue aJsonString = new JsonString("Hello, world!");
+JsonValue aJsonNumber = new JsonNumber(42.0);
+JsonArray aJsonArray = new JsonArray();
+aJsonArray.add(aJsonString);
+aJsonArray.add(aJsonNumber);
+JsonValue aJsonArrayValue = aJsonArray; // Upcast to JsonValue
 ```
 
 </div></div>
@@ -651,7 +639,7 @@ Point.y.modify : (Int ->{g} Int) -> Point ->{g} Point
 Point.y.set    : Int -> Point -> Point
 ```
 
-Modifying a field returns a new record with the updated value, leaving the original unchanged.
+Althouth the dot notation in Unison's record types _looks similar_ to Java's mutable method calls, modifying a field _returns a new record with the updated value_, leaving the original unchanged.
 
 ```unison
 pointA : Point
