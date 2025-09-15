@@ -425,7 +425,6 @@ result2 = Nat.sum [1, 2, 3, 4, 5]
 result3 = Nat.add (Nat.sum [1, 2]) 3
 ```
 
-
 </div><div>
 
 In Java, method arguments are separated by commas within parentheses.
@@ -459,7 +458,6 @@ Greeter.greet name = do
 ```
 
 The functions above are defined in the `Greeter` namespace, delimited by the dot prefix in the function name. **Namespacing** helps organize related functions together, but does not imply any state or behavior is shared between them.
-
 
 </div><div>
 
@@ -519,7 +517,6 @@ public class Main {
 ```
 
 </div></div>
-
 
 # Data modeling
 
@@ -692,6 +689,73 @@ public class Point {
         return y;
     }
 }
+```
+
+</div></div>
+
+# Generics
+
+<div class="side-by-side"><div>
+
+In Unison, **type variables** are used to define generic functions and data types. Type variables are **lowercase letters** that stand in for any type.
+
+In a type definition, type variables are listed after the type name:
+
+```unison
+type Box a = { value : a }
+```
+
+In a function signature, you can refer to type variables without declaring them explicitly; they are inferred from their usage:
+
+```unison
+Box.prettyPrint : Box a -> (a -> Text) -> Text
+Box.prettyPrint box toStringFunc =
+  "Box(" ++ toStringFunc (Box.value box) ++ ")"
+```
+
+```unison
+-- Type `Box Boolean` is inferred
+boolBox = Box true
+
+natBox : Box Nat
+natBox = Box 42
+
+Box.prettyPrint boolBox Boolean.toText
+```
+
+Unison's type system does not erase generic type information at runtime.
+
+</div><div>
+
+Java supports **generics** to define classes, interfaces, and methods that operate on types later specified by the user. Generic type parameters are **uppercase letters** in `<>` brackets.
+
+```java
+class Box<T> {
+    private T value;
+
+    public Box(T value) {
+        this.value = value;
+    }
+
+    public T getValue() {
+        return value;
+    }
+}
+```
+
+In a method signature, generic type parameters are declared in angle brackets `< >` before the return type:
+
+```java
+public <T> String prettyPrint(Box<T> box, Function<T, String> toStringFunc) {
+    return "Box(" + toStringFunc.apply(box.getValue()) + ")";
+}
+```
+
+```java
+// Type Box<Boolean> is inferred with diamond operator <>
+boolBox = new Box<>(true);
+natBox = new Box<Int>(42);
+prettyPrint(boolBox, Object::toString);
 ```
 
 </div></div>
