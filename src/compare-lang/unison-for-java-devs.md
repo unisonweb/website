@@ -129,7 +129,7 @@ aReassignment = "New value"; // ok
 
 In Java, variables are mutable by default.
 
-Java has access modifiers like `final`, `private`, `protected`, and `public` to control variable mutability and visibility.
+Java has access modifiers like `final`, `private`, `protected`, and `public` to control mutability and visibility.
 
 ```java
 final String constantValue = "I cannot be changed";
@@ -608,7 +608,7 @@ type JsonValue
   | JsonObject (Map Text JsonValue)
 ```
 
-This `JsonValue` type can represent any JSON data structure. Each variant is separated by `|`, and some variants (like `JsonArray` and `JsonObject`) contain a reference to the same type, allowing for nested structures.
+This `JsonValue` type can represent any JSON data structure. Each variant, or **data constructor**, is separated by `|`, and some variants (like `JsonArray` and `JsonObject`) contain a reference to the same type, allowing for nested structures.
 
 Functions can then be defined to operate on this data type, such as a function to serialize a `JsonValue` to a string:
 
@@ -624,7 +624,7 @@ JsonValue.toJson value =
     JsonObject obj -> "{" ++ Map.toList obj |> List.map (cases (key, value) -> "\"" ++ key ++ "\": " ++ JsonValue.toJson value) |> Text.join ", " ++ "}"
 ```
 
-Rather than overriding the `toString` method on each variant, we define a single function that handles all cases using pattern matching.
+Rather than overriding the `toString` method on each variant, we define a single function that handles all the data constructors using pattern matching.
 
 ```unison
 aJsonString : JsonValue
@@ -831,42 +831,87 @@ prettyPrint(boolBox, Object::toString);
 
 </div></div>
 
-## Interfaces and behavioral abstraction
+## Behavioral abstraction
 
 <div class="side-by-side"><div>
 
-Unison's approach to behavioral abstraction is through **higher-order functions** and **abilities**, though abilities have more uses than just defining a contract for behavior.
+### Abilities
 
+One approach to defining behavioral contracts in Unison is through **abilities**, and if you're familiar with Java's interfaces, you have a good starting point for an intuition of what they do. Abilities are a way to describe a set of operations, typically ones which involve some kind of effect, without dictating how that contract must be fulfilled.
+
+This is how we might define a simple logging ability in Unison. We don't care where the log messages go, just that we can capture a text value and log it.
 
 ```unison
-Drawable.draw : Shape -> '{IO, Exception} ()
+ability Logger where
+  log : Text -> ()
+```
 
-type Shape
-  = Circle { radius : Float }
-  | Square { side : Float }
+In our application logic, we can use the general `Logger.log` operation. Abilities are tracked in the type system, a bit like checked exceptions in Java, so the `{Logger}` indicates that this function requires something that handles the `Logger` ability. The `{Logger}` ability requirement will appear in the type signatures of all the functions that call `Logger.log` until some bit of code provides a concrete implementation for it.
+
+
+``` unison
+initialize : '{Logger} ()
+initialize = do
+  Logger.log "Initializing application"
+```
+
+The functions that provide concrete behavior for an ability are called **handlers**. For now we won't dig into _how_ handlers work; they provide the implementation for the operations specified in the ability.
+
+```unison
+ConsoleLogger.logger : '{Logger} a -> {IO, Exception} a
+ConsoleLogger.logger = cases
+  Logger.log msg -> resume ->
+    handle resume (printLine ("LOG: " ++ msg)) with logger
+  pure -> pure
+```
+
+To apply a handler, you pass it a codeblock or expression that uses the ability _as an argument_.
+
+```unison
+main : '{IO, Exception} ()
+main = do ConsoleLogger.logger do
+  Logger.log "I'm passed to the logger handler"
+  initialize()
+  Logger.log "Ending program"
 ```
 
 </div><div>
 
-Java uses **interfaces**, abstract classes, and basic inheritance to define contracts that classes can implement, allowing for polymorphism and code reuse.
+### Interfaces
+
+An **interface** specifies a set of methods that a class must implement, without dictating the concrete implementation. You can write code that works with any object that satisfies the interface.
 
 ```java
-interface Drawable {
-    void draw();
+interface Logger {
+    void log(String message);
 }
 
-class Circle implements Drawable {
-    public void draw() {
-        // Draw a circle
-    }
-}
-
-class Square implements Drawable {
-    public void draw() {
-        // Draw a square
+class ConsoleLogger implements Logger {
+    @Override
+    public void log(String message) {
+        System.out.println("LOG: " + message);
     }
 }
 ```
+
+The `ConsoleLogger` class provides a concrete implementation of the `Logger` interface. You can then use the `Logger` interface as a type for variables, method parameters, or return types, allowing for polymorphism.
+
+```java
+public class Main {
+
+    // The Logger is accepted as a regular parameter
+    public void initialize(Logger logger) {
+        logger.log("Initializing application");
+    }
+
+    public static void main(String[] args) {
+        Logger logger = new ConsoleLogger(); // Interface type pointing to a concrete implementation
+        initialize(logger);
+    }
+}
+```
+
+One major difference between Unison's abilities and Java's interfaces is that an interface is instantiated as an _object_. Abilities are not objects that can be passed around, they're effects that are tracked in the type system. Picture the ability as a `throws` clause in a Java function signature, like `public void initialize() throws Logger`.
 
 </div></div>
 
@@ -1004,7 +1049,7 @@ record Circle(double radius) implements Shape { }
 record Square(double side) implements Shape { }
 record Rectangle(double width, double height) implements Shape { }
 
-// inside some class
+// Inside some class
 static double area(Shape shape) {
         return switch (shape) {
             case Circle c -> Math.PI * c.radius() * c.radius();
@@ -1025,7 +1070,7 @@ static double area(Shape shape) {
     } else if (shape instanceof Rectangle r) {
         return r.width() * r.height();
     } else {
-        throw new IllegalArgumentException("Unknown shape: " + shape);
+        throw new IllegalArgumentException("Unknown: " + shape);
     }
 }
 ```
@@ -1091,11 +1136,11 @@ The calling function must handle the exception. One way to do this is by applyin
 ```unison
 leftValue : Either Failure Nat
 leftValue = Exception.catch do safeDiv 10 0
--- Returns: Left (Failure ArithmeticException "Divide by zero" (10, 0))
+-- Left (Failure ArithmeticException "Divide by zero" (10, 0))
 
 rightValue : Either Failure Nat
 rightValue = Exception.catch do safeDiv 10 2
--- Returns: Right 5
+-- Right 5
 ```
 
 Or, the calling function can also propagate the exception by declaring the `Exception` ability in its own type signature:
@@ -1136,7 +1181,7 @@ public void callUnsafeDiv(int x, int y) {
     }
 }
 
-public void propagateException(int x, int y) throws ArithmeticException {
+public void propagate(int x, int y) throws ArithmeticException {
     int result = safeDiv(x, y);
     System.out.println("Result is: " + result);
 }
@@ -1150,7 +1195,7 @@ Java distinguishes recoverable exceptions from unchecked exceptions, which do no
 
 <div class="side-by-side"><div>
 
-The entry point to a Unison program can be any delayed computation, `'r`, which may perform `IO` and `Exception` effects, `'{IO, Exception} r`. The `IO` ability indicates that the function performs input/output operations, and the `Exception` ability indicates that it may raise exceptions.
+The entry point to a Unison program can be any delayed computation which may perform the `IO` and `Exception` effects, `'{IO, Exception} r`. The `IO` ability indicates that the function might use `IO` operations, and the `Exception` ability indicates that it may raise exceptions.
 
 ```unison
 main : '{IO, Exception} ()
