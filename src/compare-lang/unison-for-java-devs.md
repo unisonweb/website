@@ -109,7 +109,7 @@ Since Java 10, local variables can use `var` for type inference, but the method 
 
 </div></div>
 
-### Access modifiers
+## Access modifiers
 
 <div class="side-by-side"><div>
 
@@ -368,6 +368,47 @@ The `ifPresent` method is similar to `Optional.map` in Unison.
 
 </div></div>
 
+## Delayed computations
+
+<div class="side-by-side"><div>
+
+In Unison, **delayed computations** are used to represent computations that are not executed until their result is needed. Think of delayed computations as zero argument functions, `() -> r`. In type signatures, they are represented with the syntactic sugar `'r`.
+
+```unison
+delayedVal : 'Nat
+delayedVal = do
+  -- No debug output yet
+  Debug.trace "Computing value" ()
+  42
+```
+
+The `do` keyword is used to introduce a delayed computation block.
+To call a delayed computation, use the `()` syntax.
+
+```unison
+-- The debug line will not appear until we call the thunk
+result = delayedVal()
+```
+
+</div><div>
+
+Java does not have built-in support for delayed computations. However, you can achieve similar behavior using the `Supplier<T>` interface, which represents a "supplier" of results, taking no arguments and returning a value of type `T`.
+
+```java
+Supplier<Integer> delayedVal = () -> {
+    System.out.println("Computing value");
+    return 42;
+};
+```
+
+Call the supplier with `.get()`:
+
+```java
+int result = delayedVal.get();
+```
+
+</div></div>
+
 # Method and function syntax
 
 <div class="side-by-side"><div>
@@ -553,7 +594,7 @@ An in-depth guide to the differences in data modeling between functional languag
 
 ## Data types
 
-Unison does not have classes, so there are no instance methods, no instance variables, no `new` constructor keyword, and no `this` keyword. Instead, we use **data types** to model how data is structured and **functions** to model behavior.
+Unison does not have classes, so there are no methods, no instance variables, no `new` constructor keyword, and no `this` keyword. Instead, we use **data types** to model how data is structured and **functions** that transform them to model behavior.
 
 A type can represent data with multiple variants (when a type can be created in one way or another) and data with multiple fields (when a type has several attributes), often in combination. Here's a simple example of a data type representing JSON values:
 
@@ -805,8 +846,6 @@ type Shape
   | Square { side : Float }
 ```
 
-
-
 </div><div>
 
 Java uses **interfaces**, abstract classes, and basic inheritance to define contracts that classes can implement, allowing for polymorphism and code reuse.
@@ -935,11 +974,11 @@ Switch statements _do not need to be exhaustive_, so if a value does not match a
 
 </div></div>
 
-### Decomposing values
+### Decomposing types
 
 <div class="side-by-side"><div>
 
-In Unison, we use structural pattern matching to decompose values, extracting fields from data types, and matching on specific variants of a type.
+In Unison, we use structural pattern matching to decompose types into their data constructors, extracting fields and matching on specific variants of a type.
 
 ```unison
 type Shape = Circle Float | Square Float | Rectangle Float Float
@@ -1070,7 +1109,7 @@ callUnsafeDiv x y = do
   result
 ```
 
-The "type" of the exception is less important in Unison than in Java, since the thing that appears in the type signature is just `Exception`, but you can raise and catch exceptions of different types, communicating different failure modes.
+The "type" of the exception is less important in Unison than in Java, since the thing that appears in the type signature is just `Exception`, but you can raise and catch exceptions which contain different types, communicating different failure modes.
 
 </div><div>
 
@@ -1104,5 +1143,45 @@ public void propagateException(int x, int y) throws ArithmeticException {
 ```
 
 Java distinguishes recoverable exceptions from unchecked exceptions, which do not need to be declared or caught. Unison does not make this distinction; all exceptions are treated the same way.
+
+</div></div>
+
+# Running programs
+
+<div class="side-by-side"><div>
+
+The entry point to a Unison program can be any delayed computation, `'r`, which may perform `IO` and `Exception` effects, `'{IO, Exception} r`. The `IO` ability indicates that the function performs input/output operations, and the `Exception` ability indicates that it may raise exceptions.
+
+```unison
+main : '{IO, Exception} ()
+main = do
+  printLine "Hello, Unison!"
+
+mainWithArgs : '{IO, Exception} ()
+mainWithArgs = do
+  args = getArgs()
+  printLine ("Arguments: " ++ Text.join args)
+
+mainException : '{Exception} ()
+mainException = do
+  safeDiv 10 0
+
+mainPure : 'Nat
+mainPure = do 42
+```
+
+All of the above are valid entry points to a Unison program. The function name is not special; you can name it anything you like.
+
+</div><div>
+
+In Java, the entry point to a program is the `main` method, which must be declared as `public static void main(String[] args)` within a class. The `String[] args` parameter allows command-line arguments to be passed to the program.
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java!");
+    }
+}
+```
 
 </div></div>
