@@ -304,6 +304,39 @@ Since Java 8, collections also support lambdas and streams, which bring them clo
 
 </div></div>
 
+#### Break and continue
+
+<div class="side-by-side"><div>
+
+```unison
+List.takeWhile(n -> n < 4) [1, 2, 3, 4, 5]
+  |> List.filter(n -> not (n % 2 === 0))
+-- [1, 3]
+```
+
+In Unison, short-circuiting constructs like `break` and `continue` do not exist. Instead, functions like `List.takeWhile` express similar behaviors. Breaking out of loops is more generally handled through recursion or by using Unison abilities like `Throw` or `Abort` for more complex control flow.
+
+</div><div>
+
+```java
+for (int n : numbers) {
+    if (n > 4) {
+        break; // Exit the loop early
+    }
+    if (n % 2 == 0) {
+        continue; // Skip even numbers
+    }
+    System.out.println(n);
+    // Output: 1, 3
+}
+```
+
+Java also provides the `break` and `continue` keywords to control loop flow, which have no direct equivalent in Unison.
+
+
+
+</div></div>
+
 ### Lambdas
 
 <div class="side-by-side"><div>
@@ -598,7 +631,7 @@ public class Main {
 
 </div></div>
 
-### Import statements
+## Import statements
 
 <div class="side-by-side"><div>
 
