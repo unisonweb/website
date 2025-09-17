@@ -113,29 +113,31 @@ Since Java 10, local variables can use `var` for type inference, but the method 
 
 <div class="side-by-side"><div>
 
+Unison does not have access modifier keywords that change the visibility of definitions. All definitions are public by default. Variables and functions are enclosed within other functions to limit their scope.
+
 ```unison
 noReassignments = "Initial value"
 noReassignments = "🚫 Will not compile, variable is ambiguous."
 ```
 
-In Unison, you cannot reassign or update a variable in a program once it has been defined, so there is no `final` keyword. Variables are enclosed within functions to limit their scope. There are no private/public access modifiers in Unison.
+You cannot reassign or update a variable in a program once it has been defined, so there are no keywords for controlling its scope, lifecycle, or mutability.
 
 </div><div>
 
-```java
-String aReassignment = "Initial value";
-aReassignment = "New value"; // ok
-```
-
-In Java, variables are mutable by default.
-
-Java has access modifiers like `final`, `private`, `protected`, and `public` to control mutability and visibility.
+Java has access modifiers like `final` or `public` to control mutability and visibility.
 
 ```java
 final String constantValue = "I cannot be changed";
 private String privateValue = "Accessible only within this class";
 protected String protectedValue = "Package and subclasses";
 public String publicValue = "Accessible from anywhere";
+```
+
+In Java, variables are mutable by default.
+
+```java
+String aReassignment = "Initial value";
+aReassignment = "New value"; // ok
 ```
 
 </div></div>
@@ -370,7 +372,6 @@ opt = Some "value"
 
 Optional.map (str -> Debug.trace "Got value:" str) opt
 
--- Using `getOrElse` to provide a default if `opt` is `None`
 Optional.map (str -> str ++ "!!") opt
   |> Optional.getOrElse "default"
 ```
@@ -394,7 +395,6 @@ Optional<String> opt = Optional.of("some value");
 // void operations require a different method
 opt.ifPresent(str -> System.out.println(str));
 
-// Using `orElse` to provide a default if `opt` is empty
 opt.map(str -> str + "!!").orElse("default");
 ```
 
@@ -467,7 +467,7 @@ Nat.sum ns =
 
 </div><div>
 
-Java is an object-oriented language, so **methods** that belong to classes are used to describe program behavior. Static methods can be called without creating an instance of a class, so let's use them to introduce basic syntax differences.
+Java is an object-oriented language, so **methods** that belong to classes are used to describe program behavior. Static methods can be called without creating an instance of a class. Let's use them to introduce basic syntax differences.
 
 ```java
 class MathUtils {
@@ -532,7 +532,7 @@ Greeter.greet name =
     printLine ("Hello, " ++ name ++ "!")
 ```
 
-The functions above are defined in the `Greeter` namespace, delimited by the dot prefix in the function name. **Namespacing** helps organize related functions together, but does not imply any state or behavior is shared between them.
+The functions above are defined in the `Greeter` namespace, delimited by the dot prefix in the function name. **Namespaces** help organize related functions together, similar to Java packages.
 
 </div><div>
 
@@ -540,7 +540,11 @@ The functions above are defined in the `Greeter` namespace, delimited by the dot
 
 Java uses **classes** to _encapsulate data and behavior_. **Methods** belong to a class, and describe the set of behaviors that an instance of the class may perform.
 
+Java packages, like `com.unison`, group related code together and prevent naming conflicts, with the caveat that Java packages are tied to the file system structure of the project.
+
 ```java
+package com.unison;
+
 import java.util.Scanner;
 
 public class Greeter {
@@ -582,6 +586,7 @@ A program is built by chaining together, or _composing_, the inputs and outputs 
 In Java programs, you create instances of classes and invoke methods on them, changing the state of the object or performing actions based on that state.
 
 ```java
+import com.unison.Greeter;
 public class Main {
   public static void main(String[] args) {
     Greeter greeter = new Greeter();
@@ -590,6 +595,69 @@ public class Main {
   }
 }
 ```
+
+</div></div>
+
+### Import statements
+
+<div class="side-by-side"><div>
+
+Unison differs from Java in that you do not, by default, need to import definitions from other namespaces to use them. If a definition exists in your current project and its name is unambiguous, you can use it directly.
+
+```unison
+namespace1.uniqueName : Nat -> Nat
+namespace1.uniqueName n = n + 1
+
+-- works without an import or namespace prefix
+namespace2.baz =
+  uniqueName 1
+```
+
+If you need to specify where a definition comes from, you can disambiguate by prefixing it with its namespace path.
+
+```unison
+namespace1.dupeName = 1 + 1
+namespace2.dupeName = 2 + 2
+
+useDupe = namespace2.dupeName + 1
+```
+
+The `use` keyword can bring multiple definitions from other namespaces into scope. You can import an entire namespace or specific terms.
+
+```unison
+{- Imports everything from the `namespace1`
+   namespace for use in the file -}
+use namespace1
+
+-- Only imports the foo definition from namespace1
+use namespace1 foo
+
+-- Imports both foo and bar from namespace1
+use namespace1 foo bar
+```
+</div><div>
+In Java, you must import classes from other packages to use them without their package prefix.
+
+```java
+package com.unison;
+
+public class Foo {
+    public static int uniqueName(int n) {
+        return n + 1;
+    }
+}
+```
+
+```java
+import com.unison.Foo;
+public class Bar {
+    public void baz() {
+        Foo.uniqueName(1);
+    }
+}
+```
+
+If two imported classes have the same name, you must use their fully qualified names to disambiguate them.
 
 </div></div>
 
@@ -609,7 +677,7 @@ applyTwice f x =
 
 </div><div>
 
-In Java, functions are not first-class citizens. You can pass a `Function <A, B>` object as an argument to a method; however, in Java, you might employ a different pattern for code reuse, such as passing objects that implement a specific interface.
+In Java, functions are not first-class citizens. You can pass a `Function <A, B>` object as an argument to a method; or you might employ a different pattern for code reuse, such as passing objects that implement a specific interface.
 
 ```java
 import java.util.function.Function;
@@ -620,9 +688,9 @@ public static <A> A applyTwice(Function<A, A> f, A x) {
 
 </div></div>
 
-# Data modeling
+# Types and data
 
-An in-depth guide to the differences in data modeling between functional languages like Unison and object-oriented languages like Java is out of scope for now, but here are some high-level differences.
+An in-depth guide to the differences in data modeling between functional languages like Unison and object-oriented languages like Java is out of scope for now, but here are some high-level comparison points.
 
 <div class="side-by-side"><div>
 
@@ -847,7 +915,7 @@ class Box<T> {
 In a method signature, generic type parameters are declared in angle brackets `< >` before the return type:
 
 ```java
-public <T> String prettyPrint(Box<T> box, Function<T, String> toStringFunc) {
+public static <T> String prettyPrint(Box<T> box, Function<T, String> toStringFunc) {
     return "Box(" + toStringFunc.apply(box.getValue()) + ")";
 }
 ```
@@ -855,10 +923,8 @@ public <T> String prettyPrint(Box<T> box, Function<T, String> toStringFunc) {
 Because Java supports more complex type hierarchies than Unison, Java code might employ wildcard types like `<?>` or bounded type parameters like `<T extends Number>`. These concepts do not have direct equivalents in Unison.
 
 ```java
-// Type Box<Boolean> is inferred with diamond operator <>
-boolBox = new Box<>(true);
-intBox = new Box<Int>(42);
-prettyPrint(boolBox, Object::toString);
+Box<Integer> intBox = new Box<Integer>(42);
+Box.prettyPrint(intBox, Object::toString);
 ```
 
 </div></div>
@@ -931,9 +997,8 @@ The `ConsoleLogger` class provides a concrete implementation of the `Logger` int
 
 ```java
 public class Main {
-
     // The Logger is accepted as a regular parameter
-    public void initialize(Logger logger) {
+    public static void initialize(Logger logger) {
         logger.log("Initializing application");
     }
 
