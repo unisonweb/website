@@ -309,7 +309,8 @@ Since Java 8, collections also support lambdas and streams, which bring them clo
 <div class="side-by-side"><div>
 
 ```unison
-List.takeWhile(n -> n < 4) [1, 2, 3, 4, 5] -- Take numbers until we see a 4
+-- Take numbers until we see a 4
+List.takeWhile(n -> n < 4) [1, 2, 3, 4, 5]
   |> List.filter(n -> not (n % 2 === 0)) -- Only keep odd numbers
 -- [1, 3]
 ```
@@ -439,7 +440,7 @@ Many of the methods in the `Optional` class are similar to those in Unison's `Op
 
 <div class="side-by-side"><div>
 
-In Unison, **delayed computations** are used to represent computations that are not executed until their result is needed. Think of delayed computations as zero argument functions, `() -> r`. In type signatures, they are represented with the syntactic sugar `'r`.
+In Unison, **delayed computations** are used to represent computations that are not executed until their result is needed. Think of delayed computations as zero argument functions, `() -> t`. In type signatures, they are represented with the syntactic sugar `'t`.
 
 ```unison
 delayedVal : 'Nat
