@@ -838,7 +838,7 @@ Unison has **record types** for modeling immutable single-constructor types with
 type Point = {
   x : Int,
   y : Int
-  }
+}
 ```
 
 Defining a record type in Unison automatically creates get, set, and modify functions for each field.
