@@ -259,7 +259,7 @@ List.filter (n -> n % 2 === 0) [1, 2, 3, 4]
 -- Sum up a list
 List.foldLeft (acc n -> acc + n) 0 [1, 2, 3, 4]
 -- 10
-``f`
+```
 
 This style avoids explicit indexing and mutation. Iteration is __declarative__: you say what to do with each element, not how to step through the collection.
 
@@ -362,13 +362,17 @@ noneValue : Optional Nat
 noneValue = None
 ```
 
-Optional values _must be unwrapped_ to access the value contained in them. We use functions like `Optional.map`, `Optional.fold`, or pattern matching to transform or handle the absence of a value.
+Optional values _must be unwrapped_ to access the value contained in them. We use functions like `Optional.map`, `Optional.getOrElse`, or pattern matching to transform or handle the absence of a value.
 
 ```unison
 opt: Optional Text
 opt = Some "value"
 
 Optional.map (str -> Debug.trace "Got value:" str) opt
+
+-- Using `getOrElse` to provide a default if `opt` is `None`
+Optional.map (str -> str ++ "!!") opt
+  |> Optional.getOrElse "default"
 ```
 
 </div><div>
@@ -387,10 +391,14 @@ Java 8 introduced the `Optional` class:
 ```java
 Optional<String> opt = Optional.of("some value");
 
+// void operations require a different method
 opt.ifPresent(str -> System.out.println(str));
+
+// Using `orElse` to provide a default if `opt` is empty
+opt.map(str -> str + "!!").orElse("default");
 ```
 
-The `ifPresent` method is similar to `Optional.map` in Unison.
+Many of the methods in the `Optional` class are similar to those in Unison's `Optional` type.
 
 </div></div>
 
