@@ -46,7 +46,7 @@ Java uses `//` for single-line comments and `/* ... */` for multi-line comments.
 
 <div class="side-by-side"><div>
 
-Unison variables are immutable values that can be defined at the top level of the program or within functions. Type signatures are located above the variable name, but are optional.
+Unison variables are immutable values that can be defined at the top-level of the program or within functions. Type signatures are located above the variable name, but are optional.
 
 ```unison
 aText : Text
@@ -93,7 +93,7 @@ exampleFunction =
   newValue
 ```
 
-Unison's type inference means you don't need to specify the type of `localValue` or the top level function `exampleFunction`.
+Unison's type inference means you don't need to specify the type of `localValue` or the top-level function `exampleFunction`.
 
 </div><div>
 
@@ -508,7 +508,7 @@ int result3 = MathUtils.add(MathUtils.sum(List.of(1, 2)), 3);
 
 ## Functions
 
-Functions are standalone terms, defined at the top level of a program, within **namespaces**, or within other functions. Instead of mutating the state of an instance of a class, functions accept the values that they operate on, describe some behavior or transformation, and then return new values.
+Functions are standalone terms, defined at the top-level of a program, within **namespaces**, or within other functions. Instead of mutating the state of an instance of a class, functions accept the values that they operate on, describe some behavior or transformation, and then return new values.
 
 ```unison
 Greeter.getName : '{IO, Exception} Text
@@ -675,7 +675,7 @@ abstract class JsonValue {
 }
 ```
 
-Each Json type might be implemented as a subclass which implements the `toJson` method to handle its specific serialization logic:
+Each JSON type might be implemented as a subclass that implements the `toJson` method to handle its specific serialization logic:
 
 ```java
 class JsonBoolean extends JsonValue {
@@ -722,7 +722,7 @@ JsonValue aJsonArrayValue = aJsonArray; // Upcast to JsonValue
 
 <div class="side-by-side"><div>
 
-Unison has **record types** for modeling immutable single constructor types with named fields.
+Unison has **record types** for modeling immutable single-constructor types with named fields.
 
 ```unison
 type Point = {
@@ -804,7 +804,7 @@ Box.prettyPrint box toStringFunc =
   "Box(" ++ toStringFunc (Box.value box) ++ ")"
 ```
 
-All types in Unison are invariant; so concepts like type bounds do not apply.
+All types in Unison are invariant, so concepts like type bounds do not apply.
 
 ```unison
 -- Type `Box Boolean` is inferred
@@ -861,7 +861,7 @@ prettyPrint(boolBox, Object::toString);
 
 ### Abilities
 
-One approach to defining behavioral contracts in Unison is through **abilities**. Abilities are a way to describe a set of operations, typically ones which involve some kind of effect, without dictating how that contract must be fulfilled.
+One approach to defining behavioral contracts in Unison is through **abilities**. Abilities are a way to describe a set of operations, typically ones that involve some kind of effect, without dictating how that contract must be fulfilled.
 
 This is how we might define a simple logging ability in Unison. We don't care where the log messages go, just that we can capture a text value and log it.
 
@@ -878,7 +878,7 @@ initialize = do
   Logger.log "Initializing application"
 ```
 
-The functions that provide concrete behavior for an ability are called **handlers**. For now we won't dig into _how_ handlers work, but they typicially translate the operations of an ability into other abilities, like `IO` for console output, or transform them into pure values, like logging to a `List` in memory.
+The functions that provide concrete behavior for an ability are called **handlers**. For now, we won't dig into _how_ handlers work, but they typically translate the operations of an ability into other abilities, like `IO` for console output, or transform them into pure values, like logging to a `List` in memory.
 
 ```unison
 ConsoleLogger.logger : '{Logger} a -> {IO, Exception} a
@@ -888,7 +888,7 @@ ConsoleLogger.logger = cases
   pure -> pure
 ```
 
-To apply a handler, you pass it a codeblock or expression that uses the ability _as an argument_.
+To apply a handler, you pass it a code block or expression that uses the ability _as an argument_.
 
 ```unison
 main : '{IO, Exception} ()
@@ -934,7 +934,7 @@ public class Main {
 }
 ```
 
-One major difference between Unison's abilities and Java's interfaces is that an interface is ultimately instantiated as an _object_. Abilities are not objects that can be passed around, they're more like properties of functions that are tracked in the type system. Picture the ability as a `throws` clause in the Java function signature `public void initialize() throws Logger`.
+One major difference between Unison's abilities and Java's interfaces is that an interface is ultimately instantiated as an _object_. Abilities are not objects that can be passed around; they're more like properties of functions that are tracked in the type system. Picture the ability as a `throws` clause in the Java function signature `public void initialize() throws Logger`.
 
 </div></div>
 
@@ -944,7 +944,7 @@ One major difference between Unison's abilities and Java's interfaces is that an
 
 <div class="side-by-side"><div>
 
-In Unison, conditionals are expressions that control the flow of execution and return values. A conditional expression has three parts: the `if` condition which must be a `Boolean`, the `then` branch, and the `else` branch.
+In Unison, conditionals are expressions that control the flow of execution and return values. A conditional expression has three parts: the `if` condition, which must be a `Boolean`, the `then` branch, and the `else` branch.
 
 ```unison
 sign : Int -> Text
@@ -957,7 +957,7 @@ sign n =
     "zero"
 ```
 
-In Unison, you cannot have an `if` without an `else` branch. This will fail to compile and you cannot save it to your codebase:
+In Unison, you cannot have an `if` without an `else` branch. This will fail to compile, and you cannot save it to your codebase:
 
 ```unison
 nope : Nat -> Text
@@ -1036,7 +1036,7 @@ String cardSuit(int n) {
 }
 ```
 
-`default` is slightly different from Unison's `_` wildcard pattern, as a switch statement which does not contain explicit `return` statements or `break` statements will run the `default` case.
+`default` is slightly different from Unison's `_` wildcard pattern, as a switch statement that does not contain explicit `return` statements or `break` statements will run the `default` case.
 
 Switch statements _do not need to be exhaustive_, so if a value does not match any case and there is no `default`, the program simply continues after the switch block.
 
@@ -1143,7 +1143,7 @@ String grade(int score) {
 
 <div class="side-by-side"><div>
 
-In Unison, exceptions are an **ability** that work similarly to Java's checked exceptions. Functions that may throw exceptions must declare the `Exception` ability in their type signature, `{Exception}`.
+In Unison, exceptions are an **ability** that works similarly to Java's checked exceptions. Functions that may throw exceptions must declare the `Exception` ability in their type signature, `{Exception}`.
 
 ```unison
 safeDiv : Nat -> Nat -> {Exception} Nat
@@ -1154,7 +1154,7 @@ safeDiv x y =
   else x / y
 ```
 
-The calling function must handle the exception. One way to do this is by applying functions like `Exception.catch`, which translate the exception into a value of `Either` `Left`, representing a failure, or `Right`, enclosing the successful result:
+The calling function must handle the exception. One way to do this is by applying functions like `Exception.catch`, which translates the exception into a value of `Either` `Left`, representing a failure, or `Right`, enclosing the successful result:
 
 ```unison
 leftValue : Either Failure Nat
@@ -1177,11 +1177,11 @@ callUnsafeDiv x y = do
   result
 ```
 
-The "type" of the exception is less important in Unison than in Java, since the thing that appears in the type signature is just `Exception`, but you can raise and catch exceptions which contain different types, communicating different failure modes.
+The "type" of the exception is less important in Unison than in Java, since the thing that appears in the type signature is just `Exception`, but you can raise and catch exceptions that contain different types, communicating different failure modes.
 
 </div><div>
 
-In Java, exceptions are part of the language's error handling mechanism. Methods that may throw checked exceptions must declare them in their `throws` clause.
+In Java, exceptions are part of the language's error-handling mechanism. Methods that may throw checked exceptions must declare them in their `throws` clause.
 
 ```java
 public int safeDiv(int x, int y) throws ArithmeticException {
