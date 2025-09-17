@@ -140,6 +140,32 @@ public String publicValue = "Accessible from anywhere";
 
 </div></div>
 
+## Void and Unit
+
+<div class="side-by-side"><div>
+
+All functions in Unison must return a value. But there are times when a function is called for some effect and there is no meaningful value to return. The value we use in these cases is `()` also known as `Unit`.
+
+```unison
+doSomething : ()
+doSomething =
+  Debug.trace "Doing something" ()
+  ()
+```
+
+</div><div>
+
+In Java, methods that do not return a value have the type `void`. There is no value of type `void`; it simply indicates the absence of something to return.
+
+```java
+void doSomething() {
+    // No meaningful value to return
+    System.out.println("Doing something");
+}
+```
+
+</div></div>
+
 ## Collections
 
 <div class="side-by-side"><div>
@@ -570,7 +596,7 @@ In a signature, the function type is written as `(i -> o)`, with parentheses to 
 ```unison
 applyTwice : (a -> a) -> a -> a
 applyTwice f x =
-  (f (f x))
+  f (f x)
 ```
 
 </div><div>
@@ -609,8 +635,6 @@ type JsonValue
 ```
 
 This `JsonValue` type can represent any JSON data structure. Each variant, or **data constructor**, is separated by `|`, and some variants (like `JsonArray` and `JsonObject`) contain a reference to the same type, allowing for nested structures.
-
-Functions can then be defined to operate on this data type, such as a function to serialize a `JsonValue` to a string:
 
 ```unison
 JsonValue.toJson : JsonValue -> Text
@@ -718,7 +742,7 @@ Point.y.modify : (Int ->{g} Int) -> Point ->{g} Point
 Point.y.set    : Int -> Point -> Point
 ```
 
-Althouth the dot notation in Unison's record types _looks similar_ to Java's mutable method calls, modifying a field _returns a new record with the updated value_, leaving the original unchanged.
+Although the dot notation in Unison's record types _looks similar_ to Java's mutable method calls, modifying a field _returns a new record with the updated value_, leaving the original unchanged.
 
 ```unison
 pointA : Point
@@ -837,7 +861,7 @@ prettyPrint(boolBox, Object::toString);
 
 ### Abilities
 
-One approach to defining behavioral contracts in Unison is through **abilities**, and if you're familiar with Java's interfaces, you have a good starting point for an intuition of what they do. Abilities are a way to describe a set of operations, typically ones which involve some kind of effect, without dictating how that contract must be fulfilled.
+One approach to defining behavioral contracts in Unison is through **abilities**. Abilities are a way to describe a set of operations, typically ones which involve some kind of effect, without dictating how that contract must be fulfilled.
 
 This is how we might define a simple logging ability in Unison. We don't care where the log messages go, just that we can capture a text value and log it.
 
@@ -846,8 +870,7 @@ ability Logger where
   log : Text -> ()
 ```
 
-In our application logic, we can use the general `Logger.log` operation. Abilities are tracked in the type system, a bit like checked exceptions in Java, so the `{Logger}` indicates that this function requires something that handles the `Logger` ability. The `{Logger}` ability requirement will appear in the type signatures of all the functions that call `Logger.log` until some bit of code provides a concrete implementation for it.
-
+In our application logic, we can use the general `Logger.log` operation. Abilities are tracked in the type system, a bit like checked exceptions in Java. The `{Logger}` indicates that this function requires something that handles the `Logger` ability or it will be passed up the call stack as a requirement until some bit of code provides an implementation for it.
 
 ``` unison
 initialize : '{Logger} ()
@@ -855,7 +878,7 @@ initialize = do
   Logger.log "Initializing application"
 ```
 
-The functions that provide concrete behavior for an ability are called **handlers**. For now we won't dig into _how_ handlers work; they provide the implementation for the operations specified in the ability.
+The functions that provide concrete behavior for an ability are called **handlers**. For now we won't dig into _how_ handlers work, but they typicially translate the operations of an ability into other abilities, like `IO` for console output, or transform them into pure values, like logging to a `List` in memory.
 
 ```unison
 ConsoleLogger.logger : '{Logger} a -> {IO, Exception} a
@@ -894,7 +917,7 @@ class ConsoleLogger implements Logger {
 }
 ```
 
-The `ConsoleLogger` class provides a concrete implementation of the `Logger` interface. You can then use the `Logger` interface as a type for variables, method parameters, or return types, allowing for polymorphism.
+The `ConsoleLogger` class provides a concrete implementation of the `Logger` interface. You can then use the `Logger` interface as a type for variables, method parameters, or return types.
 
 ```java
 public class Main {
@@ -905,13 +928,13 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Logger logger = new ConsoleLogger(); // Interface type pointing to a concrete implementation
+        Logger logger = new ConsoleLogger();
         initialize(logger);
     }
 }
 ```
 
-One major difference between Unison's abilities and Java's interfaces is that an interface is instantiated as an _object_. Abilities are not objects that can be passed around, they're effects that are tracked in the type system. Picture the ability as a `throws` clause in a Java function signature, like `public void initialize() throws Logger`.
+One major difference between Unison's abilities and Java's interfaces is that an interface is ultimately instantiated as an _object_. Abilities are not objects that can be passed around, they're more like properties of functions that are tracked in the type system. Picture the ability as a `throws` clause in the Java function signature `public void initialize() throws Logger`.
 
 </div></div>
 
