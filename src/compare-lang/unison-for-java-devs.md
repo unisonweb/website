@@ -216,8 +216,8 @@ Because the outputs to the modification functions return new maps, you can chain
 
 ```unison
 map3 = Map.fromList [("📘", +2), ("📙", -4), ("📔", +3)]
-  |> Map.insert "📗" +5
-  |> Map.delete "📙"
+          |> Map.insert "📗" +5
+          |> Map.delete "📙"
 ```
 </div><div>
 
@@ -253,13 +253,13 @@ List.map (n -> n * 2) [1, 2, 3]
 -- [2, 4, 6]
 
 -- Keep only even numbers
-List.filter (n -> n % 2 == 0) [1, 2, 3, 4]
+List.filter (n -> n % 2 === 0) [1, 2, 3, 4]
 -- [2, 4]
 
 -- Sum up a list
 List.foldLeft (acc n -> acc + n) 0 [1, 2, 3, 4]
 -- 10
-```
+``f`
 
 This style avoids explicit indexing and mutation. Iteration is __declarative__: you say what to do with each element, not how to step through the collection.
 
@@ -514,10 +514,10 @@ Functions are standalone terms, defined at the top-level of a program, within **
 Greeter.getName : '{IO, Exception} Text
 Greeter.getName = do
   printLine "What is your name?"
-  name = readLine()
+  readLine()
 
-Greeter.greet : Text -> '{IO, Exception} ()
-Greeter.greet name = do
+Greeter.greet : Text -> {IO, Exception} ()
+Greeter.greet name =
   if Text.isEmpty name then
     printLine "Hello, stranger!"
   else
@@ -627,7 +627,7 @@ A type can represent data with multiple variants (when a type can be created in 
 ```unison
 type JsonValue
   = JsonNull
-  | JsonBoolean Bool
+  | JsonBoolean Boolean
   | JsonNumber Float
   | JsonString Text
   | JsonArray (List JsonValue)
@@ -643,9 +643,9 @@ JsonValue.toJson value =
     JsonNull -> "null"
     JsonBoolean b -> Boolean.toText b
     JsonNumber n -> Float.toText n
-    JsonString s -> "\"" ++ Text.replace "\"" "\\\"" s ++ "\""
-    JsonArray arr -> "[" ++ Text.join ", " (List.map JsonValue.toJson arr) ++ "]"
-    JsonObject obj -> "{" ++ Map.toList obj |> List.map (cases (key, value) -> "\"" ++ key ++ "\": " ++ JsonValue.toJson value) |> Text.join ", " ++ "}"
+    JsonString s -> "\"" ++ Text.replaceAll "\"" "\\\"" s ++ "\""
+    JsonArray arr -> formatArray arr
+    JsonObject obj -> formatObj obj
 ```
 
 Rather than overriding the `toString` method on each variant, we define a single function that handles all the data constructors using pattern matching.
@@ -882,10 +882,12 @@ The functions that provide concrete behavior for an ability are called **handler
 
 ```unison
 ConsoleLogger.logger : '{Logger} a -> {IO, Exception} a
-ConsoleLogger.logger = cases
-  Logger.log msg -> resume ->
-    handle resume (printLine ("LOG: " ++ msg)) with logger
-  pure -> pure
+ConsoleLogger.logger l =
+  handle l() with cases
+    {Logger.log msg -> resume} ->
+      printLine ("LOG: " ++ msg)
+      ConsoleLogger.logger do resume()
+    {pure} -> pure
 ```
 
 To apply a handler, you pass it a code block or expression that uses the ability _as an argument_.
@@ -949,9 +951,9 @@ In Unison, conditionals are expressions that control the flow of execution and r
 ```unison
 sign : Int -> Text
 sign n =
-  if n > 0 then
+  if n > +0 then
     "positive"
-  else if n < 0 then
+  else if n < +0 then
     "negative"
   else
     "zero"
@@ -1230,7 +1232,7 @@ mainWithArgs = do
   args = getArgs()
   printLine ("Arguments: " ++ Text.join args)
 
-mainException : '{Exception} ()
+mainException : '{Exception} Nat
 mainException = do
   safeDiv 10 0
 
