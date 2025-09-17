@@ -309,8 +309,8 @@ Since Java 8, collections also support lambdas and streams, which bring them clo
 <div class="side-by-side"><div>
 
 ```unison
-List.takeWhile(n -> n < 4) [1, 2, 3, 4, 5]
-  |> List.filter(n -> not (n % 2 === 0))
+List.takeWhile(n -> n < 4) [1, 2, 3, 4, 5] -- Take numbers until we see a 4
+  |> List.filter(n -> not (n % 2 === 0)) -- Only keep odd numbers
 -- [1, 3]
 ```
 
@@ -321,10 +321,10 @@ In Unison, short-circuiting constructs like `break` and `continue` do not exist.
 ```java
 for (int n : numbers) {
     if (n > 4) {
-        break; // Exit the loop early
+        break;
     }
     if (n % 2 == 0) {
-        continue; // Skip even numbers
+        continue;
     }
     System.out.println(n);
     // Output: 1, 3
