@@ -1286,7 +1286,7 @@ callUnsafeDiv x y = do
   result
 ```
 
-The "type" of the exception is less important in Unison than in Java, since the thing that appears in the type signature is just `Exception`, but you can raise and catch exceptions that contain different types, communicating different failure modes.
+The "type" of the exception is less important in Unison than in Java, since the thing that appears in the type signature is just `Exception`, but you can raise and catch exceptions that contain different types, like our `ArithmeticException`, communicating different failure modes.
 
 </div><div>
 
@@ -1327,7 +1327,7 @@ Java distinguishes recoverable exceptions from unchecked exceptions, which do no
 
 <div class="side-by-side"><div>
 
-The entry point to a Unison program can be any delayed computation which may perform the `IO` and `Exception` effects, `'{IO, Exception} r`. The `IO` ability indicates that the function might use `IO` operations, and the `Exception` ability indicates that it may raise exceptions.
+The entry point to a Unison program can be any delayed computation which may perform the `IO` and `Exception` effects, `'{IO, Exception} t`. The `IO` ability indicates that the function might use `IO` operations, and the `Exception` ability indicates that it may raise exceptions.
 
 ```unison
 main : '{IO, Exception} ()
