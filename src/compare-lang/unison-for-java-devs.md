@@ -113,14 +113,35 @@ Since Java 10, local variables can use `var` for type inference, but the method 
 
 <div class="side-by-side"><div>
 
-Unison does not have access modifier keywords that change the visibility of definitions. All definitions are public by default. Variables and functions are enclosed within other functions to limit their scope.
+Unison does not have access modifier keywords. All definitions are public by default. Variables and functions are enclosed within other functions to limit their scope.
+
+```unison
+visible : Nat
+visible =
+  hidden = 100
+  42 + hidden
+```
+
+You cannot reassign or update a variable in a program once it has been defined, so there are no keywords for controlling its scope, lifecycle, or mutability.
 
 ```unison
 noReassignments = "Initial value"
 noReassignments = "🚫 Will not compile, variable is ambiguous."
 ```
 
-You cannot reassign or update a variable in a program once it has been defined, so there are no keywords for controlling its scope, lifecycle, or mutability.
+Some Unison code might look _as if_ it is updating a variable, but it is actually **shadowing** the variable name in a nested scope.
+
+```unison
+shadowing : Nat
+shadowing =
+  n = 2
+  inner =
+    n = 300
+    -- outer n is not accessible anymore
+    n + 1
+  -- n is still 2 here
+  n + inner
+```
 
 </div><div>
 
@@ -140,13 +161,28 @@ String aReassignment = "Initial value";
 aReassignment = "New value"; // ok
 ```
 
+Because Java distinguishes between instance and local variables, the rules for shadowing are more complex. Instance variables can be shadowed by local variables and parameter names. Local variables cannot be shadowed by other local variables in the same scope.
+
+```java
+class ShadowingExample {
+    private String name = "Outer";
+
+    public void shadowingMethod() {
+        String name = "Inner";
+        System.out.println(this.name); // Prints "Outer"
+        System.out.println(name); // Prints "Inner"
+        // String name = "Another"; Error: name already defined
+    }
+}
+```
+
 </div></div>
 
 ## Void and Unit
 
 <div class="side-by-side"><div>
 
-All functions in Unison must return a value. But there are times when a function is called for some effect and there is no meaningful value to return. The value we use in these cases is `()` also known as `Unit`.
+All functions in Unison must return a value. But there are times when a function is called for some effect and there is no meaningful value to return. The value we use in these cases is `()`, also known as `Unit`.
 
 ```unison
 doSomething : ()
@@ -189,7 +225,7 @@ Collections in Unison are **immutable** by default.
 
 </div><div>
 
-Java Collections are arranged in a hierarchy, with interfaces like `List`, `Set`, and `Map` which define basic operations for common data structures, and classes like `ArrayList`, `HashSet`, and `HashMap` to instantiate them.
+Java Collections are arranged in a hierarchy, with interfaces like `List`, `Set`, and `Map` which define basic operations for common data structures, and classes like `ArrayList`, `HashSet`, and `HashMap` which instantiate them.
 
 ```java
 List<Integer> aList = List.of(1, 2, 3, 4, 5);
@@ -333,8 +369,6 @@ for (int n : numbers) {
 ```
 
 Java also provides the `break` and `continue` keywords to control loop flow, which have no direct equivalent in Unison.
-
-
 
 </div></div>
 
@@ -501,7 +535,7 @@ Nat.sum ns =
 
 </div><div>
 
-Java is an object-oriented language, so **methods** that belong to classes are used to describe program behavior. Static methods can be called without creating an instance of a class. Let's use them to introduce basic syntax differences.
+Java is an object-oriented language, so **methods** that belong to classes are used to describe program behavior. Static methods can be called without creating an instance of a class, so let's use them to introduce basic syntax differences.
 
 ```java
 class MathUtils {
@@ -572,9 +606,9 @@ The functions above are defined in the `Greeter` namespace, delimited by the dot
 
 ## Methods
 
-Java uses **classes** to _encapsulate data and behavior_. **Methods** belong to a class, and describe the set of behaviors that an instance of the class may perform.
+Java uses **classes** and **methods** to _encapsulate data and behavior_.
 
-Java packages, like `com.unison`, group related code together and prevent naming conflicts, with the caveat that Java packages are tied to the file system structure of the project.
+Java packages group related code together and prevent naming conflicts, similar to namespaces in Unison, with the caveat that Java packages are tied to the file system structure of the project.
 
 ```java
 package com.unison;
