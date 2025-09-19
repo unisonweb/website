@@ -641,11 +641,11 @@ def categorizeNumber(num: Int): String = num match {
 <div class="side-by-side"><div>
 
 ```unison
-type User Text Nat
+type User = User Text Nat
 
 userTuple : User -> (User, Text)
 userTuple user = match user with
-  u @ User n a ->  (u, n)
+  u@(User t n) ->  (u, t)
 ```
 
 </div><div>
@@ -654,7 +654,7 @@ userTuple user = match user with
 case class User(name: String, age: Int)
 
 def userTuple(user : User): (User, String) = user match {
-  case u @ User(n, a) => (u, n)
+  case u @ User(t, n) => (u, t)
 }
 ```
 
@@ -787,7 +787,7 @@ Unison uses **watch expressions** to interactively evaluate code, instead of a t
 <div class="side-by-side"><div>
 
 ```unison
-factorial n = product (range 1 (n + 1))
+factorial n = Nat.product (List.range 1 (n + 1))
 
 > factorial 3
 ```
