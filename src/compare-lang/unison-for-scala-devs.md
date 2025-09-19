@@ -210,8 +210,9 @@ expensiveComputation = do
   printLine "Running..."
   42
 
-computeTwice expensiveComputation
--- Prints the message twice
+main = do
+  computeTwice expensiveComputation
+-- `run main` prints the message twice
 ```
 
 The syntax for forcing a thunk in Unison is `x()` or `!x`.
@@ -262,8 +263,8 @@ namespace models
 
 type User = User Text Nat
 
-User.toJson : User -> Json
-User.toJson user = todo "unimplemented"
+User.toJsonText : User -> Text
+User.toJsonText user = todo "unimplemented"
 
 type UserPreferences = UserPreferences [Text]
 ```
@@ -273,8 +274,8 @@ It's more common to see namespaces fully prefixed by their dot-separated name se
 ```unison
 type models.User = User Text Nat
 
-models.User.toJson : User -> Json
-models.User.toJson user = todo "unimplemented"
+models.User.toJsonText : User -> Text
+models.User.toJsonText user = todo "unimplemented"
 
 type models.UserPreferences = UserPreferences [Text]
 ```
@@ -317,9 +318,10 @@ If there is any ambiguity, Unison will prompt you to disambiguate. You can use t
 -- imports everything in the `models.User` namespace
 use models.User
 -- imports the `User` and `UserPreferences` namespaces
-use models User UserPreferences
+use models.User
+use models.UserPreferences
 -- imports specific terms from the `models.User` namespace
-use models.User toJson fromJson
+use models.User toJsonText fromJson
 ```
 
 The `use` keyword can also be used inside a function body for local scoping:
