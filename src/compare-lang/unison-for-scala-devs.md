@@ -207,11 +207,10 @@ computeTwice x =
 
 expensiveComputation : '{IO, Exception} Nat
 expensiveComputation = do
-  printLine("Running...")
+  printLine "Running..."
   42
 
-computeTwice(expensiveComputation())
-
+computeTwice expensiveComputation
 -- Prints the message twice
 ```
 
