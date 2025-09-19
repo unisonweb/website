@@ -591,7 +591,7 @@ type Person = Person Text Nat
 
 toText : Person -> Text
 toText person = match person with
-  Person n a -> "Name: " ++ n ++ (", Age: " ++ (toText a))
+  Person n a -> "Name: " ++ n ++ (", Age: " ++ (Nat.toText a))
 ```
 
 In Unison, the `match ... with` syntax can be replaced with `cases`:
@@ -599,7 +599,7 @@ In Unison, the `match ... with` syntax can be replaced with `cases`:
 ```unison
 toText : Person -> Text
 toText = cases
-  Person n a -> "Name: " ++ n ++ (", Age: " ++ (toText a))
+  Person n a -> "Name: " ++ n ++ (", Age: " ++ (Nat.toText a))
 ```
 
 </div><div>
