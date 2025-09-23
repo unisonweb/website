@@ -885,10 +885,10 @@ The libraries will be installed in the `lib` namespace, viewable with the `ls` c
 ```bash
 unit-converter-service/main> ls lib
 
-  1. base/                (7481 terms, 182 types)
-  2. unison_http_4_0_0/   (24792 terms, 642 types)
+  1. base/                (8236 terms, 179 types)
+  2. unison_http_5_0_2/   (48712 terms, 1208 types)
   3. unison_json_1_3_5/   (8184 terms, 189 types)
-  4. unison_routes_6_3_3/ (127000 terms, 3311 types)
+  4. unison_routes_6_3_5/ (227003 terms, 5671 types)
 ```
 
 ```unison
@@ -906,6 +906,7 @@ ConversionResponse.toJson = cases
 
 convertTemperature : Text -> Text -> Float -> Either Text Float
 convertTemperature from to value =
+  use Float + / - *
   match (from, to) with
     ("celsius", "fahrenheit")  -> Right(value * 9.0 / 5.0 + 32.0)
     ("fahrenheit", "celsius")  -> Right((value - 32.0) * 5.0 / 9.0)
@@ -941,4 +942,16 @@ unitConversionService = do
   printLine "Server running on port 8080. Press <enter> to stop."
   _ = readLine()
   stop()
+```
+
+The `unitConversionService` is set up to run this service locally. Save your scratch file and issue the following in the UCM to start the server:
+
+```bash
+unit-converter-service/main> run unitConversionService
+```
+
+Check that your service is running by visiting `http://localhost:8080/convert/temperature?from=celsius&to=fahrenheit&value=100` in your browser or by using `curl`:
+
+```bash
+$ curl -X GET "http://localhost:8080/convert/temperature?from=celsius&to=fahrenheit&value=100"
 ```
