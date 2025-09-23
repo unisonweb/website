@@ -1262,7 +1262,21 @@ grade score =
 
 </div><div>
 
-Java switch statements do not support guards. You would need to use if/else statements for similar functionality.
+As of Java 21, switch statements support pattern guards with `when` clauses:
+
+```java
+String grade(Integer score) {
+    return switch (score) {
+        case Integer s when s >= 90 -> "A";
+        case Integer s when s >= 80 -> "B";
+        case Integer s when s >= 70 -> "C";
+        case Integer s when s >= 60 -> "D";
+        default -> "F";
+    };
+}
+```
+
+In older versions of Java, you would need to use if/else statements for similar functionality.
 
 ```java
 String grade(int score) {
