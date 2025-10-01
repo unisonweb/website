@@ -25,7 +25,6 @@ const UNISON_SHARE_BASE_URL = "https://share.unison-lang.org";
 // Run the build process!
 build();
 
-
 // ----------------------
 
 function build() {
@@ -441,8 +440,8 @@ function updateContent(frontmatter, prefix, rawContent) {
     if (source?.getAttribute("type") === "youtube") {
       const iframe = dom.window.document.createElement("iframe");
       iframe.src = source.getAttribute("src");
-      iframe.setAttribute("width", "580");
-      iframe.setAttribute("height", "436");
+      iframe.setAttribute("width", "640");
+      iframe.setAttribute("height", "390");
       iframe.setAttribute("frameborder", "0");
       iframe.setAttribute(
         "allow",
