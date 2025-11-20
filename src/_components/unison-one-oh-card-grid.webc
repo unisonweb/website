@@ -232,29 +232,43 @@
   </featured-card>
 
   <featured-card
-    @title="Community"
+    @title="Join us today"
     class="featured_1-1 community featured_color_pale-green">
     <featured-icon slot="icon" color="green" size="small">
       <icon-wireframe-globe></icon-wireframe-globe>
     </featured-icon>
 
-    <p slot="description">
-      You are the best part of Unison's year. We are constantly inspired by the community of friendly, helpful, and intrepid Unison programmers. <strong>Thank you for being here!</strong>
-    </p>
+    <div slot="description">
+      <p>
+        Shape the future of Unison with us.
+      </p>
+      <div class="ctas">
+        <a href="https://unison-lang.org/quickstart" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+          <icon-rocket></icon-rocket>Get started coding
+        </a>
+        <a href="https://unison-lang.org/discord" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+          <icon-discord></icon-discord>
+          Join the community
+        </a>
+        <a href="https://bsky.app/intent/compose?text=🎉 Unison 1.0 has landed! @unison-lang.org https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+          <icon-bluesky></icon-bluesky>
+          Share on Bluesky
+        </a>
+        <a href="https://twitter.com/intent/tweet?text=🎉 Unison 1.0 has landed @unsionweb!&url=https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+          <icon-twitter></icon-twitter>
+          Share on Twitter/X
+        </a>
+        <a href="https://fosstodon.org/share?text=🎉 Unison 1.0 has landed!&url=https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+          <icon-mastodon></icon-mastodon>
+          Share on Mastodon
+        </a>
+        <a href="mailto:hello@unison.cloud" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+          <icon-conversation></icon-conversation> Use Unison at your org?
+        </a>
+      </div>
+    </div>
 
     <div slot="graphic">
-      <a href="https://unison-lang.org/discord" class="button medium contained primary-mono" target="_blank">
-        Join our Discord
-      </a>
-
-      <div class="word-soup">
-        <span class="word">Launched a newsletter</span>
-        <span class="word">824 new people in Discord</span>
-        <span class="word">Unison Share open sourced</span>
-        <span class="word">Advent of Code</span>
-        <span class="word">Community survey</span>
-        <span class="word">Community meetup in the Netherlands</span>
-      </div>
     </div>
   </featured-card>
 
@@ -284,33 +298,6 @@
       </div>
     </div>
   </featured-card>
-
-  <featured-card
-    @title="Help shape the future of Unison"
-    class="featured_1-1 help-shape ">
-
-    <featured-icon slot="icon" color="dark-gray" size="small">
-      <icon-unison-mark></icon-unison-mark>
-    </featured-icon>
-    <div slot="description">
-      <p>
-        Stay up to date; join the community.
-      </p>
-      <div class="ctas">
-        <a href="https://unison-lang.org/discord" class="button medium primary-mono contained content-icon-then-label" target="_blank">
-          <icon-discord></icon-discord>
-          Join Discord
-        </a>
-        <a href="https://bsky.app/intent/compose?text=Unison 2024 featured is here! ✨ A look back at a year of Unison features, contributions, and achievements and a peek at what's to come. @unison-lang.org https://unison-lang.org/featured2024" class="button medium primary-mono contained content-icon-then-label" target="_blank">
-          <icon-bluesky></icon-bluesky> Share on Bluesky
-        </a>
-      </div>
-    </div>
-
-    <div slot="graphic">
-    </div>
-  </featured-card>
-
 
 </template>
 
@@ -577,14 +564,14 @@
     height: 2rem;
   }
 
-  :host .help-shape .ctas {
+  :host .community .ctas {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     margin-top: 2rem;
   }
 
-  :host .help-shape .button {
+  :host .community .button {
     display: flex;
     flex-grow: 0;
     width: fit-content;
