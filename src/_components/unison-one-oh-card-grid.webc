@@ -304,7 +304,7 @@
     class="featured_1-1 faq">
 
     <featured-icon slot="icon" color="dark-gray" size="small">
-f      <icon-question-mark></icon-question-mark>
+      <icon-question-mark></icon-question-mark>
     </featured-icon>
     <div class="faq-items" slot="description">
       <faq-item @question="Why make a whole new programming language? Couldn't you add Unison's features to another language?">
