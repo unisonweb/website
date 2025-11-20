@@ -85,40 +85,47 @@ eleventyExcludeFromCollections: false
       <page-header></page-header>
       <header class="unison-featured-header">
         <h1>Unison 1.0 is here!</h1>
-        <p>We're thrilled to announce the 1.0 release of Unison 🎉</p>
+        <p>We're thrilled to announce the 1.0 release of Unison 🎉
+          This milestone reflects the dedication of a talented team of engineers and the contributions of a vibrant community of developers, maintainers, and early adopters who have indelibly shaped the language and its ecosystem. </p>
       </header>
 
       <article>
         <section>
-          <p>We're thrilled to announce the 1.0 release of Unison. This milestone reflects the dedication of a talented team of engineers and the contributions of a vibrant community of developers, maintainers, and early adopters who have indelibly shaped the language and its ecosystem. </p>
-
-          <featured-card @title="Whats in it?" class="featured_1-1 featured_components" >
-            <featured-icon slot="icon" color="blue" size="small">
+          <featured-card @title="We did it!" class="featured_1-1 featured_components" >
+            <featured-icon slot="icon" color="orange" size="small">
               <icon-trophy></icon-trophy>
             </featured-icon>
             <div slot="description">
               <p>Unison 1.0 marks a point where the language, distributed runtime, and developer workflow have stabilized. Over the past few years, we've refined the core language, optimized the programming workflow, built collaborative tooling, and created a deployment platform for your Unison apps and services.</p>
               <p>To consider this benchmark realized, we focused on delivering a set of components that together provide a fully-featured foundation for building your work on Unison. Here's what we've built to get there.</p>
             </div>
-            <ul slot="graphic" class="component-overview side-by-side">
-              <div class="component"><strong>Collaboration and code-review tooling</strong> Streamlined tools for team workflows, including tickets, reviewing, and merging code</div>
-              <div class="component"><strong>Unison Cloud</strong> Our platform for deploying Unison applications</div>
-              <div class="component"><strong>"Bring Your Own Cloud"</strong> A Unison Cloud offering that can run on any container-based infrastructure</div>
-              <div class="component"><strong>Refined programming workflow</strong> We've iterated on the high-friction parts of the dev experience</div>
-              <div class="component"><strong>Runtime optimizations</strong> Significant improvements to our interpreter's speed and efficiency</div>
-              <div class="component"><strong>Distributed systems libraries and frameworks</strong> We provide the building blocks for scalable, fault-tolerant applications</div>
+            <div slot="graphic" class="component-overview side-by-side">
+              <div class="component"><strong>Collaborative tooling</strong> Streamlined tools for team workflows</div>
+              <div class="component"><strong>Unison Cloud</strong> Out platform for deploying Unison apps</div>
+              <div class="component"><strong>"Bring Your Own Cloud"</strong> Run our Cloud on any container-based infra</div>
+              <div class="component"><strong>Refined DX</strong> We've iterated on the high-friction parts of the dev experience</div>
+              <div class="component"><strong>Runtime optimizations</strong> Vast improvements to our interpreter's speed and efficiency</div>
+              <div class="component"><strong>Distributed systems frameworks</strong> We provide the building blocks for scalable, fault-tolerant apps</div>
               <div class="component"><strong>Unison Share</strong> A polished interface for browsing and discovering code</div>
-              <div class="component"><strong>Community and contributor ecosystem</strong> A growing base supporting the language and tooling</div>
-            </ul>
+              <div class="component"><strong>Contributor ecosystem</strong> A growing community supporting the language and tooling</div>
+            </div>
           </featured-card>
 
-          <p><br />Far from being "done", Unison will continue to evolve and change. We're excited to focus on what comes next: expanding integrations with existing tools, adding products and frameworks built on our platform, deepening our libraries, and supporting the ambitious projects you'll make with Unison.</p>
-        </section>
-        <section>
-          <h2>What is Unison?</h2>
-          <p>Unison is a programming language built around <a href="/docs/the-big-idea/">one big idea</a>: let's identify a definition by its actual contents, <strong>not</strong> just by an identifier that was also the name of every past version of the function over time.</p>
-          <p>Unison code lives in a database (your "codebase"); the code only exists in text files <em>while</em> you're editing it. The internal representation is converted to and from text on demand as you work. </p>
-          <p>We built Unison's tooling, ecosystem, and deployment platform from the ground up to leverage this core idea. As a result, we never need to compile the same Unison code twice; many versioning conflicts are no longer conflicts; and we don't need complicated and error-prone cache invalidation schemes to keep things snappy. This, combined with Unison's "everything is serializable" approach, means we're able to write and deploy entire elastic distributed systems within a single program.</p>
+          <br />
+
+          <featured-card clas="featured_1-1"><p slot="description">Far from being "done", Unison will continue to evolve and change. We're excited to focus on what comes next: expanding integrations with existing tools, adding products and frameworks built on our platform, deepening our libraries, and supporting the ambitious projects you'll make with Unison.</p>
+          </featured-card>
+
+          <br />
+
+          <featured-card @title="What is Unison?" class="featured_1-1">
+            <div slot="description">
+              <p>Unison is a programming language built around <a href="/docs/the-big-idea/">one big idea</a>: let's identify a definition by its actual contents, <strong>not</strong> just by an identifier that was also the name of every past version of the function over time.</p>
+              <p>Unison code lives in a database (your "codebase"); the code only exists in text files <em>while</em> you're editing it. The internal representation is converted to and from text on demand as you work. </p>
+              <p>We built Unison's tooling, ecosystem, and deployment platform from the ground up to leverage this core idea. As a result, we never need to compile the same Unison code twice; many versioning conflicts are no longer conflicts; and we don't need complicated and error-prone cache invalidation schemes to keep things snappy. This, combined with Unison's "everything is serializable" approach, means we're able to write and deploy entire elastic distributed systems within a single program.</p>
+            </div>
+          </featured-card>
+
         </section>
       </article>
       <unison-one-oh-card-grid></unison-one-oh-card-grid>
@@ -221,7 +228,7 @@ eleventyExcludeFromCollections: false
     height: 36.75rem;
 
     .featured_content {
-      width: 40%;
+      width: 55%;
     }
 
     .component-overview {
