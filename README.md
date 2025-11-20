@@ -33,6 +33,7 @@ initialize the required Unison `Doc`.
 
 ## Running the website locally
 
+Once you've followed the steps from the previous section,
 `npm start` will both build and start a local version of the website.
 
 ## Build process
