@@ -56,9 +56,8 @@
       <icon-unison-mark></icon-unison-mark>
     </featured-icon>
     <div slot="description">
-      <p>Unison is a programming language built around <a href="/docs/the-big-idea/">one big idea</a>: let's identify a definition by its actual contents, <strong>not</strong> just by an identifier that was also the name of every past version of the function over time.</p>
-      <p>Unison code lives in a database (your "codebase"); the code only exists in text files <em>while</em> you're editing it. The internal representation is converted to and from text on demand as you work. </p>
-      <p>We built Unison's tooling, ecosystem, and deployment platform from the ground up to leverage this core idea. As a result, we never need to compile the same Unison code twice; many versioning conflicts are no longer conflicts; and we don't need complicated and error-prone cache invalidation schemes to keep things snappy. This, combined with Unison's "everything is serializable" approach, means we're able to write and deploy entire elastic distributed systems within a single program.</p>
+      <p>Unison is a programming language built around <a href="/docs/the-big-idea/">one big idea</a>: let's identify a definition by its actual contents, <strong>not</strong> just by the same name that also referred to its older version. Unison code lives in a database called your "codebase". The human-friendly names are there too, but they're just for looks, when your code is rendered on the fly as text <em>when</em> you're reading or editing it.</p>
+      <p>Our ecosystem leverages this core idea from the ground up. Some benefits: we never compile the same code twice; many versioning conflicts… aren't; and we're able to build sophisticated self-deploying distributed systems within a single strongly-typed program.</p>
     </div>
   </featured-card>
 
