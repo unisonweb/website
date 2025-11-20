@@ -89,6 +89,19 @@ a.button:hover {
   color: var(--color-button-default-hover-fg);
 }
 
+.button.contained.outlined {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.button.contained.outlined .icon {
+}
+
+.button.contained.outlined:hover {
+  border: 1px solid rgba(0, 0, 0, 0.75);
+}
+.button.contained.outlined:hover .icon {
+}
+
 .button.contained.primary-mono {
   color: var(--color-button-primary-mono-fg);
   background: var(--color-button-primary-mono-bg);

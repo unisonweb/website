@@ -31,8 +31,8 @@
   customElements.define("unison-one-oh-card-grid", UnisonOneOhCardGrid);
 </script>
 <template webc:root>
-  <featured-card @title="We did it!" class="featured_1-1 featured_components" >
-    <featured-icon slot="icon" color="orange" size="small">
+  <featured-card @title="We did it!" class="featured_1-1 featured_components featured_color_purple-gradient">
+    <featured-icon slot="icon" color="purple" size="small">
       <icon-trophy></icon-trophy>
     </featured-icon>
     <div slot="description">
@@ -51,11 +51,10 @@
     </div>
   </featured-card>
 
-  <featured-card clas="featured_1-1">
-    <p slot="description">Far from being "done", Unison will continue to evolve and change. We're excited to focus on what comes next: expanding integrations with existing tools, adding products and frameworks built on our platform, deepening our libraries, and supporting the ambitious projects you'll make with Unison.</p>
-  </featured-card>
-
   <featured-card @title="What is Unison?" class="featured_1-1">
+    <featured-icon slot="icon" color="green" size="small">
+      <icon-unison-mark></icon-unison-mark>
+    </featured-icon>
     <div slot="description">
       <p>Unison is a programming language built around <a href="/docs/the-big-idea/">one big idea</a>: let's identify a definition by its actual contents, <strong>not</strong> just by an identifier that was also the name of every past version of the function over time.</p>
       <p>Unison code lives in a database (your "codebase"); the code only exists in text files <em>while</em> you're editing it. The internal representation is converted to and from text on demand as you work. </p>
@@ -80,11 +79,12 @@
     class="featured_1-3 featured_color_pale-green"
   >
     <featured-icon slot="icon" color="green" size="small">
-      <icon-computer></icon-computer>
+      <icon-pencil-ruler></icon-pencil-ruler>
     </featured-icon>
     <p slot="description">
-      UCM Desktop is our GUI code browser for your local codebase.
-      <a href="https://github.com/unisonweb/ucm-desktop/releases" target="_blank" class="contained button primary-mono medium">Download latest version"</a>
+      <a href="https://github.com/unisonweb/ucm-desktop/releases"
+        target="_blank">UCM Desktop</a> is our GUI code browser for your local
+      codebase.
     </p>
   </featured-card>
 
@@ -133,10 +133,10 @@
 
   <featured-card
     @title="What does Unison code look like?"
-    class="featured_1-1"
+    class="featured_1-1 what-does-unison-code-look-like featured_color_dark-purple-gradient"
   >
-    <featured-icon slot="icon" color="blue" size="small">
-      <icon-unison-mark></icon-unison-mark>
+    <featured-icon slot="icon" color="purple" size="small">
+      <icon-lines-of-code></icon-lines-of-code>
     </featured-icon>
     <div slot="description">
       <p>Here's a Unison program that prompts the user to guess a random number from the command line.</p>
@@ -149,7 +149,7 @@
         <li><a href="/docs/fundamentals/values-and-functions/delayed-computations/">Delayed computations</a> - for representing non-eager evaluation</li>
       </ul>
 
-      <a href="/docs/at-a-glance/" class="button contained primary-mono medium">Syntax overview</a>
+      <a href="/docs/at-a-glance/" class="button contained outlined medium">Syntax overview</a>
     </div>
 
     <div slot="graphic" class="side-by-side">
@@ -232,6 +232,33 @@
   </featured-card>
 
   <featured-card
+    @title="Whats next?"
+    class="featured_1-1 next-2025 featured_color_space"
+  >
+    <featured-icon slot="icon" color="purple" size="small">
+      <icon-crystal-ball></icon-crystal-ball>
+    </featured-icon>
+    <p slot="description">
+      We're investing in a new UI to manage and write Unison code, organizational support for collaborating with teams, more Unison libraries, and core language improvements, like record types and runtime performance boosts. It's going to be a great year. Join us!
+    </p>
+    <div slot="graphic">
+      <a href="https://unison-lang.org/roadmap" class="button medium primary-mono contained" target="_blank">
+        Follow our roadmap
+      </a>
+      <div class="word-soup">
+        <span class="word">UCM Desktop</span>
+        <span class="word">Improved record types</span>
+        <span class="word">Unison Share notifications</span>
+        <span class="word">Scheduled jobs and cron</span>
+        <span class="word">Contribution code review</span>
+        <span class="word">BYOC: Bring your own Cloud</span>
+        <span class="word">Find usages on Unison Share</span>
+        <span class="word">Organizations on Unison Share</span>
+      </div>
+    </div>
+  </featured-card>
+
+  <featured-card
     @title="Join us today"
     class="featured_1-1 community featured_color_pale-green">
     <featured-icon slot="icon" color="green" size="small">
@@ -273,29 +300,45 @@
   </featured-card>
 
   <featured-card
-    @title="Whats next?"
-    class="featured_1-1 next-2025 featured_color_space"
-  >
-    <featured-icon slot="icon" color="purple" size="small">
-      <icon-crystal-ball></icon-crystal-ball>
+    @title="Frequently asked questions"
+    class="featured_1-1 faq">
+
+    <featured-icon slot="icon" color="dark-gray" size="small">
+      <icon-question-mark></icon-question-mark>
     </featured-icon>
-    <p slot="description">
-      We're investing in a new UI to manage and write Unison code, organizational support for collaborating with teams, more Unison libraries, and core language improvements, like record types and runtime performance boosts. It's going to be a great year. Join us!
-    </p>
+    <div class="faq-items" slot="description">
+      <faq-item @question="Why make a whole new programming language? Couldn't you add Unison's features to another language?">
+        <p>
+          Unison's hash-based, database-backed representation changes how code is identified, versioned, and shared. As a consequence, the workflow, toolchain, and deployment model are not add-ons; they emerge naturally from the language's design. In theory, you could try to retrofit these ideas onto another language, but doing so might be fragile, difficult to make reliable in production, and would likely require rewriting major parts of the existing tooling while restricting language features.
+        </p>
+        <p>You don't build a rocket ship out of old cars, you start fresh.</p>
+      </faq-item>
+      <faq-item @question="Is anyone using Unison in prod?">
+        <p>Yes, <strong>we</strong> are! Our entire Cloud orchestration layer is written entirely in Unison, and it has powered Unison Cloud from day one.</p>
+      </faq-item>
+      <faq-item @question="I'm concerned about vendor lock-in; do I have to use Unison Cloud to deploy my services?">
+        <p>No, Unison is an open source, general programming language, and you can [export a compiled binary](https://www.unison-lang.org/docs/usage-topics/running-programs/) and [deploy it via Docker](https://www.unison-lang.org/docs/usage-topics/docker/), or however you prefer.</p>
+        <p>You can also run Unison Cloud on your own infrastructure. Both [Unison Cloud](https://www.unison.cloud/) and our [Bring Your Own Cloud (BYOC)](https://www.unison.cloud/byoc/) offer generous free tiers.</p>
+      </faq-item>
+      <faq-item @question="What does collaborating look like in Unison?">
+        <p>Unison Share supports organizations, tickets, code contributions (pull requests), code review, and more.</p>
+          <p>In many ways Unison's story for collaboration outstrips the status quo of developer tooling. e.g. merge conflicts only happen when two people actually modify the same definition; not because you moved some stuff around in your files.</p>
+      </faq-item>
+      <faq-item @question="How does version control work in the absence of `git`?">
+        <p>Unison implements a native version control system: with projects, branches, clone, push, pull, merge, etc.</p>
+      </faq-item>
+      <faq-item @question="Do I have to use a specific IDE?">
+        <p>No, you can pick any IDE that you're familiar with. Unison exposes an LSP server and many community members have contributed [their own editor setups here](https://www.unison-lang.org/docs/usage-topics/editor-setup/).</p>
+      </faq-item>
+      <faq-item @question="What about interop with other languages?">
+        <p>Work is underway today to add a C FFI!</p>
+      </faq-item>
+      <faq-item @question="Without files, how do I see my codebase?">
+        <p>Your codebase structure is viewable with the [Unison Desktop app](https://www.unison-lang.org/docs/tooling/ucm-desktop/). The UCM Desktop app also features click-through to definition tooling and rich rendering of docs.</p>
+      </faq-item>
+    </div>
+
     <div slot="graphic">
-      <a href="https://unison-lang.org/roadmap" class="button medium primary-mono contained" target="_blank">
-        Follow our roadmap
-      </a>
-      <div class="word-soup">
-        <span class="word">UCM Desktop</span>
-        <span class="word">Improved record types</span>
-        <span class="word">Unison Share notifications</span>
-        <span class="word">Scheduled jobs and cron</span>
-        <span class="word">Contribution code review</span>
-        <span class="word">BYOC: Bring your own Cloud</span>
-        <span class="word">Find usages on Unison Share</span>
-        <span class="word">Organizations on Unison Share</span>
-      </div>
     </div>
   </featured-card>
 
@@ -310,16 +353,17 @@
   }
 
   :host .featured_components {
-    height: 36.75rem;
+    height: 22rem;
+    color: var(--color-gray-darken-30);
 
     .featured_content {
       width: 55%;
     }
-
+    
     .component-overview {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.75rem;
       font-size: var(--font-size-medium);
       padding: 1rem;
       margin-top: 1.5rem;
@@ -329,7 +373,6 @@
         flex-direction: column;
         padding: 0.5rem 0.75rem;
         border-radius: 0.25rem;
-        border: 1px solid var(--color-gray-lighten-40);
         background: #fff;
         color: var(--color-gray-darken-30);
 
@@ -341,6 +384,19 @@
     }
   }
 
+  :host .what-does-unison-code-look-like {
+    height: 32.5rem;
+  }
+
+  :host .what-does-unison-code-look-like code-example {
+    position: absolute;
+    right: 2rem;
+    top: 4.8rem;
+  }
+
+  :host .what-does-unison-code-look-like code-example:hover {
+    transform: translateY(-4rem);
+  }
 
   :host .unison-cloud .code-example {
     position: absolute;
@@ -605,6 +661,12 @@
 
   :host .featured_cloud code-example {
     margin: 0 2rem;
+  }
+
+  :host .faq-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   @media only screen and (max-width: 1023px) {

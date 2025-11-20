@@ -65,6 +65,17 @@
     --featured-kpi-color: var(--color-purple-1);
   }
 
+  :host.featured_color_purple-gradient {
+    background: 
+      linear-gradient(
+        -45deg,
+        var(--color-orange-4),
+        var(--color-purple-5)
+      );
+    --featured-kpi-border-color: var(--color-purple-5);
+    --featured-kpi-color: var(--color-purple-1);
+  }
+
   :host.featured_color_pale-pink {
     background: var(--color-pink-5);
     --featured-kpi-border-color: var(--color-pink-1-25pct);
@@ -91,6 +102,22 @@
 
   :host.featured_color_space h2 {
     color: var(--color-gray-lighten-100);
+  }
+
+  :host.featured_color_dark-purple-gradient {
+    background: 
+      linear-gradient(
+        -45deg,
+        var(--color-purple-2),
+        var(--color-purple-6)
+      );
+    --featured-kpi-border-color: var(--color-purple-5);
+    --featured-kpi-color: var(--color-purple-1);
+    color: var(--color-gray-darken-30);
+
+    a:not(.button) {
+      color: var(--color-blue-1);
+    }
   }
 
   :host.featured_3-3 {
