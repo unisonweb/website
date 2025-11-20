@@ -178,7 +178,7 @@
   }
 
   :host:has(.side-by-side) .featured_content {
-    width: 40%;
+    width: 55%;
   }
 
   :host .side-by-side {
