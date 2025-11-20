@@ -94,7 +94,7 @@ eleventyExcludeFromCollections: false
 
           <featured-card @title="Whats in it?" class="featured_1-1 featured_components" >
             <featured-icon slot="icon" color="blue" size="small">
-              <icon-unison-mark></icon-unison-mark>
+              <icon-trophy></icon-trophy>
             </featured-icon>
             <div slot="description">
               <p>Unison 1.0 marks a point where the language, distributed runtime, and developer workflow have stabilized. Over the past few years, we've refined the core language, optimized the programming workflow, built collaborative tooling, and created a deployment platform for your Unison apps and services.</p>

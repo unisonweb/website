@@ -33,7 +33,7 @@
 <template webc:root>
   <featured-card
     @title="The Codebase Manager"
-    class="featured_1-2 featured_color_pale-pink"
+    class="featured_2-3 featured_color_pale-pink"
   >
     <featured-icon slot="icon" color="pink" size="small">
       <icon-cli></icon-cli>
@@ -44,11 +44,24 @@
   </featured-card>
 
   <featured-card
+    @title="Unison Desktop"
+    class="featured_1-3 featured_color_pale-green"
+  >
+    <featured-icon slot="icon" color="green" size="small">
+      <icon-computer></icon-computer>
+    </featured-icon>
+    <p slot="description">
+      UCM Desktop is our GUI code browser for your local codebase.
+      <a href="https://github.com/unisonweb/ucm-desktop/releases" target="_blank" class="contained button primary-mono medium">Download latest version"</a>
+    </p>
+  </featured-card>
+
+  <featured-card
     @title="Unison Share"
     class="featured_1-2 featured_color_pale-purple"
   >
     <featured-icon slot="icon" color="purple" size="small">
-      <icon-unison-mark></icon-unison-mark>
+      <icon-gift></icon-gift>
     </featured-icon>
     <p slot="description">
       <a href="https://share.unison-lang.org" target="_blank">Unison Share</a>
@@ -62,21 +75,8 @@
   </featured-card>
 
   <featured-card
-    @title="Unison Desktop"
-    class="featured_1-2 featured_color_pale-green"
-  >
-    <featured-icon slot="icon" color="green" size="small">
-      <icon-unison-mark></icon-unison-mark>
-    </featured-icon>
-    <p slot="description">
-      UCM Desktop is our GUI code browser for your local codebase.
-      <a href="https://github.com/unisonweb/ucm-desktop/releases" target="_blank" class="contained button primary-mono medium">Download latest version"</a>
-    </p>
-  </featured-card>
-
-  <featured-card
     @title="Unison Cloud"
-    class="featured_1-2 featured_color_pale-blue"
+    class="featured_1-2 featured_color_pale-blue featured_cloud"
   >
     <featured-icon slot="icon" color="blue" size="small">
       <icon-cloud></icon-cloud>
@@ -84,6 +84,19 @@
     <p slot="description">
       <a href="https://www.unison.cloud" target="_blank">Unison Cloud</a> is our platform for deploying and scaling Unison applications. With the Unison Cloud client library, transition from writing local prototypes to fully deployed distributed applications using a simple, familiar API—no build systems, inter-node protocols, YAML files, or deployment scripts required. On the Cloud, your applications and infrastructure are defined in the same program, letting you manage services and deployments entirely in Unison code.
     </p>
+
+    <div slot="graphic">
+<code-example @title="~/scratch.u" @numLines="10"><span class="syntax"><span class="hash-qualifier">deploy</span><span class="type-ascription-colon"> :</span><span class="blank"> </span><span class="delay-force-char">'</span><span class="ability-braces">{</span><span class="type-reference">IO</span><span class="blank">,</span><span class="blank"> </span><span class="type-reference">Exception</span><span class="ability-braces">}</span><span class="blank"> </span><span class="unit">()</span><span class="blank">
+</span><span class="hash-qualifier">deploy</span><span class="binding-equals"> = </span><span class="term-reference"><span class="fqn"><span class="segment">Cloud</span><span class="sep">.</span><span class="segment">main</span></span></span><span class="blank"> </span><span class="control-keyword">do</span><span class="blank">
+</span><span class="blank">  </span><span class="var">name</span><span class="binding-equals"> =</span><span class="blank"> </span><span class="term-reference"><span class="fqn"><span class="segment">ServiceName</span><span class="sep">.</span><span class="segment">named</span></span></span><span class="blank"> </span><span class="text-literal">"hello-world"</span><span class="blank">
+</span><span class="blank">  </span><span class="var">serviceHash</span><span class="binding-equals"> =
+   </span><span class="blank"> </span><span class="term-reference">deployHttp</span><span class="blank"> </span><span class="delay-force-char">!</span><span class="term-reference"><span class="fqn"><span class="segment">Environment</span><span class="sep">.</span><span class="segment">default</span></span></span><span class="blank"> </span><span class="term-reference">helloWorld</span><span class="blank">
+</span><span class="blank">  </span><span class="term-reference"><span class="fqn"><span class="segment">ServiceName</span><span class="sep">.</span><span class="segment">assign</span></span></span><span class="blank"> </span><span class="var">name</span><span class="blank"> </span><span class="var">serviceHash</span><span class="blank"></span>
+
+
+
+</code-example>
+    </div>
   </featured-card>
 
   <featured-card
@@ -170,7 +183,7 @@
     class="featured_1-1 featured_color_pale-pink"
   >
     <featured-icon slot="icon" color="pink" size="small">
-      <icon-cli></icon-cli>
+      <icon-pulse></icon-pulse>
     </featured-icon>
     <p slot="description">
       We shipped new tools and features for every part of the programming experience,
@@ -512,7 +525,6 @@
     width: fit-content;
   }
 
-
   :host {
     p, ul, ol {
       margin-bottom: 1em;
@@ -537,6 +549,10 @@
       flex-direction: column;
       gap: 0.5rem;
     }
+  }
+
+  :host .featured_cloud code-example {
+    margin: 0 2rem;
   }
 
   @media only screen and (max-width: 1023px) {
