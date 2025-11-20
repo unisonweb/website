@@ -158,7 +158,7 @@
   <span class="term-reference">printLine</span> <span class="text-literal">"Guess a number between 0 and 100"</span>
 
   <span class="var">loop</span><span class="binding-equals"> = </span><span class="control-keyword">do</span>
-    <span class="control-keyword">match</span> (<span class="term-reference">console.readLine()</span> |> <span class="term-reference">Nat.fromText</span>) <span class="control-keyword">with</span>
+    <span class="control-keyword">match</span> (<span class="term-reference">console.readLine</span><span class="delay-force-char">()</span> |> <span class="term-reference">Nat.fromText</span>) <span class="control-keyword">with</span>
       <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> == <span class="var">target</span> ->
         <span class="term-reference">printLine</span> <span class="text-literal">"Correct! You win!"</span>
       <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> < <span class="var">target</span> ->
