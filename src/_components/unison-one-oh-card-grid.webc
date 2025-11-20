@@ -217,15 +217,16 @@
       <icon-pulse></icon-pulse>
     </featured-icon>
     <p slot="description">
-      We shipped new tools and features for every part of the programming experience,
-      from how you download libraries, to faster runtime performance, to how your codebase stores its history.
+      Our momentum is powered by a prolific team and a remarkable community:
     </p>
     <div slot="graphic" class="kpis">
       <featured-kpi-group>
-        <featured-kpi kpi="3069" label="Commits"></featured-kpi>
-        <featured-kpi kpi="436" label="PRs merged"></featured-kpi>
-        <featured-kpi kpi="17" label="Releases"></featured-kpi>
-        <featured-kpi kpi="9414" label="Release downloads"></featured-kpi>
+        <featured-kpi kpi="26,558+" label="Commits"></featured-kpi>
+        <featured-kpi kpi="3,490+" label="PRs merged"></featured-kpi>
+        <featured-kpi kpi="6.2k" label="Github stars"></featured-kpi>
+        <featured-kpi kpi="152,459" label="Unison library downloads"></featured-kpi>
+        <featured-kpi kpi="139,811+" label="Published Unison definitions"></featured-kpi>
+        <featured-kpi kpi="1,300+" label="Unison project authors"></featured-kpi>
       </featured-kpi-group>
     </div>
   </featured-card>
@@ -358,7 +359,7 @@
     .featured_content {
       width: 55%;
     }
-    
+
     .component-overview {
       display: flex;
       flex-direction: column;
