@@ -217,7 +217,7 @@
       <icon-pulse></icon-pulse>
     </featured-icon>
     <p slot="description">
-      Our momentum is powered by a prolific team and the remarkable community:
+      Our momentum is powered by a prolific team and a remarkable community:
     </p>
     <div slot="graphic" class="kpis">
       <featured-kpi-group>
