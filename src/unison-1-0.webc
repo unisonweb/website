@@ -91,22 +91,28 @@ eleventyExcludeFromCollections: false
       <article>
         <section>
           <p>We're thrilled to announce the 1.0 release of Unison. This milestone reflects the dedication of a talented team of engineers and the contributions of a vibrant community of developers, maintainers, and early adopters who have indelibly shaped the language and its ecosystem. </p>
-          <p>Unison 1.0 marks a point where the language, distributed runtime, and developer workflow have stabilized. Over the past few years, we've refined the core language, optimized the programming workflow, built collaborative tooling, and created a deployment platform for your Unison apps and services. </p>
-          <p>To consider this benchmark realized, we focused on delivering a set of components that together provide a fully-featured foundation for building your work on Unison. Here's what we've built to get there: </p>
 
+          <featured-card @title="Whats in it?" class="featured_1-1 featured_components" >
+            <featured-icon slot="icon" color="blue" size="small">
+              <icon-unison-mark></icon-unison-mark>
+            </featured-icon>
+            <div slot="description">
+              <p>Unison 1.0 marks a point where the language, distributed runtime, and developer workflow have stabilized. Over the past few years, we've refined the core language, optimized the programming workflow, built collaborative tooling, and created a deployment platform for your Unison apps and services.</p>
+              <p>To consider this benchmark realized, we focused on delivering a set of components that together provide a fully-featured foundation for building your work on Unison. Here's what we've built to get there.</p>
+            </div>
+            <ul slot="graphic" class="component-overview side-by-side">
+              <div class="component"><strong>Collaboration and code-review tooling</strong> Streamlined tools for team workflows, including tickets, reviewing, and merging code</div>
+              <div class="component"><strong>Unison Cloud</strong> Our platform for deploying Unison applications</div>
+              <div class="component"><strong>"Bring Your Own Cloud"</strong> A Unison Cloud offering that can run on any container-based infrastructure</div>
+              <div class="component"><strong>Refined programming workflow</strong> We've iterated on the high-friction parts of the dev experience</div>
+              <div class="component"><strong>Runtime optimizations</strong> Significant improvements to our interpreter's speed and efficiency</div>
+              <div class="component"><strong>Distributed systems libraries and frameworks</strong> We provide the building blocks for scalable, fault-tolerant applications</div>
+              <div class="component"><strong>Unison Share</strong> A polished interface for browsing and discovering code</div>
+              <div class="component"><strong>Community and contributor ecosystem</strong> A growing base supporting the language and tooling</div>
+            </ul>
+          </featured-card>
 
-          <ul>
-            <li><strong>Collaboration and code-review tooling:</strong> Streamlined tools for team workflows, including tickets, reviewing, and merging code</li>
-            <li><strong>Unison Cloud:</strong> Our platform for deploying Unison applications</li>
-            <li><strong>"Bring Your Own Cloud":</strong> A Unison Cloud offering that can run on any container-based infrastructure</li>
-            <li><strong>Refined programming workflow:</strong> We've iterated on the high-friction parts of the dev experience</li>
-            <li><strong>Runtime optimizations:</strong> Significant improvements to our interpreter's speed and efficiency</li>
-            <li><strong>Distributed systems libraries and frameworks:</strong> We provide the building blocks for scalable, fault-tolerant applications</li>
-            <li><strong>Unison Share:</strong> A polished interface for browsing and discovering code</li>
-            <li><strong>Community and contributor ecosystem:</strong> A growing base supporting the language and tooling</li>
-          </ul>
-
-          <p>Far from being "done", Unison will continue to evolve and change. We're excited to focus on what comes next: expanding integrations with existing tools, adding products and frameworks built on our platform, deepening our libraries, and supporting the ambitious projects you'll make with Unison.</p>
+          <p><br />Far from being "done", Unison will continue to evolve and change. We're excited to focus on what comes next: expanding integrations with existing tools, adding products and frameworks built on our platform, deepening our libraries, and supporting the ambitious projects you'll make with Unison.</p>
         </section>
         <section>
           <h2>What is Unison?</h2>
@@ -208,6 +214,38 @@ eleventyExcludeFromCollections: false
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+    }
+  }
+
+  :host .featured_components {
+    height: 36.75rem;
+
+    .featured_content {
+      width: 40%;
+    }
+
+    .component-overview {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: var(--font-size-medium);
+      padding: 1rem;
+      margin-top: 1.5rem;
+
+      .component {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.25rem;
+        border: 1px solid var(--color-gray-lighten-40);
+        background: #fff;
+        color: var(--color-gray-darken-30);
+
+        strong {
+          font-size: var(--font-size-base);
+        }
+      }
+
     }
   }
 
