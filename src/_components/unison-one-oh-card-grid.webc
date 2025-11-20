@@ -1,0 +1,583 @@
+<script>
+  function rand(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  class UnisonOneOhCardGrid extends HTMLElement {
+    connectedCallback() {
+      this.community();
+    }
+
+    community() {
+      const wordSoup = this.querySelector(".community .word-soup");
+      const words = this.querySelectorAll(".community .word-soup .word");
+      let inFocus = words.length / 2 - 1; // start in the middle
+
+      const animate = () => {
+        words.forEach(w => w.classList.remove("focus"));
+
+        words[inFocus].classList.add("focus");
+        inFocus = inFocus + 1;
+
+        if (inFocus === words.length) {
+          inFocus = 0;
+        }
+      }
+
+      setInterval(animate, 1500);
+    }
+  }
+
+  customElements.define("unison-one-oh-card-grid", UnisonOneOhCardGrid);
+</script>
+<template webc:root>
+  <featured-card
+    @title="The Codebase Manager"
+    class="featured_1-2 featured_color_pale-pink"
+  >
+    <featured-icon slot="icon" color="pink" size="small">
+      <icon-cli></icon-cli>
+    </featured-icon>
+    <p slot="description">
+      The Unison Codebase Manager (ucm) is a command-line tool for (…wait for it…) managing your Unison codebase. You will use it alongside your preferred text editor to add, modify, rename, and delete definitions; install, upgrade, and remove libraries; quickly run your programs, or run test suites.
+    </p>
+  </featured-card>
+
+  <featured-card
+    @title="Unison Share"
+    class="featured_1-2 featured_color_pale-purple"
+  >
+    <featured-icon slot="icon" color="purple" size="small">
+      <icon-unison-mark></icon-unison-mark>
+    </featured-icon>
+    <p slot="description">
+      <a href="https://share.unison-lang.org" target="_blank">Unison Share</a>
+      is our community hub where open- and closed-source projects alike are
+      hosted. In addition to all the features you'd expect of a code-hosting
+        platform—project and code search, individual and organizational
+        accounts, browsing code and docs, reviewing contributions, etc.; thanks
+          to the <a href="/docs/the-big-idea">one big idea</a>, all of the code
+          references are hyperlinked perfectly fine.
+    </p>
+  </featured-card>
+
+  <featured-card
+    @title="Unison Desktop"
+    class="featured_1-2 featured_color_pale-green"
+  >
+    <featured-icon slot="icon" color="green" size="small">
+      <icon-unison-mark></icon-unison-mark>
+    </featured-icon>
+    <p slot="description">
+      UCM Desktop is our GUI code browser for your local codebase.
+      <a href="https://github.com/unisonweb/ucm-desktop/releases" target="_blank" class="contained button primary-mono medium">Download latest version"</a>
+    </p>
+  </featured-card>
+
+  <featured-card
+    @title="Unison Cloud"
+    class="featured_1-2 featured_color_pale-blue"
+  >
+    <featured-icon slot="icon" color="blue" size="small">
+      <icon-cloud></icon-cloud>
+    </featured-icon>
+    <p slot="description">
+      <a href="https://www.unison.cloud" target="_blank">Unison Cloud</a> is our platform for deploying and scaling Unison applications. With the Unison Cloud client library, transition from writing local prototypes to fully deployed distributed applications using a simple, familiar API—no build systems, inter-node protocols, YAML files, or deployment scripts required. On the Cloud, your applications and infrastructure are defined in the same program, letting you manage services and deployments entirely in Unison code.
+    </p>
+  </featured-card>
+
+  <featured-card
+    @title="What does Unison code look like?"
+    class="featured_1-1"
+  >
+    <featured-icon slot="icon" color="blue" size="small">
+      <icon-unison-mark></icon-unison-mark>
+    </featured-icon>
+    <div slot="description">
+      <p>Here's a Unison program that prompts the user to guess a random number from the command line.</p>
+
+      <p>It features several of Unison's language features: </p>
+
+      <ul>
+        <li><a href="/docs/fundamentals/abilities/">Abilities</a> - for functional effect management</li>
+        <li><a href="/docs/fundamentals/control-flow/pattern-matching/">Structural pattern matching</a> - for decomposing types and managing control flow</li>
+        <li><a href="/docs/fundamentals/values-and-functions/delayed-computations/">Delayed computations</a> - for representing non-eager evaluation</li>
+      </ul>
+
+      <a href="/docs/at-a-glance/" class="button contained primary-mono medium">Syntax overview</a>
+    </div>
+
+    <div slot="graphic" class="side-by-side">
+<code-example @title="~/scratch.u" @numLines="10"><span class="syntax"><span class="hash-qualifier">guessingGame</span><span class="type-ascription-colon"> : </span>'{<span class="type-reference">IO</span>, <span class="type-reference">Exception</span>} ()
+<span class="hash-qualifier">guessingGame</span><span class="binding-equals"> = </span><span class="control-keyword">do </span><span class="term-reference"><span class="fqn"><span class="segment">Random</span><span class="sep">.</span><span class="segment">run</span></span></span> <span class="control-keyword">do</span>
+  <span class="var">target</span><span class="binding-equals"> = </span><span class="term-reference">Random.natIn</span> <span class="numeric-literal">0 100</span>
+  <span class="term-reference">printLine</span> <span class="text-literal">"Guess a number between 0 and 100"</span>
+
+  <span class="var">loop</span><span class="binding-equals"> = </span><span class="control-keyword">do</span>
+  <span class="control-keyword">match</span> (<span class="term-reference">console.readLine()</span> |> <span class="term-reference">Nat.fromText</span>) <span class="control-keyword">with</span>
+    <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> == <span class="var">target</span> ->
+      <span class="term-reference">printLine</span> <span class="text-literal">"Correct! You win!"</span>
+    <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> < <span class="var">target</span> ->
+      <span class="term-reference">printLine</span> <span class="text-literal">"Too low, try again"</span>
+      <span class="term-reference">loop()</span>
+    <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> > <span class="var">target</span> ->
+      <span class="term-reference">printLine</span> <span class="text-literal">"Too high, try again"</span>
+      <span class="term-reference">loop()</span>
+    <span class="var">otherwise</span> ->
+      <span class="term-reference">printLine</span> <span class="text-literal">"Invalid input, try again"</span>
+      <span class="term-reference">loop()</span>
+
+  <span class="term-reference">loop()</span>
+</span>
+</code-example>
+    </div>
+  </featured-card>
+
+
+  <featured-card
+    @title="Our road to 1.0"
+    class="featured_1-1 road featured_color_sky">
+    <featured-icon slot="icon" color="orange" size="small">
+      <icon-unfolded-map></icon-unfolded-map>
+    </featured-icon>
+    <p slot="description">
+      The major milestones from 🥚 to 🐣 and 🐥.
+    </p>
+
+    <div slot="graphic" class="road-graphic">
+      <div class="current-slide">
+        <h3>March 2025: Volturno distributed stream processing library</h3>
+        - https://share.unison-lang.org/@systemfw/volturno
+        - (timeline is not accurate but this is the earliest reference I could find to it)
+        - Volturno is a high scale streaming framework for Unison Cloud, with exactly-once processing and seamless, pain-free ops and management. Users can write distributed stream transformations in an easy, declarative API.
+      </div>
+      <div class="timeline">
+        <span>2018</span>
+        <span>2019</span>
+        <span>2020</span>
+        <span>2021</span>
+        <span>2022</span>
+        <span>2023</span>
+        <span>2024</span>
+        <span>2025</span>
+      </div>
+    </div>
+  </featured-card>
+
+
+  <featured-card
+    @title="Metrics"
+    class="featured_1-1 featured_color_pale-pink"
+  >
+    <featured-icon slot="icon" color="pink" size="small">
+      <icon-cli></icon-cli>
+    </featured-icon>
+    <p slot="description">
+      We shipped new tools and features for every part of the programming experience,
+      from how you download libraries, to faster runtime performance, to how your codebase stores its history.
+    </p>
+    <div slot="graphic" class="kpis">
+      <featured-kpi-group>
+        <featured-kpi kpi="3069" label="Commits"></featured-kpi>
+        <featured-kpi kpi="436" label="PRs merged"></featured-kpi>
+        <featured-kpi kpi="17" label="Releases"></featured-kpi>
+        <featured-kpi kpi="9414" label="Release downloads"></featured-kpi>
+      </featured-kpi-group>
+    </div>
+  </featured-card>
+
+  <featured-card
+    @title="Community"
+    class="featured_1-1 community featured_color_pale-green">
+    <featured-icon slot="icon" color="green" size="small">
+      <icon-wireframe-globe></icon-wireframe-globe>
+    </featured-icon>
+
+    <p slot="description">
+      You are the best part of Unison's year. We are constantly inspired by the community of friendly, helpful, and intrepid Unison programmers. <strong>Thank you for being here!</strong>
+    </p>
+
+    <div slot="graphic">
+      <a href="https://unison-lang.org/discord" class="button medium contained primary-mono" target="_blank">
+        Join our Discord
+      </a>
+
+      <div class="word-soup">
+        <span class="word">Launched a newsletter</span>
+        <span class="word">824 new people in Discord</span>
+        <span class="word">Unison Share open sourced</span>
+        <span class="word">Advent of Code</span>
+        <span class="word">Community survey</span>
+        <span class="word">Community meetup in the Netherlands</span>
+      </div>
+    </div>
+  </featured-card>
+
+  <featured-card
+    @title="Whats next?"
+    class="featured_1-1 next-2025 featured_color_space"
+  >
+    <featured-icon slot="icon" color="purple" size="small">
+      <icon-crystal-ball></icon-crystal-ball>
+    </featured-icon>
+    <p slot="description">
+      We're investing in a new UI to manage and write Unison code, organizational support for collaborating with teams, more Unison libraries, and core language improvements, like record types and runtime performance boosts. It's going to be a great year. Join us!
+    </p>
+    <div slot="graphic">
+      <a href="https://unison-lang.org/roadmap" class="button medium primary-mono contained" target="_blank">
+        Follow our roadmap
+      </a>
+      <div class="word-soup">
+        <span class="word">UCM Desktop</span>
+        <span class="word">Improved record types</span>
+        <span class="word">Unison Share notifications</span>
+        <span class="word">Scheduled jobs and cron</span>
+        <span class="word">Contribution code review</span>
+        <span class="word">BYOC: Bring your own Cloud</span>
+        <span class="word">Find usages on Unison Share</span>
+        <span class="word">Organizations on Unison Share</span>
+      </div>
+    </div>
+  </featured-card>
+
+  <featured-card
+    @title="Help shape the future of Unison"
+    class="featured_1-1 help-shape ">
+
+    <featured-icon slot="icon" color="dark-gray" size="small">
+      <icon-unison-mark></icon-unison-mark>
+    </featured-icon>
+    <div slot="description">
+      <p>
+        Stay up to date; join the community.
+      </p>
+      <div class="ctas">
+        <a href="https://unison-lang.org/discord" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+          <icon-discord></icon-discord>
+          Join Discord
+        </a>
+        <a href="https://bsky.app/intent/compose?text=Unison 2024 featured is here! ✨ A look back at a year of Unison features, contributions, and achievements and a peek at what's to come. @unison-lang.org https://unison-lang.org/featured2024" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+          <icon-bluesky></icon-bluesky> Share on Bluesky
+        </a>
+      </div>
+    </div>
+
+    <div slot="graphic">
+    </div>
+  </featured-card>
+
+
+</template>
+
+<style webc:scoped>
+  :host {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  :host .unison-cloud .code-example {
+    position: absolute;
+    right: 0;
+    bottom: -3rem;
+    width: 38rem;
+    height: min-content;
+    display: flex;
+    align-self: flex-end;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 12px;
+    transition: all 0.5s cubic-bezier(0.41, 1.88, 0.44, 0.96);
+  }
+
+  :host .unison-cloud .button {
+    background: var(--color-blue-1);
+  }
+
+  :host .unison-cloud .cloud-graphic:hover .code-example {
+    transform: translateY(-1rem);
+  }
+
+  :host .unison-cloud .cloud-graphic:hover .clouds {
+    top: 14rem;
+  }
+
+  :host .unison-cloud .featured_content {
+    width: 26rem;
+    height: 22rem;
+    z-index: 1;
+  }
+
+  :host .unison-cloud .clouds {
+    transition: all 1s cubic-bezier(0.41, 1.88, 0.44, 0.96);
+    top: 9rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-30%);
+    bottom: 0;
+    filter: blur(1.25rem);
+  }
+
+  :host .community {
+    background-image: url(/assets/wrapped2024/community.svg);
+    background-repeat: no-repeat;
+    background-position: 10rem -4rem;
+  }
+
+  :host .community .featured_content {
+    width: 22rem;
+  }
+
+  :host .community .button {
+    margin-left: 2rem;
+    background: var(--color-green-0);
+  }
+
+  :host .community .word-soup {
+    position: absolute;
+    bottom: 2rem;
+    right: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 1.25rem;
+    gap: 1rem;
+    justify-content: flex-end;
+    color: var(--color-green-0);
+    font-weight: 700;
+    margin-bottom: 2rem;
+    width: 26rem;
+  }
+
+  :host .community .word-soup .word {
+    filter: blur(0.5rem);
+    opacity: 0.75;
+    transition: all 0.5s;
+  }
+
+  :host .community .word-soup .word.focus {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale3d(1.2, 1.2, 1.2);
+    padding: 0 1rem;
+  }
+
+  :host .road .road-graphic {
+    background-color: linear-gradient(var(--color-green-2), var(--color-green-1));
+    background-image: url(/assets/unison-one-oh/hills.svg);
+    background-repeat: no-repeat;
+    padding-top: 5rem;
+    margin-top: -2rem;
+  }
+
+  :host .road .current-slide {
+    width: 30rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--color-gray-lighten-100);
+    padding: 1rem;
+    border-radius: 0.75rem;
+
+    h3 {
+      font-size: 1rem;
+    }
+  }
+
+  :host .road .timeline {
+    margin-top: 1.5rem;
+    line-height: 1;
+    padding: 1rem 4rem;
+    justify-content: space-between;
+    background: rgba(0, 0, 0, 0.4);
+    color: var(--color-gray-lighten-100);
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    gap: 4rem;
+  }
+
+  @keyframes scrollx {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  :host .top-contributors ol {
+    margin-left: 0;
+    margin-top: 1rem;
+    list-style-type: none;
+  }
+
+  :host .top-contributors li {
+    padding: 0.25rem 0;
+    font-size: 1.125rem;
+  }
+
+  :host .top-contributors li a {
+    color: var(--color-blue-1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+  }
+
+  :host .top-contributors li img {
+    border-radius: 0.75rem;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 1),
+      0 0 0 2px rgba(0, 0, 0, 0.15);
+  }
+
+  :host .next-2025 .featured_text p {
+    opacity: 0.75;
+  }
+
+  :host .next-2025 .button {
+    background: var(--color-purple-4);
+    color: var(--color-purple-1);
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  :host .next-2025 .word-soup {
+    --gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    gap: var(--gap);
+    font-weight: 500;
+    padding-top: 0.5rem;
+    height: 2.5rem;
+    overflow: hidden;
+    top: 93px;
+    left: 21rem;
+    position: absolute;
+  }
+
+  :host .next-2025 .word-soup .word:first-child {
+    animation: scrolly 14s cubic-bezier(0.41, 1.5, 0.44, 0.96) infinite;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+  }
+
+  @keyframes scrolly {
+    0% { margin-top: 0; }
+    10% { margin-top: -2.5rem; }
+    20% { margin-top: -5rem; }
+    30% { margin-top: -7.5rem; }
+    40% { margin-top: -10rem; }
+    50% { margin-top: -12.5rem; }
+    60% { margin-top: -15rem; }
+    70% { margin-top: -17.5rem; }
+    90% { margin-top: 0; }
+    100% { margin-top: 0; }
+  }
+
+  :host .next-2025 .word-soup .word {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    line-height: 1;
+    opacity: 1;
+    transition: all 0.5s;
+    color: var(--color-purple-5);
+    background: var(--color-gray-darken-30);
+    padding: 0.3rem 0.75rem;
+    border-radius: 1.5rem;
+    border: 2px solid var(--color-purple-1);
+    width: min-content;
+    flex-grow: 0;
+    flex-shrink: 0;
+    white-space: nowrap;
+    height: 2rem;
+  }
+
+  :host .help-shape .ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  :host .help-shape .button {
+    display: flex;
+    flex-grow: 0;
+    width: fit-content;
+  }
+
+
+  :host {
+    p, ul, ol {
+      margin-bottom: 1em;
+    }
+
+    section {
+      margin-bottom: 2em;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.25em;
+    }
+
+    section:last-child, p:last-child, ul:last-child, ol:last-child {
+      margin-bottom: 0;
+    }
+
+    ul, ol {
+      margin-left: 2em;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  @media only screen and (max-width: 1023px) {
+    :host {
+      margin: 0 4rem;
+      flex-direction: column;
+    }
+
+    :host .unison-cloud .cloud-graphic {
+      display: none;
+    }
+
+    :host .community {
+      padding-bottom: 8rem;
+    }
+
+  }
+
+  @media only screen and (max-width: 768px) {
+    :host {
+      margin: 0 2rem;
+    }
+
+    :host .unison-cloud .featured_content {
+      width: auto;
+      height: auto;
+    }
+
+    :host .community {
+      padding-bottom: 2rem;
+    }
+
+    :host .next-2025 .word-soup,
+    :host .community .word-soup {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 496px) {
+    :host {
+      margin: 0 1.5rem;
+    }
+  }
+</style>

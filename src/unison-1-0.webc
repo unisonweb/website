@@ -1,0 +1,226 @@
+---
+tags: blog
+permalink: unison-1-0/index.html
+authors:
+  - arya-irani
+  - rebecca-mark
+categories:
+  - highlights
+date: 2025-11-21T00:00:00.000Z
+featuredImage: /assets/unison-1-0-social.png
+status: published
+summary: "TODO"
+title: Announcing Unison 1.0
+eleventyExcludeFromCollections: false
+---
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Announcing Unison 1.0</title>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Our 2024 in review."
+    />
+    <meta
+      name="twitter:description"
+      content="Our 2024 in review."
+    />
+    <meta
+      property="og:description"
+      content="Our 2024 in review."
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <meta name="theme-color" content="#ffffff" />
+
+    <meta property="og:title" content="Unison featured 2024" />
+    <meta name="twitter:title" content="Unison featured 2024" />
+
+    <meta property="og:type" content="blog" />
+    <meta property="og:url" content="https://unison-lang.org" />
+    <meta
+      property="og:image"
+      content="https://unison-lang.org/assets/unison-featured-2024-social.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="627" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:image"
+      content="https://unison-lang.org/assets/unison-featured-2024-social.png"
+    />
+    <meta name="twitter:site" content="@unisonweb" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      webc:keep
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;500;600;700;900&family=Princess+Sofia:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link webc:keep rel="stylesheet" href="/css/styles.css" />
+    <style @raw="getBundle('css')" webc:keep></style>
+
+    <script
+      webc:keep
+      defer
+      data-domain="unison-lang.org"
+      src="https://plausible.io/js/plausible.js"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <page-header></page-header>
+      <header class="unison-featured-header">
+        <h1>Unison 1.0 is here!</h1>
+        <p>We're thrilled to announce the 1.0 release of Unison 🎉</p>
+      </header>
+
+      <article>
+        <section>
+          <p>We're thrilled to announce the 1.0 release of Unison. This milestone reflects the dedication of a talented team of engineers and the contributions of a vibrant community of developers, maintainers, and early adopters who have indelibly shaped the language and its ecosystem. </p>
+          <p>Unison 1.0 marks a point where the language, distributed runtime, and developer workflow have stabilized. Over the past few years, we've refined the core language, optimized the programming workflow, built collaborative tooling, and created a deployment platform for your Unison apps and services. </p>
+          <p>To consider this benchmark realized, we focused on delivering a set of components that together provide a fully-featured foundation for building your work on Unison. Here's what we've built to get there: </p>
+
+
+          <ul>
+            <li><strong>Collaboration and code-review tooling:</strong> Streamlined tools for team workflows, including tickets, reviewing, and merging code</li>
+            <li><strong>Unison Cloud:</strong> Our platform for deploying Unison applications</li>
+            <li><strong>"Bring Your Own Cloud":</strong> A Unison Cloud offering that can run on any container-based infrastructure</li>
+            <li><strong>Refined programming workflow:</strong> We've iterated on the high-friction parts of the dev experience</li>
+            <li><strong>Runtime optimizations:</strong> Significant improvements to our interpreter's speed and efficiency</li>
+            <li><strong>Distributed systems libraries and frameworks:</strong> We provide the building blocks for scalable, fault-tolerant applications</li>
+            <li><strong>Unison Share:</strong> A polished interface for browsing and discovering code</li>
+            <li><strong>Community and contributor ecosystem:</strong> A growing base supporting the language and tooling</li>
+          </ul>
+
+          <p>Far from being "done", Unison will continue to evolve and change. We're excited to focus on what comes next: expanding integrations with existing tools, adding products and frameworks built on our platform, deepening our libraries, and supporting the ambitious projects you'll make with Unison.</p>
+        </section>
+        <section>
+          <h2>What is Unison?</h2>
+          <p>Unison is a programming language built around <a href="/docs/the-big-idea/">one big idea</a>: let's identify a definition by its actual contents, <strong>not</strong> just by an identifier that was also the name of every past version of the function over time.</p>
+          <p>Unison code lives in a database (your "codebase"); the code only exists in text files <em>while</em> you're editing it. The internal representation is converted to and from text on demand as you work. </p>
+          <p>We built Unison's tooling, ecosystem, and deployment platform from the ground up to leverage this core idea. As a result, we never need to compile the same Unison code twice; many versioning conflicts are no longer conflicts; and we don't need complicated and error-prone cache invalidation schemes to keep things snappy. This, combined with Unison's "everything is serializable" approach, means we're able to write and deploy entire elastic distributed systems within a single program.</p>
+        </section>
+      </article>
+      <unison-one-oh-card-grid></unison-one-oh-card-grid>
+      <article>
+        <h2>Frequently asked questions</h2>
+        <div class="faq">
+          <faq-item @question="Why make a whole new programming language? Couldn't you add Unison's features to another language?">
+            <p>
+              Unison's hash-based, database-backed representation changes how code is identified, versioned, and shared. As a consequence, the workflow, toolchain, and deployment model are not add-ons; they emerge naturally from the language's design. In theory, you could try to retrofit these ideas onto another language, but doing so might be fragile, difficult to make reliable in production, and would likely require rewriting major parts of the existing tooling while restricting language features.
+            </p>
+            <p>You don't build a rocket ship out of old cars, you start fresh.</p>
+          </faq-item>
+          <faq-item @question="Is anyone using Unison in prod?">
+            <p>Yes, <strong>we</strong> are! Our entire Cloud orchestration layer is written entirely in Unison, and it has powered Unison Cloud from day one.</p>
+          </faq-item>
+          <faq-item @question="I'm concerned about vendor lock-in; do I have to use Unison Cloud to deploy my services?">
+            <p>No, Unison is an open source, general programming language, and you can [export a compiled binary](https://www.unison-lang.org/docs/usage-topics/running-programs/) and [deploy it via Docker](https://www.unison-lang.org/docs/usage-topics/docker/), or however you prefer.</p>
+            <p>You can also run Unison Cloud on your own infrastructure. Both [Unison Cloud](https://www.unison.cloud/) and our [Bring Your Own Cloud (BYOC)](https://www.unison.cloud/byoc/) offer generous free tiers.</p>
+          </faq-item>
+          <faq-item @question="What does collaborating look like in Unison?">
+            <p>Unison Share supports organizations, tickets, code contributions (pull requests), code review, and more.</p>
+              <p>In many ways Unison's story for collaboration outstrips the status quo of developer tooling. e.g. merge conflicts only happen when two people actually modify the same definition; not because you moved some stuff around in your files.</p>
+          </faq-item>
+          <faq-item @question="How does version control work in the absence of `git`?">
+            <p>Unison implements a native version control system: with projects, branches, clone, push, pull, merge, etc.</p>
+          </faq-item>
+          <faq-item @question="Do I have to use a specific IDE?">
+            <p>No, you can pick any IDE that you're familiar with. Unison exposes an LSP server and many community members have contributed [their own editor setups here](https://www.unison-lang.org/docs/usage-topics/editor-setup/).</p>
+          </faq-item>
+          <faq-item @question="What about interop with other languages?">
+            <p>Work is underway today to add a C FFI!</p>
+          </faq-item>
+          <faq-item @question="Without files, how do I see my codebase?">
+            <p>Your codebase structure is viewable with the [Unison Desktop app](https://www.unison-lang.org/docs/tooling/ucm-desktop/). The UCM Desktop app also features click-through to definition tooling and rich rendering of docs.</p>
+          </faq-item>
+        </div>
+      </article>
+    </main>
+    <page-footer></page-footer>
+    <script @raw="getBundle('js')" webc:keep></script>
+  </body>
+</html>
+
+<style webc:scoped>
+  body {
+    background: var(--color-gray-lighten-100);
+  }
+
+  main {
+    width: 64rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  main .unison-featured-header {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  main .unison-featured-header h1 {
+    font-size: 3rem;
+    font-weight: 900;
+  }
+
+  main .unison-featured-header p {
+    font-size: 1.5rem;
+  }
+
+  main article {
+    font-size: 1.125rem;
+
+    p, ul, ol {
+      margin-bottom: 1em;
+    }
+
+    section {
+      margin-bottom: 2em;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.25em;
+    }
+
+    section:last-child, p:last-child, ul:last-child, ol:last-child {
+      margin-bottom: 0;
+    }
+
+    ul, ol {
+      margin-left: 2em;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  :host .faq {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  @media only screen and (max-width: 1023px) {
+    :host main {
+      width: 100%;
+    }
+  }
+
+</style>

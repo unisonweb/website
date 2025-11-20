@@ -1,0 +1,27 @@
+<details>
+  <summary @text="question"></summary>
+  <slot></slot>
+</details>
+
+<style webc:scoped>
+  :host details {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-gray-lighten-55);
+    border-radius: 0.75rem;
+  }
+
+  :host summary {
+    font-weight: bold;
+    line-height: 1;
+
+    p:first-child {
+      margin-top: 0.5rem;
+    }
+
+    p:last-child {
+      margin: 0;
+    }
+  }
+</style>
