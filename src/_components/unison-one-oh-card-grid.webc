@@ -117,11 +117,11 @@
     </p>
 
     <div slot="graphic">
-<code-example @title="~/scratch.u" @numLines="10"><span class="syntax"><span class="hash-qualifier">deploy</span><span class="type-ascription-colon"> :</span><span class="blank"> </span><span class="delay-force-char">'</span><span class="ability-braces">{</span><span class="type-reference">IO</span><span class="blank">,</span><span class="blank"> </span><span class="type-reference">Exception</span><span class="ability-braces">}</span><span class="blank"> </span><span class="unit">()</span><span class="blank">
+<code-example @title="~/scratch.u" @numLines="10"><span class="syntax"><span class="hash-qualifier">deploy</span><span class="type-ascription-colon"> :</span><span class="blank"> </span><span class="delay-force-char">'</span><span class="ability-braces">{</span><span class="type-reference">IO</span><span class="blank">,</span><span class="blank"> </span><span class="type-reference">Exception</span><span class="ability-braces">}</span><span class="blank"> </span><span class="type-reference">URI</span><span class="blank">
 </span><span class="hash-qualifier">deploy</span><span class="binding-equals"> = </span><span class="term-reference"><span class="fqn"><span class="segment">Cloud</span><span class="sep">.</span><span class="segment">main</span></span></span><span class="blank"> </span><span class="control-keyword">do</span><span class="blank">
 </span><span class="blank">  </span><span class="var">name</span><span class="binding-equals"> =</span><span class="blank"> </span><span class="term-reference"><span class="fqn"><span class="segment">ServiceName</span><span class="sep">.</span><span class="segment">named</span></span></span><span class="blank"> </span><span class="text-literal">"hello-world"</span><span class="blank">
 </span><span class="blank">  </span><span class="var">serviceHash</span><span class="binding-equals"> =
-   </span><span class="blank"> </span><span class="term-reference">deployHttp</span><span class="blank"> </span><span class="delay-force-char">!</span><span class="term-reference"><span class="fqn"><span class="segment">Environment</span><span class="sep">.</span><span class="segment">default</span></span></span><span class="blank"> </span><span class="term-reference">helloWorld</span><span class="blank">
+   </span><span class="blank"> </span><span class="term-reference">deployHttp</span><span class="blank"> </span><span class="term-reference"><span class="fqn"><span class="segment">Environment</span><span class="sep">.</span><span class="segment">default</span><span class="delay-force-char">()</span></span></span><span class="blank"> </span><span class="term-reference">helloWorld</span><span class="blank">
 </span><span class="blank">  </span><span class="term-reference"><span class="fqn"><span class="segment">ServiceName</span><span class="sep">.</span><span class="segment">assign</span></span></span><span class="blank"> </span><span class="var">name</span><span class="blank"> </span><span class="var">serviceHash</span><span class="blank"></span>
 
 
@@ -158,20 +158,20 @@
   <span class="term-reference">printLine</span> <span class="text-literal">"Guess a number between 0 and 100"</span>
 
   <span class="var">loop</span><span class="binding-equals"> = </span><span class="control-keyword">do</span>
-  <span class="control-keyword">match</span> (<span class="term-reference">console.readLine()</span> |> <span class="term-reference">Nat.fromText</span>) <span class="control-keyword">with</span>
-    <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> == <span class="var">target</span> ->
-      <span class="term-reference">printLine</span> <span class="text-literal">"Correct! You win!"</span>
-    <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> < <span class="var">target</span> ->
-      <span class="term-reference">printLine</span> <span class="text-literal">"Too low, try again"</span>
-      <span class="term-reference">loop()</span>
-    <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> > <span class="var">target</span> ->
-      <span class="term-reference">printLine</span> <span class="text-literal">"Too high, try again"</span>
-      <span class="term-reference">loop()</span>
-    <span class="var">otherwise</span> ->
-      <span class="term-reference">printLine</span> <span class="text-literal">"Invalid input, try again"</span>
-      <span class="term-reference">loop()</span>
+    <span class="control-keyword">match</span> (<span class="term-reference">console.readLine</span><span class="delay-force-char">()</span> |> <span class="term-reference">Nat.fromText</span>) <span class="control-keyword">with</span>
+      <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> == <span class="var">target</span> ->
+        <span class="term-reference">printLine</span> <span class="text-literal">"Correct! You win!"</span>
+      <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> < <span class="var">target</span> ->
+        <span class="term-reference">printLine</span> <span class="text-literal">"Too low, try again"</span>
+        <span class="term-reference">loop</span><span class="delay-force-char">()</span>
+      <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> > <span class="var">target</span> ->
+        <span class="term-reference">printLine</span> <span class="text-literal">"Too high, try again"</span>
+        <span class="term-reference">loop</span><span class="delay-force-char">()</span>
+      <span class="var">otherwise</span> ->
+        <span class="term-reference">printLine</span> <span class="text-literal">"Invalid input, try again"</span>
+        <span class="term-reference">loop</span><span class="delay-force-char">()</span></span>
 
-  <span class="term-reference">loop()</span>
+  <span class="term-reference">loop</span><span class="delay-force-char">()</span>
 </span>
 </code-example>
     </div>
