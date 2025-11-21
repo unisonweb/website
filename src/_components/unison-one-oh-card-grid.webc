@@ -239,21 +239,22 @@
       <icon-crystal-ball></icon-crystal-ball>
     </featured-icon>
     <p slot="description">
-      We're investing in a new UI to manage and write Unison code, organizational support for collaborating with teams, more Unison libraries, and core language improvements, like record types and runtime performance boosts. It's going to be a great year. Join us!
+      We're continuing to improve the core Unison language and tooling for a more streamlined and delightful development experience, as well as developing exciting new capabilities on top of Unison Cloud. Here are a few examples on our immediate horizon:
     </p>
     <div slot="graphic">
       <a href="https://unison-lang.org/roadmap" class="button medium primary-mono contained" target="_blank">
         Follow our roadmap
       </a>
       <div class="word-soup">
-        <span class="word">UCM Desktop</span>
+        <span class="word">C FFI support</span>
         <span class="word">Improved record types</span>
-        <span class="word">Unison Share notifications</span>
-        <span class="word">Scheduled jobs and cron</span>
-        <span class="word">Contribution code review</span>
-        <span class="word">BYOC: Bring your own Cloud</span>
-        <span class="word">Find usages on Unison Share</span>
-        <span class="word">Organizations on Unison Share</span>
+        <span class="word">Improved library management</span>
+        <span class="word">Faster codebase sync</span>
+        <span class="word">Improved MCP</span>
+        <span class="word">New UCM desktop capabilities</span>
+        <span class="word">Cloud observability</span>
+        <span class="word">Agentic computing framework</span>
+        <span class="word">Kinesis on S3</span>
       </div>
     </div>
   </featured-card>
@@ -317,8 +318,8 @@
         <p>Yes, <strong>we</strong> are! Our entire Cloud orchestration layer is written entirely in Unison, and it has powered Unison Cloud from day one.</p>
       </faq-item>
       <faq-item @question="I'm concerned about vendor lock-in; do I have to use Unison Cloud to deploy my services?">
-        <p>No, Unison is an open source, general programming language, and you can [export a compiled binary](https://www.unison-lang.org/docs/usage-topics/running-programs/) and [deploy it via Docker](https://www.unison-lang.org/docs/usage-topics/docker/), or however you prefer.</p>
-        <p>You can also run Unison Cloud on your own infrastructure. Both [Unison Cloud](https://www.unison.cloud/) and our [Bring Your Own Cloud (BYOC)](https://www.unison.cloud/byoc/) offer generous free tiers.</p>
+        <p>No, Unison is an open source, general programming language, and you can <a href="https://www.unison-lang.org/docs/usage-topics/running-programs/">export a compiled binary</a> and <a href="https://www.unison-lang.org/docs/usage-topics/docker/">deploy it via Docker</a>, or however you prefer.</p>
+        <p>You can also run Unison Cloud on your own infrastructure. Both <a href="https://www.unison.cloud/">Unison Cloud</a> and our <a href="https://www.unison.cloud/byoc/">Bring Your Own Cloud (BYOC)</a> offer generous free tiers.</p>
       </faq-item>
       <faq-item @question="What does collaborating look like in Unison?">
         <p>Unison Share supports organizations, tickets, code contributions (pull requests), code review, and more.</p>
@@ -328,13 +329,13 @@
         <p>Unison implements a native version control system: with projects, branches, clone, push, pull, merge, etc.</p>
       </faq-item>
       <faq-item @question="Do I have to use a specific IDE?">
-        <p>No, you can pick any IDE that you're familiar with. Unison exposes an LSP server and many community members have contributed [their own editor setups here](https://www.unison-lang.org/docs/usage-topics/editor-setup/).</p>
+        <p>No, you can pick any IDE that you're familiar with. Unison exposes an LSP server and many community members have contributed <a href="https://www.unison-lang.org/docs/usage-topics/editor-setup/">their own editor setups here</a>.</p>
       </faq-item>
       <faq-item @question="What about interop with other languages?">
         <p>Work is underway today to add a C FFI!</p>
       </faq-item>
       <faq-item @question="Without files, how do I see my codebase?">
-        <p>Your codebase structure is viewable with the [Unison Desktop app](https://www.unison-lang.org/docs/tooling/ucm-desktop/). The UCM Desktop app also features click-through to definition tooling and rich rendering of docs.</p>
+        <p>Your codebase structure is viewable with the <a href="https://www.unison-lang.org/docs/tooling/ucm-desktop/">Unison Desktop app</a>. The UCM Desktop app also features click-through to definition tooling and rich rendering of docs.</p>
       </faq-item>
     </div>
 
