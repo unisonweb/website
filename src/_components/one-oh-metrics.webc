@@ -1,8 +1,8 @@
 <featured-card
   @title="Metrics"
-  class="featured_1-2 featured_color_pale-yellow"
+  class="featured_1-1 featured_color_pale-yellow"
 >
-  <featured-icon slot="icon" color="purple" size="small">
+  <featured-icon slot="icon" color="orange" size="small">
     <icon-pulse></icon-pulse>
   </featured-icon>
   <p slot="description">
@@ -21,6 +21,8 @@
 </featured-card>
 <style webc:scoped>
 :host {
+  width: 50%;
+
   featured-card {
     display: flex;
     flex-direction: column;

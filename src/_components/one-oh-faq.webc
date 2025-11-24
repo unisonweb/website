@@ -1,8 +1,8 @@
 <featured-card
   @title="Frequently asked questions"
-  class="featured_1-1 faq">
+  class="featured_1-1 featured_color_pale-blue faq">
 
-  <featured-icon slot="icon" color="dark-gray" size="small">
+  <featured-icon slot="icon" color="blue" size="small">
     <icon-question-mark></icon-question-mark>
   </featured-icon>
   <div class="faq-items" slot="description">

@@ -36,22 +36,24 @@
 
   <featured-card
     @title="Unison Desktop"
-    class="featured_1-2 featured_color_pale-green"
+    class="featured_1-2 featured_color_pale-green ucm-desktop"
   >
     <featured-icon slot="icon" color="green" size="small">
       <icon-pencil-ruler></icon-pencil-ruler>
     </featured-icon>
+
     <p slot="description">
       <a href="https://github.com/unisonweb/ucm-desktop/releases"
         target="_blank">UCM Desktop</a> is our GUI code browser for your local
       codebase.
     </p>
+
+    <div slot="graphic">
+      <img src="/assets/ucm-desktop.png" width="1600"/>
+    </div>
   </featured-card>
 
-  <featured-card
-    @title="Unison Share"
-    class="featured_1-2 featured_color_pale-purple"
-  >
+  <featured-card @title="Unison Share" class="featured_1-2 featured_color_pale-purple" >
     <featured-icon slot="icon" color="purple" size="small">
       <icon-gift></icon-gift>
     </featured-icon>
@@ -95,7 +97,7 @@
 
   <featured-card
     @title="What does Unison code look like?"
-    class="featured_1-1 what-does-unison-code-look-like featured_color_dark-purple-gradient"
+    class="featured_1-1 what-does-unison-code-look-like"
   >
     <featured-icon slot="icon" color="purple" size="small">
       <icon-lines-of-code></icon-lines-of-code>
@@ -171,73 +173,77 @@
     </div>
   </featured-card>
 
-  <one-oh-metrics></one-oh-metrics>
+  <div class="metrics-roadmap-community">
+    <one-oh-metrics></one-oh-metrics>
 
-  <featured-card
-    @title="Whats next?"
-    class="featured_1-2 roadmap featured_color_space"
-  >
-    <featured-icon slot="icon" color="purple" size="small">
-      <icon-crystal-ball></icon-crystal-ball>
-    </featured-icon>
-    <p slot="description">
-      We're continuing to improve the core Unison language and tooling for a more streamlined and delightful development experience, as well as developing exciting new capabilities on top of Unison Cloud. Here are a few examples on our immediate horizon:
-    </p>
-    <div slot="graphic">
-      <div class="word-soup">
-        <span class="word">C FFI support</span>
-        <span class="word">Improved record types</span>
-        <span class="word">Improved library management</span>
-        <span class="word">Faster codebase sync</span>
-        <span class="word">Improved MCP</span>
-        <span class="word">New UCM desktop capabilities</span>
-        <span class="word">Cloud observability</span>
-        <span class="word">Agentic computing framework</span>
-        <span class="word">Kinesis on S3</span>
-      </div>
-      <a href="https://unison-lang.org/roadmap" class="button medium primary-mono contained" target="_blank">
-        Follow our roadmap
-      </a>
+    <div class="roadmap-community">
+      <featured-card
+        @title="Whats next?"
+        class="featured_1-1 roadmap featured_color_space"
+      >
+        <featured-icon slot="icon" color="purple" size="small">
+          <icon-crystal-ball></icon-crystal-ball>
+        </featured-icon>
+        <p slot="description">
+          We're continuing to improve the core Unison language and tooling for a more streamlined and delightful development experience, as well as developing exciting new capabilities on top of Unison Cloud. Here are a few examples on our immediate horizon:
+        </p>
+        <div slot="graphic">
+          <div class="word-soup">
+            <span class="word">C FFI support</span>
+            <span class="word">Improved record types</span>
+            <span class="word">Improved library management</span>
+            <span class="word">Faster codebase sync</span>
+            <span class="word">Improved MCP</span>
+            <span class="word">New UCM desktop capabilities</span>
+            <span class="word">Cloud observability</span>
+            <span class="word">Agentic computing framework</span>
+            <span class="word">Kinesis on S3</span>
+          </div>
+          <a href="https://unison-lang.org/roadmap" class="button medium primary-mono contained" target="_blank">
+            Follow our roadmap
+          </a>
+        </div>
+      </featured-card>
+
+      <featured-card
+        @title="Join us today"
+        class="featured_1-1 community featured_color_pale-green">
+        <featured-icon slot="icon" color="green" size="small">
+          <icon-wireframe-globe></icon-wireframe-globe>
+        </featured-icon>
+
+        <div slot="description">
+          <p>
+            Shape the future of Unison with us.
+          </p>
+          <div class="ctas">
+            <a href="https://unison-lang.org/quickstart" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+              <icon-rocket></icon-rocket>Get started coding
+            </a>
+            <a href="https://unison-lang.org/discord" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+              <icon-discord></icon-discord>
+              Join the community
+            </a>
+            <a href="https://bsky.app/intent/compose?text=🎉 Unison 1.0 has landed! @unison-lang.org https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+              <icon-bluesky></icon-bluesky>
+              Share on Bluesky
+            </a>
+            <a href="https://twitter.com/intent/tweet?text=🎉 Unison 1.0 has landed @unsionweb!&url=https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+              <icon-twitter></icon-twitter>
+              Share on Twitter/X
+            </a>
+            <a href="https://fosstodon.org/share?text=🎉 Unison 1.0 has landed!&url=https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+              <icon-mastodon></icon-mastodon>
+              Share on Mastodon
+            </a>
+            <a href="mailto:hello@unison.cloud" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+              <icon-conversation></icon-conversation> Use Unison at your org?
+            </a>
+          </div>
+        </div>
+      </featured-card>
     </div>
-  </featured-card>
-
-  <featured-card
-    @title="Join us today"
-    class="featured_1-2 community featured_color_pale-green">
-    <featured-icon slot="icon" color="green" size="small">
-      <icon-wireframe-globe></icon-wireframe-globe>
-    </featured-icon>
-
-    <div slot="description">
-      <p>
-        Shape the future of Unison with us.
-      </p>
-      <div class="ctas">
-        <a href="https://unison-lang.org/quickstart" class="button medium primary-mono contained content-icon-then-label" target="_blank">
-          <icon-rocket></icon-rocket>Get started coding
-        </a>
-        <a href="https://unison-lang.org/discord" class="button medium primary-mono contained content-icon-then-label" target="_blank">
-          <icon-discord></icon-discord>
-          Join the community
-        </a>
-        <a href="https://bsky.app/intent/compose?text=🎉 Unison 1.0 has landed! @unison-lang.org https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
-          <icon-bluesky></icon-bluesky>
-          Share on Bluesky
-        </a>
-        <a href="https://twitter.com/intent/tweet?text=🎉 Unison 1.0 has landed @unsionweb!&url=https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
-          <icon-twitter></icon-twitter>
-          Share on Twitter/X
-        </a>
-        <a href="https://fosstodon.org/share?text=🎉 Unison 1.0 has landed!&url=https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
-          <icon-mastodon></icon-mastodon>
-          Share on Mastodon
-        </a>
-        <a href="mailto:hello@unison.cloud" class="button medium primary-mono contained content-icon-then-label" target="_blank">
-          <icon-conversation></icon-conversation> Use Unison at your org?
-        </a>
-      </div>
-    </div>
-  </featured-card>
+  </div>
 
   <one-oh-faq></one-oh-faq>
 
@@ -249,6 +255,15 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1.5rem;
+  }
+
+  /* -- UCM DESKTOP  ------------------------------------------------------- */
+  .ucm-desktop {
+    height: 22rem;
+
+    img {
+      margin-left: 2rem;
+    }
   }
 
   /* -- CLOUD -------------------------------------------------------------- */
@@ -348,6 +363,22 @@
     display: flex;
     flex-direction: row;
     gap: 4rem;
+  }
+
+  /* -- METRICS-ROADMAP-COMMUNITY ------------------------------------------ */
+
+  :host .metrics-roadmap-community {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    width: 100%;
+
+    .roadmap-community {
+      width: 50%;
+      gap: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   /* -- ROADMAP ------------------------------------------------------------ */
