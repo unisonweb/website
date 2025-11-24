@@ -85,8 +85,7 @@ eleventyExcludeFromCollections: false
       <page-header></page-header>
       <header class="unison-featured-header">
         <h1>Unison 1.0 is here!</h1>
-        <p>We're thrilled to announce the 1.0 release of Unison 🎉
-          This milestone reflects the dedication of a talented team of engineers and the contributions of a vibrant community of developers, maintainers, and early adopters who have indelibly shaped the language and its ecosystem. </p>
+        <p>This milestone reflects the dedication of our talented team and the many developers, maintainers, and early adopters who have indelibly shaped our language ecosystem. </p>
       </header>
       <unison-one-oh-card-grid></unison-one-oh-card-grid>
     </main>
