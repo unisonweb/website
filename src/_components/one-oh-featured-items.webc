@@ -1,0 +1,107 @@
+<script>
+  class OneOhFeaturedItems extends HTMLElement {
+    connectedCallback() {
+      this.animate();
+    }
+
+    animate() {
+      const items = this.querySelectorAll(".item");
+      let inFocus = items.length / 2 - 1; // start in the middle
+
+      const animate_ = () => {
+        items.forEach(w => w.classList.remove("focus"));
+
+        items[inFocus].classList.add("focus");
+        inFocus = inFocus + 1;
+
+        if (inFocus === items.length) {
+          inFocus = 0;
+        }
+      }
+
+      setInterval(animate_, 1500);
+    }
+  }
+
+  customElements.define("one-oh-featured-items", OneOhFeaturedItems);
+</script>
+<featured-card @title="We did it!" class="featured_1-1 featured_items featured_color_purple-gradient">
+  <featured-icon slot="icon" color="purple" size="small">
+    <icon-trophy></icon-trophy>
+  </featured-icon>
+  <div slot="description">
+    <p>Unison 1.0 marks a point where the language, distributed runtime, and developer workflow have stabilized. Over the past few years, we've refined the core language, optimized the programming workflow, built collaborative tooling, and created a deployment platform for your Unison apps and services.</p>
+    <p>To consider this benchmark realized, we focused on delivering a set of items that together provide a fully-featured foundation for building your work on Unison. Here's what we've built to get there.</p>
+  </div>
+  <div slot="graphic" class="item-overview side-by-side">
+    <div class="item"><strong>Collaborative tooling</strong> Streamlined tools for team workflows</div>
+    <div class="item"><strong>Unison Cloud</strong> Out platform for deploying Unison apps</div>
+    <div class="item"><strong>"Bring Your Own Cloud"</strong> Run our Cloud on any container-based infra</div>
+    <div class="item"><strong>Refined DX</strong> We've iterated on the high-friction parts of the dev experience</div>
+    <div class="item"><strong>Runtime optimizations</strong> Vast improvements to our interpreter's speed and efficiency</div>
+    <div class="item"><strong>Distributed systems frameworks</strong> We provide the building blocks for scalable, fault-tolerant apps</div>
+    <div class="item"><strong>Unison Share</strong> A polished interface for browsing and discovering code</div>
+    <div class="item"><strong>Contributor ecosystem</strong> A growing community supporting the language and tooling</div>
+  </div>
+</featured-card>
+<style webc:scoped>
+  :host .featured_items {
+    --gap: 0.75rem;
+    --item-height: 3.625rem;
+    height: 22rem;
+
+    .featured_content {
+      width: 55%;
+    }
+
+    .item-overview {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+      font-size: var(--font-size-medium);
+      padding: 1rem;
+      margin-top: 1.5rem;
+      justify-content: space-around;
+      overflow: hidden;
+        /*
+      will-change: transform;
+      animation: scrolly 25s ease-in-out infinite;
+        */
+
+      .item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 0.75rem;
+        border-radius: 0.25rem;
+        background: var(--color-gray-lighten-100);
+        color: var(--color-gray-lighten-20);
+        height: var(--item-height);
+        filter: blur(0.5rem);
+        opacity: 0.75;
+        transition: all 0.5s;
+
+        strong {
+          color: var(--color-gray-darken-30);
+          font-size: var(--font-size-base);
+        }
+
+        &.focus {
+          opacity: 1;
+          filter: blur(0);
+          transform: scale3d(1.2, 1.2, 1.2);
+          padding: 0 1rem;
+        }
+      }
+    }
+  }
+
+  @keyframes scrolly {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(calc(var(--item-height) * -1) - var(--gap)));
+    }
+  }
+</style>

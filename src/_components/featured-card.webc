@@ -74,6 +74,7 @@
       );
     --featured-kpi-border-color: var(--color-purple-5);
     --featured-kpi-color: var(--color-purple-1);
+    color: var(--color-gray-darken-30);
   }
 
   :host.featured_color_pale-pink {

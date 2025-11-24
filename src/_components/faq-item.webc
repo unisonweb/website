@@ -1,26 +1,48 @@
 <details>
-  <summary @text="question"></summary>
-  <slot></slot>
+  <summary>
+    <icon-caret-right></icon-caret-right>
+    <span @text="question"></span>
+  </summary>
+  <div class="answer"><slot></slot></div>
 </details>
 
 <style webc:scoped>
   :host details {
     display: flex;
     flex-direction: column;
-    background: var(--color-gray-lighten-55);
+    color: var(--color-gray-darken-10);
     border-radius: 0.75rem;
+    font-weight: normal;
+  }
+
+  :host details[open] .icon {
+    transform: rotate(90deg);
+  }
+
+  :host summary::marker {
+    content: "";
   }
 
   :host summary {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    align-items: center;
     font-weight: bold;
     line-height: 1;
+    color: var(--color-gray-darken-30);
+  }
+
+  .answer {
+    margin-left: 1.25rem;
 
     p:first-child {
       margin-top: 0.5rem;
     }
 
     p:last-child {
-      margin: 0;
+      margin-bottom: 1rem;
     }
   }
 </style>
