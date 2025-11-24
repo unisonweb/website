@@ -24,7 +24,7 @@
 
   <featured-card
     @title="The Codebase Manager"
-    class="featured_1-2 featured_color_pale-pink"
+    class="featured_1-2 featured_color_pale-pink ucm"
   >
     <featured-icon slot="icon" color="pink" size="small">
       <icon-cli></icon-cli>
@@ -32,6 +32,58 @@
     <p slot="description">
       The Unison Codebase Manager (ucm) is a CLI tool used alongside your text editor to edit, rename, delete definitions; manage libraries; run your programs and test suites.
     </p>
+
+    <div slot="graphic" class="scratch-and-ucm">
+      <code-example class="scratch" @title="Edit: ~/scratch.u" @numLines="10"><span class="syntax"><span class="hash-qualifier">factorial</span> n <span class="binding-equals">=</span>
+  if n > 1 then n * factorial (n-1) else n
+
+<span class="hash-qualifier">guessingGame</span> <span class="binding-equals">=</span> <span class="control-keyword">do</span> Random.run do
+  target = Random.natIn 0 100
+  printLine "Guess a number between 0 and 100"
+
+  loop = do
+    match (console.readLine() |> Nat.fromText) with
+      Some guess | guess == target ->
+        printLine "Correct! You win!"
+      Some guess | guess < target ->
+        printLine "Too low, try again"
+        loop()
+      Some guess | guess > target ->
+        printLine "Too high, try again"
+        loop()
+      otherwise ->
+        printLine "Invalid input, try again"
+        loop()
+
+  loop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </span></code-example>
+
+  <code-example class="terminal-ucm" @title="Terminal: ucm" @numLines="10"><span class="syntax"><span class="ucm-project">scratch</span><span class="ucm-branch">/main</span>>
+
+  Loading changes detected in <span class="ucm-hl">~/scratch.u.</span>
+
+  <span class="ucm-add">+</span> <span class="term-reference">factorial</span>    : <span class="type-reference">Nat</span> -> <span class="type-reference">Nat</span>
+  <span class="ucm-add">+</span> <span class="term-reference">guessingGame</span> : <span class="delay-force-char">'</span>{<span class="type-reference">IO</span>, <span class="type-reference">Exception</span>} <span class="type-reference">()</span>
+  
+  Run <span class="ucm-command">`update`</span> to apply these changes to your codebase.
+
+  </span></code-example>
+    </div>
   </featured-card>
 
   <featured-card
@@ -209,6 +261,54 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1.5rem;
+  }
+
+  /* -- UCM ---------------------------------------------------------------- */
+
+  .ucm .scratch-and-ucm {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding-left: 3rem;
+    height: 20rem;
+
+    code-example {
+      max-width: 100%;
+    }
+
+    .scratch {
+      opacity: 0.5;
+      transform: rotate(-3deg);
+    }
+
+    .terminal-ucm {
+      position: absolute;
+      top: 3.5rem;
+      left: 3.75rem;
+      transform: rotate(-3deg);
+      color: var(--color-gray-lighten-30);
+
+      .ucm-hl {
+        color: var(--color-gray-lighten-100);
+      }
+
+      .ucm-project {
+        color: var(--color-green-4);
+      }
+
+      .ucm-branch {
+        color: var(--color-blue-4);
+      }
+
+      .ucm-add {
+        color: var(--color-green-4);
+      }
+
+      .ucm-command {
+        color: var(--color-orange-4);
+      }
+    }
   }
 
   /* -- UCM DESKTOP  ------------------------------------------------------- */

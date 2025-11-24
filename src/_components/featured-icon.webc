@@ -107,7 +107,7 @@
   }
 
   :host .featured-icon_pink .icon {
-    color: var(--color-pink-0);
+    color: rgba(0, 0, 0, 0.75);
   }
 
   :host .featured-icon_dark-gray {
