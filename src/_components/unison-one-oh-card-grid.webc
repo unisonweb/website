@@ -374,6 +374,10 @@
 
   /* -- ROADMAP ------------------------------------------------------------ */
 
+  :host .roadmap {
+    padding-bottom: 2rem;
+  }
+
   :host .roadmap .featured_text p {
     opacity: 0.75;
   }
@@ -395,7 +399,7 @@
     padding-top: 0.5rem;
     height: 2.5rem;
     overflow: hidden;
-    bottom: 9rem;
+    bottom: 2rem;
     left: 13rem;
     position: absolute;
   }
