@@ -33,6 +33,7 @@
     line-height: 1;
     color: var(--color-gray-darken-30);
     cursor: pointer;
+    transition: all 0.2s;
 
     .caret-wrapper {
       display: flex;
@@ -46,11 +47,15 @@
       transition: all 0.2s;
     }
 
-    &:hover .caret-wrapper {
-      background: var(--color-blue-3);
-      .icon {
-        color: var(--color-blue-1);
-        line-height: 1;
+    &:hover {
+      color: var(--color-blue-1);
+
+      .caret-wrapper {
+        background: var(--color-blue-3);
+        .icon {
+          color: var(--color-blue-1);
+          line-height: 1;
+        }
       }
     }
 
