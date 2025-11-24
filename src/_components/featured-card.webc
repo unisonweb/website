@@ -65,7 +65,19 @@
     --wrapped-kpi-color: var(--color-purple-1);
   }
 
-  :host.featured_color_purple-gradient {
+  :host.featured_color_pale-purple-gradient {
+    background: 
+      linear-gradient(
+        -45deg,
+        var(--color-purple-4),
+        var(--color-purple-6)
+      );
+    --wrapped-kpi-border-color: var(--color-purple-5);
+    --wrapped-kpi-color: var(--color-purple-1);
+    color: var(--color-gray-darken-30);
+  }
+
+  :host.featured_color_purple-orange-gradient {
     background: 
       linear-gradient(
         -45deg,
@@ -106,6 +118,40 @@
   :host.featured_color_pale-green {
     background: var(--color-green-5);
     --wrapped-kpi-border-color: var(--color-green-4);
+  }
+
+  :host.featured_color_green {
+    background: var(--color-green-2);
+    --wrapped-kpi-border-color: var(--color-green-3);
+  }
+
+  :host.featured_color_dark-green {
+    background: 
+      linear-gradient(
+        -45deg,
+        var(--color-gray-darken-30),
+        var(--color-green-0)
+      );
+    --wrapped-kpi-border-color: var(--color-green-1);
+    color: rgba(255, 255, 255, 0.85);
+
+    h2 {
+      color: var(--color-gray-lighten-100);
+    }
+
+    a:not(.button) {
+      color: var(--color-blue-3);
+    }
+  }
+
+  :host.featured_color_green-gradient {
+    background: 
+      linear-gradient(
+        -45deg,
+        var(--color-green-1),
+        var(--color-green-3)
+      );
+    --wrapped-kpi-border-color: var(--color-green-1);
   }
 
   :host.featured_color_pale-yellow {

@@ -25,7 +25,7 @@
 
   customElements.define("one-oh-featured-items", OneOhFeaturedItems);
 </script>
-<featured-card @title="We did it!" class="featured_1-1 featured_items featured_color_purple-gradient">
+<featured-card @title="We did it!" class="featured_1-1 featured_items featured_color_purple-orange-gradient">
   <featured-icon slot="icon" color="purple" size="small">
     <icon-trophy></icon-trophy>
   </featured-icon>

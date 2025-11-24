@@ -88,7 +88,7 @@
 
   <featured-card
     @title="Unison Desktop"
-    class="featured_1-2 featured_color_pale-green ucm-desktop"
+    class="featured_1-2 featured_color_dark-green ucm-desktop"
   >
     <featured-icon slot="icon" color="green" size="small">
       <icon-pencil-ruler></icon-pencil-ruler>
@@ -105,7 +105,7 @@
     </div>
   </featured-card>
 
-  <featured-card @title="Unison Share" class="featured_1-2 featured_color_pale-purple" >
+  <featured-card @title="Unison Share" class="featured_1-2 featured_color_pale-purple-gradient" >
     <featured-icon slot="icon" color="purple" size="small">
       <icon-gift></icon-gift>
     </featured-icon>
