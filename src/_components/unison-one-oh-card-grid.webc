@@ -95,53 +95,7 @@
     </div>
   </featured-card>
 
-  <featured-card
-    @title="What does Unison code look like?"
-    class="featured_1-1 what-does-unison-code-look-like"
-  >
-    <featured-icon slot="icon" color="purple" size="small">
-      <icon-lines-of-code></icon-lines-of-code>
-    </featured-icon>
-    <div slot="description">
-      <p>Here's a Unison program that prompts the user to guess a random number from the command line.</p>
-
-      <p>It features several of Unison's language features: </p>
-
-      <ul>
-        <li><a href="/docs/fundamentals/abilities/">Abilities</a> - for functional effect management</li>
-        <li><a href="/docs/fundamentals/control-flow/pattern-matching/">Structural pattern matching</a> - for decomposing types and managing control flow</li>
-        <li><a href="/docs/fundamentals/values-and-functions/delayed-computations/">Delayed computations</a> - for representing non-eager evaluation</li>
-      </ul>
-
-      <a href="/docs/at-a-glance/" class="button contained outlined medium">Syntax overview</a>
-    </div>
-
-    <div slot="graphic" class="side-by-side">
-<code-example @title="~/scratch.u" @numLines="10"><span class="syntax"><span class="hash-qualifier">guessingGame</span><span class="type-ascription-colon"> : </span>'{<span class="type-reference">IO</span>, <span class="type-reference">Exception</span>} ()
-<span class="hash-qualifier">guessingGame</span><span class="binding-equals"> = </span><span class="control-keyword">do </span><span class="term-reference"><span class="fqn"><span class="segment">Random</span><span class="sep">.</span><span class="segment">run</span></span></span> <span class="control-keyword">do</span>
-  <span class="var">target</span><span class="binding-equals"> = </span><span class="term-reference">Random.natIn</span> <span class="numeric-literal">0 100</span>
-  <span class="term-reference">printLine</span> <span class="text-literal">"Guess a number between 0 and 100"</span>
-
-  <span class="var">loop</span><span class="binding-equals"> = </span><span class="control-keyword">do</span>
-    <span class="control-keyword">match</span> (<span class="term-reference">console.readLine</span><span class="delay-force-char">()</span> |> <span class="term-reference">Nat.fromText</span>) <span class="control-keyword">with</span>
-      <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> == <span class="var">target</span> ->
-        <span class="term-reference">printLine</span> <span class="text-literal">"Correct! You win!"</span>
-      <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> < <span class="var">target</span> ->
-        <span class="term-reference">printLine</span> <span class="text-literal">"Too low, try again"</span>
-        <span class="term-reference">loop</span><span class="delay-force-char">()</span>
-      <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> > <span class="var">target</span> ->
-        <span class="term-reference">printLine</span> <span class="text-literal">"Too high, try again"</span>
-        <span class="term-reference">loop</span><span class="delay-force-char">()</span>
-      <span class="var">otherwise</span> ->
-        <span class="term-reference">printLine</span> <span class="text-literal">"Invalid input, try again"</span>
-        <span class="term-reference">loop</span><span class="delay-force-char">()</span></span>
-
-  <span class="term-reference">loop</span><span class="delay-force-char">()</span>
-</span>
-</code-example>
-    </div>
-  </featured-card>
-
+  <one-oh-syntax-overview></one-oh-syntax-overview>
 
   <featured-card
     @title="Our road to 1.0"
@@ -214,12 +168,9 @@
 
         <div slot="description">
           <p>
-            Shape the future of Unison with us.
+            Unison couldn't be made without our amazing community. Join us and help shape the future of Unison.
           </p>
           <div class="ctas">
-            <a href="https://unison-lang.org/quickstart" class="button medium primary-mono contained content-icon-then-label" target="_blank">
-              <icon-rocket></icon-rocket>Get started coding
-            </a>
             <a href="https://unison-lang.org/discord" class="button medium primary-mono contained content-icon-then-label" target="_blank">
               <icon-discord></icon-discord>
               Join the community
@@ -236,7 +187,10 @@
               <icon-mastodon></icon-mastodon>
               Share on Mastodon
             </a>
-            <a href="mailto:hello@unison.cloud" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+            <a href="https://unison-lang.org/quickstart" class="button medium primary contained content-icon-then-label" target="_blank">
+              <icon-rocket></icon-rocket>Get started coding
+            </a>
+            <a href="mailto:hello@unison.cloud" class="button medium contained primary content-icon-then-label" target="_blank">
               <icon-conversation></icon-conversation> Use Unison at your org?
             </a>
           </div>
@@ -445,40 +399,8 @@
   :host .community {
     background-image: url(/assets/wrapped2024/community.svg);
     background-repeat: no-repeat;
-    background-position: 10rem -4rem;
-  }
-
-  :host .community .button {
-    background: var(--color-green-0);
-  }
-
-  :host .community .word-soup {
-    position: absolute;
-    bottom: 2rem;
-    right: 2.5rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    font-size: 1.25rem;
-    gap: 1rem;
-    justify-content: flex-end;
-    color: var(--color-green-0);
-    font-weight: 700;
-    margin-bottom: 2rem;
-    width: 26rem;
-  }
-
-  :host .community .word-soup .word {
-    filter: blur(0.5rem);
-    opacity: 0.75;
-    transition: all 0.5s;
-  }
-
-  :host .community .word-soup .word.focus {
-    opacity: 1;
-    filter: blur(0);
-    transform: scale3d(1.2, 1.2, 1.2);
-    padding: 0 1rem;
+    background-position: 15rem -5rem;
+    height: 100%;
   }
 
   :host .community .ctas {
@@ -486,12 +408,13 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 0.5rem;
+    margin-top: 2rem;
   }
 
   :host .community .button {
     display: flex;
     flex-grow: 0;
-    width: fit-content;
+    width: calc(50% - 0.25rem);
   }
 
   :host {

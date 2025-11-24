@@ -118,6 +118,14 @@
     color: var(--color-gray-lighten-100);
   }
 
+  :host .featured-icon_black-and-purple {
+    background: linear-gradient(130deg, var(--color-gray-lighten-20), var(--color-gray-darken-10));
+  }
+
+  :host .featured-icon_black-and-purple .icon {
+    color: var(--color-purple-4);
+  }
+
   @media only screen and (max-width: 768px) {
     :host .featured-icon {
       width: 3rem;
