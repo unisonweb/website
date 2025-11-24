@@ -38,18 +38,11 @@
       "title": "Notifications",
       "description": "A fully configurable notification system for Unison Share.",
       "areas": ["unison-share"]
-    }
-  ],
-  "now": [
+    },
     {
       "title": "Unison Cloud BYOC",
       "description": "Run Unison Cloud clusters on your own infrastructure.",
       "areas": ["cloud", "performance"]
-    },
-    {
-      "title": "Contributions v2",
-      "description": "Next version of change management on Share with better diffs and support for code review.",
-      "areas": ["unison-share"]
     },
     {
       "title": "Dependents in Unison Share",
@@ -66,17 +59,60 @@
       "description": "Rich support for Unison coding assistants",
       "areas": ["ucm"]
     }
+
+  ],
+  "now": [
+    {
+      "title": "Unison FFI",
+      "description": "Call C functions directly from Unison.",
+      "areas": ["core-language"]
+    },
+    {
+      "title": "Contributions v2",
+      "description": "Next version of change management on Share with better diffs and support for code review.",
+      "areas": ["unison-share"]
+    },
+    {
+      "title": "Unison MCP server v2",
+      "description": "Rich support for Unison coding assistants",
+      "areas": ["ucm"]
+    },
+    {
+      "title": "Record types",
+      "description": "First-class records support; an extension to the syntax and the type system.",
+      "areas": ["core-language"]
+    },
+    {
+      "title": "Agentic computing framework",
+      "description": "Stateful, persistent, intelligent agents that can be deployed to Unison Cloud.",
+      "areas": ["cloud", "services"]
+    },
+    {
+      "title": "Kinesis on S3",
+      "description": "Drop-in replacement for Kinesis, but on S3 to reduce storage and bandwidth costs.",
+      "areas": ["cloud", "services"]
+    }
   ],
   "next": [
+    {
+      "title": "Scheduled jobs and cloud cron",
+      "description": "Open source library for resilient scheduled jobs and recurring jobs.",
+      "areas": ["cloud"]
+    },
     {
       "title": "UCM desktop v2",
       "description": "Improve terminal interaction and code editing",
       "areas": ["ucm"]
     },
     {
-      "title": "Unison FFI",
-      "description": "Call C functions directly from Unison.",
-      "areas": ["core-language"]
+      "title": "Unison runtime improvements",
+      "description": "Improvements to the Unison runtime for better performance and lower memory usage.",
+      "areas": ["runtime", "performance"]
+    },
+    {
+      "title": "Improved Cloud observability",
+      "description": "Better search functionality in Unison Share including filtering and sorting.",
+      "areas": ["cloud"]
     }
   ],
   "later": [
@@ -84,21 +120,6 @@
       "title": "Dependency management",
       "description": "Easier dependency management and library upgrades.",
       "areas": ["unison-share", "ucm"]
-    },
-    {
-      "title": "Unison JIT",
-      "description": "LLVM-compile Unison functions on the fly.",
-      "areas": ["core-language"]
-    },
-    {
-      "title": "Scheduled jobs and cloud cron",
-      "description": "Open source library for resilient scheduled jobs and recurring jobs.",
-      "areas": ["cloud"]
-    },
-    {
-      "title": "Record types",
-      "description": "First-class records support; an extension to the syntax and the type system.",
-      "areas": ["core-language"]
     }
   ]
 }
