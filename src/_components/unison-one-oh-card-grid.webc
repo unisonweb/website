@@ -269,7 +269,7 @@
   /* -- CLOUD -------------------------------------------------------------- */
 
   :host .unison-cloud {
-    --height: 34rem;
+    --height: 31rem;
     height: var(--height);
   }
 
