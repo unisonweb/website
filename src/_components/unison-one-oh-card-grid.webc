@@ -75,13 +75,12 @@
     </featured-icon>
     <p slot="description">
       <a href="https://www.unison.cloud" target="_blank">Unison Cloud</a> is
-      our platform for deploying and scaling Unison applications. With the
-      Unison Cloud client library, transition from writing local prototypes to
+      our platform for deploying Unison applications. Transition from local prototypes to
       fully deployed distributed applications using a simple, familiar API—no
-      build systems, inter-node protocols, YAML files, or deployment scripts
-      required. On the Cloud, your applications and infrastructure are defined
+      YAML files, inter-node protocols, or deployment scripts
+      required. In Unison, your apps and infrastructure are defined
       in the same program, letting you manage services and deployments entirely
-      in Unison code.
+      in code.
     </p>
 
     <div slot="graphic">
