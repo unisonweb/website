@@ -30,7 +30,7 @@
       "areas": ["cloud"]
     },
     {
-      "title": "Project Collaboration",
+      "title": "Project collaboration",
       "description": "Organization support and project collaborators.",
       "areas": ["unison-share", "cloud"]
     },
@@ -89,7 +89,7 @@
     },
     {
       "title": "Kinesis on S3",
-      "description": "Drop-in replacement for Kinesis, but on S3 to reduce storage and bandwidth costs.",
+      "description": "Drop-in replacement for Kinesis, built on S3 to reduce storage and bandwidth costs.",
       "areas": ["cloud", "services"]
     }
   ],
@@ -111,7 +111,7 @@
     },
     {
       "title": "Improved Cloud observability",
-      "description": "Better search functionality in Unison Share including filtering and sorting.",
+      "description": "More comprehensive monitoring capabilities for Unison Cloud, with a richer admin interface",
       "areas": ["cloud"]
     }
   ],
