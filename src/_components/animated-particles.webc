@@ -1,0 +1,103 @@
+<script>
+  function rand(max, option) {
+    const n = Math.random() * (max + 1);
+    if (option === "include-negatives") {
+      return Math.random() < 0.5 ? -(n * 2) : n;
+    } else {
+      return n;
+    }
+  }
+
+  class AnimatedParticles extends HTMLElement {
+    constructor() {
+      super();
+
+      this.props = {
+        width: 2000,
+        height: 500,
+        amount: 64,
+      };
+    }
+
+    connectedCallback() {
+      //this.initProps();
+
+      const colors = ["#ff4756", "#27ae60", "#5695f4", "#ffc41f", "#734da3"];
+
+      for (let i = 1; i <= this.props.amount; i++) {
+        let particle = this.makeParticle(i);
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.background = randomColor;
+        this.querySelector(".particles")?.appendChild(particle);
+
+        let keyframes = document.createElement("style");
+        keyframes.innerHTML = `
+          @keyframes particle-animation-${i} {
+            100% {
+              transform: ${this.transform()};
+            }
+          }
+        `;
+
+        this.appendChild(keyframes);
+      }
+    }
+
+    initProps() {
+      const { width, height, amount } = this.dataset;
+
+      this.props = {
+        width: !!width ? parseInt(width) : this.props.width,
+        height: !!height ? parseInt(height) : this.props.height,
+        amount: !!amount ? parseInt(amount) : this.props.amount,
+      };
+    }
+
+    makeParticle(id) {
+      const size = rand(5) + 5;
+      const opacity = rand(100) / 100;
+
+      let particle = document.createElement("div");
+
+      particle.classList.add("particle");
+      particle.style.animation = `particle-animation-${id} 60s infinite`;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.opacity = `${opacity}`;
+      particle.style.transform = this.transform();
+      particle.style.zIndex = "1";
+      particle.style.animationDelay = `calc(%${-id} * .2s)`;
+
+      return particle;
+    }
+
+    transform() {
+      const { width, height } = this.props;
+      return `translate3d(${rand(width / 2, "include-negatives")}px, ${rand(height / 2, "include-negatives")}px, ${rand(100)}px)`;
+    }
+  }
+
+  customElements.define("animated-particles", AnimatedParticles);
+</script>
+<animated-particles>
+  <div class="particles"></div>
+</animated-particles>
+
+<style webc:scoped>
+  :host .particle {
+    position: absolute;
+    top: 2rem;
+    left: 65%;
+    border-radius: 1rem;
+    transition: transform3d 5s;
+    pointer-events: none;
+    background: var(--color-orange-1);
+    z-index: 0;
+  }
+
+  @media (max-width: 760px) {
+    animated-particles {
+      display: none;
+    }
+  }
+</style>

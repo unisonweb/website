@@ -24,7 +24,7 @@
 
   <featured-card
     @title="The Codebase Manager"
-    class="featured_1-2 featured_color_pale-pink ucm"
+    class="featured_1-2 featured_color_dark-gray ucm"
   >
     <featured-icon slot="icon" color="pink" size="small">
       <icon-cli></icon-cli>
@@ -35,7 +35,7 @@
 
     <div slot="graphic" class="scratch-and-ucm">
       <code-example class="scratch" @title="Edit: ~/scratch.u" @numLines="10"><span class="syntax"><span class="hash-qualifier">factorial</span> n <span class="binding-equals">=</span>
-  if n > 1 then n * factorial (n-1) else n
+  if n > 1 then n * factorial (n-1) else n                                                            
 
 <span class="hash-qualifier">guessingGame</span> <span class="binding-equals">=</span> <span class="control-keyword">do</span> Random.run do
   target = Random.natIn 0 100
@@ -270,23 +270,18 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
-    padding-left: 3rem;
+    padding-left: 2rem;
     height: 20rem;
-
-    code-example {
-      max-width: 100%;
-    }
 
     .scratch {
       opacity: 0.5;
-      transform: rotate(-3deg);
+      filter: blur(0.05rem);
     }
 
     .terminal-ucm {
       position: absolute;
-      top: 3.5rem;
-      left: 3.75rem;
-      transform: rotate(-3deg);
+      top: 3.75rem;
+      left: 3.5rem;
       color: var(--color-gray-lighten-30);
 
       .ucm-hl {

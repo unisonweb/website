@@ -83,6 +83,26 @@
     --wrapped-kpi-color: var(--color-pink-0);
   }
 
+  :host.featured_color_dark-gray {
+    background: var(--color-gray-darken-30);
+    color: var(--color-gray-lighten-40);
+
+    h2 {
+      color: var(--color-gray-lighten-100);
+    }
+  }
+
+  :host.featured_color_pale-pink-gradient {
+    background: 
+      linear-gradient(
+        -45deg,
+        var(--color-pink-4),
+        var(--color-pink-5)
+      );
+    --wrapped-kpi-border-color: var(--color-pink-1-25pct);
+    --wrapped-kpi-color: var(--color-pink-0);
+  }
+
   :host.featured_color_pale-green {
     background: var(--color-green-5);
     --wrapped-kpi-border-color: var(--color-green-4);

@@ -86,6 +86,7 @@ eleventyExcludeFromCollections: false
       <header class="unison-featured-header">
         <h1>Unison 1.0 is here!</h1>
         <p>This milestone reflects the dedication of our talented team and the many developers, maintainers, and early adopters who have indelibly shaped our language ecosystem. </p>
+        <animated-particles></animated-particles>
       </header>
       <unison-one-oh-card-grid></unison-one-oh-card-grid>
     </main>
@@ -110,6 +111,9 @@ eleventyExcludeFromCollections: false
   main .unison-featured-header {
     margin-top: 2rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   main .unison-featured-header h1 {
@@ -119,6 +123,14 @@ eleventyExcludeFromCollections: false
 
   main .unison-featured-header p {
     font-size: 1.5rem;
+  }
+
+  main animated-particles {
+    position: absolute;
+    width: 64rem;
+    left: -160px;
+    top: 2rem;
+    opacity: 0.6;
   }
 
   main article {

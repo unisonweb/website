@@ -1,7 +1,7 @@
 <script>
   class OneOhFeaturedItems extends HTMLElement {
     connectedCallback() {
-      // this.animate();
+      this.animate();
     }
 
     animate() {
@@ -33,31 +33,21 @@
     <p>Unison 1.0 marks a point where the language, distributed runtime, and developer workflow have stabilized. Over the past few years, we've refined the core language, optimized the programming workflow, built collaborative tooling, and created a deployment platform for your Unison apps and services.</p>
   </div>
   <div slot="graphic" class="item-overview side-by-side">
-    <div class="item">Collaborative tooling</div>
-    <div class="item">Unison Cloud</div>
-    <div class="item">"Bring Your Own Cloud"</div>
-    <div class="item">Refined DX</div>
-    <div class="item">Runtime optimizations</div>
-    <div class="item">Distributed systems</div>
-    <div class="item">Unison Share</div>
-    <div class="item">Contributor ecosystem</div>
-    <!--
-    <div class="item focus">Collaborative tooling Streamlined tools for team workflows</div>
-    <div class="item">Unison Cloud Our platform for deploying Unison apps</div>
-    <div class="item">"Bring Your Own Cloud" Run our Cloud on any container-based infra</div>
-    <div class="item">Refined DX We've iterated on the high-friction parts of the dev experience</div>
-    <div class="item">Runtime optimizations Vast improvements to our interpreter's speed and efficiency</div>
-    <div class="item">Distributed systems frameworks We provide the building blocks for scalable, fault-tolerant apps</div>
-    <div class="item">Unison Share A polished interface for browsing and discovering code</div>
-    <div class="item">Contributor ecosystem A growing community supporting the language and tooling</div>
-    !-->
+    <div class="item focus"><strong>Collaborative tooling</strong> <span class="item-details">Streamlined tools for team workflows</span></div>
+    <div class="item"><strong>Unison Cloud</strong><span class="item-details"> Our platform for deploying Unison apps</span></div>
+    <div class="item"><strong>"Bring Your Own Cloud"</strong> <span class="item-details">Run our Cloud on any container-based infra</span></div>
+    <div class="item"><strong>Refined DX</strong> <span class="item-details">We've iterated on the high-friction parts of the dev experience</span></div>
+    <div class="item"><strong>Runtime optimizations</strong> <span class="item-details">Vast improvements to our interpreter's speed and efficiency</span></div>
+    <div class="item"><strong>Distributed systems frameworks</strong> <span class="item-details">We provide the building blocks for scalable, fault-tolerant apps</span></div>
+    <div class="item"><strong>Unison Share</strong> <span class="item-details">A polished interface for browsing and discovering code</span></div>
+    <div class="item"><strong>Contributor ecosystem</strong> <span class="item-details">A growing community supporting the language and tooling</span></div>
   </div>
 </featured-card>
 <style webc:scoped>
   :host .featured_items {
     --gap: 0.75rem;
     --item-height: 3.625rem;
-    height: 22rem;
+    height: 16rem;
 
     .featured_content {
       width: 55%;
@@ -68,13 +58,14 @@
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
       gap: var(--gap);
       font-size: var(--font-size-medium);
-      padding-top: 4rem;
+      padding-top: 2rem;
+      padding-right: 2rem;
       will-change: transform;
-      /*animation: scrollx 25s ease-in-out infinite;*/
+      animation: scrolly 13.5s ease-in-out infinite;
 
       .item {
         display: flex;
@@ -85,32 +76,29 @@
         border-radius: 1rem;
         background: var(--color-gray-lighten-100);
         color: var(--color-gray-darken-30);
-        /*filter: blur(0.5rem);
+        filter: blur(0.25rem);
         opacity: 0.75;
-          */
         transition: all 0.5s;
 
         strong {
           color: var(--color-gray-darken-30);
-          font-size: var(--font-size-base);
+        }
+
+        .item-details {
+          color: var(--color-gray-lighten-20);
         }
 
         &.focus {
           opacity: 1;
           filter: blur(0);
-          transform: scale3d(1.2, 1.2, 1.2);
-          padding: 0 1rem;
+          border-radius: 0.5rem;
+          transform: scale3d(1.05, 1.05, 1.05);
+
+          .item-details {
+            opacity: 1;
+          }
         }
       }
-    }
-  }
-
-  @keyframes scrollx {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(calc(-100% - var(--gap)));
     }
   }
 </style>
