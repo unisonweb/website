@@ -1,6 +1,6 @@
 <featured-card
   @title="What does Unison code look like?"
-  class="featured_1-1 syntax-overview"
+  class="featured_1-1 syntax-overview featured_color_pale-blue"
 >
   <featured-icon slot="icon" color="pale-blue" size="small">
     <icon-lines-of-code></icon-lines-of-code>
@@ -17,7 +17,7 @@
     </ul>
 
     <footer>
-      <a href="/docs/at-a-glance/" class="button contained primary-mono medium">Syntax overview</a>
+      <a href="/docs/at-a-glance/" class="button contained primary medium">Syntax overview</a>
     </footer>
   </div>
 
