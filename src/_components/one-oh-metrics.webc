@@ -1,21 +1,29 @@
 <featured-card
   @title="Metrics"
-  class="featured_1-1 featured_color_pale-pink"
+  class="featured_1-2 featured_color_pale-yellow"
 >
-  <featured-icon slot="icon" color="pink" size="small">
+  <featured-icon slot="icon" color="purple" size="small">
     <icon-pulse></icon-pulse>
   </featured-icon>
   <p slot="description">
-    Our momentum is powered by a prolific team and a remarkable community:
+    Our momentum is powered by a prolific team and a remarkable community.
   </p>
   <div slot="graphic" class="kpis">
-    <featured-kpi-group>
-      <featured-kpi kpi="26,558+" label="Commits"></featured-kpi>
-      <featured-kpi kpi="3,490+" label="PRs merged"></featured-kpi>
-      <featured-kpi kpi="6.2k" label="Github stars"></featured-kpi>
-      <featured-kpi kpi="152,459" label="Unison library downloads"></featured-kpi>
-      <featured-kpi kpi="139,811+" label="Published Unison definitions"></featured-kpi>
-      <featured-kpi kpi="1,300+" label="Unison project authors"></featured-kpi>
-    </featured-kpi-group>
+    <wrapped-kpi-group>
+      <wrapped-kpi kpi="26,558+" label="Commits"></wrapped-kpi>
+      <wrapped-kpi kpi="3,490+" label="PRs merged"></wrapped-kpi>
+      <wrapped-kpi kpi="6.2k" label="Github stars"></wrapped-kpi>
+      <wrapped-kpi kpi="152,459" label="Unison library downloads"></wrapped-kpi>
+      <wrapped-kpi kpi="139,811+" label="Published Unison definitions"></wrapped-kpi>
+      <wrapped-kpi kpi="1,300+" label="Unison project authors"></wrapped-kpi>
+    </wrapped-kpi-group>
   </div>
 </featured-card>
+<style webc:scoped>
+:host {
+  featured-card {
+    display: flex;
+    flex-direction: column;
+  }
+}
+</style>

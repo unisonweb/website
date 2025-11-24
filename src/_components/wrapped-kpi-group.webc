@@ -25,4 +25,12 @@
   :host .wrapped-kpi:nth-child(2) {
     border-bottom: 1px solid var(--wrapped-kpi-border-color);
   }
+
+  :host .wrapped-kpi:nth-child(5) {
+    border-top: 1px solid var(--wrapped-kpi-border-color);
+  }
+
+  :host .wrapped-kpi:nth-child(6) {
+    border-top: 1px solid var(--wrapped-kpi-border-color);
+  }
 </style>

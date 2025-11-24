@@ -23,8 +23,8 @@
     color: var(--color-gray-base);
     font-size: 1rem;
     overflow: clip;
-    --featured-kpi-border-color: var(--color-gray-darken-20-transparent);
-    --featured-kpi-color: var(--color-gray-base);
+    --wrapped-kpi-border-color: var(--color-gray-darken-20-transparent);
+    --wrapped-kpi-color: var(--color-gray-base);
   }
 
   :host header {
@@ -40,8 +40,8 @@
       var(--color-blue-5),
       var(--color-blue-2)
     );
-    --featured-kpi-border-color: var(--color-blue-1);
-    --featured-kpi-color: var(--color-blue-2);
+    --wrapped-kpi-border-color: var(--color-blue-1);
+    --wrapped-kpi-color: var(--color-blue-2);
   }
 
   :host.featured_color_blue {
@@ -49,20 +49,20 @@
       var(--color-blue-5),
       var(--color-blue-2)
     );
-    --featured-kpi-border-color: var(--color-blue-1);
-    --featured-kpi-color: var(--color-blue-2);
+    --wrapped-kpi-border-color: var(--color-blue-1);
+    --wrapped-kpi-color: var(--color-blue-2);
   }
 
   :host.featured_color_pale-blue {
     background: var(--color-blue-5);
-    --featured-kpi-border-color: var(--color-blue-4);
-    --featured-kpi-color: var(--color-blue-2);
+    --wrapped-kpi-border-color: var(--color-blue-3);
+    --wrapped-kpi-color: var(--color-blue-1);
   }
 
   :host.featured_color_pale-purple {
     background: var(--color-purple-6);
-    --featured-kpi-border-color: var(--color-purple-5);
-    --featured-kpi-color: var(--color-purple-1);
+    --wrapped-kpi-border-color: var(--color-purple-5);
+    --wrapped-kpi-color: var(--color-purple-1);
   }
 
   :host.featured_color_purple-gradient {
@@ -72,25 +72,26 @@
         var(--color-orange-4),
         var(--color-purple-5)
       );
-    --featured-kpi-border-color: var(--color-purple-5);
-    --featured-kpi-color: var(--color-purple-1);
+    --wrapped-kpi-border-color: var(--color-purple-5);
+    --wrapped-kpi-color: var(--color-purple-1);
     color: var(--color-gray-darken-30);
   }
 
   :host.featured_color_pale-pink {
     background: var(--color-pink-5);
-    --featured-kpi-border-color: var(--color-pink-1-25pct);
-    --featured-kpi-color: var(--color-pink-0);
+    --wrapped-kpi-border-color: var(--color-pink-1-25pct);
+    --wrapped-kpi-color: var(--color-pink-0);
   }
 
   :host.featured_color_pale-green {
     background: var(--color-green-5);
-    --featured-kpi-border-color: var(--color-green-4);
+    --wrapped-kpi-border-color: var(--color-green-4);
   }
 
   :host.featured_color_pale-yellow {
     background: var(--color-orange-5);
-    --featured-kpi-border-color: var(--color-orange-4);
+    --wrapped-kpi-border-color: rgba(0, 0, 0, 0.125);
+    --wrapped-kpi-color: var(--color-gray-darken-30);
   }
 
   :host.featured_color_space {
@@ -112,8 +113,8 @@
         var(--color-purple-2),
         var(--color-purple-6)
       );
-    --featured-kpi-border-color: var(--color-purple-5);
-    --featured-kpi-color: var(--color-purple-1);
+    --wrapped-kpi-border-color: var(--color-purple-5);
+    --wrapped-kpi-color: var(--color-purple-1);
     color: var(--color-gray-darken-30);
 
     a:not(.button) {
