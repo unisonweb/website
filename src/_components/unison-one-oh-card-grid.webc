@@ -30,7 +30,7 @@
       <icon-cli></icon-cli>
     </featured-icon>
     <p slot="description">
-      The Unison Codebase Manager (ucm) is a command-line tool for (…wait for it…) managing your Unison codebase. You will use it alongside your preferred text editor to add, modify, rename, and delete definitions; install, upgrade, and remove libraries; quickly run your programs, or run test suites.
+      The Unison Codebase Manager (ucm) is a CLI tool used alongside your text editor to edit, rename, delete definitions; manage libraries; run your programs and test suites.
     </p>
   </featured-card>
 
