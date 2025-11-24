@@ -2,7 +2,7 @@
   @title="What does Unison code look like?"
   class="featured_1-1 syntax-overview"
 >
-  <featured-icon slot="icon" color="black-and-purple" size="small">
+  <featured-icon slot="icon" color="pale-blue" size="small">
     <icon-lines-of-code></icon-lines-of-code>
   </featured-icon>
   <div slot="description">
@@ -16,36 +16,38 @@
       <li><a href="/docs/fundamentals/values-and-functions/delayed-computations/">Delayed computations</a> - for representing non-eager evaluation</li>
     </ul>
 
-    <a href="/docs/at-a-glance/" class="button contained outlined medium">Syntax overview</a>
+    <footer>
+      <a href="/docs/at-a-glance/" class="button contained primary-mono medium">Syntax overview</a>
+    </footer>
   </div>
 
   <div slot="graphic" class="syntax-graphic">
-<code-example @title="~/scratch.u" @numLines="10"><span class="syntax"><span class="hash-qualifier">guessingGame</span><span class="type-ascription-colon"> : </span>'{<span class="type-reference">IO</span>, <span class="type-reference">Exception</span>} ()
+<code-example-light-mode @title="~/scratch.u" @numLines="10"><span class="syntax"><span class="hash-qualifier">guessingGame</span><span class="type-ascription-colon"> : </span>'{<span class="type-reference">IO</span>, <span class="type-reference">Exception</span>} ()
 <span class="hash-qualifier">guessingGame</span><span class="binding-equals"> = </span><span class="control-keyword">do </span><span class="term-reference"><span class="fqn"><span class="segment">Random</span><span class="sep">.</span><span class="segment">run</span></span></span> <span class="control-keyword">do</span>
-<span class="var">target</span><span class="binding-equals"> = </span><span class="term-reference">Random.natIn</span> <span class="numeric-literal">0 100</span>
-<span class="term-reference">printLine</span> <span class="text-literal">"Guess a number between 0 and 100"</span>
+  <span class="var">target</span><span class="binding-equals"> = </span><span class="term-reference">Random.natIn</span> <span class="numeric-literal">0 100</span>
+  <span class="term-reference">printLine</span> <span class="text-literal">"Guess a number between 0 and 100"</span>
 
-<span class="var">loop</span><span class="binding-equals"> = </span><span class="control-keyword">do</span>
-  <span class="control-keyword">match</span> (<span class="term-reference">console.readLine</span><span class="delay-force-char">()</span> |> <span class="term-reference">Nat.fromText</span>) <span class="control-keyword">with</span>
-    <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> == <span class="var">target</span> ->
-      <span class="term-reference">printLine</span> <span class="text-literal">"Correct! You win!"</span>
-    <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> < <span class="var">target</span> ->
-      <span class="term-reference">printLine</span> <span class="text-literal">"Too low, try again"</span>
-      <span class="term-reference">loop</span><span class="delay-force-char">()</span>
-    <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> > <span class="var">target</span> ->
-      <span class="term-reference">printLine</span> <span class="text-literal">"Too high, try again"</span>
-      <span class="term-reference">loop</span><span class="delay-force-char">()</span>
-    <span class="var">otherwise</span> ->
-      <span class="term-reference">printLine</span> <span class="text-literal">"Invalid input, try again"</span>
-      <span class="term-reference">loop</span><span class="delay-force-char">()</span></span>
+  <span class="var">loop</span><span class="binding-equals"> = </span><span class="control-keyword">do</span>
+    <span class="control-keyword">match</span> (<span class="term-reference">console.readLine</span><span class="delay-force-char">()</span> |> <span class="term-reference">Nat.fromText</span>) <span class="control-keyword">with</span>
+      <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> == <span class="var">target</span> ->
+        <span class="term-reference">printLine</span> <span class="text-literal">"Correct! You win!"</span>
+      <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> < <span class="var">target</span> ->
+        <span class="term-reference">printLine</span> <span class="text-literal">"Too low, try again"</span>
+        <span class="term-reference">loop</span><span class="delay-force-char">()</span>
+      <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> > <span class="var">target</span> ->
+        <span class="term-reference">printLine</span> <span class="text-literal">"Too high, try again"</span>
+        <span class="term-reference">loop</span><span class="delay-force-char">()</span>
+      <span class="var">otherwise</span> ->
+        <span class="term-reference">printLine</span> <span class="text-literal">"Invalid input, try again"</span>
+        <span class="term-reference">loop</span><span class="delay-force-char">()</span></span>
 
-<span class="term-reference">loop</span><span class="delay-force-char">()</span>
-</span>
-
-
+  <span class="term-reference">loop</span><span class="delay-force-char">()</span>
+  </span>
 
 
-</code-example>
+
+
+</code-example-light-mode>
   </div>
 </featured-card>
 
@@ -68,5 +70,9 @@
     left: 2rem;
   }
 
+  footer {
+    margin-top: 2rem;
+    text-align: right;
+  }
 }
 </style>
