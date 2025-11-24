@@ -4,7 +4,8 @@
   --color-syntax-base: var(--color-gray-lighten-45);
   --color-syntax-subtle: var(--color-gray-lighten-20);
   --color-syntax-subtle-em: var(--color-gray-lighten-30);
-  --color-syntax-keyword: var(--color-pink-2);
+  --color-syntax-keyword: var(--color-pink-3);
+  --color-syntax-ability: var(--color-pink-3);
   --color-syntax-operator: var(--color-gray-lighten-20);
   --color-syntax-term: var(--color-purple-4);
   --color-syntax-term-namespace: var(--color-purple-3);

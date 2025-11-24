@@ -1,6 +1,6 @@
 <details>
   <summary>
-    <icon-caret-right></icon-caret-right>
+    <div class="caret-wrapper"><icon-caret-right></icon-caret-right></div>
     <span @text="question"></span>
   </summary>
   <div class="answer"><slot></slot></div>
@@ -15,7 +15,7 @@
     font-weight: normal;
   }
 
-  :host details[open] .icon {
+  :host details[open] .caret-wrapper {
     transform: rotate(90deg);
   }
 
@@ -32,6 +32,33 @@
     font-weight: bold;
     line-height: 1;
     color: var(--color-gray-darken-30);
+    cursor: pointer;
+
+    .caret-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-gray-lighten-30);
+      border-radius: 1rem;
+      line-height: 1;
+      height: 1.25rem;
+      width: 1.25rem;
+      transition: all 0.2s;
+    }
+
+    &:hover .caret-wrapper {
+      background: var(--color-blue-3);
+      .icon {
+        color: var(--color-blue-1);
+        line-height: 1;
+      }
+    }
+
+    .icon {
+      font-size: 1.125rem;
+      color: var(--color-gray-base);
+      margin-left: 2px;
+    }
   }
 
   .answer {
