@@ -77,4 +77,22 @@
       margin-bottom: 1rem;
     }
   }
+
+  @media only screen and (max-width: 1023px) {
+    :host summary {
+      flex-wrap: nowrap;
+      line-height: 1.4;
+      gap: 0.75rem;
+    }
+
+    :host .answer {
+      margin-left: 1.75rem;
+    }
+  }
+
+  @media only screen and (max-width: 590px) {
+    :host summary {
+      align-items: flex-start;
+    }
+  }
 </style>

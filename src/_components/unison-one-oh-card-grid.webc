@@ -524,6 +524,14 @@
     :host {
       margin: 0 4rem;
       flex-direction: column;
+
+      .metrics-roadmap-community {
+        flex-direction: column;
+
+        .roadmap-community {
+          width: 100%;
+        }
+      }
     }
   }
 
@@ -531,9 +539,24 @@
     :host {
       margin: 0 2rem;
     }
+  }
 
-    :host .roadmap.word-soup {
+  @media only screen and (max-width: 550px) {
+    :host .roadmap .word-soup {
       display: none;
+    }
+
+    :host .community {
+      .ctas {
+        flex-direction: column;
+      }
+      .button {
+        white-space: nowrap;
+        width: 100%;
+        .icon {
+          display: none;
+        }
+      }
     }
   }
 
