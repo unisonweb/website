@@ -111,10 +111,10 @@
     </featured-icon>
     <p slot="description">
       <a href="https://share.unison-lang.org" target="_blank">Unison Share</a>
-      is our community hub where open- and closed-source projects alike are
+      is our community hub where open and closed-source projects alike are
       hosted. In addition to all the features you'd expect of a code-hosting
         platform—project and code search, individual and organizational
-        accounts, browsing code and docs, reviewing contributions, etc.; thanks
+        accounts, browsing code and docs, reviewing contributions, etc, thanks
           to the <a href="/docs/the-big-idea">one big idea</a>, all of the code
           references are hyperlinked and navigable.
     </p>
