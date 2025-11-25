@@ -17,8 +17,8 @@
       <icon-unison-mark></icon-unison-mark>
     </featured-icon>
     <div slot="description">
-      <p>Unison is a programming language built around <a href="/docs/the-big-idea/">one big idea</a>: let's identify a definition by its actual contents, <strong>not</strong> just by the same name that also referred to its older version. Unison code lives in a database called your "codebase". The human-friendly names are there too, but they're just for looks, when your code is rendered on the fly as text <em>when</em> you're reading or editing it.</p>
-      <p>Our ecosystem leverages this core idea from the ground up. Some benefits: we never compile the same code twice; many versioning conflicts… aren't; and we're able to build sophisticated self-deploying distributed systems within a single strongly-typed program.</p>
+      <p>Unison is a programming language built around <a href="/docs/the-big-idea/">one big idea</a>: let's identify a definition by its actual contents, <strong>not</strong> just by the human-friendly name that also referred to older versions of the definition. Our ecosystem leverages this core idea from the ground up. Some benefits: we never compile the same code twice; many versioning conflicts <em>aren't</em>; and oh, by the way, we're able to build sophisticated self-deploying distributed systems within a single strongly-typed program!</p>
+      <p>Unison code lives in a database—your "codebase"—rather than in text files. The human-friendly names are in the codebase too, but they're just for looks, when your code is rendered on the fly as text <em>when</em> you're reading or editing it.</p>
     </div>
   </featured-card>
 
