@@ -304,6 +304,9 @@
     .share-features {
       padding: 0 2rem;
       margin-top: -6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
@@ -543,6 +546,14 @@
     :host {
       margin: 0 2rem;
     }
+
+    .unison-share {
+      .share-features {
+        img {
+          width: 100%;
+        }
+      }
+    }
   }
 
   @media only screen and (max-width: 550px) {
@@ -574,6 +585,10 @@
         .terminal-ucm {
           left: 2rem;
         }
+      }
+
+      .unison-share {
+        height: 34rem;
       }
     }
   }
