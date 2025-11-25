@@ -64,7 +64,7 @@
         <timeline-event date="Nov 2023" data-date="2023-11" title="Contributions added to Unison Share" description="We added the ability to make pull-requests to Unison Share. Unison OSS maintainers rejoice." cta="Read post" link="https://www.unison-lang.org/blog/introducing-contributions/"></timeline-event>
         <timeline-event date="Nov 2023" data-date="2023-11" title="OrderedTable storage added to the Cloud" description="`OrderedTable` is a typed transactional storage API on the Cloud. It's built atop other storage primitives; proving that storage can be compositional." cta="Unison Share" link="https://share.unison-lang.org/@unison/cloud/code/main/latest/types/durable/OrderedTable"></timeline-event>
         <timeline-event date="Feb 2024" data-date="2024-02" title="Unison Cloud generally available to the public" description="After much alpha testing, we release the Unison Cloud to the general public! Folks deploy hello-world in a few commands." cta="Unison Cloud" link="https://www.unison.cloud/"></timeline-event>
-        <timeline-event date="May 2024" data-date="2024-05" title="We open-source Unison Share" description="🫶 Unison Share belongs to us all." cta="Read post" link="https://www.unison-lang.org/blog/unison-share-is-open-source/"></timeline-event>
+        <timeline-event date="May 2024" data-date="2024-05" title="We open-sourced Unison Share" description="🫶 Unison Share belongs to us all." cta="Read post" link="https://www.unison-lang.org/blog/unison-share-is-open-source/"></timeline-event>
         <timeline-event date="Jul 2024" data-date="2024-07" title="Cloud daemons" description="Long-running services (daemons) were added as a new Cloud feature." cta="Unison Share" link="https://share.unison-lang.org/@unison/cloud/code/main/latest/terms/Daemon/"></timeline-event>
         <timeline-event date="Aug 2024" data-date="2024-08" title="Ecosystem-wide type-based search" description="Discover projects, terms, and types across the entire ecosystem in a few keystrokes." cta="Read post" link="https://www.unison-lang.org/blog/type-based-search/"></timeline-event>
         <timeline-event date="Sep 2024" data-date="2024-09" title="Unison Forall 2024" description="Our second online conference showcases Unison on the web and more!" cta="Watch videos" link="https://youtube.com/playlist?list=PLQ0IlHfOk1GjQah6kjsknDpOQZDpf5iYP&si=A-w-qNc1J737z7Tx"></timeline-event>
@@ -213,5 +213,61 @@
     height: 1.125rem;
     box-shadow: 0 0 0 3px rgba(255,255, 255, 0.25);
   }
+}
+
+@media only screen and (max-width: 1023px) {
+  :host {
+    .road .road-graphic {
+      margin: 0;
+    }
+
+    .road .timeline {
+      display: none;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 1000px) {
+  :host {
+    .featured_text {
+      width: 18rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 930px) {
+  .featured_text {
+    width: 33%;
+  }
+}
+
+@media only screen and (max-width: 908px) {
+  .featured_text {
+    width: 100%;
+  }
+
+  .road .road-graphic {
+    padding-top: 0;
+    height: 14rem;
+  }
+
+  .events {
+    width: 100%;
+    position: relative;
+    top: auto;
+    right: auto;
+    padding: 1rem;
+    height: 13rem;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  /*
+  .events {
+    --item-height: 15rem;
+    height: 16.5rem;
+  }
+  */
 }
 </style>

@@ -73,4 +73,29 @@
 :host.focus {
   opacity: 1;
 }
+
+@media only screen and (max-width: 550px) {
+  :host {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+
+    .date {
+      font-size: 0.675rem;
+    }
+
+    h3 {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  :host {
+    font-size: 0.75rem;
+
+    h3 {
+      font-size: 0.75rem;
+    }
+  }
+}
 </style>

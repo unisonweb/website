@@ -75,4 +75,56 @@
     text-align: right;
   }
 }
+@media only screen and (max-width: 1023px) {
+  :host {
+    .featured_content {
+      height: auto;
+
+      .featured_text {
+        margin: 0;
+      }
+    }
+
+    .syntax-graphic {
+      position: relative;
+      top: 0;
+      left: 0;
+      padding: 0 2rem;
+      overflow: hidden;
+      height: 32rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  :host {
+    .syntax-graphic {
+      padding: 0 1rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  :host {
+    .syntax-graphic {
+      height: 28rem;
+      .code.rich {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  :host {
+    .syntax-graphic {
+      padding: 0 0.5rem;
+
+      .code.rich {
+        padding: 0.5rem;
+        overflow: auto;
+      }
+    }
+  }
+}
 </style>
