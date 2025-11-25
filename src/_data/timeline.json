@@ -3,7 +3,7 @@
     {
       "date": "2018-02",
       "title": "Unison Computing company founding",
-      "description": "The Unison triumvirate unites! Paul, Rúnar, and Arya found a company in Boston."
+      "description": "The Unison triumvirate unites! Paul, Rúnar, and Arya found a public benefit corporation in Boston."
     },
     {
       "date": "2019-08",
@@ -15,6 +15,12 @@
       "title": "Strangeloop conference",
       "description": "The tech world gets an intro to Unison at the storied Strangeloop conference.",
       "link": "https://youtu.be/gCWtkvDQ2ZI?si=GrxYqfBHo9CvLZ-W"
+    },
+    {
+      "date": "2021-04",
+      "title": "Unison adopts Sqlite for local codebases",
+      "description": "Switched from git-style, filesystem-based database to new Sqlite format for 100x codebase size reduction.",
+      "link": "https://github.com/unisonweb/unison/issues/1930"
     },
     {
       "date": "2021-07",
