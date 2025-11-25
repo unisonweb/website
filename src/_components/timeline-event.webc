@@ -1,0 +1,101 @@
+<div webc:root webc:if="focus" class="timeline-event focus" @attributes>
+  <span class="date" @text="date"></span>
+  <h3 @text="title"></h3>
+  <div class="timeline-event-content">
+    <div class="description" @text="description"></div>
+    <div webc:if="cta" class="cta">
+      <a @href="link" @text="cta" class="button default contained small"></a>
+    </div>
+  </div>
+</div>
+<div webc:root webc:else class="timeline-event" @attributes>
+  <span class="date" @text="date"></span>
+  <h3 @text="title"></h3>
+  <div class="timeline-event-content">
+    <div class="description" @text="description"></div>
+    <div webc:if="cta" class="cta">
+      <a @href="link" @text="cta" class="button default contained small"></a>
+    </div>
+  </div>
+</div>
+<style webc:scoped>
+:host {
+  background: var(--color-gray-lighten-100);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex-shrink: 0;
+  height: var(--item-height);
+  will-change: transform;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.5);
+  margin: 0 0.25rem;
+
+  .date {
+    font-size: var(--font-size-small);
+    color: var(--color-gray-lighten-20);
+  }
+
+  h3 {
+    font-size: 1.125rem;
+    color: var(--color-gray-darken-30);
+  }
+
+  .timeline-event-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+  }
+
+  .description {
+    width: 100%;
+    flex-shrink: 0;
+    text-wrap: pretty;
+  }
+
+  .cta {
+    margin-top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    align-self: flex-end;
+    flex-shrink: 0;
+  }
+}
+
+:host.focus {
+  opacity: 1;
+}
+
+@media only screen and (max-width: 550px) {
+  :host {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+
+    .date {
+      font-size: 0.675rem;
+    }
+
+    h3 {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  :host {
+    font-size: 0.75rem;
+
+    h3 {
+      font-size: 0.75rem;
+    }
+  }
+}
+</style>

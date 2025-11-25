@@ -1,0 +1,50 @@
+<featured-card
+  @title="Frequently asked questions"
+  class="featured_1-1 featured_color_pale-blue faq">
+
+  <featured-icon slot="icon" color="blue" size="small">
+    <icon-question-mark></icon-question-mark>
+  </featured-icon>
+  <div class="faq-items" slot="description">
+    <faq-item @question="Why make a whole new programming language? Couldn't you add Unison's features to another language?">
+      <p>
+        Unison's hash-based, database-backed representation changes how code is identified, versioned, and shared. As a consequence, the workflow, toolchain, and deployment model are not add-ons; they emerge naturally from the language's design. In theory, you could try to retrofit these ideas onto another language, but doing so might be fragile, difficult to make reliable in production, and would likely require rewriting major parts of the existing tooling while restricting language features.
+      </p>
+      <p>You don't build a rocket ship out of old cars, you start fresh.</p>
+    </faq-item>
+    <faq-item @question="Is anyone using Unison in prod?">
+      <p>Yes, <strong>we</strong> are! Our entire Cloud orchestration layer is written entirely in Unison, and it has powered Unison Cloud from day one.</p>
+    </faq-item>
+    <faq-item @question="I'm concerned about vendor lock-in; do I have to use Unison Cloud to deploy my services?">
+      <p>No, Unison is an open source, general programming language, and you can <a href="https://www.unison-lang.org/docs/usage-topics/running-programs/">export a compiled binary</a> and <a href="https://www.unison-lang.org/docs/usage-topics/docker/">deploy it via Docker</a>, or however you prefer.</p>
+      <p>You can also run Unison Cloud on your own infrastructure. Both <a href="https://www.unison.cloud/">Unison Cloud</a> and our <a href="https://www.unison.cloud/byoc/">Bring Your Own Cloud (BYOC)</a> offer generous free tiers.</p>
+    </faq-item>
+    <faq-item @question="What does collaborating look like in Unison?">
+      <p>Unison Share supports organizations, tickets, code contributions (pull requests), code review, and more.</p>
+        <p>In many ways Unison's story for collaboration outstrips the status quo of developer tooling. e.g. merge conflicts only happen when two people actually modify the same definition; not because you moved some stuff around in your files.</p>
+    </faq-item>
+    <faq-item @question="How does version control work in the absence of `git`?">
+      <p>Unison implements a native version control system: with projects, branches, clone, push, pull, merge, etc.</p>
+    </faq-item>
+    <faq-item @question="Do I have to use a specific IDE?">
+      <p>No, you can pick any IDE that you're familiar with. Unison exposes an LSP server and many community members have contributed <a href="https://www.unison-lang.org/docs/usage-topics/editor-setup/">their own editor setups here</a>.</p>
+    </faq-item>
+    <faq-item @question="What about interop with other languages?">
+      <p>Work is underway today to add a C FFI!</p>
+    </faq-item>
+    <faq-item @question="Without files, how do I see my codebase?">
+      <p>Your codebase structure is viewable with the <a href="https://www.unison-lang.org/docs/tooling/ucm-desktop/">Unison Desktop app</a>. The UCM Desktop app also features click-through to definition tooling and rich rendering of docs.</p>
+    </faq-item>
+  </div>
+</featured-card>
+
+<style webc:scoped>
+:host {
+  width: 100%;
+}
+:host .faq-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+</style>

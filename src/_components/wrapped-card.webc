@@ -32,6 +32,16 @@
     align-items: center;
   }
 
+  :host.wrapped_color_sky {
+    background: linear-gradient(0deg,
+      var(--color-orange-5),
+      var(--color-blue-5),
+      var(--color-blue-2)
+    );
+    --wrapped-kpi-border-color: var(--color-blue-1);
+    --wrapped-kpi-color: var(--color-blue-2);
+  }
+
   :host.wrapped_color_blue {
     background: linear-gradient(145deg,
       var(--color-blue-5),
@@ -102,6 +112,10 @@
     width: calc(50% - 0.75rem);
   }
 
+  :host.wrapped_1-1 {
+    width: 100%;
+  }
+
   :host .wrapped_content {
     display: flex;
     flex-direction: column;
@@ -135,6 +149,10 @@
 
   :host .wrapped_content {
     padding: 2rem;
+  }
+
+  :host a:not(.button) {
+    color: var(--color-blue-1);
   }
 
   @media only screen and (max-width: 1023px) {

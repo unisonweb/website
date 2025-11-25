@@ -1,0 +1,98 @@
+<details>
+  <summary>
+    <div class="caret-wrapper"><icon-caret-right></icon-caret-right></div>
+    <span @text="question"></span>
+  </summary>
+  <div class="answer"><slot></slot></div>
+</details>
+
+<style webc:scoped>
+  :host details {
+    display: flex;
+    flex-direction: column;
+    color: var(--color-gray-darken-10);
+    border-radius: 0.75rem;
+    font-weight: normal;
+  }
+
+  :host details[open] .caret-wrapper {
+    transform: rotate(90deg);
+  }
+
+  :host summary::marker {
+    content: "";
+  }
+
+  :host summary {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    font-weight: bold;
+    line-height: 1;
+    color: var(--color-gray-darken-30);
+    cursor: pointer;
+    transition: all 0.2s;
+
+    .caret-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-gray-lighten-30);
+      border-radius: 1rem;
+      line-height: 1;
+      height: 1.25rem;
+      width: 1.25rem;
+      transition: all 0.2s;
+    }
+
+    &:hover {
+      color: var(--color-blue-1);
+
+      .caret-wrapper {
+        background: var(--color-blue-3);
+        .icon {
+          color: var(--color-blue-1);
+          line-height: 1;
+        }
+      }
+    }
+
+    .icon {
+      font-size: 1.125rem;
+      color: var(--color-gray-base);
+      margin-left: 2px;
+    }
+  }
+
+  .answer {
+    margin-left: 1.25rem;
+
+    p:first-child {
+      margin-top: 0.5rem;
+    }
+
+    p:last-child {
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media only screen and (max-width: 1023px) {
+    :host summary {
+      flex-wrap: nowrap;
+      line-height: 1.4;
+      gap: 0.75rem;
+    }
+
+    :host .answer {
+      margin-left: 1.75rem;
+    }
+  }
+
+  @media only screen and (max-width: 590px) {
+    :host summary {
+      align-items: flex-start;
+    }
+  }
+</style>

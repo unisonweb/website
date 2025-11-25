@@ -14,6 +14,7 @@
 #blog-index .post-summaries .card {
   width: calc(50% - 2rem);
   transition: all 0.2s;
+  background: #fff;
 }
 
 #blog-index .post-summaries .card:hover {

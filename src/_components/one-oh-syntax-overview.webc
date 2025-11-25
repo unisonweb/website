@@ -1,0 +1,130 @@
+<featured-card
+  @title="What does Unison code look like?"
+  class="featured_1-1 syntax-overview featured_color_pale-blue"
+>
+  <featured-icon slot="icon" color="pale-blue" size="small">
+    <icon-lines-of-code></icon-lines-of-code>
+  </featured-icon>
+  <div slot="description">
+    <p>Here's a Unison program that prompts the user to guess a random number from the command line.</p>
+
+    <p>It features several of Unison's language features: </p>
+
+    <ul>
+      <li><a href="/docs/fundamentals/abilities/">Abilities</a> - for functional effect management</li>
+      <li><a href="/docs/fundamentals/control-flow/pattern-matching/">Structural pattern matching</a> - for decomposing types and managing control flow</li>
+      <li><a href="/docs/fundamentals/values-and-functions/delayed-computations/">Delayed computations</a> - for representing non-eager evaluation</li>
+    </ul>
+
+    <footer>
+      <a href="/docs/at-a-glance/" class="button contained primary medium">Syntax overview</a>
+    </footer>
+  </div>
+
+  <div slot="graphic" class="syntax-graphic">
+<code-example-light-mode @title="~/scratch.u" @numLines="10"><span class="syntax"><span class="hash-qualifier">guessingGame</span><span class="type-ascription-colon"> : </span>'{<span class="type-reference">IO</span>, <span class="type-reference">Exception</span>} ()
+<span class="hash-qualifier">guessingGame</span><span class="binding-equals"> = </span><span class="control-keyword">do </span><span class="term-reference"><span class="fqn"><span class="segment">Random</span><span class="sep">.</span><span class="segment">run</span></span></span> <span class="control-keyword">do</span>
+  <span class="var">target</span><span class="binding-equals"> = </span><span class="term-reference">Random.natIn</span> <span class="numeric-literal">0 100</span>
+  <span class="term-reference">printLine</span> <span class="text-literal">"Guess a number between 0 and 100"</span>
+
+  <span class="var">loop</span><span class="binding-equals"> = </span><span class="control-keyword">do</span>
+    <span class="control-keyword">match</span> (<span class="term-reference">console.readLine</span><span class="delay-force-char">()</span> |> <span class="term-reference">Nat.fromText</span>) <span class="control-keyword">with</span>
+      <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> == <span class="var">target</span> ->
+        <span class="term-reference">printLine</span> <span class="text-literal">"Correct! You win!"</span>
+      <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> < <span class="var">target</span> ->
+        <span class="term-reference">printLine</span> <span class="text-literal">"Too low, try again"</span>
+        <span class="term-reference">loop</span><span class="delay-force-char">()</span>
+      <span class="data-constructor-reference">Some</span> <span class="var">guess</span> | <span class="var">guess</span> > <span class="var">target</span> ->
+        <span class="term-reference">printLine</span> <span class="text-literal">"Too high, try again"</span>
+        <span class="term-reference">loop</span><span class="delay-force-char">()</span>
+      <span class="var">otherwise</span> ->
+        <span class="term-reference">printLine</span> <span class="text-literal">"Invalid input, try again"</span>
+        <span class="term-reference">loop</span><span class="delay-force-char">()</span></span>
+
+  <span class="term-reference">loop</span><span class="delay-force-char">()</span>
+  </span>
+
+
+
+
+</code-example-light-mode>
+  </div>
+</featured-card>
+
+<style webc:scoped>
+:host {
+  width: 100%;
+  position: relative;
+
+  .featured_content {
+    height: 38.5rem;
+
+    .featured_text {
+      margin-left: 50%;
+    }
+  }
+
+  .syntax-graphic {
+    position: absolute;
+    top: 6.5rem;
+    left: 2rem;
+  }
+
+  footer {
+    margin-top: 2rem;
+    text-align: right;
+  }
+}
+@media only screen and (max-width: 1023px) {
+  :host {
+    .featured_content {
+      height: auto;
+
+      .featured_text {
+        margin: 0;
+      }
+    }
+
+    .syntax-graphic {
+      position: relative;
+      top: 0;
+      left: 0;
+      padding: 0 2rem;
+      overflow: hidden;
+      height: 32rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  :host {
+    .syntax-graphic {
+      padding: 0 1rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  :host {
+    .syntax-graphic {
+      height: 28rem;
+      .code.rich {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  :host {
+    .syntax-graphic {
+      padding: 0 0.5rem;
+
+      .code.rich {
+        padding: 0.5rem;
+        overflow: auto;
+      }
+    }
+  }
+}
+</style>

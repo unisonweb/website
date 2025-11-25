@@ -1,0 +1,194 @@
+---
+tags: blog
+permalink: unison-1-0/index.html
+authors:
+  - arya-irani
+  - rebecca-mark
+categories:
+  - highlights
+date: 2025-11-25T00:00:00.000Z
+featuredImage: /assets/unison-is-one-oh.png
+status: published
+summary: "After years of engineering, design, and community collaboration, we're excited to release Unison 1.0. This version delivers a refined programming workflow and a mature toolchain. Join us as we celebrate this milestone and look ahead to the future of Unison."
+title: Announcing Unison 1.0
+eleventyExcludeFromCollections: false
+---
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Announcing Unison 1.0</title>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="After years of engineering, design, and community collaboration, we're excited to release Unison 1.0. This version delivers a refined programming workflow and a mature toolchain. Join us as we celebrate this milestone and look ahead to the future of Unison."
+    />
+    <meta
+      name="twitter:description"
+      content="After years of engineering, design, and community collaboration, we're excited to release Unison 1.0. This version delivers a refined programming workflow and a mature toolchain. Join us as we celebrate this milestone and look ahead to the future of Unison."
+    />
+    <meta
+      property="og:description"
+      content="After years of engineering, design, and community collaboration, we're excited to release Unison 1.0. This version delivers a refined programming workflow and a mature toolchain. Join us as we celebrate this milestone and look ahead to the future of Unison."
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <meta name="theme-color" content="#ffffff" />
+
+    <meta property="og:title" content="Announcing Unison 1.0" />
+    <meta name="twitter:title" content="Announcing Unison 1.0" />
+
+    <meta property="og:type" content="blog" />
+    <meta property="og:url" content="https://unison-lang.org" />
+    <meta
+      property="og:image"
+      content="https://unison-lang.org/assets/unison-is-one-oh.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="627" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:image"
+      content="https://unison-lang.org/assets/unison-is-one-oh.png"
+    />
+    <meta name="twitter:site" content="@unisonweb" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      webc:keep
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;500;600;700;900&family=Princess+Sofia:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link webc:keep rel="stylesheet" href="/css/styles.css" />
+    <style @raw="getBundle('css')" webc:keep></style>
+
+    <script
+      webc:keep
+      defer
+      data-domain="unison-lang.org"
+      src="https://plausible.io/js/plausible.js"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <page-header></page-header>
+      <header class="unison-featured-header">
+        <h1>Unison 1.0 is here!</h1>
+        <p>This milestone reflects the dedication of our talented team and the many developers, maintainers, and early adopters who have indelibly shaped our language ecosystem. </p>
+        <animated-particles></animated-particles>
+      </header>
+      <unison-one-oh-card-grid></unison-one-oh-card-grid>
+    </main>
+    <page-footer></page-footer>
+    <script @raw="getBundle('js')" webc:keep></script>
+  </body>
+</html>
+
+<style webc:scoped>
+  body {
+    background: var(--color-gray-lighten-100);
+  }
+
+  main {
+    width: 64rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  main .unison-featured-header {
+    margin-top: 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  main .unison-featured-header h1 {
+    font-size: 3rem;
+    font-weight: 900;
+  }
+
+  main .unison-featured-header p {
+    font-size: 1.5rem;
+  }
+
+  main animated-particles {
+    position: absolute;
+    width: 64rem;
+    left: -200px;
+    top: 2rem;
+    opacity: 0.6;
+  }
+
+  main article {
+    font-size: 1.125rem;
+
+    p, ul, ol {
+      margin-bottom: 1em;
+    }
+
+    section {
+      margin-bottom: 2em;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.25em;
+    }
+
+    section:last-child, p:last-child, ul:last-child, ol:last-child {
+      margin-bottom: 0;
+    }
+
+    ul, ol {
+      margin-left: 2em;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  @media only screen and (max-width: 1023px) {
+    :host main {
+      width: 100%;
+    }
+
+    :host header h1 {
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    main .unison-featured-header p {
+      font-size: 1.25rem;
+      margin: 0 2.5rem;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    main .unison-featured-header p {
+      font-size: 1.125rem;
+      margin: 0 4rem;
+    }
+  }
+
+  @media only screen and (max-width: 850px) {
+    main .unison-featured-header p {
+      font-size: 1rem;
+      margin: 0 1.5rem;
+    }
+  }
+
+</style>

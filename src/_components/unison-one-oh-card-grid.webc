@@ -1,0 +1,595 @@
+<script>
+  function rand(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  class UnisonOneOhCardGrid extends HTMLElement {
+    connectedCallback() { }
+  }
+
+  customElements.define("unison-one-oh-card-grid", UnisonOneOhCardGrid);
+</script>
+<template webc:root>
+  <one-oh-featured-items></one-oh-featured-items>
+
+  <featured-card @title="What is Unison?" class="featured_1-1">
+    <featured-icon slot="icon" color="green" size="small">
+      <icon-unison-mark></icon-unison-mark>
+    </featured-icon>
+    <div slot="description">
+      <p>Unison is a programming language built around <a href="/docs/the-big-idea/">one big idea</a>: let's identify a definition by its actual contents, <strong>not</strong> just by the human-friendly name that also referred to older versions of the definition. Our ecosystem leverages this core idea from the ground up. Some benefits: we never compile the same code twice; many versioning conflicts simply <em>aren't</em>; and we're able to build sophisticated self-deploying distributed systems within a single strongly-typed program.</p>
+      <p>Unison code lives in a database—your "codebase"—rather than in text files. The human-friendly names are in the codebase too, but they're materialized as text only when reading or editing your code.</p>
+    </div>
+  </featured-card>
+
+  <featured-card
+    @title="The Codebase Manager"
+    class="featured_1-2 featured_color_dark-gray-gradient ucm"
+  >
+    <featured-icon slot="icon" color="orange" size="small">
+      <icon-cli></icon-cli>
+    </featured-icon>
+    <p slot="description">
+      The Unison Codebase Manager (ucm) is a CLI tool used alongside your text editor to edit, rename, delete definitions; manage libraries; run your programs and test suites.
+    </p>
+
+    <div slot="graphic" class="scratch-and-ucm">
+      <code-example class="scratch" @title="Edit: ~/scratch.u" @numLines="10"><span class="syntax"><span class="hash-qualifier">factorial</span> n <span class="binding-equals">=</span>
+  if n > 1 then n * factorial (n-1) else n
+
+<span class="hash-qualifier">guessingGame</span> <span class="binding-equals">=</span> <span class="control-keyword">do</span> Random.run do
+  target = Random.natIn 0 100
+  printLine "Guess a number between 0 and 100"
+
+  loop = do
+    match (console.readLine() |> Nat.fromText) with
+      Some guess | guess == target ->
+        printLine "Correct! You win!"
+      Some guess | guess < target ->
+        printLine "Too low, try again"
+        loop()
+      Some guess | guess > target ->
+        printLine "Too high, try again"
+        loop()
+      otherwise ->
+        printLine "Invalid input, try again"
+        loop()
+
+  loop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </span></code-example>
+
+  <code-example class="terminal-ucm" @title="Terminal: ucm" @numLines="10"><span class="syntax"><span class="ucm-project">scratch</span><span class="ucm-branch">/main</span>>                                                                                          
+
+  Loading changes detected in <span class="ucm-hl">~/scratch.u.</span>
+
+  <span class="ucm-add">+</span> <span class="term-reference">factorial</span>    : <span class="type-reference">Nat</span> -> <span class="type-reference">Nat</span>
+  <span class="ucm-add">+</span> <span class="term-reference">guessingGame</span> : <span class="delay-force-char">'</span>{<span class="type-reference">IO</span>, <span class="type-reference">Exception</span>} <span class="type-reference">()</span>
+
+  Run <span class="ucm-command">`update`</span> to apply these changes to your codebase.
+
+  </span></code-example>
+    </div>
+  </featured-card>
+
+  <featured-card
+    @title="UCM Desktop"
+    class="featured_1-2 featured_color_dark-gray-gradient ucm-desktop"
+  >
+    <featured-icon slot="icon" color="orange" size="small">
+      <icon-pencil-ruler></icon-pencil-ruler>
+    </featured-icon>
+
+    <p slot="description">
+      <a href="https://github.com/unisonweb/ucm-desktop/releases"
+        target="_blank">UCM Desktop</a> is our GUI code browser for your local
+      codebase.
+    </p>
+
+    <div slot="graphic">
+      <img src="/assets/ucm-desktop.png" width="1600"/>
+    </div>
+  </featured-card>
+
+  <featured-card @title="Unison Share" class="featured_1-2 featured_color_pale-purple-gradient unison-share" >
+    <featured-icon slot="icon" color="purple" size="small">
+      <icon-gift></icon-gift>
+    </featured-icon>
+    <p slot="description">
+      <a href="https://share.unison-lang.org" target="_blank">Unison Share</a>
+      is our community hub where open and closed-source projects alike are
+      hosted. In addition to all the features you'd expect of a code-hosting
+        platform—project and code search, individual and organizational
+        accounts, browsing code and docs, reviewing contributions, etc, thanks
+          to the <a href="/docs/the-big-idea">one big idea</a>, all of the code
+          references are hyperlinked and navigable.
+    </p>
+    <div slot="graphic" class="share-features">
+      <img src="/assets/unison-one-oh/abstract-diff.svg" />
+    </div>
+  </featured-card>
+
+  <featured-card
+    @title="Unison Cloud"
+    class="featured_1-2 featured_color_blue featured_cloud unison-cloud"
+  >
+    <featured-icon slot="icon" color="blue" size="small">
+      <icon-cloud></icon-cloud>
+    </featured-icon>
+    <p slot="description">
+      <a href="https://www.unison.cloud" target="_blank">Unison Cloud</a> is
+      our platform for deploying Unison applications. Transition from local prototypes to
+      fully deployed distributed applications using a simple, familiar API—no
+      YAML files, inter-node protocols, or deployment scripts
+      required. In Unison, your apps and infrastructure are defined
+      in the same program, letting you manage services and deployments entirely
+      in code.
+    </p>
+
+    <div slot="graphic">
+      <div class="cloud-graphic">
+        <div class="code-example"><http-code-deploy></http-code-deploy></div>
+        <div class="clouds">
+          <cloud-background></cloud-background>
+        </div>
+      </div>
+    </div>
+  </featured-card>
+
+  <one-oh-syntax-overview></one-oh-syntax-overview>
+
+  <one-oh-road></one-oh-road>
+
+  <div class="metrics-roadmap-community">
+    <one-oh-metrics></one-oh-metrics>
+
+    <div class="roadmap-community">
+      <featured-card
+        @title="Whats next?"
+        class="featured_1-1 roadmap featured_color_space"
+      >
+        <featured-icon slot="icon" color="purple" size="small">
+          <icon-crystal-ball></icon-crystal-ball>
+        </featured-icon>
+        <p slot="description">
+          We're continuing to improve the core Unison language and tooling for a more streamlined and delightful development experience, as well as developing exciting new capabilities on top of Unison Cloud. Here are a few examples on our immediate horizon:
+        </p>
+        <div slot="graphic">
+          <div class="word-soup">
+            <span class="word">C FFI support</span>
+            <span class="word">Improved record types</span>
+            <span class="word">Improved library management</span>
+            <span class="word">Faster codebase sync</span>
+            <span class="word">Improved MCP</span>
+            <span class="word">New UCM desktop capabilities</span>
+            <span class="word">Cloud observability</span>
+            <span class="word">Agentic computing framework</span>
+            <span class="word">Kinesis on S3</span>
+          </div>
+          <a href="https://unison-lang.org/roadmap" class="button medium primary-mono contained" target="_blank">
+            Follow our roadmap
+          </a>
+        </div>
+      </featured-card>
+
+      <featured-card
+        @title="Join us today"
+        class="featured_1-1 community featured_color_pale-green">
+        <featured-icon slot="icon" color="green" size="small">
+          <icon-wireframe-globe></icon-wireframe-globe>
+        </featured-icon>
+
+        <div slot="description">
+          <p>
+            Unison couldn't be made without our amazing community. Join us and help shape the future of Unison.
+          </p>
+          <div class="ctas">
+            <a href="https://unison-lang.org/discord" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+              <icon-discord></icon-discord>
+              Join the community
+            </a>
+            <a href="https://bsky.app/intent/compose?text=🎉 Unison 1.0 has landed! Share the news! https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+              <icon-bluesky></icon-bluesky>
+              Share on Bluesky
+            </a>
+            <a href="https://twitter.com/intent/tweet?text=🎉 Unison 1.0 has landed! Share the news!&url=https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+              <icon-twitter></icon-twitter>
+              Share on Twitter/X
+            </a>
+            <a href="https://fosstodon.org/share?text=🎉 Unison 1.0 has landed! Share the news!&url=https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+              <icon-mastodon></icon-mastodon>
+              Share on Mastodon
+            </a>
+            <a href="https://unison-lang.org/docs/quickstart" class="button medium primary contained content-icon-then-label" target="_blank">
+              <icon-rocket></icon-rocket>Get started coding
+            </a>
+            <a href="mailto:hello@unison.cloud" class="button medium contained primary content-icon-then-label" target="_blank">
+              <icon-conversation></icon-conversation> Use Unison at your org?
+            </a>
+          </div>
+        </div>
+      </featured-card>
+    </div>
+  </div>
+
+  <one-oh-faq></one-oh-faq>
+
+</template>
+
+<style webc:scoped>
+  :host {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  /* -- UCM ---------------------------------------------------------------- */
+
+  .ucm .scratch-and-ucm {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding-left: 2rem;
+    height: 20rem;
+
+    .scratch {
+      opacity: 0.5;
+      filter: blur(0.05rem);
+      width: 2000px;
+      flex-shrink: 0;
+    }
+
+    .terminal-ucm {
+      width: 2000px;
+      flex-shrink: 0;
+      position: absolute;
+      top: 3.75rem;
+      left: 3.5rem;
+      color: var(--color-gray-lighten-30);
+
+      .ucm-hl {
+        color: var(--color-gray-lighten-100);
+      }
+
+      .ucm-project {
+        color: var(--color-green-4);
+      }
+
+      .ucm-branch {
+        color: var(--color-blue-4);
+      }
+
+      .ucm-add {
+        color: var(--color-green-4);
+      }
+
+      .ucm-command {
+        color: var(--color-orange-4);
+      }
+    }
+  }
+
+  /* -- UCM DESKTOP  ------------------------------------------------------- */
+
+  .ucm-desktop {
+    height: 100%;
+    max-height: 34rem;
+
+    img {
+      margin-left: 2rem;
+    }
+  }
+
+  /* -- SHARE -------------------------------------------------------------- */
+
+  :host .unison-share {
+    height: 31rem;
+
+    .share-features {
+      padding: 0 2rem;
+      margin-top: -6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  /* -- CLOUD -------------------------------------------------------------- */
+
+  :host .unison-cloud {
+    --height: 31rem;
+    height: var(--height);
+  }
+
+  :host .unison-cloud .code-example {
+    position: absolute;
+    bottom: -3rem;
+    height: min-content;
+    display: flex;
+    align-self: flex-end;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 12px;
+    transition: all 0.5s cubic-bezier(0.41, 1.88, 0.44, 0.96);
+    width: 100%;
+    padding: 0 2rem;
+
+    code-example {
+      width: 100%;
+    }
+  }
+
+  :host .unison-cloud .button {
+    background: var(--color-blue-1);
+  }
+
+  :host .unison-cloud .cloud-graphic:hover .code-example {
+    transform: translateY(-1rem);
+  }
+
+  :host .unison-cloud .cloud-graphic:hover .clouds {
+    top: calc(var(--height) - 4.5rem);
+  }
+
+  :host .unison-cloud .clouds {
+    transition: all 1s cubic-bezier(0.41, 1.88, 0.44, 0.96);
+    top: calc(var(--height) - 10rem);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-30%);
+    bottom: 0;
+    filter: blur(1.25rem);
+  }
+
+  /* -- UNISON SYNTAX ------------------------------------------------------ */
+
+  :host .what-does-unison-code-look-like {
+    height: 32.5rem;
+  }
+
+  :host .what-does-unison-code-look-like code-example {
+    position: absolute;
+    right: 2rem;
+    top: 4.8rem;
+  }
+
+  :host .what-does-unison-code-look-like code-example:hover {
+    transform: translateY(-4rem);
+  }
+
+  /* -- METRICS-ROADMAP-COMMUNITY ------------------------------------------ */
+
+  :host .metrics-roadmap-community {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    width: 100%;
+
+    .roadmap-community {
+      width: 50%;
+      gap: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  /* -- ROADMAP ------------------------------------------------------------ */
+
+  :host .roadmap {
+    padding-bottom: 2rem;
+  }
+
+  :host .roadmap .featured_text p {
+    opacity: 0.75;
+  }
+
+  :host .roadmap .button {
+    background: var(--color-purple-4);
+    color: var(--color-purple-1);
+    margin-left: 2rem;
+    margin-top: 0;
+  }
+
+  :host .roadmap .word-soup {
+    --gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    gap: var(--gap);
+    font-weight: 500;
+    padding-top: 0.5rem;
+    height: 2.5rem;
+    overflow: hidden;
+    bottom: 2rem;
+    left: 13rem;
+    position: absolute;
+  }
+
+  :host .roadmap .word-soup .word:first-child {
+    animation: scrolly 20s cubic-bezier(0.41, 1.5, 0.44, 0.96) infinite;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+  }
+
+  :host .roadmap .word-soup .word {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    line-height: 1;
+    opacity: 1;
+    transition: all 0.5s;
+    color: var(--color-purple-5);
+    background: var(--color-gray-darken-30);
+    padding: 0.3rem 0.75rem;
+    border-radius: 1.5rem;
+    border: 2px solid var(--color-purple-1);
+    width: min-content;
+    flex-grow: 0;
+    flex-shrink: 0;
+    white-space: nowrap;
+    height: 2rem;
+  }
+
+  /* -- COMMUNITY ---------------------------------------------------------- */
+
+  :host .community {
+    background-image: url(/assets/wrapped2024/community.svg);
+    background-repeat: no-repeat;
+    background-position: 15rem -5rem;
+    height: 100%;
+  }
+
+  :host .community .ctas {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  :host .community .button {
+    display: flex;
+    flex-grow: 0;
+    width: calc(50% - 0.25rem);
+    background: var(--color-green-0);
+
+    &.primary-mono {
+      background: var(--color-green-1);
+    }
+
+    &:hover {
+      background: var(--color-gray-darken-30);
+    }
+  }
+
+  :host {
+    p, ul, ol {
+      margin-bottom: 1em;
+    }
+
+    section {
+      margin-bottom: 2em;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.25em;
+    }
+
+    section:last-child, p:last-child, ul:last-child, ol:last-child {
+      margin-bottom: 0;
+    }
+
+    ul, ol {
+      margin-left: 2em;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  @keyframes scrolly {
+    0% { margin-top: 0; }
+    10% { margin-top: -2.5rem; }
+    20% { margin-top: -5rem; }
+    30% { margin-top: -7.5rem; }
+    40% { margin-top: -10rem; }
+    50% { margin-top: -12.5rem; }
+    60% { margin-top: -15rem; }
+    70% { margin-top: -17.5rem; }
+    90% { margin-top: -20rem; }
+    100% { margin-top: 0; }
+  }
+
+  @keyframes scrollx {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @media only screen and (max-width: 1023px) {
+    :host {
+      margin: 0 4rem;
+      flex-direction: column;
+
+      .metrics-roadmap-community {
+        flex-direction: column;
+
+        .roadmap-community {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    :host {
+      margin: 0 2rem;
+    }
+
+    .unison-share {
+      .share-features {
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 550px) {
+    :host .roadmap .word-soup {
+      display: none;
+    }
+
+    :host .community {
+      .ctas {
+        flex-direction: column;
+      }
+      .button {
+        white-space: nowrap;
+        width: 100%;
+        .icon {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 496px) {
+    :host {
+      margin: 0 1.5rem;
+
+      .ucm .scratch-and-ucm {
+        padding-left: 0;
+
+        .terminal-ucm {
+          left: 2rem;
+        }
+      }
+
+      .unison-share {
+        height: 34rem;
+      }
+    }
+  }
+</style>

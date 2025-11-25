@@ -1,0 +1,144 @@
+<div
+  class="featured-icon"
+  :class="`featured-icon_${color} featured-icon_${size || 'large'}`"
+>
+  <slot></slot>
+</div>
+
+<style webc:scoped>
+  :host .featured-icon {
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  :host .featured-icon::after {
+    content: " ";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0.75rem;
+    background: linear-gradient(
+      to bottom right,
+      transparent,
+      var(--color-gray-darken-30)
+    );
+    mix-blend-mode: overlay;
+    z-index: 1;
+  }
+
+  :host .icon {
+    position: relative;
+    font-size: 2.25rem;
+    z-index: 2;
+  }
+
+  :host .featured-icon_small {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+  }
+
+  :host .featured-icon_small .icon {
+    font-size: 1.75rem;
+  }
+
+  :host .featured-icon_small::after {
+    border-radius: 0.5rem;
+  }
+
+  :host .featured-icon_blue {
+    background: var(--color-blue-3);
+  }
+
+  :host .featured-icon_blue .icon {
+    color: var(--color-blue-5);
+  }
+
+  :host .featured-icon_pale-blue {
+    background: var(--color-blue-4);
+  }
+
+  :host .featured-icon_pale-blue .icon {
+    color: var(--color-blue-1);
+  }
+
+  :host .featured-icon_green {
+    background: var(--color-green-2);
+  }
+
+  :host .featured-icon_green .icon {
+    color: var(--color-gray-lighten-100);
+  }
+
+  :host .featured-icon_orange {
+    background: var(--color-orange-1);
+  }
+
+  :host .featured-icon_orange .icon {
+    color: var(--color-orange-5);
+  }
+
+  :host .featured-icon_yellow {
+    background: var(--color-orange-3);
+  }
+
+  :host .featured-icon_yellow .icon {
+    color: var(--color-orange-0);
+  }
+
+  :host .featured-icon_purple {
+    background: var(--color-purple-4);
+  }
+
+  :host .featured-icon_purple .icon {
+    color: var(--color-gray-lighten-100);
+  }
+
+  :host .featured-icon_pink {
+    background: var(--color-pink-4);
+  }
+
+  :host .featured-icon_pink .icon {
+    color: rgba(0, 0, 0, 0.75);
+  }
+
+  :host .featured-icon_dark-gray {
+    background: linear-gradient(130deg, var(--color-gray-lighten-30), var(--color-gray-lighten-20));
+  }
+
+  :host .featured-icon_dark-gray .icon {
+    color: var(--color-gray-lighten-100);
+  }
+
+  :host .featured-icon_black-and-purple {
+    background: linear-gradient(130deg, var(--color-gray-lighten-20), var(--color-gray-darken-10));
+  }
+
+  :host .featured-icon_black-and-purple .icon {
+    color: var(--color-purple-4);
+  }
+
+  @media only screen and (max-width: 768px) {
+    :host .featured-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 0.5rem;
+    }
+
+    :host .featured-icon .icon {
+      font-size: 1.5rem;
+    }
+
+    :host .featured-icon::after {
+      border-radius: 0.5rem;
+    }
+  }
+</style>

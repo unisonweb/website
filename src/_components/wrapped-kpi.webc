@@ -19,4 +19,10 @@
   :host h4 {
     opacity: 0.6;
   }
+
+  @media only screen and (max-width: 550px) {
+    :host {
+      padding: 1rem;
+    }
+  }
 </style>
