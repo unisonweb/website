@@ -7,7 +7,7 @@ authors:
 categories:
   - highlights
 date: 2025-11-25T00:00:00.000Z
-featuredImage: /assets/unison-1-0-social.png
+featuredImage: /assets/unison-is-one-oh.png
 status: published
 summary: "After years of engineering, design, and community collaboration, we're excited to release Unison 1.0. This version delivers a refined programming workflow and a mature toolchain. Join us as we celebrate this milestone and look ahead to the future of Unison."
 title: Announcing Unison 1.0
@@ -46,7 +46,7 @@ eleventyExcludeFromCollections: false
     <meta property="og:url" content="https://unison-lang.org" />
     <meta
       property="og:image"
-      content="https://unison-lang.org/assets/unison-featured-2024-social.png"
+      content="https://unison-lang.org/assets/unison-is-one-oh.png"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="627" />
@@ -54,7 +54,7 @@ eleventyExcludeFromCollections: false
     <meta name="twitter:card" content="summary" />
     <meta
       name="twitter:image"
-      content="https://unison-lang.org/assets/unison-featured-2024-social.png"
+      content="https://unison-lang.org/assets/unison-is-one-oh.png"
     />
     <meta name="twitter:site" content="@unisonweb" />
 
