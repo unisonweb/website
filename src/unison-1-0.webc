@@ -22,15 +22,15 @@ eleventyExcludeFromCollections: false
     <meta charset="utf-8" />
     <meta
       name="description"
-      content="Our 2024 in review."
+      content="After years of engineering, design, and community collaboration, we're excited to release Unison 1.0. This version delivers a refined programming workflow and a mature toolchain. Join us as we celebrate this milestone and look ahead to the future of Unison."
     />
     <meta
       name="twitter:description"
-      content="Our 2024 in review."
+      content="After years of engineering, design, and community collaboration, we're excited to release Unison 1.0. This version delivers a refined programming workflow and a mature toolchain. Join us as we celebrate this milestone and look ahead to the future of Unison."
     />
     <meta
       property="og:description"
-      content="Our 2024 in review."
+      content="After years of engineering, design, and community collaboration, we're excited to release Unison 1.0. This version delivers a refined programming workflow and a mature toolchain. Join us as we celebrate this milestone and look ahead to the future of Unison."
     />
     <meta
       name="viewport"
@@ -39,8 +39,8 @@ eleventyExcludeFromCollections: false
 
     <meta name="theme-color" content="#ffffff" />
 
-    <meta property="og:title" content="Unison featured 2024" />
-    <meta name="twitter:title" content="Unison featured 2024" />
+    <meta property="og:title" content="Announcing Unison 1.0" />
+    <meta name="twitter:title" content="Announcing Unison 1.0" />
 
     <meta property="og:type" content="blog" />
     <meta property="og:url" content="https://unison-lang.org" />
