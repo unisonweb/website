@@ -11,7 +11,9 @@
       const animate_ = () => {
         items.forEach(w => w.classList.remove("focus"));
 
-        items[inFocus].classList.add("focus");
+        const item = items[inFocus];
+
+        item.classList.add("focus");
         inFocus = inFocus + 1;
 
         if (inFocus === items.length) {
@@ -19,7 +21,7 @@
         }
       }
 
-      setInterval(animate_, 1500);
+      setInterval(animate_, 2500);
     }
   }
 
@@ -29,11 +31,17 @@
   <featured-icon slot="icon" color="purple" size="small">
     <icon-trophy></icon-trophy>
   </featured-icon>
-  <div slot="description">
-    <p>Unison 1.0 marks a point where the language, distributed runtime, and developer workflow have stabilized. Over the past few years, we've refined the core language, optimized the programming workflow, built collaborative tooling, and created a deployment platform for your Unison apps and services.</p>
+  <div slot="description" class="featured-items_content">
+    <p><strong>Unison 1.0</strong> marks a point where the language, distributed runtime, and developer workflow have stabilized. Over the past few years, we've refined the core language, optimized the programming workflow, built collaborative tooling, and created a deployment platform for your Unison apps and services.</p>
+
+    <div class="main-cta">
+      <a href="/docs/quickstart" class="button primary-mono large contained">
+        Get started with Unison 1.0
+      </a>
+    </div>
   </div>
-  <div slot="graphic" class="item-overview side-by-side">
-    <div class="item focus"><strong>Collaborative tooling</strong> <span class="item-details">Streamlined tools for team workflows</span></div>
+  <div slot="graphic" class="item-overview">
+    <div class="item"><strong>Collaborative tooling</strong> <span class="item-details">Streamlined tools for team workflows</span></div>
     <div class="item"><strong>Unison Cloud</strong><span class="item-details"> Our platform for deploying Unison apps</span></div>
     <div class="item"><strong>"Bring Your Own Cloud"</strong> <span class="item-details">Run our Cloud on any container-based infra</span></div>
     <div class="item"><strong>Refined DX</strong> <span class="item-details">We've iterated on the high-friction parts of the dev experience</span></div>
@@ -45,39 +53,53 @@
 </featured-card>
 <style webc:scoped>
   :host .featured_items {
-    --gap: 0.75rem;
-    --item-height: 3.625rem;
-    height: 16rem;
+    --gap: 1rem;
+    height: 38rem;
 
-    .featured_content {
-      width: 55%;
+    .featured-items_content {
+      display: flex;
+      align-items: center;
+
+      p {
+        width: 50%;
+      }
+
+      .main-cta {
+        position: absolute;
+        top: 4rem;
+        right: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: url(/assets/unison-one-oh/confetti.svg);
+        background-size: cover;
+        width: 50%;
+        height: 12rem;
+      }
     }
 
     .item-overview {
-      width: 45%;
+      width: 1000px;
+      height: 50px;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
       gap: var(--gap);
       font-size: var(--font-size-medium);
-      padding-top: 2rem;
-      padding-right: 2rem;
       will-change: transform;
-      animation: scrolly 13.5s ease-in-out infinite;
 
       .item {
         display: flex;
         flex-direction: column;
         justify-content: center;
         flex-shrink: 0;
-        padding: 0.25rem 0.75rem;
-        border-radius: 1rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
         background: var(--color-gray-lighten-100);
         color: var(--color-gray-darken-30);
-        filter: blur(0.25rem);
-        opacity: 0.75;
+        opacity: 0.5;
         transition: all 0.5s;
 
         strong {
@@ -86,17 +108,6 @@
 
         .item-details {
           color: var(--color-gray-lighten-20);
-        }
-
-        &.focus {
-          opacity: 1;
-          filter: blur(0);
-          border-radius: 0.5rem;
-          transform: scale3d(1.05, 1.05, 1.05);
-
-          .item-details {
-            opacity: 1;
-          }
         }
       }
     }
