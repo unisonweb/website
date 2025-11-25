@@ -165,6 +165,25 @@ eleventyExcludeFromCollections: false
     :host main {
       width: 100%;
     }
+
+    main .unison-featured-header p {
+      font-size: 1.25rem;
+      margin: 0 2.5rem;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    main .unison-featured-header p {
+      font-size: 1.125rem;
+      margin: 0 4rem;
+    }
+  }
+
+  @media only screen and (max-width: 850px) {
+    main .unison-featured-header p {
+      font-size: 1rem;
+      margin: 0 1.5rem;
+    }
   }
 
 </style>
