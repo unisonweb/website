@@ -1,32 +1,3 @@
-<script>
-  class OneOhFeaturedItems extends HTMLElement {
-    connectedCallback() {
-      this.animate();
-    }
-
-    animate() {
-      const items = this.querySelectorAll(".item");
-      let inFocus = 1;
-
-      const animate_ = () => {
-        items.forEach(w => w.classList.remove("focus"));
-
-        const item = items[inFocus];
-
-        item.classList.add("focus");
-        inFocus = inFocus + 1;
-
-        if (inFocus === items.length) {
-          inFocus = 0;
-        }
-      }
-
-      setInterval(animate_, 2500);
-    }
-  }
-
-  customElements.define("one-oh-featured-items", OneOhFeaturedItems);
-</script>
 <featured-card @title="We did it!" class="featured_1-1 featured_items featured_color_purple-orange-gradient">
   <featured-icon slot="icon" color="purple" size="small">
     <icon-trophy></icon-trophy>
@@ -41,20 +12,54 @@
     </div>
   </div>
   <div slot="graphic" class="item-overview">
-    <div class="item"><strong>Collaborative tooling</strong> <span class="item-details">Streamlined tools for team workflows</span></div>
-    <div class="item"><strong>Unison Cloud</strong><span class="item-details"> Our platform for deploying Unison apps</span></div>
-    <div class="item"><strong>"Bring Your Own Cloud"</strong> <span class="item-details">Run our Cloud on any container-based infra</span></div>
-    <div class="item"><strong>Refined DX</strong> <span class="item-details">We've iterated on the high-friction parts of the dev experience</span></div>
-    <div class="item"><strong>Runtime optimizations</strong> <span class="item-details">Vast improvements to our interpreter's speed and efficiency</span></div>
-    <div class="item"><strong>Distributed systems frameworks</strong> <span class="item-details">We provide the building blocks for scalable, fault-tolerant apps</span></div>
-    <div class="item"><strong>Unison Share</strong> <span class="item-details">A polished interface for browsing and discovering code</span></div>
-    <div class="item"><strong>Contributor ecosystem</strong> <span class="item-details">A growing community supporting the language and tooling</span></div>
+    <div class="item-group">
+      <div class="items">
+        <div class="item"><strong>Collaborative tooling</strong> <span class="item-details">Streamlined tools for team workflows</span></div>
+        <div class="item"><strong>Unison Cloud</strong><span class="item-details"> Our platform for deploying Unison apps</span></div>
+        <div class="item filler"></div>
+        <div class="item"><strong>"Bring Your Own Cloud"</strong> <span class="item-details">Run our Cloud on any container-based infra</span></div>
+        <div class="item filler"></div>
+        <div class="item"><strong>Refined DX</strong> <span class="item-details">We've iterated on the high-friction parts of the dev experience</span></div>
+        <div class="item filler"></div>
+      </div>
+      <div class="items" aria-hidden="true">
+        <div class="item"><strong>Collaborative tooling</strong> <span class="item-details">Streamlined tools for team workflows</span></div>
+        <div class="item"><strong>Unison Cloud</strong><span class="item-details"> Our platform for deploying Unison apps</span></div>
+        <div class="item filler"></div>
+        <div class="item"><strong>"Bring Your Own Cloud"</strong> <span class="item-details">Run our Cloud on any container-based infra</span></div>
+        <div class="item filler"></div>
+        <div class="item"><strong>Refined DX</strong> <span class="item-details">We've iterated on the high-friction parts of the dev experience</span></div>
+        <div class="item filler"></div>
+      </div>
+    </div>
+    <div class="item-group">
+      <div class="items">
+        <div class="item"><strong>Runtime optimizations</strong> <span class="item-details">Vast improvements to our interpreter's speed and efficiency</span></div>
+        <div class="item filler"></div>
+        <div class="item"><strong>Distributed systems frameworks</strong> <span class="item-details">We provide the building blocks for scalable, fault-tolerant apps</span></div>
+        <div class="item filler"></div>
+        <div class="item"><strong>Unison Share</strong> <span class="item-details">A polished interface for browsing and discovering code</span></div>
+        <div class="item filler"></div>
+        <div class="item"><strong>Contributor ecosystem</strong> <span class="item-details">A growing community supporting the language and tooling</span></div>
+        <div class="item filler"></div>
+      </div>
+      <div class="items" aria-hidden="true">
+        <div class="item"><strong>Runtime optimizations</strong> <span class="item-details">Vast improvements to our interpreter's speed and efficiency</span></div>
+        <div class="item filler"></div>
+        <div class="item"><strong>Distributed systems frameworks</strong> <span class="item-details">We provide the building blocks for scalable, fault-tolerant apps</span></div>
+        <div class="item filler"></div>
+        <div class="item"><strong>Unison Share</strong> <span class="item-details">A polished interface for browsing and discovering code</span></div>
+        <div class="item filler"></div>
+        <div class="item"><strong>Contributor ecosystem</strong> <span class="item-details">A growing community supporting the language and tooling</span></div>
+        <div class="item filler"></div>
+      </div>
+    </div>
   </div>
 </featured-card>
 <style webc:scoped>
   :host .featured_items {
     --gap: 1rem;
-    height: 38rem;
+    height: 23.5rem;
 
     .featured-items_content {
       display: flex;
@@ -73,12 +78,19 @@
         justify-content: center;
         background: url(/assets/unison-one-oh/confetti.svg);
         background-size: cover;
-        width: 50%;
+        width: 48%;
         height: 12rem;
+
+        .button {
+          box-shadow: 
+            0 0 0 1px rgba(255, 255, 255, 2),
+            0 0 0 0.5rem rgba(255, 255, 255, 0.5);
+        }
       }
     }
 
     .item-overview {
+      margin-top: -1rem;
       width: 1000px;
       height: 50px;
       display: flex;
@@ -90,16 +102,41 @@
       font-size: var(--font-size-medium);
       will-change: transform;
 
+      .item-group {
+        display: flex;
+        gap: var(--gap);
+      }
+      
+      .items {
+        display: flex;
+        gap: var(--gap);
+        min-width: 100%;
+        flex-shrink: 0;
+        justify-content: space-around;
+        overflow: hidden;
+        animation: scrollx 64s linear infinite;
+      }
+
+      .item.filler {
+        opacity: 0.4;
+        background: var(--color-gray-lighten-100);
+        width: 10rem;
+      }
+
+      .item.filler:nth-child(odd) {
+        width: 3rem;
+      }
+
       .item {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
+        gap: 0.5rem;
         flex-shrink: 0;
         padding: 0.5rem 0.75rem;
         border-radius: 0.5rem;
         background: var(--color-gray-lighten-100);
         color: var(--color-gray-darken-30);
-        opacity: 0.5;
         transition: all 0.5s;
 
         strong {
