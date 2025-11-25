@@ -23,7 +23,7 @@
       <p>Unison Share supports organizations, tickets, code contributions (pull requests), code review, and more.</p>
         <p>In many ways Unison's story for collaboration outstrips the status quo of developer tooling. e.g. merge conflicts only happen when two people actually modify the same definition; not because you moved some stuff around in your files.</p>
     </faq-item>
-    <faq-item @question="How does version control work in the absence of `git`?">
+    <faq-item @question="How does version control work in the absence of Git?">
       <p>Unison implements a native version control system: with projects, branches, clone, push, pull, merge, etc.</p>
     </faq-item>
     <faq-item @question="Do I have to use a specific IDE?">
