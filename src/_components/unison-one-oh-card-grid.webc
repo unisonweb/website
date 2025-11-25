@@ -392,6 +392,7 @@
 
   :host .roadmap {
     padding-bottom: 2rem;
+    min-height: 19rem;
   }
 
   :host .roadmap .featured_text p {
@@ -537,6 +538,10 @@
 
         .roadmap-community {
           width: 100%;
+
+          .roadmap {
+            min-height: auto;
+          }
         }
       }
     }
