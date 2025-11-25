@@ -74,7 +74,7 @@
     {
       "date": "2024-07",
       "title": "Cloud daemons",
-      "description": "Long-running services (daemons), were added as a new Cloud feature.",
+      "description": "Long-running services (daemons) were added as a new Cloud feature.",
       "link": "https://share.unison-lang.org/@unison/cloud/code/main/latest/terms/Daemon/"
     },
     {
