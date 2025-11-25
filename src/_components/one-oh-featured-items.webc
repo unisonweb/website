@@ -82,9 +82,24 @@
         height: 12rem;
 
         .button {
+          transition: all 0.2s;
+          color: var(--color-gray-lighten-100);
+
+          background: linear-gradient(
+            var(--color-blue-2),
+            var(--color-blue-1)
+          );
           box-shadow: 
-            0 0 0 1px rgba(255, 255, 255, 2),
-            0 0 0 0.5rem rgba(255, 255, 255, 0.5);
+            0 0 0 1px var(--color-blue-1),
+            0 0 0 2px rgba(255, 255, 255, 1),
+            0 0 0 0.325rem rgba(255, 255, 255, 0.5);
+
+          &:hover {
+          background: linear-gradient(
+            var(--color-gray-base),
+            var(--color-gray-darken-30)
+          );
+          }
         }
       }
     }
