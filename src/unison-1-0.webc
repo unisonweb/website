@@ -166,6 +166,11 @@ eleventyExcludeFromCollections: false
       width: 100%;
     }
 
+    :host header h1 {
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
     main .unison-featured-header p {
       font-size: 1.25rem;
       margin: 0 2.5rem;
