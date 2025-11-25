@@ -251,9 +251,13 @@
     .scratch {
       opacity: 0.5;
       filter: blur(0.05rem);
+      width: 2000px;
+      flex-shrink: 0;
     }
 
     .terminal-ucm {
+      width: 2000px;
+      flex-shrink: 0;
       position: absolute;
       top: 3.75rem;
       left: 3.5rem;
