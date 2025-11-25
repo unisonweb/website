@@ -17,8 +17,8 @@
       <icon-unison-mark></icon-unison-mark>
     </featured-icon>
     <div slot="description">
-      <p>Unison is a programming language built around <a href="/docs/the-big-idea/">one big idea</a>: let's identify a definition by its actual contents, <strong>not</strong> just by the human-friendly name that also referred to older versions of the definition. Our ecosystem leverages this core idea from the ground up. Some benefits: we never compile the same code twice; many versioning conflicts <em>aren't</em>; and oh, by the way, we're able to build sophisticated self-deploying distributed systems within a single strongly-typed program!</p>
-      <p>Unison code lives in a database—your "codebase"—rather than in text files. The human-friendly names are in the codebase too, but they're just for looks, when your code is rendered on the fly as text <em>when</em> you're reading or editing it.</p>
+      <p>Unison is a programming language built around <a href="/docs/the-big-idea/">one big idea</a>: let's identify a definition by its actual contents, <strong>not</strong> just by the human-friendly name that also referred to older versions of the definition. Our ecosystem leverages this core idea from the ground up. Some benefits: we never compile the same code twice; many versioning conflicts simply <em>aren't</em>; and we're able to build sophisticated self-deploying distributed systems within a single strongly-typed program.</p>
+      <p>Unison code lives in a database—your "codebase"—rather than in text files. The human-friendly names are in the codebase too, but they're materialized as text only when reading or editing your code.</p>
     </div>
   </featured-card>
 
@@ -35,7 +35,7 @@
 
     <div slot="graphic" class="scratch-and-ucm">
       <code-example class="scratch" @title="Edit: ~/scratch.u" @numLines="10"><span class="syntax"><span class="hash-qualifier">factorial</span> n <span class="binding-equals">=</span>
-  if n > 1 then n * factorial (n-1) else n                                                            
+  if n > 1 then n * factorial (n-1) else n
 
 <span class="hash-qualifier">guessingGame</span> <span class="binding-equals">=</span> <span class="control-keyword">do</span> Random.run do
   target = Random.natIn 0 100
@@ -79,7 +79,7 @@
 
   <span class="ucm-add">+</span> <span class="term-reference">factorial</span>    : <span class="type-reference">Nat</span> -> <span class="type-reference">Nat</span>
   <span class="ucm-add">+</span> <span class="term-reference">guessingGame</span> : <span class="delay-force-char">'</span>{<span class="type-reference">IO</span>, <span class="type-reference">Exception</span>} <span class="type-reference">()</span>
-  
+
   Run <span class="ucm-command">`update`</span> to apply these changes to your codebase.
 
   </span></code-example>
@@ -111,12 +111,12 @@
     </featured-icon>
     <p slot="description">
       <a href="https://share.unison-lang.org" target="_blank">Unison Share</a>
-      is our community hub where open- and closed-source projects alike are
+      is our community hub where open and closed-source projects alike are
       hosted. In addition to all the features you'd expect of a code-hosting
         platform—project and code search, individual and organizational
-        accounts, browsing code and docs, reviewing contributions, etc.; thanks
+        accounts, browsing code and docs, reviewing contributions, etc, thanks
           to the <a href="/docs/the-big-idea">one big idea</a>, all of the code
-          references are hyperlinked perfectly fine.
+          references are hyperlinked and navigable.
     </p>
     <div slot="graphic" class="share-features">
       <img src="/assets/unison-one-oh/abstract-diff.svg" />
