@@ -202,15 +202,15 @@
               <icon-discord></icon-discord>
               Join the community
             </a>
-            <a href="https://bsky.app/intent/compose?text=🎉 Unison 1.0 has landed! @unison-lang.org https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+            <a href="https://bsky.app/intent/compose?text=🎉 Unison 1.0 has landed! Share the news! https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
               <icon-bluesky></icon-bluesky>
               Share on Bluesky
             </a>
-            <a href="https://twitter.com/intent/tweet?text=🎉 Unison 1.0 has landed @unsionweb!&url=https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+            <a href="https://twitter.com/intent/tweet?text=🎉 Unison 1.0 has landed! Share the news!&url=https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
               <icon-twitter></icon-twitter>
               Share on Twitter/X
             </a>
-            <a href="https://fosstodon.org/share?text=🎉 Unison 1.0 has landed!&url=https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
+            <a href="https://fosstodon.org/share?text=🎉 Unison 1.0 has landed! Share the news!&url=https://unison-lang.org/unison-1-0/" class="button medium primary-mono contained content-icon-then-label" target="_blank">
               <icon-mastodon></icon-mastodon>
               Share on Mastodon
             </a>
