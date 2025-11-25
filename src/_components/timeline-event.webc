@@ -1,0 +1,45 @@
+<div webc:root class="timeline-event">
+  <span class="date" @text="date"></span>
+  <h3 @text="title"></h3>
+  <div @text="description"></div>
+  <div webc:if="cta" class="cta">
+    <a @href="link" @text="cta" class="button outlined contained small"></a>
+  </div>
+</div>
+<style webc:scoped>
+:host {
+  width: 30rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--color-gray-lighten-100);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  opacity: 0;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+
+  .date {
+    font-size: var(--font-size-small);
+    color: var(--color-gray-lighten-20);
+  }
+
+  h3 {
+    font-size: 1.125rem;
+    color: var(--color-gray-darken-30);
+  }
+
+  .cta {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+:host.focus {
+  opacity: 1;
+}
+</style>

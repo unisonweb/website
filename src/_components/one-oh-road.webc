@@ -1,0 +1,181 @@
+<script>
+  class OneOhRoad extends HTMLElement {
+    connectedCallback() {
+      this.community();
+    }
+
+    community() {
+      const events = this.querySelectorAll(".timeline-event");
+      // TODO: There are less markers than events...
+      const markers = this.querySelectorAll(".m.h");
+      let inFocus = 1;
+
+      const animate = () => {
+        markers.forEach(w => w.classList.remove("focus"));
+        events.forEach(w => w.classList.remove("focus"));
+
+        events[inFocus].classList.add("focus");
+        markers[inFocus].classList.add("focus");
+        inFocus = inFocus + 1;
+
+        if (inFocus === events.length) {
+          inFocus = 0;
+        }
+      }
+
+      setInterval(animate, 3000);
+    }
+  }
+
+  customElements.define("one-oh-road", OneOhRoad);
+</script>
+<featured-card
+  @title="Our road to 1.0"
+  class="featured_1-1 road featured_color_sky">
+  <featured-icon slot="icon" color="orange" size="small">
+    <icon-unfolded-map></icon-unfolded-map>
+  </featured-icon>
+  <p slot="description">
+    The major milestones from 🥚 to 🐣 and 🐥.
+  </p>
+
+  <div slot="graphic" class="road-graphic">
+    <div class="events">
+      <timeline-event class="focus" date="2018-02" title="Unison Computing company founding" description="The Unison triumvirate unites! Paul, Rúnar, and Arya found a company in Boston."></timeline-event>
+      <timeline-event date="2019-08" title="First alpha release of Unison" description="Unison calls for alpha testers for the first official release of the Unison language."></timeline-event>
+      <timeline-event date="2019-09" title="Strangeloop conference" description="The tech world gets an intro to Unison at the storied Strangeloop conference." cta="Watch video" link="https://youtu.be/gCWtkvDQ2ZI?si=GrxYqfBHo9CvLZ-W"></timeline-event>
+      <timeline-event date="2021-07" title="Unison Share's first deployment" description="Unison's code hosting platform released. People start pushing and pulling code from their remote codebases." cta="Unison Share" link="https://share.unison-lang.org/"></timeline-event>
+      <timeline-event date="2022-06" title="Unison Forall conference" description="Our first community conference is an online affair featuring topics from CRDTs to the Cloud." cta="Watch videos" link="https://youtube.com/playlist?list=PLQ0IlHfOk1GgbXSZAjOOls9PnrO4Dpsbb&si=gL5LR1FavSBZ41jx"></timeline-event>
+      <timeline-event date="2022-08" title="LSP support" description="The first appearance of the red-squiggly line for Unison appears in text editors." cta="Read post" link="https://www.unison-lang.org/blog/autocomplete/"></timeline-event>
+      <timeline-event date="2023-06" title="Projects land in Unison" description="We added the ability to segment your codebase into discrete projects, with branches for different work-streams." cta="Read post" link="https://www.unison-lang.org/blog/projects-are-here/"></timeline-event>
+      <timeline-event date="2023-10" title="Kind-checking lands for Unison" description="Since their introduction, Unison's exhaustiveness and kind-checking features have prevented us from many headaches."></timeline-event>
+      <timeline-event date="2023-11" title="Contributions added to Unison Share" description="We added the ability to make pull-requests to Unison Share. Unison OSS maintainers rejoice." cta="Read post" link="https://www.unison-lang.org/blog/introducing-contributions/"></timeline-event>
+      <timeline-event date="2023-11" title="OrderedTable storage added to the Cloud" description="`OrderedTable` is a typed transactional storage API on the Cloud. It's built atop other storage primitives; proving that storage can be compositional." cta="Unison Share" link="https://share.unison-lang.org/@unison/cloud/code/main/latest/types/durable/OrderedTable"></timeline-event>
+      <timeline-event date="2024-02" title="Unison Cloud generally available to the public" description="After much alpha testing, we release the Unison Cloud to the general public! Folks deploy hello-world in a few commands." cta="Unison Cloud" link="https://www.unison.cloud/"></timeline-event>
+      <timeline-event date="2024-05" title="We open-source Unison Share" description="🫶 Unison Share belongs to us all." cta="Read post" link="https://www.unison-lang.org/blog/unison-share-is-open-source/"></timeline-event>
+      <timeline-event date="2024-07" title="Cloud daemons" description="Long-running services (daemons) were added as a new Cloud feature." cta="Unison Share" link="https://share.unison-lang.org/@unison/cloud/code/main/latest/terms/Daemon/"></timeline-event>
+      <timeline-event date="2024-08" title="Ecosystem-wide type-based search" description="Discover projects, terms, and types across the entire ecosystem in a few keystrokes." cta="Read post" link="https://www.unison-lang.org/blog/type-based-search/"></timeline-event>
+      <timeline-event date="2024-09" title="Unison Forall 2024" link="https://youtube.com/playlist?list=PLQ0IlHfOk1GjQah6kjsknDpOQZDpf5iYP&si=A-w-qNc1J737z7Tx"></timeline-event>
+      <timeline-event date="2025-01" title="Unison Desktop App" description="Unison Desktop offers visibility into your codebase structure with a rich, interactive UI." cta="Read docs" link="https://www.unison-lang.org/docs/tooling/ucm-desktop/"></timeline-event>
+      <timeline-event date="2025-03" title="Volturno distributed stream processing library" description="We ship a high scale streaming framework with exactly-once processing and seamless, pain-free ops. Users write distributed stream transformations in an easy, declarative API." link="https://share.unison-lang.org/@systemfw/volturno"></timeline-event>
+      <timeline-event date="2025-06" title="Runtime performance optimizations" description="The UCM compiler team delivers on an extended effort of improving Unison's runtime." cta="Read post" link="https://dolio.unison-services.cloud/s/blog/posts/optimizing-affine-handlers"></timeline-event>
+      <timeline-event date="2025-08" title="MCP server for Unison" description="Our MCP server supports AI coding agents in typechecking code, browsing docs, and inspecting dependencies."></timeline-event>
+      <timeline-event date="2025-10-01" title="Cloud BYOC" description="We launched Unison Cloud BYOC - Unison Cloud can run on your own infrastructure anywhere you can launch containers." link="https://youtu.be/0sZqI1XoGLY?si=yjlKtL7om1DgJKvb"></timeline-event>
+      <timeline-event date="2025-10" title="UCM git-style diff tool support" description="We added a git-style code diff integration. View PRs and merges in a familiar format." cta="Watch video" link="https://youtu.be/DnYmLwM07Sk"></timeline-event>
+      <timeline-event date="2025-11" title="Branch history comments" description="Annotate your branch history with helpful descriptions for yourself or collaborators." cta="Watch video" link="https://youtu.be/AQvyJoqiUZQ?si=bHLO9fznCTqp40QM"></timeline-event>
+      <timeline-event date="2025-11-25" title="1.0 release"></timeline-event>
+    </div>
+    <div class="timeline">
+      <div class="y">2018</div>
+
+      <div class="m"></div> <div class="m h focus"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
+
+      <div class="y">2019</div>
+
+      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m h"></div> <div class="m h"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
+
+      <div class="y">2020</div>
+
+      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
+
+      <div class="y">2021</div>
+
+      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m h"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
+
+      <div class="y">2022</div>
+
+      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m h"></div> 
+      <div class="m"></div> <div class="m h"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
+
+      <div class="y">2023</div>
+
+      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m h"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m h"></div> <div class="m"></div> <div class="m"></div>
+
+      <div class="y">2024</div>
+
+      <div class="m"></div> <div class="m h"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m h"></div> <div class="m"></div> 
+      <div class="m h"></div> <div class="m h"></div> <div class="m h"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
+
+      <div class="y">2025</div>
+
+      <div class="m h"></div> <div class="m"></div> <div class="m h"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m h"></div> 
+      <div class="m"></div> <div class="m h"></div> <div class="m"></div> 
+      <div class="m h"></div> <div class="m h"></div> <div class="m"></div>
+
+    </div>
+  </div>
+</featured-card>
+
+<style webc:scoped>
+:host {
+  width: 100%
+}
+
+:host .road .road-graphic {
+  background-color: linear-gradient(var(--color-green-2), var(--color-green-1));
+  background-image: url(/assets/unison-one-oh/hills.svg);
+  background-repeat: no-repeat;
+  padding-top: 5rem;
+  margin-top: -2rem;
+}
+
+:host .road .timeline {
+  margin-top: 1.5rem;
+  line-height: 1;
+  padding: 0 1rem;
+  height: 3rem;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--color-gray-lighten-100);
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+
+  .y {
+    color: var(--color-green-3);
+  }
+
+  .m {
+    display: inline-flex;
+    width: 2px;
+    flex-shrink: 0;
+    height: 0.25rem;
+    border-radius: 1rem;
+    background: rgba(0,0, 0, 0.5);
+    background: var(--color-green-2);
+    transition: all 0.5s;
+  }
+
+  .m.h {
+    height: 0.75rem;
+    background: var(--color-green-4);
+  }
+  .m.h.focus {
+    background: var(--color-green-5);
+    height: 1.125rem;
+    box-shadow: 0 0 0 3px rgba(255,255, 255, 0.25);
+  }
+}
+</style>

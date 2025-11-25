@@ -152,35 +152,7 @@
 
   <one-oh-syntax-overview></one-oh-syntax-overview>
 
-  <featured-card
-    @title="Our road to 1.0"
-    class="featured_1-1 road featured_color_sky">
-    <featured-icon slot="icon" color="orange" size="small">
-      <icon-unfolded-map></icon-unfolded-map>
-    </featured-icon>
-    <p slot="description">
-      The major milestones from 🥚 to 🐣 and 🐥.
-    </p>
-
-    <div slot="graphic" class="road-graphic">
-      <div class="current-slide">
-        <h3>March 2025: Volturno distributed stream processing library</h3>
-        - https://share.unison-lang.org/@systemfw/volturno
-        - (timeline is not accurate but this is the earliest reference I could find to it)
-        - Volturno is a high scale streaming framework for Unison Cloud, with exactly-once processing and seamless, pain-free ops and management. Users can write distributed stream transformations in an easy, declarative API.
-      </div>
-      <div class="timeline">
-        <span>2018</span>
-        <span>2019</span>
-        <span>2020</span>
-        <span>2021</span>
-        <span>2022</span>
-        <span>2023</span>
-        <span>2024</span>
-        <span>2025</span>
-      </div>
-    </div>
-  </featured-card>
+  <one-oh-road></one-oh-road>
 
   <div class="metrics-roadmap-community">
     <one-oh-metrics></one-oh-metrics>
@@ -391,43 +363,6 @@
 
   :host .what-does-unison-code-look-like code-example:hover {
     transform: translateY(-4rem);
-  }
-
-  /* -- TIMELINE ----------------------------------------------------------- */
-
-  :host .road .road-graphic {
-    background-color: linear-gradient(var(--color-green-2), var(--color-green-1));
-    background-image: url(/assets/unison-one-oh/hills.svg);
-    background-repeat: no-repeat;
-    padding-top: 5rem;
-    margin-top: -2rem;
-  }
-
-  :host .road .current-slide {
-    width: 30rem;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: var(--color-gray-lighten-100);
-    padding: 1rem;
-    border-radius: 0.75rem;
-
-    h3 {
-      font-size: 1rem;
-    }
-  }
-
-  :host .road .timeline {
-    margin-top: 1.5rem;
-    line-height: 1;
-    padding: 1rem 4rem;
-    justify-content: space-between;
-    background: rgba(0, 0, 0, 0.4);
-    color: var(--color-gray-lighten-100);
-    font-weight: bold;
-    display: flex;
-    flex-direction: row;
-    gap: 4rem;
   }
 
   /* -- METRICS-ROADMAP-COMMUNITY ------------------------------------------ */
