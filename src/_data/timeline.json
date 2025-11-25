@@ -19,13 +19,13 @@
     {
       "date": "2021-07",
       "title": "Unison Share's first deployment",
-      "description": "Unison's own code hosting platform released. People can easily push code to their remote codebase and pull code from others to use locally.",
+      "description": "Unison's code hosting platform released. People start pushing and pulling code from their remote codebases.",
       "link": "https://share.unison-lang.org/"
     },
     {
       "date": "2022-06",
       "title": "Unison Forall conference",
-      "description": "Our first community conference is an online affair featuring new libraries and topics from CRDT's to a peak ahead at the Cloud.",
+      "description": "Our first community conference is an online affair featuring topics from CRDTs to the Cloud.",
       "link": "https://youtube.com/playlist?list=PLQ0IlHfOk1GgbXSZAjOOls9PnrO4Dpsbb&si=gL5LR1FavSBZ41jx"
     },
     {
@@ -37,31 +37,31 @@
     {
       "date": "2023-06",
       "title": "Projects land in Unison",
-      "description": "A stalwart few may remember that namespaces were initially our top-level project organization convention. We added the ability to segment your codebase into discrete projects, with branches for different work-streams.",
+      "description": "We added the ability to segment your codebase into discrete projects, with branches for different work-streams.",
       "link": "https://www.unison-lang.org/blog/projects-are-here/"
     },
     {
       "date": "2023-10",
       "title": "Kind-checking lands for Unison",
-      "description": "Since its introduction, Unison's kind-checking feature has prevented us from many headaches!",
+      "description": "Since their introduction, Unison's exhaustiveness and kind-checking features have prevented us from many headaches.",
       "image": "file://%7B%22source%22%3A%22attachment%3A0bdd1164-d0ff-4f4b-8f45-985974d78e4b%3AUCM_(3).png%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%222b05fbdd-830d-80e0-b86d-f8ed87390df0%22%2C%22spaceId%22%3A%22860d448b-655b-48ac-b56f-4c92a358307d%22%7D%7D"
     },
     {
       "date": "2023-11",
       "title": "Contributions added to Unison Share",
-      "description": "We added the ability to make pull-requests to Unison Share. Prior to this, users could `pull` and `merge` code once tagged informally in our Discord, but this added helping",
+      "description": "We added the ability to make pull-requests to Unison Share. Unison OSS maintainers rejoice.",
       "link": "https://www.unison-lang.org/blog/introducing-contributions/"
     },
     {
       "date": "2023-11",
       "title": "OrderedTable storage added to the Cloud",
-      "description": "`OrderedTable` added a user-friendly, typed transactional storage API to the Cloud. It was one of the first Cloud datatypes built atop *other* Cloud storage primitives; proving that storage could be compositional.",
-      "link": "https://share.unison-lang.org/@unison/cloud/code/releases/22.2.1/latest/types/durable/OrderedTable"
+      "description": "`OrderedTable` is a typed transactional storage API on the Cloud. It's built atop other storage primitives; proving that storage can be compositional.",
+      "link": "https://share.unison-lang.org/@unison/cloud/code/main/latest/types/durable/OrderedTable"
     },
     {
       "date": "2024-02",
       "title": "Unison Cloud generally available to the public",
-      "description": "After much dogfooding and internal testing, we release the Unison Cloud to the general public! Folks deploy hello world in a few commands.",
+      "description": "After much alpha testing, we release the Unison Cloud to the general public! Folks deploy hello-world in a few commands.",
       "link": "https://www.unison.cloud/",
       "image": "file://%7B%22source%22%3A%22attachment%3A2dc628a6-388f-45bf-a225-e3787d729548%3Ascratch.u_(6).png%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%222b05fbdd-830d-805e-9122-f3ea48cd1fda%22%2C%22spaceId%22%3A%22860d448b-655b-48ac-b56f-4c92a358307d%22%7D%7D"
     },
@@ -72,9 +72,15 @@
       "link": "https://www.unison-lang.org/blog/unison-share-is-open-source/"
     },
     {
+      "date": "2024-07",
+      "title": "Cloud daemons",
+      "description": "Long-running services (daemons), were added as a new Cloud feature.",
+      "link": "https://share.unison-lang.org/@unison/cloud/code/main/latest/terms/Daemon/"
+    },
+    {
       "date": "2024-08",
       "title": "Ecosystem-wide type-based search",
-      "description": "Discover projects, terms, and types across the entire ecosystem in a few keystrokes. Inspired by Hoogle and other type based code search solutions.",
+      "description": "Discover projects, terms, and types across the entire ecosystem in a few keystrokes.",
       "link": "https://www.unison-lang.org/blog/type-based-search/"
     },
     {
@@ -85,19 +91,25 @@
     {
       "date": "2025-01",
       "title": "Unison Desktop App",
-      "description": "Unison's Desktop app helps address the workflow challenge of not being able to \"see\" your codebase structure in a traditional way. It features click-through to definition functionality, and a rich, interactive UI.",
+      "description": "Unison Desktop offers visibility into your codebase structure with a rich, interactive UI.",
       "link": "https://www.unison-lang.org/docs/tooling/ucm-desktop/"
     },
     {
       "date": "2025-03",
       "title": "Volturno distributed stream processing library",
-      "description": "(timeline is not accurate but this is the earliest reference I could find to it) Volturno is a high scale streaming framework for Unison Cloud, with exactly-once processing and seamless, pain-free ops and management. Users can write distributed stream transformations in an easy, declarative API.",
+      "description": "We ship a high scale streaming framework with exactly-once processing and seamless, pain-free ops. Users write distributed stream transformations in an easy, declarative API.",
       "link": "https://share.unison-lang.org/@systemfw/volturno"
+    },
+    {
+      "date": "2025-06",
+      "title": "Runtime performance optimizations",
+      "description": "The UCM compiler team delivers on an extended effort of improving Unison's runtime.",
+      "link": "https://dolio.unison-services.cloud/s/blog/posts/optimizing-affine-handlers"
     },
     {
       "date": "2025-08",
       "title": "MCP server for Unison",
-      "description": "Unison's tooling evolves to support AI coding workflows. Our MCP server is built into the codebase manager and supports AI agents taking actions like typechecking code, browsing docs, and inspecting library source code."
+      "description": "Our MCP server supports AI coding agents in typechecking code, browsing docs, and inspecting dependencies."
     },
     {
       "date": "2025-10-01",
@@ -108,17 +120,17 @@
     {
       "date": "2025-10",
       "title": "UCM git-style diff tool support",
-      "description": "We added a git-style code diff view integration. Set an environment variable and view PR's and merges in a familiar format.",
+      "description": "We added a git-style code diff integration. View PRs and merges in a familiar format.",
       "link": "https://youtu.be/DnYmLwM07Sk"
     },
     {
       "date": "2025-11",
       "title": "Branch history comments",
-      "description": "Your codebase is an append-only log of changes, and with the latest release of the UCM you can annotate your branch history with helpful descriptions for yourself or collaborators.",
+      "description": "Annotate your branch history with helpful descriptions for yourself or collaborators.",
       "link": "https://youtu.be/AQvyJoqiUZQ?si=bHLO9fznCTqp40QM"
     },
     {
-      "date": "2025-11-19",
+      "date": "2025-11-25",
       "title": "1.0 release"
     }
   ]
