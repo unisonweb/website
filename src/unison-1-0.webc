@@ -128,7 +128,7 @@ eleventyExcludeFromCollections: false
   main animated-particles {
     position: absolute;
     width: 64rem;
-    left: -160px;
+    left: -200px;
     top: 2rem;
     opacity: 0.6;
   }

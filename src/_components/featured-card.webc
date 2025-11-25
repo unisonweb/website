@@ -103,6 +103,24 @@
       color: var(--color-gray-lighten-100);
     }
   }
+  :host.featured_color_dark-gray-gradient {
+    background: 
+      linear-gradient(
+        -45deg,
+        var(--color-gray-darken-30),
+        var(--color-gray-darken-20)
+      );
+    color: var(--color-gray-lighten-40);
+
+    h2 {
+      color: var(--color-gray-lighten-100);
+    }
+
+    a:not(.button) {
+      color: var(--color-blue-3);
+    }
+  }
+
 
   :host.featured_color_pale-pink-gradient {
     background: 

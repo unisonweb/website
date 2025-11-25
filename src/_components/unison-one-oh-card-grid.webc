@@ -24,9 +24,9 @@
 
   <featured-card
     @title="The Codebase Manager"
-    class="featured_1-2 featured_color_dark-gray ucm"
+    class="featured_1-2 featured_color_dark-gray-gradient ucm"
   >
-    <featured-icon slot="icon" color="pink" size="small">
+    <featured-icon slot="icon" color="orange" size="small">
       <icon-cli></icon-cli>
     </featured-icon>
     <p slot="description">
@@ -87,10 +87,10 @@
   </featured-card>
 
   <featured-card
-    @title="Unison Desktop"
-    class="featured_1-2 featured_color_dark-green ucm-desktop"
+    @title="UCM Desktop"
+    class="featured_1-2 featured_color_dark-gray-gradient ucm-desktop"
   >
-    <featured-icon slot="icon" color="green" size="small">
+    <featured-icon slot="icon" color="orange" size="small">
       <icon-pencil-ruler></icon-pencil-ruler>
     </featured-icon>
 
@@ -105,7 +105,7 @@
     </div>
   </featured-card>
 
-  <featured-card @title="Unison Share" class="featured_1-2 featured_color_pale-purple-gradient" >
+  <featured-card @title="Unison Share" class="featured_1-2 featured_color_pale-purple-gradient unison-share" >
     <featured-icon slot="icon" color="purple" size="small">
       <icon-gift></icon-gift>
     </featured-icon>
@@ -118,6 +118,9 @@
           to the <a href="/docs/the-big-idea">one big idea</a>, all of the code
           references are hyperlinked perfectly fine.
     </p>
+    <div slot="graphic" class="share-features">
+      <img src="/assets/unison-one-oh/abstract-diff.svg" />
+    </div>
   </featured-card>
 
   <featured-card
@@ -307,11 +310,24 @@
   }
 
   /* -- UCM DESKTOP  ------------------------------------------------------- */
+
   .ucm-desktop {
-    height: 22rem;
+    height: 100%;
+    max-height: 34rem;
 
     img {
       margin-left: 2rem;
+    }
+  }
+
+  /* -- SHARE -------------------------------------------------------------- */
+
+  :host .unison-share {
+    height: 31rem;
+
+    .share-features {
+      padding: 0 2rem;
+      margin-top: -6px;
     }
   }
 
