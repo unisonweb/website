@@ -67,7 +67,7 @@
         <timeline-event date="May 2024" data-date="2024-05" title="We open-source Unison Share" description="🫶 Unison Share belongs to us all." cta="Read post" link="https://www.unison-lang.org/blog/unison-share-is-open-source/"></timeline-event>
         <timeline-event date="Jul 2024" data-date="2024-07" title="Cloud daemons" description="Long-running services (daemons) were added as a new Cloud feature." cta="Unison Share" link="https://share.unison-lang.org/@unison/cloud/code/main/latest/terms/Daemon/"></timeline-event>
         <timeline-event date="Aug 2024" data-date="2024-08" title="Ecosystem-wide type-based search" description="Discover projects, terms, and types across the entire ecosystem in a few keystrokes." cta="Read post" link="https://www.unison-lang.org/blog/type-based-search/"></timeline-event>
-        <timeline-event date="Sep 2024" data-date="2024-09" title="Unison Forall 2024" description="TODO" cta="Watch videos" link="https://youtube.com/playlist?list=PLQ0IlHfOk1GjQah6kjsknDpOQZDpf5iYP&si=A-w-qNc1J737z7Tx"></timeline-event>
+        <timeline-event date="Sep 2024" data-date="2024-09" title="Unison Forall 2024" description="Our second online conference showcases Unison on the web and more!" cta="Watch videos" link="https://youtube.com/playlist?list=PLQ0IlHfOk1GjQah6kjsknDpOQZDpf5iYP&si=A-w-qNc1J737z7Tx"></timeline-event>
         <timeline-event date="Jan 2025" data-date="2025-01" title="Unison Desktop App" description="UCM Desktop offers visibility into your codebase structure with a rich, interactive UI." cta="Read docs" link="https://www.unison-lang.org/docs/tooling/ucm-desktop/"></timeline-event>
         <timeline-event date="Mar 2025" data-date="2025-03" title="Volturno distributed stream processing library" description="We ship a high scale streaming framework with exactly-once processing and seamless, pain-free ops. Users write distributed stream transformations in an easy, declarative API." link="https://share.unison-lang.org/@systemfw/volturno"></timeline-event>
         <timeline-event date="Jun 2025" data-date="2025-06" title="Runtime performance optimizations" description="The UCM compiler team delivers on an extended effort of improving Unison's runtime." cta="Read post" link="https://dolio.unison-services.cloud/s/blog/posts/optimizing-affine-handlers"></timeline-event>
@@ -75,64 +75,64 @@
         <timeline-event date="Oct 2025" data-date="2025-10" title="Cloud BYOC" description="We launched Unison Cloud BYOC - Unison Cloud can run on your own infrastructure anywhere you can launch containers." link="https://youtu.be/0sZqI1XoGLY?si=yjlKtL7om1DgJKvb"></timeline-event>
         <timeline-event date="Oct 2025" data-date="2025-10" title="UCM git-style diff tool support" description="We added a git-style code diff integration. View PRs and merges in a familiar format." cta="Watch video" link="https://youtu.be/DnYmLwM07Sk"></timeline-event>
         <timeline-event date="Nov 2025" data-date="2025-11" title="Branch history comments" description="Annotate your branch history with helpful descriptions for yourself or collaborators." cta="Watch video" link="https://youtu.be/AQvyJoqiUZQ?si=bHLO9fznCTqp40QM"></timeline-event>
-        <timeline-event date="Nov 2025" data-date="2025-11" title="Unison 1.0 release" description="TODO" cta="Get started with 1.0" link="/docs/quickstart"></timeline-event>
+        <timeline-event date="Nov 2025" data-date="2025-11" title="Unison 1.0 release" description="A stable release with a rich feature set for getting things done." cta="Get started with 1.0" link="/docs/quickstart"></timeline-event>
       </div>
     </div>
     <div class="timeline">
       <div class="y">2018</div>
 
-      <div class="m"></div> <div class="m h focus" id="d-2018-02"></div> <div class="m"></div> 
-      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
-      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m h focus" id="d-2018-02"></div> <div class="m"></div>
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
       <div class="m"></div> <div class="m"></div> <div class="m"></div>
 
       <div class="y">2019</div>
 
-      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
-      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
-      <div class="m"></div> <div class="m h" id="d-2019-08"></div> <div class="m h" id="d-2019-09"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
+      <div class="m"></div> <div class="m h" id="d-2019-08"></div> <div class="m h" id="d-2019-09"></div>
       <div class="m"></div> <div class="m"></div> <div class="m"></div>
 
       <div class="y">2020</div>
 
-      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
-      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
-      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
       <div class="m"></div> <div class="m"></div> <div class="m"></div>
 
       <div class="y">2021</div>
 
-      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
-      <div class="m h" id="d-2021-04"></div> <div class="m"></div> <div class="m"></div> 
-      <div class="m h" id="d-2021-07"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
+      <div class="m h" id="d-2021-04"></div> <div class="m"></div> <div class="m"></div>
+      <div class="m h" id="d-2021-07"></div> <div class="m"></div> <div class="m"></div>
       <div class="m"></div> <div class="m"></div> <div class="m"></div>
 
       <div class="y">2022</div>
 
-      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
-      <div class="m"></div> <div class="m"></div> <div class="m h" id="d-2022-06"></div> 
-      <div class="m"></div> <div class="m h" id="d-2022-08"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
+      <div class="m"></div> <div class="m"></div> <div class="m h" id="d-2022-06"></div>
+      <div class="m"></div> <div class="m h" id="d-2022-08"></div> <div class="m"></div>
       <div class="m"></div> <div class="m"></div> <div class="m"></div>
 
       <div class="y">2023</div>
 
-      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
       <div class="m"></div> <div class="m"></div> <div class="m h" id="d-2023-06"></div>
-      <div class="m"></div> <div class="m"></div> <div class="m"></div> 
+      <div class="m"></div> <div class="m"></div> <div class="m"></div>
       <div class="m h" id="d-2023-10"></div> <div class="m h" id="d-2023-11"></div> <div class="m"></div>
 
       <div class="y">2024</div>
 
-      <div class="m"></div> <div class="m h" id="d-2024-02"></div> <div class="m"></div> 
-      <div class="m"></div> <div class="m h" id="d-2024-05"></div> <div class="m"></div> 
-      <div class="m h" id="d-2024-07"></div> <div class="m h" id="d-2024-08"></div> <div class="m h" id="d-2024-09"></div> 
+      <div class="m"></div> <div class="m h" id="d-2024-02"></div> <div class="m"></div>
+      <div class="m"></div> <div class="m h" id="d-2024-05"></div> <div class="m"></div>
+      <div class="m h" id="d-2024-07"></div> <div class="m h" id="d-2024-08"></div> <div class="m h" id="d-2024-09"></div>
       <div class="m"></div> <div class="m"></div> <div class="m"></div>
 
       <div class="y">2025</div>
 
-      <div class="m h" id="d-2025-01"></div> <div class="m"></div> <div class="m h" id="d-2025-03"></div> 
-      <div class="m"></div> <div class="m"></div> <div class="m h" id="d-2025-06"></div> 
-      <div class="m"></div> <div class="m h" id="d-2025-08"></div> <div class="m"></div> 
+      <div class="m h" id="d-2025-01"></div> <div class="m"></div> <div class="m h" id="d-2025-03"></div>
+      <div class="m"></div> <div class="m"></div> <div class="m h" id="d-2025-06"></div>
+      <div class="m"></div> <div class="m h" id="d-2025-08"></div> <div class="m"></div>
       <div class="m h" id="d-2025-10"></div> <div class="m h" id="d-2025-11"></div> <div class="m"></div>
 
     </div>
