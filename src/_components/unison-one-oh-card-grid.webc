@@ -73,7 +73,7 @@
 
   </span></code-example>
 
-  <code-example class="terminal-ucm" @title="Terminal: ucm" @numLines="10"><span class="syntax"><span class="ucm-project">scratch</span><span class="ucm-branch">/main</span>>
+  <code-example class="terminal-ucm" @title="Terminal: ucm" @numLines="10"><span class="syntax"><span class="ucm-project">scratch</span><span class="ucm-branch">/main</span>>                                                                                          
 
   Loading changes detected in <span class="ucm-hl">~/scratch.u.</span>
 
@@ -563,6 +563,14 @@
   @media only screen and (max-width: 496px) {
     :host {
       margin: 0 1.5rem;
+
+      .ucm .scratch-and-ucm {
+        padding-left: 0;
+
+        .terminal-ucm {
+          left: 2rem;
+        }
+      }
     }
   }
 </style>
