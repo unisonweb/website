@@ -33,7 +33,7 @@
       <p>Work is underway today to add a C FFI!</p>
     </faq-item>
     <faq-item @question="Without files, how do I see my codebase?">
-      <p>Your codebase structure is viewable with the <a href="https://www.unison-lang.org/docs/tooling/ucm-desktop/">Unison Desktop app</a>. The UCM Desktop app also features click-through to definition tooling and rich rendering of docs.</p>
+      <p>Your codebase structure is viewable via the Unison Codebase Manager CLI with commands like <code>ls</code> and <code>view</code>, or with the <a href="https://www.unison-lang.org/docs/tooling/ucm-desktop/">Unison Desktop app GUI</a>. The UCM Desktop app also features click-through to definition tooling and rich rendering of docs.</p>
     </faq-item>
   </div>
 </featured-card>
