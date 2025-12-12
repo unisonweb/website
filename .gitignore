@@ -27,3 +27,6 @@ src/_includes/_home-examples.njk
 
 # Local Netlify folder
 .netlify
+
+# Elm
+elm-stuff

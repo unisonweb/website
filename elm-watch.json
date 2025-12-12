@@ -1,0 +1,8 @@
+{
+  "targets": {
+    "My target name": {
+      "inputs": ["src/HyperContextual/Main.elm"],
+      "output": "build/site/js/hypercontextual-app.js"
+    }
+  }
+}

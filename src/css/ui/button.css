@@ -1,0 +1,400 @@
+.button {
+  /* @todo: move subdued colors up here */
+  /* note that icons take the color of "text" when they are standalone */
+  --color-button-default-text: var(--u-color_text-on-action);
+  --color-button-default-icon: var(--u-color_icon-on-action);
+  --color-button-default-icon-only: var(--u-color_text-on-action);
+  --color-button-default-bg: var(--u-color_action);
+  --color-button-default-hover-text: var(--u-color_text-on-action_hovered);
+  --color-button-default-hover-icon: var(--u-color_icon-on-action_hovered);
+  --color-button-default-hover-bg: var(--u-color_action_hovered);
+
+  --color-button-emphasized-text: var(--u-color_text-on-action-emphasized);
+  --color-button-emphasized-icon: var(--u-color_icon-on-action-emphasized);
+  --color-button-emphasized-icon-only: var(--u-color_text-on-action-emphasized);
+  --color-button-emphasized-bg: var(--u-color_action_emphasized);
+  --color-button-emphasized-hover-text: var(
+    --u-color_text-on-action-emphasized_hovered
+  );
+  --color-button-emphasized-hover-icon: var(
+    --u-color_icon-on-action-emphasized_hovered
+  );
+  --color-button-emphasized-hover-icon-only: var(
+    --u-color-text-on-action-emphasized_hovered
+  );
+  --color-button-emphasized-hover-bg: var(--u-color_action_emphasized_hovered);
+
+  --color-button-outlined-text: var(--u-color_text-on-action-outlined);
+  --color-button-outlined-icon: var(--u-color_icon-on-action-outlined);
+  --color-button-outlined-icon-only: var(--u-color_text-on-action-outlined);
+  --color-button-outlined-border: var(--u-color_border-on-action-outlined);
+  --color-button-outlined-bg: var(--u-color_action_outlined);
+  --color-button-outlined-hover-text: var(
+    --u-color_text-on-action-outlined_hovered
+  );
+  --color-button-outlined-hover-icon: var(
+    --u-color_icon-on-action-outlined_hovered
+  );
+  --color-button-outlined-hover-icon-only: var(
+    --u-color_text-on-action-outlined_hovered
+  );
+  --color-button-outlined-hover-bg: var(--u-color_action_outlined_hovered);
+  --color-button-outlined-hover-border: var(
+    --u-color_border-on-action-outlined_hovered
+  );
+
+  --color-button-critical-text: var(--u-color_critical_text-on-action);
+  --color-button-critical-icon: var(--u-color_critical_icon-on-action);
+  --color-button-critical-icon-only: var(--u-color_critical_text-on-action);
+  --color-button-critical-bg: var(--u-color_critical_action);
+  --color-button-critical-hover-text: var(
+    --u-color_critical_text-on-action_hovered
+  );
+  --color-button-critical-hover-icon: var(
+    --u-color_critical_icon-on-action_hovered
+  );
+  --color-button-critical-hover-icon-only: var(
+    --u-color_critical_text-on-action_hovered
+  );
+  --color-button-critical-hover-bg: var(--u-color_critical_action_hovered);
+
+  --color-button-positive-text: var(--u-color_positive_text-on-action);
+  --color-button-positive-icon: var(--u-color_positive_icon-on-action);
+  --color-button-positive-icon-only: var(--u-color_positive_text-on-action);
+  --color-button-positive-bg: var(--u-color_positive_action);
+  --color-button-positive-hover-text: var(
+    --u-color_positive_text-on-action_hovered
+  );
+  --color-button-positive-hover-icon: var(
+    --u-color_positive_icon-on-action_hovered
+  );
+  --color-button-positive-hover-icon-only: var(
+    --u-color_positive_text-on-action_hovered
+  );
+  --color-button-positive-hover-bg: var(--u-color_positive_action_hovered);
+
+  /* @color-todo */
+  /* @decorative */
+  --color-button-decorative-blue-text: var(--color-gray-10);
+  --color-button-decorative-blue-bg: var(--color-blue-2);
+  --color-button-decorative-blue-icon: var(--color-blue-3);
+  --color-button-decorative-blue-icon-only: var(--color-gray-10);
+  --color-button-decorative-blue-hover-text: var(--color-gray-10);
+  --color-button-decorative-blue-hover-bg: var(--color-blue-1);
+
+  --color-button-decorative-purple-text: var(--color-purple-1);
+  --color-button-decorative-purple-icon: var(--color-purple-2);
+  --color-button-decorative-purple-icon-only: var(--color-purple-1);
+  --color-button-decorative-purple-bg: var(--color-purple-4);
+  --color-button-decorative-purple-hover-text: var(--color-purple-2);
+  --color-button-decorative-purple-hover-bg: var(--color-purple-4);
+
+  display: inline-flex;
+  font-family: var(--font-sans-serif);
+  border: 0;
+  border-radius: var(--border-radius-base);
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1em;
+  cursor: pointer;
+  transition: all 0.1s ease-in;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+a.button,
+a.button:hover {
+  text-decoration: none;
+}
+
+.button:focus {
+  outline: none;
+  will-change: transform;
+}
+
+.button:active {
+  transform: translate(0, 0.1rem);
+}
+
+/* Fixes icon jitter on click in safari (and thus tauri) */
+.button .icon {
+  will-change: transform;
+}
+
+/* -- Sizes ---------------------------------------------------------------- */
+
+.button.small {
+  height: 1.5rem;
+  font-size: var(--font-size-small);
+  gap: 0.25rem;
+}
+
+.button.small .icon {
+  font-size: var(--font-size-small);
+}
+
+.button.small:not(.content-icon) {
+  padding: 0 0.5rem;
+}
+
+.button.small.content-icon {
+  padding: 0;
+  width: 1.5rem;
+}
+
+.button.medium {
+  height: 2rem;
+  font-size: var(--font-size-medium);
+  gap: 0.375rem;
+}
+
+.button.medium .icon {
+  font-size: var(--font-size-medium);
+}
+
+.button.medium:not(.content-icon) {
+  padding: 0 0.75rem;
+}
+
+.button.medium.content-icon {
+  padding: 0;
+  width: 2rem;
+}
+
+.button.large {
+  height: 2.5rem;
+  font-size: 1.125rem;
+  gap: 0.5rem;
+}
+
+.button.large .icon {
+  font-size: 1.125rem;
+}
+
+.button.large:not(.content-icon) {
+  padding: 0 1rem;
+}
+
+.button.large.content-icon {
+  padding: 0;
+  width: 2.5rem;
+}
+
+.button.default {
+  color: var(--color-button-default-text);
+  background: var(--color-button-default-bg);
+}
+
+.button.default .icon {
+  color: var(--color-button-default-icon);
+}
+
+.button.default.content-icon .icon {
+  color: var(--color-button-default-icon-only);
+}
+
+.button.default:not(.disabled):hover,
+.button.default.button_active {
+  color: var(--color-button-default-hover-text);
+  background: var(--color-button-default-hover-bg);
+}
+
+.button.default:not(.disabled):hover .icon,
+.button.default.button_active .icon {
+  color: var(--color-button-default-hover-icon);
+}
+
+.button.default.content-icon:not(.disabled):hover .icon,
+.button.default.content-icon.button_active .icon {
+  color: var(--color-button-default-hover-icon-only);
+}
+
+.button.emphasized {
+  color: var(--color-button-emphasized-text);
+  background: var(--color-button-emphasized-bg);
+}
+
+.button.emphasized .icon {
+  color: var(--color-button-emphasized-icon);
+}
+
+.button.emphasized.content-icon .icon {
+  color: var(--color-button-emphasized-icon-only);
+}
+
+.button.emphasized:not(.disabled):hover,
+.button.emphasized.button_active {
+  color: var(--color-button-emphasized-hover-text);
+  background: var(--color-button-emphasized-hover-bg);
+}
+
+.button.emphasized:not(.disabled):hover .icon,
+.button.emphasized.button_active .icon {
+  color: var(--color-button-emphasized-hover-icon);
+}
+
+.button.emphasized.content-icon:not(.disabled):hover .icon,
+.button.emphasized.content-icon.button_active .icon {
+  color: var(--color-button-emphasized-hover-icon-only);
+}
+
+.button.outlined {
+  color: var(--color-button-outlined-text);
+  box-shadow: 0 0 0 1px var(--color-button-outlined-border);
+  background: var(--color-button-outlined-bg);
+}
+
+.button.outlined .icon {
+  color: var(--color-button-outlined-icon);
+}
+
+.button.outlined.content-icon .icon {
+  color: var(--color-button-outlined-icon-only);
+}
+
+.button.outlined:not(.disabled):hover,
+.button.outlined.button_active {
+  color: var(--color-button-outlined-hover-text);
+  box-shadow: 0 0 0 1px var(--color-button-outlined-hover-border);
+  background: var(--color-button-outlined-hover-bg);
+}
+
+.button.outlined:not(.disabled):hover .icon,
+.button.outlined.button_active .icon {
+  color: var(--color-button-outlined-hover-icon);
+}
+
+.button.outlined.content-icon:not(.disabled):hover .icon,
+.button.outlined.content-icon.button_active .icon {
+  color: var(--color-button-outlined-hover-icon-only);
+}
+
+.button.critical {
+  color: var(--color-button-critical-text);
+  background: var(--color-button-critical-bg);
+}
+
+.button.critical .icon {
+  color: var(--color-button-critical-icon);
+}
+
+.button.critical.content-icon .icon {
+  color: var(--color-button-critical-icon-only);
+}
+
+.button.critical:not(.disabled):hover,
+.button.critical.button_active {
+  color: var(--color-button-critical-hover-text);
+  background: var(--color-button-critical-hover-bg);
+}
+
+.button.critical:not(.disabled):hover .icon,
+.button.critical.button_active .icon {
+  color: var(--color-button-critical-hover-icon);
+}
+
+.button.critical.content-icon:not(.disabled):hover .icon,
+.button.critical.content-icon.button_active .icon {
+  color: var(--color-button-critical-hover-icon-only);
+}
+
+.button.positive {
+  color: var(--color-button-positive-text);
+  background: var(--color-button-positive-bg);
+}
+
+.button.positive .icon {
+  color: var(--color-button-positive-icon);
+}
+
+.button.positive.content-icon .icon {
+  color: var(--color-button-positive-icon-only);
+}
+
+.button.positive:not(.disabled):hover,
+.button.positive.button_active {
+  color: var(--color-button-positive-hover-text);
+  background: var(--color-button-positive-hover-bg);
+}
+
+.button.positive:not(.disabled):hover .icon,
+.button.positive.button_active .icon {
+  color: var(--color-button-positive-hover-icon);
+}
+
+.button.positive.content-icon:not(.disabled):hover .icon,
+.button.positive.content-icon.button_active .icon {
+  color: var(--color-button-positive-hover-icon-only);
+}
+
+.button.decorative-purple {
+  color: var(--color-button-decorative-purple-text);
+  background: var(--color-button-decorative-purple-bg);
+}
+
+.button.decorative-purple .icon {
+  color: var(--color-button-decorative-purple-icon);
+}
+
+.button.decorative-purple.conten-icon .icon {
+  color: var(--color-button-decorative-purple-icon-only);
+}
+
+.button.decorative-purple:not(.disabled):hover,
+.button.decorative-purple.button_active {
+  color: var(--color-button-decorative-purple-hover-text);
+  background: var(--color-button-decorative-purple-hover-bg);
+}
+
+.button.decorative-purple:not(.disabled):hover .icon,
+.button.decorative-purple.button_active .icon {
+  color: var(--color-button-decorative-purple-hover-text);
+}
+
+.button.decorative-blue {
+  color: var(--color-button-decorative-blue-text);
+  background: var(--color-button-decorative-blue-bg);
+}
+
+.button.decorative-blue .icon {
+  color: var(--color-button-decorative-blue-icon);
+}
+
+.button.decorative-blue.content-icon .icon {
+  color: var(--color-button-decorative-blue-icon-only);
+}
+
+.button.decorative-blue:not(.disabled):hover,
+.button.decorative-blue.button_active {
+  color: var(--color-button-decorative-blue-hover-text);
+  background: var(--color-button-decorative-blue-hover-bg);
+}
+
+.button.decorative-blue:not(.disabled):hover .icon,
+.button.decorative-blue.button_active .icon {
+  color: var(--color-button-decorative-blue-hover-text);
+}
+
+.button.subdued {
+  --color-button-default-text: var(--u-color_interactive);
+  background: var(--color-transparent);
+  color: var(--color-button-default-text);
+}
+
+.button.subdued:not(.disabled):hover,
+.button.subdued.button_active {
+  color: var(--color-button-default-hover-text);
+  background: var(--color-button-default-hover-bg);
+}
+
+.button.subdued:not(.disabled):hover .icon,
+.button.subdued.button_active .icon {
+  color: var(--color-button-default-hover-text);
+}
+
+.button.disabled {
+  opacity: 0.25;
+  pointer-events: none;
+}
