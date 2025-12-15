@@ -2,6 +2,7 @@ module Option exposing (..)
 
 import Html exposing (Html, div, h4, header, input)
 import Html.Attributes exposing (checked, class, classList, type_)
+import UI
 import UI.Click as Click exposing (Click)
 import UI.Icon as Icon
 
@@ -14,6 +15,7 @@ type alias Option msg =
     , isChecked : Bool
     , hasChevron : Bool
     , isFocused : Bool
+    , isSelected : Bool
     , isDisabled : Bool
     , isBare : Bool
     , click : Maybe (Click msg)
@@ -33,6 +35,7 @@ option title content =
     , isChecked = False
     , hasChevron = False
     , isFocused = False
+    , isSelected = False
     , isDisabled = False
     , isBare = False
     , click = Nothing
@@ -97,6 +100,11 @@ focus opt =
     { opt | isFocused = True }
 
 
+select : Option msg -> Option msg
+select opt =
+    { opt | isSelected = True }
+
+
 enabled : Option msg -> Option msg
 enabled opt =
     { opt | isDisabled = False }
@@ -122,20 +130,29 @@ view opt =
         optionClass =
             classList
                 [ ( "option", True )
-                , ( "focus", opt.isFocused )
+                , ( "focused", opt.isFocused )
+                , ( "selected", opt.isSelected )
                 , ( "disabled", opt.isDisabled )
                 , ( "bare", opt.isBare )
                 ]
 
+        selectedIcon =
+            if opt.isSelected then
+                div [ class "selected-icon" ] [ Icon.view Icon.checkmark ]
+
+            else
+                UI.nothing
+
         headerContent =
             case opt.badge of
                 Just badgeText ->
-                    [ h4 [] [ Html.text opt.title ]
+                    [ selectedIcon
+                    , h4 [] [ Html.text opt.title ]
                     , div [ class "badge" ] [ Html.text badgeText ]
                     ]
 
                 Nothing ->
-                    [ h4 [] [ Html.text opt.title ] ]
+                    [ selectedIcon, h4 [] [ Html.text opt.title ] ]
 
         radioSection =
             if opt.hasRadio then

@@ -266,7 +266,7 @@ viewSelectedAddress addr =
     in
     ChatDemo.viewEntry
         [ Option.option addr.name addressContent
-            |> Option.focus
+            |> Option.select
             |> Option.disabled
             |> Option.view
         ]
@@ -327,7 +327,7 @@ viewSelectedOrder order =
     ChatDemo.viewEntry
         [ Option.option order.id itemsContent
             |> Option.withBadge order.status
-            |> Option.focus
+            |> Option.select
             |> Option.disabled
             |> Option.view
         ]
