@@ -54,11 +54,7 @@
     />
 
     <link webc:keep rel="stylesheet" href="/css/styles.css" />
-    <link webc:keep rel="stylesheet" href="/css/ui/light.css" />
-    <link webc:keep rel="stylesheet" href="/css/ui/button.css" />
-    <link webc:keep rel="stylesheet" href="/css/ui/animations.css" />
-    <link webc:keep rel="stylesheet" href="/css/ui/status-indicator.css" />
-    <link webc:keep rel="stylesheet" href="/css/ui/status-banner.css" />
+    <link webc:keep rel="stylesheet" href="/css/hypercontextual.css" />
     <style @raw="getBundle('css')" webc:keep></style>
 
     <script
@@ -541,7 +537,8 @@
       justify-content: flex-end;
     }
 
-    .loading {
+    .loading,
+    .instruction {
       display: flex;
       height: 2.5rem;
       align-items: center;
@@ -549,6 +546,11 @@
     }
 
     .status-banner.status-banner_working {
+      background: var(--color-gray-11);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .status-banner.status-banner_info {
       background: var(--color-gray-11);
       border: 1px solid rgba(0, 0, 0, 0.1);
     }

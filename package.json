@@ -7,7 +7,7 @@
     "dev": "eleventy --serve --port 2345",
     "watch": "elm-watch hot",
     "preBuild": "./build.mjs",
-    "build": "elm-watch make --optimize; ./build.mjs && eleventy",
+    "build": "./build.mjs && elm-watch make --optimize && eleventy",
     "deploy:prod": "netlify deploy --prod --build",
     "deploy:preview": "netlify deploy --build --context deploy-preview",
     "ui-core-install": "ui-core-install",
