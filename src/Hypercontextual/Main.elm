@@ -4,6 +4,7 @@ import Browser
 import ChatBubble
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class)
+import Html.Keyed as Keyed
 import Lib.Util exposing (delayMsg)
 import Option
 import UI.Button as Button
@@ -377,54 +378,54 @@ view model =
                     ( [], viewAwaitingInput )
 
                 LoadingOrders ->
-                    ( [ viewRequestRecentOrders
+                    ( [ ( "request-recent-orders", viewRequestRecentOrders )
                       ]
                     , viewLoading "Looking up orders..."
                     )
 
                 RecentOrders ->
-                    ( [ viewRequestRecentOrders
-                      , viewAgentBubble (text "Select a recent order")
-                      , viewRecentOrders
+                    ( [ ( "request-recent-orders", viewRequestRecentOrders )
+                      , ( "agent-select-order", viewAgentBubble (text "Select a recent order") )
+                      , ( "recent-orders", viewRecentOrders )
                       ]
                     , viewDisabledInteraction
                     )
 
                 LoadingAddresses order ->
-                    ( [ viewRequestRecentOrders
-                      , viewAgentBubble (text "Select a recent order")
-                      , viewSelectedOrder order
+                    ( [ ( "request-recent-orders", viewRequestRecentOrders )
+                      , ( "agent-select-order", viewAgentBubble (text "Select a recent order") )
+                      , ( "selected-order-" ++ order.id, viewSelectedOrder order )
                       ]
                     , viewLoading "Fetching saved addresses..."
                     )
 
                 ShippingAddresses order address ->
-                    ( [ viewRequestRecentOrders
-                      , viewAgentBubble (text "Select a recent order")
-                      , viewSelectedOrder order
-                      , viewAgentBubble (text "Select an address")
-                      , viewShippingAddresses address
+                    ( [ ( "request-recent-orders", viewRequestRecentOrders )
+                      , ( "agent-select-order", viewAgentBubble (text "Select a recent order") )
+                      , ( "selected-order-" ++ order.id, viewSelectedOrder order )
+                      , ( "agent-select-address", viewAgentBubble (text "Select an address") )
+                      , ( "shipping-addresses", viewShippingAddresses address )
                       ]
                     , viewDisabledInteraction
                     )
 
                 SavingAddress order address ->
-                    ( [ viewRequestRecentOrders
-                      , viewAgentBubble (text "Select a recent order")
-                      , viewSelectedOrder order
-                      , viewAgentBubble (text "Select an address")
-                      , viewAddressUpdated address
+                    ( [ ( "request-recent-orders", viewRequestRecentOrders )
+                      , ( "agent-select-order", viewAgentBubble (text "Select a recent order") )
+                      , ( "selected-order-" ++ order.id, viewSelectedOrder order )
+                      , ( "agent-select-address", viewAgentBubble (text "Select an address") )
+                      , ( "address-updated", viewAddressUpdated address )
                       ]
                     , viewLoading "Saving address selection"
                     )
 
                 AddressUpdated order newAddress ->
-                    ( [ viewRequestRecentOrders
-                      , viewAgentBubble (text "Select a recent order")
-                      , viewSelectedOrder order
-                      , viewAgentBubble (text "Select an address")
-                      , viewAddressUpdated newAddress
-                      , viewAgentBubble (text ("Address successfully updated on order " ++ order.id))
+                    ( [ ( "request-recent-orders", viewRequestRecentOrders )
+                      , ( "agent-select-order", viewAgentBubble (text "Select a recent order") )
+                      , ( "selected-order-" ++ order.id, viewSelectedOrder order )
+                      , ( "agent-select-address", viewAgentBubble (text "Select an address") )
+                      , ( "address-updated", viewAddressUpdated newAddress )
+                      , ( "agent-success", viewAgentBubble (text ("Address successfully updated on order " ++ order.id)) )
                       ]
                     , div [ class "actions" ]
                         [ Button.button Restart "Restart"
@@ -434,7 +435,7 @@ view model =
                     )
     in
     div [ class "demo orders-demo" ]
-        [ div [ class "log" ] (List.reverse log)
+        [ Keyed.node "div" [ class "log" ] (List.reverse log)
         , div [ class "interaction" ] [ interaction ]
         ]
 
