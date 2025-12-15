@@ -389,7 +389,7 @@ view model =
                       , ( "selected-order-" ++ order.id, viewSelectedOrder order )
                       , ( "agent-select-address", ChatDemo.viewAgentBubble (text "Select an address") )
                       , ( "address-updated", viewAddressUpdated newAddress )
-                      , ( "agent-success", ChatDemo.viewAgentBubble (text ("Address successfully updated on order " ++ order.id)) )
+                      , ( "agent-success", ChatDemo.viewAgentBubble_ True (text ("Address successfully updated on order " ++ order.id)) )
                       ]
                     , div [ class "actions" ]
                         [ Button.button Restart "Restart"

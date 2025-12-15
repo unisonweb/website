@@ -1,16 +1,17 @@
 module ChatDemo exposing
     ( ChatDemo
-    , chatDemo
-    , withDemoClass
-    , withLog
     , addLogEntry
-    , withInteraction
+    , chatDemo
     , view
-    , viewEntry
-    , viewUserBubble
     , viewAgentBubble
-    , viewLoading
+    , viewAgentBubble_
+    , viewEntry
     , viewInstruction
+    , viewLoading
+    , viewUserBubble
+    , withDemoClass
+    , withInteraction
+    , withLog
     )
 
 import ChatBubble
@@ -95,9 +96,15 @@ viewUserBubble content =
 
 viewAgentBubble : Html msg -> Html msg
 viewAgentBubble content =
+    viewAgentBubble_ False content
+
+
+viewAgentBubble_ : Bool -> Html msg -> Html msg
+viewAgentBubble_ isSuccess content =
     viewEntry
         [ content
             |> ChatBubble.chatBubble_ ChatBubble.Left
+            |> ChatBubble.when isSuccess ChatBubble.success
             |> ChatBubble.view
         ]
 

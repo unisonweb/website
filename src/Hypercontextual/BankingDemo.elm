@@ -1,7 +1,7 @@
 module BankingDemo exposing (..)
 
 import ChatDemo
-import Html exposing (Html, div, span, text)
+import Html exposing (Html, div, text)
 import Html.Attributes exposing (class)
 import Lib.Util exposing (delayMsg)
 import Set exposing (Set)
@@ -75,7 +75,6 @@ type Step
     | SelectingAccounts (Set String)
     | LoadingContactMethods (Set String)
     | SelectingNotificationMethods (Set String) (Set String)
-    | ConfiguringAlert (Set String) (Set String)
     | SavingAlert (Set String) (Set String)
     | AlertCreated (Set String) (Set String)
 
@@ -102,7 +101,6 @@ type Msg
     | ShowContactMethods
     | ToggleContactMethod String
     | ConfirmNotificationMethods
-    | ConfirmAlert
     | SaveAlert
     | AlertSaved
     | Restart
@@ -179,15 +177,7 @@ update msg model =
                         ( model, Cmd.none )
 
                     else
-                        ( { model | step = ConfiguringAlert accounts_ selected }, Cmd.none )
-
-                _ ->
-                    ( model, Cmd.none )
-
-        ConfirmAlert ->
-            case model.step of
-                ConfiguringAlert accounts_ methods ->
-                    ( { model | step = SavingAlert accounts_ methods }, delayMsg 1500 SaveAlert )
+                        ( { model | step = SavingAlert accounts_ selected }, delayMsg 1500 SaveAlert )
 
                 _ ->
                     ( model, Cmd.none )
@@ -354,25 +344,6 @@ viewNotificationMethodSelection selectedIds =
         ]
 
 
-viewAlertConfiguration : Html Msg
-viewAlertConfiguration =
-    ChatDemo.viewEntry
-        [ Tile.tile "Alert threshold: $1,000.00"
-            (div [ class "alert-config" ]
-                [ div [ class "config-item" ]
-                    [ span [ class "config-label subdued" ] [ text "You'll be notified when your selected account balance drops below this amount." ]
-                    ]
-                ]
-            )
-            |> Tile.view
-        , div [ class "actions" ]
-            [ Button.button ConfirmAlert "Create alert"
-                |> Button.emphasized
-                |> Button.view
-            ]
-        ]
-
-
 viewAlertSummary : Set String -> Set String -> Html Msg
 viewAlertSummary accountIds methodIds =
     let
@@ -391,7 +362,7 @@ viewAlertSummary accountIds methodIds =
         summaryText =
             "Alert created: You'll receive " ++ selectedMethods ++ " notifications when " ++ selectedAccounts ++ " drops below $1,000.00"
     in
-    ChatDemo.viewAgentBubble (text summaryText)
+    ChatDemo.viewAgentBubble_ True (text summaryText)
 
 
 view : Model -> Html Msg
@@ -434,25 +405,12 @@ view model =
                     , ChatDemo.viewInstruction "Select one or more notification methods above"
                     )
 
-                ConfiguringAlert accountIds methodIds ->
-                    ( [ ( "request-alert", viewRequestAlert )
-                      , ( "agent-select-accounts", ChatDemo.viewAgentBubble (text "Which account(s) would you like to monitor?") )
-                      , ( "selected-accounts", viewSelectedAccounts accountIds )
-                      , ( "agent-select-methods", ChatDemo.viewAgentBubble (text "How would you like to be notified?") )
-                      , ( "selected-methods", viewSelectedMethods methodIds )
-                      , ( "agent-configure", ChatDemo.viewAgentBubble (text "Review your alert configuration") )
-                      , ( "alert-config", viewAlertConfiguration )
-                      ]
-                    , ChatDemo.viewInstruction "Review and confirm your alert settings"
-                    )
-
                 SavingAlert accountIds methodIds ->
                     ( [ ( "request-alert", viewRequestAlert )
                       , ( "agent-select-accounts", ChatDemo.viewAgentBubble (text "Which account(s) would you like to monitor?") )
                       , ( "selected-accounts", viewSelectedAccounts accountIds )
                       , ( "agent-select-methods", ChatDemo.viewAgentBubble (text "How would you like to be notified?") )
                       , ( "selected-methods", viewSelectedMethods methodIds )
-                      , ( "agent-configure", ChatDemo.viewAgentBubble (text "Review your alert configuration") )
                       ]
                     , ChatDemo.viewLoading "Creating alert..."
                     )
@@ -463,7 +421,6 @@ view model =
                       , ( "selected-accounts", viewSelectedAccounts accountIds )
                       , ( "agent-select-methods", ChatDemo.viewAgentBubble (text "How would you like to be notified?") )
                       , ( "selected-methods", viewSelectedMethods methodIds )
-                      , ( "agent-configure", ChatDemo.viewAgentBubble (text "Review your alert configuration") )
                       , ( "alert-summary", viewAlertSummary accountIds methodIds )
                       ]
                     , div [ class "actions" ]
