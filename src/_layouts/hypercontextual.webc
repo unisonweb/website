@@ -200,7 +200,7 @@
     font-size: 0.875rem;
     overflow: hidden;
 
-    &.orders-demo {
+    &.demo {
       height: 36rem;
     }
 

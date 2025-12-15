@@ -12,6 +12,7 @@ type alias Option msg =
     , badge : Maybe String
     , content : Html msg
     , hasRadio : Bool
+    , hasCheckbox : Bool
     , isChecked : Bool
     , hasChevron : Bool
     , isFocused : Bool
@@ -32,6 +33,7 @@ option title content =
     , badge = Nothing
     , content = content
     , hasRadio = False
+    , hasCheckbox = False
     , isChecked = False
     , hasChevron = False
     , isFocused = False
@@ -78,6 +80,11 @@ withBadge badge opt =
 withRadio : Bool -> Option msg -> Option msg
 withRadio isChecked opt =
     { opt | hasRadio = True, isChecked = isChecked }
+
+
+withCheckbox : Bool -> Option msg -> Option msg
+withCheckbox isChecked opt =
+    { opt | hasCheckbox = True, isChecked = isChecked }
 
 
 withChevron : Option msg -> Option msg
@@ -163,6 +170,15 @@ view opt =
             else
                 []
 
+        checkboxSection =
+            if opt.hasCheckbox then
+                [ div [ class "checkbox" ]
+                    [ input [ type_ "checkbox", checked opt.isChecked ] [] ]
+                ]
+
+            else
+                []
+
         chevronSection =
             if opt.hasChevron then
                 [ div [ class "chevron" ] [ Icon.view Icon.chevronRight ] ]
@@ -178,6 +194,11 @@ view opt =
             if opt.hasRadio then
                 [ div [ class "option-row" ]
                     (radioSection ++ [ detailsSection ])
+                ]
+
+            else if opt.hasCheckbox then
+                [ div [ class "option-row" ]
+                    (checkboxSection ++ [ detailsSection ])
                 ]
 
             else
