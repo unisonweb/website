@@ -1,15 +1,13 @@
 module OrderDemo exposing (..)
 
-import ChatBubble
+import ChatDemo
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class)
-import Html.Keyed as Keyed
 import Lib.Util exposing (delayMsg)
 import Option
 import UI.Button as Button
 import UI.Divider as Divider
 import UI.Icon as Icon
-import UI.StatusBanner as StatusBanner
 
 
 
@@ -269,7 +267,7 @@ viewSelectedAddress addr =
     Option.option addr.name addressContent
         |> Option.bare
         |> Option.view
-        |> viewUserBubble
+        |> ChatDemo.viewUserBubble
 
 
 viewAwaitingInput : Html Msg
@@ -287,12 +285,12 @@ viewAwaitingInput =
 
 viewRequestRecentOrders : Html Msg
 viewRequestRecentOrders =
-    viewUserBubble (text "I need to change the address for my order")
+    ChatDemo.viewUserBubble (text "I need to change the address for my order")
 
 
 viewRecentOrders : Html Msg
 viewRecentOrders =
-    viewEntry
+    ChatDemo.viewEntry
         [ div [ class "options" ]
             (List.map viewOrder orders)
         ]
@@ -300,7 +298,7 @@ viewRecentOrders =
 
 viewShippingAddresses : Address -> Html Msg
 viewShippingAddresses address =
-    viewEntry
+    ChatDemo.viewEntry
         [ div [ class "options" ] (List.map (viewAddress address.id) addresses)
         , div [ class "actions" ]
             [ Button.button SaveAddressSelection "Save selection"
@@ -312,37 +310,9 @@ viewShippingAddresses address =
 
 viewAddressUpdated : Address -> Html Msg
 viewAddressUpdated address =
-    viewEntry
+    ChatDemo.viewEntry
         [ viewSelectedAddress address
         ]
-
-
-viewEntry : List (Html Msg) -> Html Msg
-viewEntry content =
-    div [ class "entry" ] content
-
-
-viewUserBubble : Html Msg -> Html Msg
-viewUserBubble content =
-    viewEntry
-        [ content
-            |> ChatBubble.chatBubble_ ChatBubble.Right
-            |> ChatBubble.view
-        ]
-
-
-viewAgentBubble : Html Msg -> Html Msg
-viewAgentBubble content =
-    viewEntry
-        [ content
-            |> ChatBubble.chatBubble_ ChatBubble.Left
-            |> ChatBubble.view
-        ]
-
-
-viewLoading : String -> Html Msg
-viewLoading label =
-    div [ class "loading" ] [ StatusBanner.working label ]
 
 
 viewSelectedOrder : Order -> Html Msg
@@ -356,12 +326,7 @@ viewSelectedOrder order =
         |> Option.withBadge order.status
         |> Option.bare
         |> Option.view
-        |> viewUserBubble
-
-
-viewInstruction : String -> Html msg
-viewInstruction instruction =
-    div [ class "instruction" ] [ StatusBanner.info instruction ]
+        |> ChatDemo.viewUserBubble
 
 
 view : Model -> Html Msg
@@ -375,52 +340,52 @@ view model =
                 LoadingOrders ->
                     ( [ ( "request-recent-orders", viewRequestRecentOrders )
                       ]
-                    , viewLoading "Looking up orders..."
+                    , ChatDemo.viewLoading "Looking up orders..."
                     )
 
                 RecentOrders ->
                     ( [ ( "request-recent-orders", viewRequestRecentOrders )
-                      , ( "agent-select-order", viewAgentBubble (text "Select a recent order") )
+                      , ( "agent-select-order", ChatDemo.viewAgentBubble (text "Select a recent order") )
                       , ( "recent-orders", viewRecentOrders )
                       ]
-                    , viewInstruction "Select an order above"
+                    , ChatDemo.viewInstruction "Select an order above"
                     )
 
                 LoadingAddresses order ->
                     ( [ ( "request-recent-orders", viewRequestRecentOrders )
-                      , ( "agent-select-order", viewAgentBubble (text "Select a recent order") )
+                      , ( "agent-select-order", ChatDemo.viewAgentBubble (text "Select a recent order") )
                       , ( "selected-order-" ++ order.id, viewSelectedOrder order )
                       ]
-                    , viewLoading "Fetching saved addresses..."
+                    , ChatDemo.viewLoading "Fetching saved addresses..."
                     )
 
                 ShippingAddresses order address ->
                     ( [ ( "request-recent-orders", viewRequestRecentOrders )
-                      , ( "agent-select-order", viewAgentBubble (text "Select a recent order") )
+                      , ( "agent-select-order", ChatDemo.viewAgentBubble (text "Select a recent order") )
                       , ( "selected-order-" ++ order.id, viewSelectedOrder order )
-                      , ( "agent-select-address", viewAgentBubble (text "Select an address") )
+                      , ( "agent-select-address", ChatDemo.viewAgentBubble (text "Select an address") )
                       , ( "shipping-addresses", viewShippingAddresses address )
                       ]
-                    , viewInstruction "Select an address above"
+                    , ChatDemo.viewInstruction "Select an address above"
                     )
 
                 SavingAddress order address ->
                     ( [ ( "request-recent-orders", viewRequestRecentOrders )
-                      , ( "agent-select-order", viewAgentBubble (text "Select a recent order") )
+                      , ( "agent-select-order", ChatDemo.viewAgentBubble (text "Select a recent order") )
                       , ( "selected-order-" ++ order.id, viewSelectedOrder order )
-                      , ( "agent-select-address", viewAgentBubble (text "Select an address") )
+                      , ( "agent-select-address", ChatDemo.viewAgentBubble (text "Select an address") )
                       , ( "address-updated", viewAddressUpdated address )
                       ]
-                    , viewLoading "Saving address selection"
+                    , ChatDemo.viewLoading "Saving address selection"
                     )
 
                 AddressUpdated order newAddress ->
                     ( [ ( "request-recent-orders", viewRequestRecentOrders )
-                      , ( "agent-select-order", viewAgentBubble (text "Select a recent order") )
+                      , ( "agent-select-order", ChatDemo.viewAgentBubble (text "Select a recent order") )
                       , ( "selected-order-" ++ order.id, viewSelectedOrder order )
-                      , ( "agent-select-address", viewAgentBubble (text "Select an address") )
+                      , ( "agent-select-address", ChatDemo.viewAgentBubble (text "Select an address") )
                       , ( "address-updated", viewAddressUpdated newAddress )
-                      , ( "agent-success", viewAgentBubble (text ("Address successfully updated on order " ++ order.id)) )
+                      , ( "agent-success", ChatDemo.viewAgentBubble (text ("Address successfully updated on order " ++ order.id)) )
                       ]
                     , div [ class "actions" ]
                         [ Button.button Restart "Restart"
@@ -429,7 +394,8 @@ view model =
                         ]
                     )
     in
-    div [ class "demo orders-demo" ]
-        [ Keyed.node "div" [ class "log" ] (List.reverse log)
-        , div [ class "interaction" ] [ interaction ]
-        ]
+    ChatDemo.chatDemo
+        |> ChatDemo.withDemoClass "demo orders-demo"
+        |> ChatDemo.withLog log
+        |> ChatDemo.withInteraction interaction
+        |> ChatDemo.view
