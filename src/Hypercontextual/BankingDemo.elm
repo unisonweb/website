@@ -4,8 +4,8 @@ import ChatDemo
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class)
 import Lib.Util exposing (delayMsg)
-import Option
 import Set exposing (Set)
+import Tile
 import UI.Button as Button
 import UI.Icon as Icon
 
@@ -223,11 +223,11 @@ viewAccount selectedIds account =
         isSelected =
             Set.member account.id selectedIds
     in
-    Option.option account.name accountContent
-        |> Option.withCheckbox isSelected
-        |> Option.when isSelected Option.focus
-        |> Option.onClick (ToggleAccount account.id)
-        |> Option.view
+    Tile.tile account.name accountContent
+        |> Tile.withCheckbox isSelected
+        |> Tile.when isSelected Tile.focus
+        |> Tile.onClick (ToggleAccount account.id)
+        |> Tile.view
 
 
 viewContactMethod : Set String -> ContactMethod -> Html Msg
@@ -241,12 +241,12 @@ viewContactMethod selectedIds method =
         isSelected =
             Set.member method.id selectedIds
     in
-    Option.option method.methodType methodContent
-        |> Option.withCheckbox isSelected
-        |> Option.when method.isDefault (Option.withBadge "Default")
-        |> Option.when isSelected Option.focus
-        |> Option.onClick (ToggleContactMethod method.id)
-        |> Option.view
+    Tile.tile method.methodType methodContent
+        |> Tile.withCheckbox isSelected
+        |> Tile.when method.isDefault (Tile.withBadge "Default")
+        |> Tile.when isSelected Tile.focus
+        |> Tile.onClick (ToggleContactMethod method.id)
+        |> Tile.view
 
 
 viewSelectedAccounts : Set String -> Html Msg
@@ -264,10 +264,10 @@ viewSelectedAccounts selectedIds =
                         , div [ class "account-type subdued" ] [ text account.accountType ]
                         ]
             in
-            Option.option account.name accountContent
-                |> Option.select
-                |> Option.disabled
-                |> Option.view
+            Tile.tile account.name accountContent
+                |> Tile.select
+                |> Tile.disabled
+                |> Tile.view
     in
     ChatDemo.viewEntry
         [ div [ class "options" ]
@@ -289,10 +289,10 @@ viewSelectedMethods selectedIds =
                         [ div [ class "value" ] [ text method.value ]
                         ]
             in
-            Option.option method.methodType methodContent
-                |> Option.select
-                |> Option.disabled
-                |> Option.view
+            Tile.tile method.methodType methodContent
+                |> Tile.select
+                |> Tile.disabled
+                |> Tile.view
     in
     ChatDemo.viewEntry
         [ div [ class "options" ]
@@ -357,15 +357,14 @@ viewNotificationMethodSelection selectedIds =
 viewAlertConfiguration : Html Msg
 viewAlertConfiguration =
     ChatDemo.viewEntry
-        [ div [ class "alert-config" ]
-            [ div [ class "config-item" ]
-                [ span [ class "config-label" ] [ text "Alert threshold:" ]
-                , span [ class "config-value" ] [ text "$1,000.00" ]
+        [ Tile.tile "Alert threshold: $1,000.00"
+            (div [ class "alert-config" ]
+                [ div [ class "config-item" ]
+                    [ span [ class "config-label subdued" ] [ text "You'll be notified when your selected account balance drops below this amount." ]
+                    ]
                 ]
-            , div [ class "config-item" ]
-                [ span [ class "config-label subdued" ] [ text "You'll be notified when your selected account balance drops below this amount." ]
-                ]
-            ]
+            )
+            |> Tile.view
         , div [ class "actions" ]
             [ Button.button ConfirmAlert "Create alert"
                 |> Button.emphasized

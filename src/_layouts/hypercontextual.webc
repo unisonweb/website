@@ -343,7 +343,7 @@
       }
     }
 
-    .option {
+    .tile {
       position: relative;
       background: var(--interactive-bg_1);
       border: 1px solid var(--color-gray-lighten-45);
@@ -362,7 +362,7 @@
         background: transparent;
       }
 
-      .option-row {
+      .tile-row {
         display: flex;
         flex-direction: row;
         align-items: flex-start;
@@ -373,7 +373,7 @@
         transform: translateY(0.125rem);
       }
 
-      .option-details {
+      .tile-details {
         display: flex;
         flex-direction: column;
         gap: 0.25rem;

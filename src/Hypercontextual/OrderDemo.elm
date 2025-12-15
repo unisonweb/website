@@ -4,7 +4,7 @@ import ChatDemo
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class)
 import Lib.Util exposing (delayMsg)
-import Option
+import Tile
 import UI.Button as Button
 import UI.Divider as Divider
 import UI.Icon as Icon
@@ -227,12 +227,12 @@ viewOrder order =
         isDisabled =
             order.status /= "Not yet shipped"
     in
-    Option.option order.id itemsContent
-        |> Option.withBadge order.status
-        |> Option.when isDisabled Option.disabled
-        |> Option.whenNot isDisabled (Option.onClick (SelectOrder order))
-        |> Option.whenNot isDisabled Option.withChevron
-        |> Option.view
+    Tile.tile order.id itemsContent
+        |> Tile.withBadge order.status
+        |> Tile.when isDisabled Tile.disabled
+        |> Tile.whenNot isDisabled (Tile.onClick (SelectOrder order))
+        |> Tile.whenNot isDisabled Tile.withChevron
+        |> Tile.view
 
 
 viewAddress : String -> Address -> Html Msg
@@ -247,12 +247,12 @@ viewAddress selectedAddressId addr =
         isSelected =
             selectedAddressId == addr.id
     in
-    Option.option addr.name addressContent
-        |> Option.withRadio isSelected
-        |> Option.when addr.isDefault (Option.withBadge "Default")
-        |> Option.when isSelected Option.focus
-        |> Option.onClick (SelectAddress addr)
-        |> Option.view
+    Tile.tile addr.name addressContent
+        |> Tile.withRadio isSelected
+        |> Tile.when addr.isDefault (Tile.withBadge "Default")
+        |> Tile.when isSelected Tile.focus
+        |> Tile.onClick (SelectAddress addr)
+        |> Tile.view
 
 
 viewSelectedAddress : Address -> Html Msg
@@ -265,10 +265,10 @@ viewSelectedAddress addr =
                 ]
     in
     ChatDemo.viewEntry
-        [ Option.option addr.name addressContent
-            |> Option.select
-            |> Option.disabled
-            |> Option.view
+        [ Tile.tile addr.name addressContent
+            |> Tile.select
+            |> Tile.disabled
+            |> Tile.view
         ]
 
 
@@ -325,11 +325,11 @@ viewSelectedOrder order =
                 (List.map viewItem order.items)
     in
     ChatDemo.viewEntry
-        [ Option.option order.id itemsContent
-            |> Option.withBadge order.status
-            |> Option.select
-            |> Option.disabled
-            |> Option.view
+        [ Tile.tile order.id itemsContent
+            |> Tile.withBadge order.status
+            |> Tile.select
+            |> Tile.disabled
+            |> Tile.view
         ]
 
 
