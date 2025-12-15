@@ -78,12 +78,8 @@
     <script @raw="getBundle('js')" webc:keep></script>
     <script webc:keep src="/js/hypercontextual-app.js"></script>
     <script webc:keep>
-      function init() {
-        const flags = {};
-
-        Elm.Main.init({ flags, node: document.querySelector("#orders-demo") });
-      }
-      init();
+      Elm.Main.init({ flags: { demo: "OrdersDemo" }, node: document.querySelector("#orders-demo") });
+      Elm.Main.init({ flags: { demo: "BankingDemo" }, node: document.querySelector("#banking-demo") });
     </script>
   </body>
 </html>

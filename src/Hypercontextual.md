@@ -7,3 +7,4 @@ description: "Comparing syntax and patterns between Unison and Java"
 ---
 
 <div id="orders-demo"></div>
+<div id="banking-demo"></div>
