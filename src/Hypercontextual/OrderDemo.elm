@@ -264,10 +264,12 @@ viewSelectedAddress addr =
                 , div [ class "address subdued" ] [ text addr.address ]
                 ]
     in
-    Option.option addr.name addressContent
-        |> Option.bare
-        |> Option.view
-        |> ChatDemo.viewUserBubble
+    ChatDemo.viewEntry
+        [ Option.option addr.name addressContent
+            |> Option.selected
+            |> Option.disabled
+            |> Option.view
+        ]
 
 
 viewAwaitingInput : Html Msg
@@ -322,11 +324,13 @@ viewSelectedOrder order =
             div [ class "items" ]
                 (List.map viewItem order.items)
     in
-    Option.option order.id itemsContent
-        |> Option.withBadge order.status
-        |> Option.bare
-        |> Option.view
-        |> ChatDemo.viewUserBubble
+    ChatDemo.viewEntry
+        [ Option.option order.id itemsContent
+            |> Option.withBadge order.status
+            |> Option.selected
+            |> Option.disabled
+            |> Option.view
+        ]
 
 
 view : Model -> Html Msg
