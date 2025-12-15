@@ -2,6 +2,9 @@ module ChatDemo exposing
     ( ChatDemo
     , addLogEntry
     , chatDemo
+    , lazyViewAgentBubble
+    , lazyViewAgentBubble_
+    , lazyViewUserBubble
     , view
     , viewAgentBubble
     , viewAgentBubble_
@@ -15,9 +18,10 @@ module ChatDemo exposing
     )
 
 import ChatBubble
-import Html exposing (Html, div)
+import Html exposing (Html, div, text)
 import Html.Attributes exposing (class)
 import Html.Keyed as Keyed
+import Html.Lazy as Lazy
 import UI.StatusBanner as StatusBanner
 
 
@@ -71,7 +75,7 @@ withInteraction interaction demo =
 view : ChatDemo msg -> Html msg
 view demo =
     div [ class demo.demoClass ]
-        [ Keyed.node "div" [ class "log" ] (List.reverse demo.log)
+        [ Keyed.node "div" [ class "log" ] demo.log
         , div [ class "interaction" ] [ demo.interaction ]
         ]
 
@@ -117,3 +121,50 @@ viewLoading label =
 viewInstruction : String -> Html msg
 viewInstruction instruction =
     div [ class "instruction" ] [ StatusBanner.info instruction ]
+
+
+
+-- LAZY VIEW HELPERS
+
+
+lazyViewUserBubble : String -> Html msg
+lazyViewUserBubble message =
+    Lazy.lazy lazyViewUserBubble_ message
+
+
+lazyViewUserBubble_ : String -> Html msg
+lazyViewUserBubble_ message =
+    viewEntry
+        [ text message
+            |> ChatBubble.chatBubble_ ChatBubble.Right
+            |> ChatBubble.view
+        ]
+
+
+lazyViewAgentBubble : String -> Html msg
+lazyViewAgentBubble message =
+    Lazy.lazy lazyViewAgentBubble__ message
+
+
+lazyViewAgentBubble__ : String -> Html msg
+lazyViewAgentBubble__ message =
+    viewEntry
+        [ text message
+            |> ChatBubble.chatBubble_ ChatBubble.Left
+            |> ChatBubble.view
+        ]
+
+
+lazyViewAgentBubble_ : Bool -> String -> Html msg
+lazyViewAgentBubble_ isSuccess message =
+    Lazy.lazy2 lazyViewAgentBubble___ isSuccess message
+
+
+lazyViewAgentBubble___ : Bool -> String -> Html msg
+lazyViewAgentBubble___ isSuccess message =
+    viewEntry
+        [ text message
+            |> ChatBubble.chatBubble_ ChatBubble.Left
+            |> ChatBubble.when isSuccess ChatBubble.success
+            |> ChatBubble.view
+        ]

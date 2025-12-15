@@ -287,7 +287,7 @@ viewAwaitingInput =
 
 viewRequestRecentOrders : Html Msg
 viewRequestRecentOrders =
-    ChatDemo.viewUserBubble (text "I need to change the address for my order")
+    ChatDemo.lazyViewUserBubble "I need to change the address for my order"
 
 
 viewRecentOrders : Html Msg
@@ -336,61 +336,65 @@ viewSelectedOrder order =
 view : Model -> Html Msg
 view model =
     let
-        ( log, interaction ) =
+        demo =
+            ChatDemo.chatDemo
+                |> ChatDemo.withDemoClass "demo orders-demo"
+
+        ( demo_, interaction ) =
             case model.step of
                 AwaitingInput ->
-                    ( [], viewAwaitingInput )
+                    ( demo, viewAwaitingInput )
 
                 LoadingOrders ->
-                    ( [ ( "request-recent-orders", viewRequestRecentOrders )
-                      ]
+                    ( demo
+                        |> ChatDemo.addLogEntry "request-recent-orders" viewRequestRecentOrders
                     , ChatDemo.viewLoading "Looking up orders..."
                     )
 
                 RecentOrders ->
-                    ( [ ( "request-recent-orders", viewRequestRecentOrders )
-                      , ( "agent-select-order", ChatDemo.viewAgentBubble (text "Select a recent order") )
-                      , ( "recent-orders", viewRecentOrders )
-                      ]
+                    ( demo
+                        |> ChatDemo.addLogEntry "request-recent-orders" viewRequestRecentOrders
+                        |> ChatDemo.addLogEntry "agent-select-order" (ChatDemo.lazyViewAgentBubble "Select a recent order")
+                        |> ChatDemo.addLogEntry "recent-orders" viewRecentOrders
                     , ChatDemo.viewInstruction "Select an order above"
                     )
 
                 LoadingAddresses order ->
-                    ( [ ( "request-recent-orders", viewRequestRecentOrders )
-                      , ( "agent-select-order", ChatDemo.viewAgentBubble (text "Select a recent order") )
-                      , ( "selected-order-" ++ order.id, viewSelectedOrder order )
-                      ]
+                    ( demo
+                        |> ChatDemo.addLogEntry "request-recent-orders" viewRequestRecentOrders
+                        |> ChatDemo.addLogEntry "agent-select-order" (ChatDemo.lazyViewAgentBubble "Select a recent order")
+                        |> ChatDemo.addLogEntry ("selected-order-" ++ order.id) (viewSelectedOrder order)
                     , ChatDemo.viewLoading "Fetching saved addresses..."
                     )
 
                 ShippingAddresses order address ->
-                    ( [ ( "request-recent-orders", viewRequestRecentOrders )
-                      , ( "agent-select-order", ChatDemo.viewAgentBubble (text "Select a recent order") )
-                      , ( "selected-order-" ++ order.id, viewSelectedOrder order )
-                      , ( "agent-select-address", ChatDemo.viewAgentBubble (text "Select an address") )
-                      , ( "shipping-addresses", viewShippingAddresses address )
-                      ]
+                    ( demo
+                        |> ChatDemo.addLogEntry "request-recent-orders" viewRequestRecentOrders
+                        |> ChatDemo.addLogEntry "agent-select-order" (ChatDemo.lazyViewAgentBubble "Select a recent order")
+                        |> ChatDemo.addLogEntry ("selected-order-" ++ order.id) (viewSelectedOrder order)
+                        |> ChatDemo.addLogEntry "agent-select-address" (ChatDemo.lazyViewAgentBubble "Select an address")
+                        |> ChatDemo.addLogEntry "shipping-addresses" (viewShippingAddresses address)
                     , ChatDemo.viewInstruction "Select an address above"
                     )
 
                 SavingAddress order address ->
-                    ( [ ( "request-recent-orders", viewRequestRecentOrders )
-                      , ( "agent-select-order", ChatDemo.viewAgentBubble (text "Select a recent order") )
-                      , ( "selected-order-" ++ order.id, viewSelectedOrder order )
-                      , ( "agent-select-address", ChatDemo.viewAgentBubble (text "Select an address") )
-                      , ( "address-updated", viewAddressUpdated address )
-                      ]
+                    ( demo
+                        |> ChatDemo.addLogEntry "request-recent-orders" viewRequestRecentOrders
+                        |> ChatDemo.addLogEntry "agent-select-order" (ChatDemo.lazyViewAgentBubble "Select a recent order")
+                        |> ChatDemo.addLogEntry ("selected-order-" ++ order.id) (viewSelectedOrder order)
+                        |> ChatDemo.addLogEntry "agent-select-address" (ChatDemo.lazyViewAgentBubble "Select an address")
+                        |> ChatDemo.addLogEntry "address-updated" (viewAddressUpdated address)
                     , ChatDemo.viewLoading "Saving address selection"
                     )
 
-                AddressUpdated order newAddress ->
-                    ( [ ( "request-recent-orders", viewRequestRecentOrders )
-                      , ( "agent-select-order", ChatDemo.viewAgentBubble (text "Select a recent order") )
-                      , ( "selected-order-" ++ order.id, viewSelectedOrder order )
-                      , ( "agent-select-address", ChatDemo.viewAgentBubble (text "Select an address") )
-                      , ( "address-updated", viewAddressUpdated newAddress )
-                      , ( "agent-success", ChatDemo.viewAgentBubble_ True (text ("Address successfully updated on order " ++ order.id)) )
-                      ]
+                AddressUpdated order address ->
+                    ( demo
+                        |> ChatDemo.addLogEntry "request-recent-orders" viewRequestRecentOrders
+                        |> ChatDemo.addLogEntry "agent-select-order" (ChatDemo.lazyViewAgentBubble "Select a recent order")
+                        |> ChatDemo.addLogEntry ("selected-order-" ++ order.id) (viewSelectedOrder order)
+                        |> ChatDemo.addLogEntry "agent-select-address" (ChatDemo.lazyViewAgentBubble "Select an address")
+                        |> ChatDemo.addLogEntry "address-updated" (viewAddressUpdated address)
+                        |> ChatDemo.addLogEntry "agent-success" (ChatDemo.lazyViewAgentBubble_ True ("Address successfully updated on order " ++ order.id))
                     , div [ class "actions" ]
                         [ Button.button Restart "Restart"
                             |> Button.emphasized
@@ -398,8 +402,6 @@ view model =
                         ]
                     )
     in
-    ChatDemo.chatDemo
-        |> ChatDemo.withDemoClass "demo orders-demo"
-        |> ChatDemo.withLog log
+    demo_
         |> ChatDemo.withInteraction interaction
         |> ChatDemo.view

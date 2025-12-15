@@ -208,7 +208,8 @@
       --grid-color: rgba(0, 0, 0, 0.05);
       padding: 0.75rem;
       display: flex;
-      flex-direction: column-reverse;
+      /*flex-direction: column-reverse;*/
+      flex-direction: column;
       background: var(--main-bg_1);
       gap: 1rem;
       overflow: scroll;

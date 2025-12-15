@@ -305,7 +305,7 @@ viewAwaitingInput =
 
 viewRequestAlert : Html Msg
 viewRequestAlert =
-    ChatDemo.viewUserBubble (text "Add an alert if my balance drops below $1000")
+    ChatDemo.lazyViewUserBubble "Add an alert if my balance drops below $1000"
 
 
 viewAccountSelection : Set String -> Html Msg
@@ -362,67 +362,71 @@ viewAlertSummary accountIds methodIds =
         summaryText =
             "Alert created: You'll receive " ++ selectedMethods ++ " notifications when " ++ selectedAccounts ++ " drops below $1,000.00"
     in
-    ChatDemo.viewAgentBubble_ True (text summaryText)
+    ChatDemo.lazyViewAgentBubble_ True summaryText
 
 
 view : Model -> Html Msg
 view model =
     let
-        ( log, interaction ) =
+        demo =
+            ChatDemo.chatDemo
+                |> ChatDemo.withDemoClass "demo banking-demo"
+
+        ( demo_, interaction ) =
             case model.step of
                 AwaitingInput ->
-                    ( [], viewAwaitingInput )
+                    ( demo, viewAwaitingInput )
 
                 LoadingAccounts ->
-                    ( [ ( "request-alert", viewRequestAlert )
-                      ]
+                    ( demo
+                        |> ChatDemo.addLogEntry "request-alert" viewRequestAlert
                     , ChatDemo.viewLoading "Looking up your accounts..."
                     )
 
                 SelectingAccounts selectedIds ->
-                    ( [ ( "request-alert", viewRequestAlert )
-                      , ( "agent-select-accounts", ChatDemo.viewAgentBubble (text "Which account(s) would you like to monitor?") )
-                      , ( "account-selection", viewAccountSelection selectedIds )
-                      ]
+                    ( demo
+                        |> ChatDemo.addLogEntry "request-alert" viewRequestAlert
+                        |> ChatDemo.addLogEntry "agent-select-accounts" (ChatDemo.lazyViewAgentBubble "Which account(s) would you like to monitor?")
+                        |> ChatDemo.addLogEntry "account-selection" (viewAccountSelection selectedIds)
                     , ChatDemo.viewInstruction "Select one or more accounts above"
                     )
 
                 LoadingContactMethods selectedAccounts ->
-                    ( [ ( "request-alert", viewRequestAlert )
-                      , ( "agent-select-accounts", ChatDemo.viewAgentBubble (text "Which account(s) would you like to monitor?") )
-                      , ( "selected-accounts", viewSelectedAccounts selectedAccounts )
-                      ]
+                    ( demo
+                        |> ChatDemo.addLogEntry "request-alert" viewRequestAlert
+                        |> ChatDemo.addLogEntry "agent-select-accounts" (ChatDemo.lazyViewAgentBubble "Which account(s) would you like to monitor?")
+                        |> ChatDemo.addLogEntry "selected-accounts" (viewSelectedAccounts selectedAccounts)
                     , ChatDemo.viewLoading "Fetching contact information..."
                     )
 
                 SelectingNotificationMethods accountIds selectedMethods ->
-                    ( [ ( "request-alert", viewRequestAlert )
-                      , ( "agent-select-accounts", ChatDemo.viewAgentBubble (text "Which account(s) would you like to monitor?") )
-                      , ( "selected-accounts", viewSelectedAccounts accountIds )
-                      , ( "agent-select-methods", ChatDemo.viewAgentBubble (text "How would you like to be notified?") )
-                      , ( "method-selection", viewNotificationMethodSelection selectedMethods )
-                      ]
+                    ( demo
+                        |> ChatDemo.addLogEntry "request-alert" viewRequestAlert
+                        |> ChatDemo.addLogEntry "agent-select-accounts" (ChatDemo.lazyViewAgentBubble "Which account(s) would you like to monitor?")
+                        |> ChatDemo.addLogEntry "selected-accounts" (viewSelectedAccounts accountIds)
+                        |> ChatDemo.addLogEntry "agent-select-methods" (ChatDemo.lazyViewAgentBubble "How would you like to be notified?")
+                        |> ChatDemo.addLogEntry "method-selection" (viewNotificationMethodSelection selectedMethods)
                     , ChatDemo.viewInstruction "Select one or more notification methods above"
                     )
 
                 SavingAlert accountIds methodIds ->
-                    ( [ ( "request-alert", viewRequestAlert )
-                      , ( "agent-select-accounts", ChatDemo.viewAgentBubble (text "Which account(s) would you like to monitor?") )
-                      , ( "selected-accounts", viewSelectedAccounts accountIds )
-                      , ( "agent-select-methods", ChatDemo.viewAgentBubble (text "How would you like to be notified?") )
-                      , ( "selected-methods", viewSelectedMethods methodIds )
-                      ]
+                    ( demo
+                        |> ChatDemo.addLogEntry "request-alert" viewRequestAlert
+                        |> ChatDemo.addLogEntry "agent-select-accounts" (ChatDemo.lazyViewAgentBubble "Which account(s) would you like to monitor?")
+                        |> ChatDemo.addLogEntry "selected-accounts" (viewSelectedAccounts accountIds)
+                        |> ChatDemo.addLogEntry "agent-select-methods" (ChatDemo.lazyViewAgentBubble "How would you like to be notified?")
+                        |> ChatDemo.addLogEntry "selected-methods" (viewSelectedMethods methodIds)
                     , ChatDemo.viewLoading "Creating alert..."
                     )
 
                 AlertCreated accountIds methodIds ->
-                    ( [ ( "request-alert", viewRequestAlert )
-                      , ( "agent-select-accounts", ChatDemo.viewAgentBubble (text "Which account(s) would you like to monitor?") )
-                      , ( "selected-accounts", viewSelectedAccounts accountIds )
-                      , ( "agent-select-methods", ChatDemo.viewAgentBubble (text "How would you like to be notified?") )
-                      , ( "selected-methods", viewSelectedMethods methodIds )
-                      , ( "alert-summary", viewAlertSummary accountIds methodIds )
-                      ]
+                    ( demo
+                        |> ChatDemo.addLogEntry "request-alert" viewRequestAlert
+                        |> ChatDemo.addLogEntry "agent-select-accounts" (ChatDemo.lazyViewAgentBubble "Which account(s) would you like to monitor?")
+                        |> ChatDemo.addLogEntry "selected-accounts" (viewSelectedAccounts accountIds)
+                        |> ChatDemo.addLogEntry "agent-select-methods" (ChatDemo.lazyViewAgentBubble "How would you like to be notified?")
+                        |> ChatDemo.addLogEntry "selected-methods" (viewSelectedMethods methodIds)
+                        |> ChatDemo.addLogEntry "alert-summary" (viewAlertSummary accountIds methodIds)
                     , div [ class "actions" ]
                         [ Button.button Restart "Restart"
                             |> Button.emphasized
@@ -430,8 +434,6 @@ view model =
                         ]
                     )
     in
-    ChatDemo.chatDemo
-        |> ChatDemo.withDemoClass "demo banking-demo"
-        |> ChatDemo.withLog log
+    demo_
         |> ChatDemo.withInteraction interaction
         |> ChatDemo.view
