@@ -293,15 +293,16 @@ viewRequestRecentOrders =
 viewRecentOrders : Html Msg
 viewRecentOrders =
     ChatDemo.viewEntry
-        [ div [ class "options" ]
-            (List.map viewOrder orders)
+        [ ChatDemo.viewAgentBubble (text "Select a recent order")
+        , div [ class "options" ] (List.map viewOrder orders)
         ]
 
 
 viewShippingAddresses : Address -> Html Msg
 viewShippingAddresses address =
     ChatDemo.viewEntry
-        [ div [ class "options" ] (List.map (viewAddress address.id) addresses)
+        [ ChatDemo.viewAgentBubble (text "Select an address")
+        , div [ class "options" ] (List.map (viewAddress address.id) addresses)
         , div [ class "actions" ]
             [ Button.button SaveAddressSelection "Save selection"
                 |> Button.emphasized
@@ -354,7 +355,6 @@ view model =
                 RecentOrders ->
                     ( demo
                         |> ChatDemo.addLogEntry "request-recent-orders" viewRequestRecentOrders
-                        |> ChatDemo.addLogEntry "agent-select-order" (ChatDemo.lazyViewAgentBubble "Select a recent order")
                         |> ChatDemo.addLogEntry "recent-orders" viewRecentOrders
                     , ChatDemo.viewInstruction "Select an order above"
                     )
@@ -372,7 +372,6 @@ view model =
                         |> ChatDemo.addLogEntry "request-recent-orders" viewRequestRecentOrders
                         |> ChatDemo.addLogEntry "agent-select-order" (ChatDemo.lazyViewAgentBubble "Select a recent order")
                         |> ChatDemo.addLogEntry ("selected-order-" ++ order.id) (viewSelectedOrder order)
-                        |> ChatDemo.addLogEntry "agent-select-address" (ChatDemo.lazyViewAgentBubble "Select an address")
                         |> ChatDemo.addLogEntry "shipping-addresses" (viewShippingAddresses address)
                     , ChatDemo.viewInstruction "Select an address above"
                     )

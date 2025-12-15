@@ -189,6 +189,7 @@
     --interactive-bg_1: #fff;
     --interactive-bg_1_hover: var(--color-blue-2);
 
+    position: relative;
     width: 32rem;
     display: flex;
     flex-direction: column;
@@ -208,8 +209,7 @@
       --grid-color: rgba(0, 0, 0, 0.05);
       padding: 0.75rem;
       display: flex;
-      /*flex-direction: column-reverse;*/
-      flex-direction: column;
+      flex-direction: column-reverse;
       background: var(--main-bg_1);
       gap: 1rem;
       overflow: scroll;
@@ -224,9 +224,9 @@
         repeating-linear-gradient(157.5deg, transparent, transparent 2px, rgba(31, 41, 55, 0.03) 2px, rgba(31, 41, 55, 0.03) 3px, transparent 3px, transparent 8px);
     }
 
-    .log::after {
+    &::after {
       position: absolute;
-      bottom: 0;
+      bottom: 65px;
       left: 0;
       right: 0;
       background: linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.05));
@@ -348,7 +348,9 @@
       transform: translateY(0);
       transition: transform 0.5s;
       will-change: transform;
+    }
 
+    .entry:first-child:not(:has(.tile.selected)) {
       @starting-style {
         transform: translateY(1000px);
       }

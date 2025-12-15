@@ -60,7 +60,7 @@ withLog log demo =
 
 addLogEntry : String -> Html msg -> ChatDemo msg -> ChatDemo msg
 addLogEntry key entry demo =
-    { demo | log = demo.log ++ [ ( key, entry ) ] }
+    { demo | log = ( key, entry ) :: demo.log }
 
 
 withInteraction : Html msg -> ChatDemo msg -> ChatDemo msg

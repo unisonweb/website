@@ -315,8 +315,8 @@ viewAccountSelection selectedIds =
             not (Set.isEmpty selectedIds)
     in
     ChatDemo.viewEntry
-        [ div [ class "options" ]
-            (List.map (viewAccount selectedIds) accounts)
+        [ ChatDemo.viewAgentBubble (text "Which account(s) would you like to monitor?")
+        , div [ class "options" ] (List.map (viewAccount selectedIds) accounts)
         , div [ class "actions" ]
             [ Button.button ConfirmAccounts "Continue"
                 |> Button.emphasized
@@ -333,7 +333,8 @@ viewNotificationMethodSelection selectedIds =
             not (Set.isEmpty selectedIds)
     in
     ChatDemo.viewEntry
-        [ div [ class "options" ]
+        [ ChatDemo.viewAgentBubble (text "How would you like to be notified?")
+        , div [ class "options" ]
             (List.map (viewContactMethod selectedIds) contactMethods)
         , div [ class "actions" ]
             [ Button.button ConfirmNotificationMethods "Continue"
@@ -386,7 +387,6 @@ view model =
                 SelectingAccounts selectedIds ->
                     ( demo
                         |> ChatDemo.addLogEntry "request-alert" viewRequestAlert
-                        |> ChatDemo.addLogEntry "agent-select-accounts" (ChatDemo.lazyViewAgentBubble "Which account(s) would you like to monitor?")
                         |> ChatDemo.addLogEntry "account-selection" (viewAccountSelection selectedIds)
                     , ChatDemo.viewInstruction "Select one or more accounts above"
                     )
@@ -404,7 +404,6 @@ view model =
                         |> ChatDemo.addLogEntry "request-alert" viewRequestAlert
                         |> ChatDemo.addLogEntry "agent-select-accounts" (ChatDemo.lazyViewAgentBubble "Which account(s) would you like to monitor?")
                         |> ChatDemo.addLogEntry "selected-accounts" (viewSelectedAccounts accountIds)
-                        |> ChatDemo.addLogEntry "agent-select-methods" (ChatDemo.lazyViewAgentBubble "How would you like to be notified?")
                         |> ChatDemo.addLogEntry "method-selection" (viewNotificationMethodSelection selectedMethods)
                     , ChatDemo.viewInstruction "Select one or more notification methods above"
                     )
