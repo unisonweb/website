@@ -364,9 +364,9 @@ viewSelectedOrder order =
         |> viewUserBubble
 
 
-viewDisabledInteraction : Html msg
-viewDisabledInteraction =
-    div [] [ text "todo" ]
+viewInstruction : String -> Html msg
+viewInstruction instruction =
+    div [ class "instruction" ] [ StatusBanner.info instruction ]
 
 
 view : Model -> Html Msg
@@ -388,7 +388,7 @@ view model =
                       , ( "agent-select-order", viewAgentBubble (text "Select a recent order") )
                       , ( "recent-orders", viewRecentOrders )
                       ]
-                    , viewDisabledInteraction
+                    , viewInstruction "Select an order above"
                     )
 
                 LoadingAddresses order ->
@@ -406,7 +406,7 @@ view model =
                       , ( "agent-select-address", viewAgentBubble (text "Select an address") )
                       , ( "shipping-addresses", viewShippingAddresses address )
                       ]
-                    , viewDisabledInteraction
+                    , viewInstruction "Select an address above"
                     )
 
                 SavingAddress order address ->

@@ -221,6 +221,7 @@
       gap: 1rem;
       overflow: scroll;
       scroll-behavior: smooth;
+      overflow-anchor: none;
       height: 100%;
       position: relative;
       background-image:
@@ -245,6 +246,10 @@
       background: var(--main-bg_0);
       border-top: 1px solid rgb(0, 0, 0, 0.15);
       transition: all 0.2s;
+      height: 4rem;
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
     }
 
     .chat-bubble_row {
@@ -505,6 +510,7 @@
     }
 
     .step_awaiting-input {
+      width: 100%;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -530,6 +536,7 @@
     }
 
     .actions {
+      width: 100%;
       display: flex;
       justify-content: flex-end;
     }
