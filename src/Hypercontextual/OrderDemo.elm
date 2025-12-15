@@ -250,7 +250,7 @@ viewAddress selectedAddressId addr =
     Option.option addr.name addressContent
         |> Option.withRadio isSelected
         |> Option.when addr.isDefault (Option.withBadge "Default")
-        |> Option.when isSelected Option.selected
+        |> Option.when isSelected Option.focus
         |> Option.onClick (SelectAddress addr)
         |> Option.view
 
@@ -266,7 +266,7 @@ viewSelectedAddress addr =
     in
     ChatDemo.viewEntry
         [ Option.option addr.name addressContent
-            |> Option.selected
+            |> Option.focus
             |> Option.disabled
             |> Option.view
         ]
@@ -327,7 +327,7 @@ viewSelectedOrder order =
     ChatDemo.viewEntry
         [ Option.option order.id itemsContent
             |> Option.withBadge order.status
-            |> Option.selected
+            |> Option.focus
             |> Option.disabled
             |> Option.view
         ]

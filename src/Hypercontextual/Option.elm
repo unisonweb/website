@@ -13,7 +13,7 @@ type alias Option msg =
     , hasRadio : Bool
     , isChecked : Bool
     , hasChevron : Bool
-    , isSelected : Bool
+    , isFocused : Bool
     , isDisabled : Bool
     , isBare : Bool
     , click : Maybe (Click msg)
@@ -32,7 +32,7 @@ option title content =
     , hasRadio = False
     , isChecked = False
     , hasChevron = False
-    , isSelected = False
+    , isFocused = False
     , isDisabled = False
     , isBare = False
     , click = Nothing
@@ -92,9 +92,9 @@ withClick click opt =
     { opt | click = Just click }
 
 
-selected : Option msg -> Option msg
-selected opt =
-    { opt | isSelected = True }
+focus : Option msg -> Option msg
+focus opt =
+    { opt | isFocused = True }
 
 
 enabled : Option msg -> Option msg
@@ -122,7 +122,7 @@ view opt =
         optionClass =
             classList
                 [ ( "option", True )
-                , ( "selected", opt.isSelected )
+                , ( "focus", opt.isFocused )
                 , ( "disabled", opt.isDisabled )
                 , ( "bare", opt.isBare )
                 ]
