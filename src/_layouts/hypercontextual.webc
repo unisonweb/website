@@ -66,12 +66,16 @@
   </head>
 
   <body>
+    <div class="top-gradient">
+      <main>
+        <page-header></page-header>
+        <header class="unison-featured-header">
+          <h1 class="title" @text="title"></h1>
+          <p @text="subtitle"></p>
+        </header>
+      </main>
+    </div>
     <main>
-      <page-header></page-header>
-      <header class="unison-featured-header">
-        <h1 class="title" @text="title"></h1>
-        <p @text="subtitle"></p>
-      </header>
       <article @raw="content"></article>
     </main>
     <page-footer></page-footer>
@@ -87,6 +91,14 @@
 <style webc:scoped>
   body {
     background: var(--color-gray-lighten-100);
+  }
+
+  .top-gradient {
+    background: linear-gradient(var(--color-blue-4), var(--color-gray-lighten-100));
+  }
+
+  #main-header {
+    background: none;
   }
 
   main {
@@ -185,6 +197,7 @@
     width: 28rem;
     height: 36rem;
     display: flex;
+    margin: 2rem auto;
     flex-shrink: 0;
     flex-direction: column;
     border-radius: 1rem;

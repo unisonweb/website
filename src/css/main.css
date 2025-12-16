@@ -117,7 +117,7 @@ main#blog-post {
 #main-header {
   grid-area: main-header;
   height: var(--main-header-height);
-  background: var(--color-main-header-bg);
+  /*background: var(--color-main-header-bg);*/
   color: var(--color-main-header-fg);
   display: flex;
   flex-direction: column;
@@ -311,18 +311,18 @@ main#blog-post {
 }
 
 #main-header .newsletter::after {
-	bottom: 100%;
-	right: 10%;
-	border: solid transparent;
-	content: "";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: rgba(136, 183, 213, 0);
-	border-bottom-color: var(--color-gray-lighten-55);
-	border-width: 0.5rem;
-	margin-left: -0.5rem;
+  bottom: 100%;
+  right: 10%;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(136, 183, 213, 0);
+  border-bottom-color: var(--color-gray-lighten-55);
+  border-width: 0.5rem;
+  margin-left: -0.5rem;
 }
 
 #main-header .newsletter input {
@@ -514,7 +514,6 @@ body.modal-open {
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
-
 
   #main-header .announcement {
     font-size: 0.75rem;
