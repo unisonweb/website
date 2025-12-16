@@ -242,51 +242,50 @@ viewContactMethod selectedIds method =
 viewSelectedAccounts : Set String -> Html Msg
 viewSelectedAccounts selectedIds =
     let
-        selectedAccounts =
-            accounts
-                |> List.filter (\a -> Set.member a.id selectedIds)
-
-        viewSelectedAccount account =
+        viewAccountWithSelection account =
             let
                 accountContent =
                     div []
                         [ div [ class "balance" ] [ text account.balance ]
                         , div [ class "account-type subdued" ] [ text account.accountType ]
                         ]
+
+                isSelected =
+                    Set.member account.id selectedIds
             in
             Tile.tile account.name accountContent
-                |> Tile.select
+                |> Tile.when isSelected Tile.select
                 |> Tile.disabled
                 |> Tile.view
     in
     ChatDemo.viewEntry
         [ div [ class "options" ]
-            (List.map viewSelectedAccount selectedAccounts)
+            (List.map viewAccountWithSelection accounts)
         ]
 
 
 viewSelectedMethods : Set String -> Html Msg
 viewSelectedMethods selectedIds =
     let
-        selectedMethods =
-            contactMethods
-                |> List.filter (\m -> Set.member m.id selectedIds)
-
-        viewSelectedMethod method =
+        viewMethodWithSelection method =
             let
                 methodContent =
                     div []
                         [ div [ class "value" ] [ text method.value ]
                         ]
+
+                isSelected =
+                    Set.member method.id selectedIds
             in
             Tile.tile method.methodType methodContent
-                |> Tile.select
+                |> Tile.when method.isDefault (Tile.withBadge "Default")
+                |> Tile.when isSelected Tile.select
                 |> Tile.disabled
                 |> Tile.view
     in
     ChatDemo.viewEntry
         [ div [ class "options" ]
-            (List.map viewSelectedMethod selectedMethods)
+            (List.map viewMethodWithSelection contactMethods)
         ]
 
 

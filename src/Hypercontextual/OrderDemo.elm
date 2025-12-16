@@ -256,19 +256,27 @@ viewAddress selectedAddressId addr =
 
 
 viewSelectedAddress : Address -> Html Msg
-viewSelectedAddress addr =
+viewSelectedAddress selectedAddr =
     let
-        addressContent =
-            div []
-                [ div [ class "phone" ] [ text addr.phone ]
-                , div [ class "address subdued" ] [ text addr.address ]
-                ]
+        viewAddressWithSelection addr =
+            let
+                addressContent =
+                    div []
+                        [ div [ class "phone" ] [ text addr.phone ]
+                        , div [ class "address subdued" ] [ text addr.address ]
+                        ]
+
+                isSelected =
+                    addr.id == selectedAddr.id
+            in
+            Tile.tile addr.name addressContent
+                |> Tile.when addr.isDefault (Tile.withBadge "Default")
+                |> Tile.when isSelected Tile.select
+                |> Tile.disabled
+                |> Tile.view
     in
     ChatDemo.viewEntry
-        [ Tile.tile addr.name addressContent
-            |> Tile.select
-            |> Tile.disabled
-            |> Tile.view
+        [ div [ class "options" ] (List.map viewAddressWithSelection addresses)
         ]
 
 
@@ -319,19 +327,25 @@ viewAddressUpdated address =
 
 
 viewSelectedOrder : Order -> Html Msg
-viewSelectedOrder order =
+viewSelectedOrder selectedOrder =
     let
-        itemsContent =
-            div [ class "items" ]
-                (List.map viewItem order.items)
+        viewOrderWithSelection order =
+            let
+                itemsContent =
+                    div [ class "items" ]
+                        (List.map viewItem order.items)
+
+                isSelected =
+                    order.id == selectedOrder.id
+            in
+            Tile.tile order.id itemsContent
+                |> Tile.withBadge order.status
+                |> Tile.when isSelected Tile.select
+                |> Tile.disabled
+                |> Tile.view
     in
     ChatDemo.viewEntry
-        [ Tile.tile order.id itemsContent
-            |> Tile.withBadge order.status
-            |> Tile.select
-            |> Tile.disabled
-            |> Tile.view
-        ]
+        [ div [ class "options" ] (List.map viewOrderWithSelection orders) ]
 
 
 view : Model -> Html Msg
