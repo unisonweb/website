@@ -32,9 +32,12 @@ A good interface will need to clarify these things, and this clarification may r
 
 Let’s see a demo:
 
+<div style="display: flex; gap: 2rem;">
 <div id="orders-demo"></div>
 
 This interface is somewhere between a chatbot and a traditional application. Notice how sparingly text is used as the modality. Yes, text is used where it makes sense, but elsewhere we use proper UI controls that are more constrained and offer better affordances.
+
+</div>
 
 If you need the user to select which account they want, what’s the better experience: (Show visual)
 
