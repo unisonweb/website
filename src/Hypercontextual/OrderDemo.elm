@@ -306,14 +306,15 @@ viewRecentOrders =
         ]
 
 
-viewShippingAddresses : Address -> Html Msg
-viewShippingAddresses address =
+viewShippingAddresses : Bool -> Address -> Html Msg
+viewShippingAddresses isLoading address =
     ChatDemo.viewEntry
         [ ChatDemo.viewAgentBubble (text "Select an address")
         , div [ class "options" ] (List.map (viewAddress address.id) addresses)
         , div [ class "actions" ]
             [ Button.button SaveAddressSelection "Save selection"
                 |> Button.emphasized
+                |> Button.when isLoading Button.disabled
                 |> Button.view
             ]
         ]
@@ -386,7 +387,7 @@ view model =
                         |> ChatDemo.addLogEntry "request-recent-orders" viewRequestRecentOrders
                         |> ChatDemo.addLogEntry "agent-select-order" (ChatDemo.lazyViewAgentBubble "Select a recent order")
                         |> ChatDemo.addLogEntry ("selected-order-" ++ order.id) (viewSelectedOrder order)
-                        |> ChatDemo.addLogEntry "shipping-addresses" (viewShippingAddresses address)
+                        |> ChatDemo.addLogEntry "shipping-addresses" (viewShippingAddresses False address)
                     , ChatDemo.viewInstruction "Select an address above"
                     )
 
@@ -395,8 +396,7 @@ view model =
                         |> ChatDemo.addLogEntry "request-recent-orders" viewRequestRecentOrders
                         |> ChatDemo.addLogEntry "agent-select-order" (ChatDemo.lazyViewAgentBubble "Select a recent order")
                         |> ChatDemo.addLogEntry ("selected-order-" ++ order.id) (viewSelectedOrder order)
-                        |> ChatDemo.addLogEntry "agent-select-address" (ChatDemo.lazyViewAgentBubble "Select an address")
-                        |> ChatDemo.addLogEntry "address-updated" (viewAddressUpdated address)
+                        |> ChatDemo.addLogEntry "shipping-addresses" (viewShippingAddresses True address)
                     , ChatDemo.viewLoading "Saving address selection"
                     )
 
