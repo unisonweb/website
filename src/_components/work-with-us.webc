@@ -1,0 +1,30 @@
+<div webc:root class="work-with-us">
+  <p>Interested in working with us?</p>
+
+  <div class="actions">
+    <a href="https://cal.com/team/unison-computing/consulting" target="_blank" class="button contained primary-mono medium">
+      Schedule a call
+    </a>
+    <a href="mailto:consulting@unison.cloud" class="button contained primary-mono medium">
+      consulting@unison.cloud
+    </a>
+  </div>
+</div>
+
+<style webc:scoped>
+  :host {
+    display: flex;
+    font-size: 1.25rem;
+    flex-direction: column;
+    margin-top: 6rem;
+    background: var(--color-blue-5);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    .actions {
+    }
+  }
+</style>
