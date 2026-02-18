@@ -296,13 +296,13 @@ main#article .unison-at-work-cta .button {
 }
 
 @media only screen and (max-width: 1264px) {
-  #main-content {
+  #article #main-content {
     margin-left: 2rem;
   }
 }
 
 @media only screen and (max-width: 1110px) {
-  #main-content {
+  #article #main-content {
     margin-left: 0;
   }
 }

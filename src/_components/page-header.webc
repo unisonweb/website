@@ -11,20 +11,20 @@
     </a>
     <div class="navs">
       <section id="primary-nav">
-        <a href="/docs" {% if '/docs' in page.url %}aria-current="page"{% endif %}>Docs</a>
-        <a href="/community" {% if '/community' in page.url %}aria-current="page"{% endif %}>Community</a>
+        <a href="/docs" :aria-current="page.url.includes('/docs') ? 'page' : null">Docs</a>
+        <a href="/community" :aria-current="page.url.includes('/community') ? 'page' : null">Community</a>
         <a href="https://share.unison-lang.org" target="_blank" class="tooltip-trigger" data-tooltip-content-id="unison-share-tooltip">
           Libraries
         </a>
-        <a href="/roadmap" {% if '/roadmap' in page.url %}aria-current="page"{% endif %}>Roadmap</a>
-        <a href="/about-us" {% if '/about-us' in page.url %}aria-current="page"{% endif %}>About us</a>
+        <a href="/roadmap" :aria-current="page.url.includes('/roadmap') ? 'page' : null">Roadmap</a>
+        <a href="/about-us" :aria-current="page.url.includes('/about-us') ? 'page' : null">About us</a>
         <a href="https://unison.cloud" target="_blank" class="cloud tooltip-trigger" data-tooltip-content-id="unison-cloud-tooltip">
           Cloud
         </a>
       </section>
 
       <section id="secondary-nav">
-        <a href="/blog" {% if '/blog' in page.url %}aria-current="page"{% endif %}>Blog</a>
+        <a href="/blog" :aria-current="page.url.includes('/blog') ? 'page' : null">Blog</a>
 
         <a id="newsletter-trigger">Newsletter</a>
 

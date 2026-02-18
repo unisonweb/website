@@ -25,6 +25,20 @@
     gap: 1rem;
 
     .actions {
+      display: flex;
+      flex-direction: row;
+      gap: 0.25rem;
+    }
+  }
+
+  @media only screen and (max-width: 410px) {
+    :host {
+      text-align: center;
+
+      .actions {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
     }
   }
 </style>
