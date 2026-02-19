@@ -139,7 +139,7 @@
       "name": "Cody Allen",
       "description": "is a functional programmer and infrastructure engineer who has solved real-world problems for both startups and Fortune 500 companies. He loves declarative code and infrastructure but believes that project success depends on effective communication more than technology choices. At Unison Computing he was one of the core developers of Unison Cloud, which specializes in sandboxing user-provided code and executing it in a clustered environment to power distributed web services, batch jobs, and daemons. Prior to Unison, as a Lead Machine Learning Engineer at Salesforce, he wrote Scala libraries and Spark jobs that sifted through a noisy data lake to identify and anonymize valuable training data. Cody has contributed to a variety of open source projects including authoring hundreds of commits in the Scala functional programming library [cats](https://typelevel.org/cats/).",
       "skills": [
-        "all things AWS",
+        "AWS",
         "declarative infrastructure",
         "systems design",
         "web services",
@@ -158,8 +158,7 @@
         "Consul",
         "Nomad",
         "Vault",
-        "Spark",
-        "AWS"
+        "Spark"
       ],
       "base": "Indianapolis, IN (Time Zone: Eastern Time, UTC-5)",
       "linkedin": null,
