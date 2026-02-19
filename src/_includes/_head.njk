@@ -54,17 +54,14 @@
 <meta property="og:type" content="blog" />
 <meta property="og:url" content="https://unison-lang.org" />
 {% if featuredImage %}
-<meta
-  property="og:image"
-  content="https://unison-lang.org/{{featuredImage}}"
-/>
+<meta property="og:image" content="https://unison-lang.org/{{featuredImage}}" />
 {% else %}
 <meta
   property="og:image"
   content="https://unison-lang.org/assets/unison-social.png"
 />
 <meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="1200" />
+<meta property="og:image:height" content="630" />
 {% endif %}
 
 <meta name="twitter:card" content="summary" />
@@ -85,19 +82,19 @@
 />
 
 <style>
-/* 
+  /* 
 avoid flash of unstyled content with resizing 
 the main logo during layout painting 
 */
-#main-header nav a#logo {
-  color: #41424b;
-}
+  #main-header nav a#logo {
+    color: #41424b;
+  }
 
-#main-header nav #logo-icon {
-  width: 1rem;
-  height: 1rem;
-  margin-top: -4px;
-}
+  #main-header nav #logo-icon {
+    width: 1rem;
+    height: 1rem;
+    margin-top: -4px;
+  }
 </style>
 
 <link rel="stylesheet" href="/css/styles.css" />
