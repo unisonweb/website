@@ -16,7 +16,7 @@
     display: flex;
     font-size: 1.25rem;
     flex-direction: column;
-    margin-top: 6rem;
+    margin-top: 3rem;
     background: var(--color-blue-5);
     padding: 2rem;
     border-radius: 0.75rem;
