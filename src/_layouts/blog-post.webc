@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title @text="`${title} · Unison programming language`"></title>
+    <meta charset="utf-8" />
+    <meta webc:if="summary" name="description" :content="summary" />
+    <meta webc:if="summary" name="twitter:description" :content="summary" />
+    <meta webc:if="summary" property="og:description" :content="summary" />
+    <meta webc:if="!summary" name="description" content="A friendly programming language from the future." />
+    <meta webc:if="!summary" name="twitter:description" content="A friendly programming language from the future." />
+    <meta webc:if="!summary" property="og:description" content="A friendly programming language from the future." />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:title" :content="`${title} · Unison programming language`" />
+    <meta name="twitter:title" :content="`${title} · Unison programming language`" />
+    <meta property="og:type" content="blog" />
+    <meta property="og:url" content="https://unison-lang.org" />
+    <meta webc:if="featuredImage" property="og:image" :content="`https://unison-lang.org${featuredImage}`" />
+    <meta webc:if="!featuredImage" property="og:image" content="https://unison-lang.org/assets/unison-social.png" />
+    <meta webc:if="!featuredImage" property="og:image:width" content="1200" />
+    <meta webc:if="!featuredImage" property="og:image:height" content="1200" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://unison-lang.org/assets/unison-social.png" />
+    <meta name="twitter:site" content="@unisonweb" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      webc:keep
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;500;600;700;900&family=Princess+Sofia:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      #main-header nav a#logo { color: #41424b; }
+      #main-header nav #logo-icon { width: 1rem; height: 1rem; margin-top: -4px; }
+    </style>
+    <link webc:keep rel="stylesheet" href="/css/styles.css" />
+    <link rel="alternate" href="/feed.xml" type="application/atom+xml" title="Unison Language | Whats New?" />
+    <style @raw="getBundle('css')" webc:keep></style>
+    <script webc:keep defer data-domain="unison-lang.org" src="https://plausible.io/js/plausible.js"></script>
+  </head>
+  <body>
+    <main id="blog-post">
+      <page-header></page-header>
+      <div id="main-content">
+        <header class="post-header">
+          <div class="categories-and-date">
+            <div class="categories">
+              <span webc:for="c of categories" class="category" @text="c"></span>
+            </div>
+            <span class="date" @text="this.formatDate(date)"></span>
+          </div>
+          <h1 id="title" @text="title"></h1>
+          <div class="authors">
+            <span webc:for="a of authors" class="author" @text="this.author(a)"></span>
+          </div>
+        </header>
+        <img webc:if="featuredImage" :src="featuredImage" class="featured-image" />
+        <div class="post-content" @raw="content"></div>
+      </div>
+    </main>
+    <page-footer></page-footer>
+    <script @raw="getBundle('js')" webc:keep></script>
+  </body>
+</html>
+
+<style webc:scoped>
+#main-content {
+  section.team {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  
+  p {
+    margin-bottom: 1em;
+  }
+}
+
+#main-content:not(:has(.featured-image)) .post-content {
+  margin: auto;
+  margin-top: 2rem;
+  width: min(100%, 50rem);
+}
+
+#post-content {
+  a, a:visited {
+    text-decoration: underline;
+  }
+  a:hover, a:visited:hover {
+    color: var(--color-blue-1);
+  }
+}
+</style>

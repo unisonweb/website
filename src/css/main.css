@@ -99,6 +99,11 @@ main#article {
   grid-template-areas: "main-header" "main-content";
 }
 
+main#about-us {
+  grid-template-columns: auto;
+  grid-template-areas: "main-header" "main-content";
+}
+
 main#page {
   grid-template-columns: auto;
   grid-template-areas: "main-header" "main-content";
@@ -311,18 +316,18 @@ main#blog-post {
 }
 
 #main-header .newsletter::after {
-	bottom: 100%;
-	right: 10%;
-	border: solid transparent;
-	content: "";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: rgba(136, 183, 213, 0);
-	border-bottom-color: var(--color-gray-lighten-55);
-	border-width: 0.5rem;
-	margin-left: -0.5rem;
+  bottom: 100%;
+  right: 10%;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(136, 183, 213, 0);
+  border-bottom-color: var(--color-gray-lighten-55);
+  border-width: 0.5rem;
+  margin-left: -0.5rem;
 }
 
 #main-header .newsletter input {
@@ -514,7 +519,6 @@ body.modal-open {
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
-
 
   #main-header .announcement {
     font-size: 0.75rem;

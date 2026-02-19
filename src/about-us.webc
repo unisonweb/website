@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>About the Unison team</title>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="A friendly programming language from the future."
+    />
+    <meta
+      name="twitter:description"
+      content="A friendly programming language from the future."
+    />
+    <meta
+      property="og:description"
+      content="A friendly programming language from the future."
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <meta name="theme-color" content="#ffffff" />
+
+    <meta property="og:title" content="Announcing Unison 1.0" />
+    <meta name="twitter:title" content="Announcing Unison 1.0" />
+
+    <meta property="og:type" content="blog" />
+    <meta property="og:url" content="https://unison-lang.org" />
+    <meta
+      property="og:image"
+      content="https://unison-lang.org/assets/unison-social.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="1200" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:image"
+      content="https://unison-lang.org/assets/unison-social.png"
+    />
+    <meta name="twitter:site" content="@unisonweb" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      webc:keep
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;500;600;700;900&family=Princess+Sofia:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link webc:keep rel="stylesheet" href="/css/styles.css" />
+    <style @raw="getBundle('css')" webc:keep></style>
+
+    <script
+      webc:keep
+      defer
+      data-domain="unison-lang.org"
+      src="https://plausible.io/js/plausible.js"
+    ></script>
+  </head>
+  <body>
+    <main id="about-us">
+      <page-header></page-header>
+      <div id="main-content">
+        <header class="page-header">
+          <h1 id="title">About us</h1>
+          <h2>Meet the team</h2>
+        </header>
+
+        <section class="intro">
+          <p>Unison Computing is a highly knowledgeable group with deep
+            expertise in functional programming, distributed systems,
+            concurrent programming, cloud infrastructure management, compilers,
+          language and DSL design, and artificial intelligence. Across all
+          these domains we know well, we love teaching and mentorship.</p>
+
+          <p>Read more about individual team members below.</p>
+        </section>
+
+        <section class="team">
+          <team-person webc:for="person of team.team" />
+        </section>
+
+        <work-with-us></work-with-us>
+      </div>
+    </main>
+    <page-footer></page-footer>
+    <script @raw="getBundle('js')" webc:keep></script>
+  </body>
+</html>

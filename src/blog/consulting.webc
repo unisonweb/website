@@ -1,0 +1,42 @@
+---
+tags: blog
+layout: "blog-post.webc"
+authors:
+  - paul-chiusano
+categories:
+  - news
+date: 2026-02-19T00:00:00.000Z
+status: published
+summary: "We are spinning up a consulting group, now open to work in a variety of languages, including Scala, Haskell, Rust, Elm, and of course Unison. Our goal is a self-sustaining model in which a mix of consulting and product revenue funds development of Unison-based tech well into the distant future. We aim to be cash flow positive as a business in the next 12 months and could use your help in getting there."
+title: Unison Computing now has a consulting group
+eleventyExcludeFromCollections: false
+---
+
+<article id="post-content">
+  <p>We are spinning up a consulting group, now open to work <em>in a variety of languages</em>, <strong>including Scala, Haskell, Rust, Elm,</strong> and of course <strong>Unison.</strong> How this works is flexible: we can contribute alongside existing engineering teams as ICs, build custom end-to-end systems from scratch, or serve in an advisory or thought-partnership role. Additionally, we offer customized training programs on a variety of technologies and topics. In short: whatever your organization needs, so long as it's within the purview of something we know well.</p>
+
+  <p>Our goal is a self-sustaining model in which a mix of consulting and product revenue funds development of Unison-based tech well into the distant future. We aim to be cash flow positive as a business in the next 12 months and could use your help in getting there.</p>
+
+  <p>So, if you've ever wanted to work with the people who created Unison, <a href="https://share.unison-lang.org">Unison Share</a>, and <a href="https://unison.cloud">Unison Cloud</a>, and also wrote the book <a href="https://bookshop.org/p/books/functional-programming-in-scala-second-edition-michael-pilquist/e3b6935687828fcd?ean=9781617299582&amp;next=t">Functional Programming in Scala</a>, now is the time! You can get in touch at <a href="mailto:consulting@unison.cloud"><strong>consulting@unison.cloud</strong></a> or directly <a href="https://www.notion.so/unisonweb/todo.com">book a call to discuss possible projects</a>.</p>
+
+  <p>Bios of our team are below, but briefly, this is a highly experienced group with deep expertise in functional programming, distributed systems, cloud infrastructure management, compilers, language design, and artificial intelligence.</p>
+
+  <p>We really look forward to hearing from you!</p>
+</article>
+
+<work-with-us></work-with-us>
+
+<section class="team">
+  <team-person webc:for="person of team.team" />
+</section>
+<style>
+
+#post-content {
+  a, a:visited {
+    text-decoration: underline;
+  }
+  a:hover, a:visited:hover {
+    color: var(--color-blue-1);
+  }
+}
+</style>

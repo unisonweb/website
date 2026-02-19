@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Cody Allen Resume</title>
+    <style>
+      :root {
+        --text-font-size: 16px;
+        --text-font-family: var(--text-default-font-family);
+      }
+
+      /* Modified from: https://www.joshwcomeau.com/css/custom-css-reset/ */
+
+      /* 1. Use a more-intuitive box-sizing model */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      /* 2. Remove default margin */
+      *:not(dialog) {
+        margin: 0;
+      }
+
+      body {
+        /* 3. Improve text rendering */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      :root {
+        --border-color: #d0d0d0;
+
+        /* text colors */
+        --text-color-primary: #000000;
+        --text-color-secondary: #333333;
+
+        /* spacing */
+        --spacing-xss: 2px;
+        --spacing-xs: 4px;
+        --spacing-sm: 8px;
+        --spacing-md: 12px;
+        --spacing-lg: 16px;
+        --spacing-xl: 24px;
+        --spacing-xxl: 40px;
+        --spacing-xxxl: 80px;
+
+        /* font sizes */
+        --font-size-xs: 0.8rem;
+        --font-size-sm: 0.9rem;
+        --font-size-md: 1rem;
+        --font-size-lg: 1.1rem;
+        --font-size-xl: 1.25rem;
+        --font-size-xxl: 2.5rem;
+
+        /* line heights */
+        --line-height-base: 1.5;
+        --line-height-tight: 1.375;
+
+        /* layout */
+        --page-max-width: 900px;
+
+        /* typography */
+        --text-default-font-family: -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      }
+
+      html {
+        font-size: var(--text-font-size);
+      }
+
+      body {
+        /* font & text */
+        color: var(--text-color-primary);
+        font-family: var(--text-font-family);
+        /* this variable is defined by `typography.fontSize` in resume html layout */
+        text-autospace: normal;
+
+        /* layout */
+        line-height: var(--line-height-base);
+        max-width: var(--page-max-width);
+        margin: 0 auto;
+        padding: var(--spacing-xxxl) var(--spacing-xxl) var(--spacing-xxl);
+      }
+
+      /* header */
+      .resume-header {
+        margin-bottom: var(--spacing-xxl);
+        text-align: center;
+      }
+
+      .resume-name {
+        font-size: var(--font-size-xxl);
+        font-weight: 600;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .resume-headline {
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-md);
+      }
+
+      /* contact info */
+      .resume-contact-info {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        column-gap: var(--spacing-lg);
+        row-gap: var(--spacing-xs);
+        margin-top: var(--spacing-sm);
+      }
+
+      .resume-contact-icon,
+      .resume-contact-label {
+        margin-right: var(--spacing-sm);
+        vertical-align: middle;
+      }
+
+      /* links: modern typographic style */
+      a {
+        color: var(--text-color-primary);
+        text-decoration: underline;
+        text-decoration-color: var(--border-color);
+        text-underline-offset: 3px;
+        text-decoration-thickness: 1px;
+        text-decoration-skip-ink: auto;
+        transition: text-decoration-color 0.2s;
+      }
+
+      a:hover {
+        text-decoration-color: var(--text-color-primary);
+      }
+
+      /* sections */
+      .resume-section {
+        margin-bottom: var(--spacing-xl);
+      }
+
+      .resume-section-title {
+        font-size: var(--font-size-xl);
+        font-weight: 500;
+        margin-bottom: var(--spacing-md);
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: var(--spacing-xs);
+      }
+
+      /* entries */
+      .resume-entry {
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .resume-entry:last-child {
+        margin-bottom: 0;
+      }
+
+      .resume-entry-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: var(--spacing-xs);
+      }
+
+      .resume-entry-title {
+        font-weight: 500;
+        margin-bottom: var(--spacing-xss);
+      }
+
+      .resume-entry-summary p,
+      .resume-summary-content p {
+        margin-bottom: var(--spacing-xs);
+      }
+
+      /* lists */
+      .resume-entry-summary ul,
+      .resume-entry-summary ol,
+      .resume-summary-content ul,
+      .resume-summary-content ol {
+        padding-left: var(--spacing-lg);
+        list-style-type: circle;
+      }
+
+      .resume-entry-summary li,
+      .resume-summary-content li {
+        line-height: var(--line-height-tight);
+      }
+
+      /* labeled lists (courses, keywords, etc.) */
+      .resume-labeled-list span {
+        font-weight: 500;
+      }
+
+      /* skills grid */
+      .resume-skill-item,
+      .resume-language-item {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: var(--spacing-xs);
+      }
+
+      .resume-skill-name,
+      .resume-language-name {
+        font-weight: 500;
+      }
+
+      .resume-skill-level,
+      .resume-language-fluency {
+        font-weight: 400;
+      }
+
+      /* mobile */
+      @media (max-width: 768px) {
+        body {
+          padding: var(--spacing-xl);
+        }
+
+        .resume-header {
+          margin-bottom: var(--spacing-xl);
+        }
+
+        .resume-contact-info {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .resume-entry-header {
+          flex-wrap: wrap;
+        }
+
+        .resume-skill-item,
+        .resume-language-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      /* footer */
+      .resume-footer {
+        margin-top: var(--spacing-xxl);
+        padding-top: var(--spacing-xl);
+        border-top: 1px solid var(--border-color);
+        font-size: var(--font-size-sm);
+        color: var(--text-color-secondary);
+      }
+
+      @media print {
+        .resume-footer {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="resume-header">
+      <h1 class="resume-name">Cody Allen</h1>
+      <p class="resume-headline">Software/Infra Engineer</p>
+      <div class="resume-contact-info resume-location-info">
+        <span class="resume-contact-item"
+          ><span class="resume-contact-icon">📍</span>Indianapolis,
+          Indiana</span
+        >
+      </div>
+      <div class="resume-contact-info resume-profiles-info">
+        <span class="resume-contact-item"
+          ><span class="resume-contact-label">GitHub</span>:
+          <a href="https://github.com/ceedubs" class="resume-contact-link"
+            >@ceedubs</a
+          ></span
+        >
+      </div>
+    </header>
+    <section class="resume-section" data-section="summary">
+      <h2 class="resume-section-title">Profile</h2>
+      <div class="resume-section-content">
+        <div class="resume-summary-content">
+          <p>
+            I am a functional programmer and infrastructure engineer who has
+            solved real-world problems for both startups and Fortune 500
+            companies. I love declarative code and infrastructure but believe
+            that project success depends on effective communication more than
+            technology choices.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="resume-section" data-section="work">
+      <h2 class="resume-section-title">Professional Experience</h2>
+      <div class="resume-section-content">
+        <div class="resume-entry">
+          <div class="resume-entry-header">
+            <div>
+              <div class="resume-entry-title">
+                <a href="https://www.unison-lang.org/unison-computing/"
+                  >Unison Computing</a
+                >
+              </div>
+              <div class="resume-entry-organization">
+                Lead Infrastructure Engineer
+              </div>
+            </div>
+            <div class="resume-entry-date">Sep 2021–Present</div>
+          </div>
+          <div class="resume-entry-summary">
+            <ul>
+              <li>
+                <p>
+                  Our 3 person team built Unison Cloud, where users deploy web
+                  services, batch jobs, and daemons
+                </p>
+              </li>
+              <li>
+                <p>
+                  Implemented Unison data plane that executes user code in a
+                  distributed, sandboxed environment
+                </p>
+              </li>
+              <li>
+                <p>
+                  Maintained Haskell control plane for auth, service membership,
+                  billing, and real-time events
+                </p>
+              </li>
+              <li>
+                <p>
+                  Managed servers, databases, auto-scaling groups, network
+                  policies, DNS, etc with Terraform
+                </p>
+              </li>
+              <li>
+                <p>
+                  Developed foundational libraries for nascent Unison ecosystem:
+                  HTTP, connection pool, JSON, AWS, Redis, etc
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="resume-labeled-list">
+            <span>Keywords</span>: Unison, Haskell, Terraform, Docker, Nomad,
+            Consul, Vault, Packer, Grafana, SQL, AWS
+          </div>
+        </div>
+        <div class="resume-entry">
+          <div class="resume-entry-header">
+            <div>
+              <div class="resume-entry-title">
+                <a href="https://www.salesforce.com/">Salesforce, Inc.</a>
+              </div>
+              <div class="resume-entry-organization">
+                Lead Machine Learning Engineer
+              </div>
+            </div>
+            <div class="resume-entry-date">Feb 2018–Aug 2021</div>
+          </div>
+          <div class="resume-entry-summary">
+            <ul>
+              <li>
+                <p>
+                  Reduced bias of template emails in training data with scalable
+                  near-duplicate detection via locality-sensitive hashing
+                </p>
+              </li>
+              <li>
+                <p>
+                  Built LSTM model to detect requests in emails (filtered
+                  training data, managed labeling team, trained model)
+                </p>
+              </li>
+              <li>
+                <p>
+                  Wrote a library based on Kleene algebras to detect patterns in
+                  email threads (ex: 2+ requests with no reply)
+                </p>
+              </li>
+              <li>
+                <p>
+                  Developed
+                  <a href="https://opensource.salesforce.com/maligned/"
+                    >maligned</a
+                  >, an open source library modeling data pipelines as
+                  type-aligned sequences
+                </p>
+              </li>
+              <li>
+                <p>
+                  Applied NLP to normalize/pseudonymize corpora, managing
+                  tension between privacy and need for real-world training data
+                </p>
+              </li>
+              <li>
+                <p>
+                  Implemented a build-time check for incompatible changes to
+                  Avro schemas
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="resume-labeled-list">
+            <span>Keywords</span>: Spark, Scala, Machine learning, Data
+            pipelines, Kafka, GDPR compliance, Avro
+          </div>
+        </div>
+        <div class="resume-entry">
+          <div class="resume-entry-header">
+            <div>
+              <div class="resume-entry-title">
+                <a href="https://www.verizon.com/">Verizon Communications</a>
+              </div>
+              <div class="resume-entry-organization">Software Engineer</div>
+            </div>
+            <div class="resume-entry-date">Oct 2014–Jan 2018</div>
+          </div>
+          <div class="resume-entry-summary">
+            <ul>
+              <li>
+                <p>
+                  Tech lead and manager for a voice services team of 5 engineers
+                </p>
+              </li>
+              <li>
+                <p>
+                  Integrated with ASR, NLP, and media metadata services to
+                  deliver real-time voice search results
+                </p>
+              </li>
+              <li>
+                <p>
+                  Developed Scala libraries used by multiple teams for metadata
+                  search, authentication, service discovery, and more
+                </p>
+              </li>
+              <li>
+                <p>
+                  Used functional programming to promote maintainable, testable,
+                  composable code
+                </p>
+              </li>
+              <li>
+                <p>
+                  Mentored others through tech talks, pair programming, code
+                  reviews
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="resume-labeled-list">
+            <span>Keywords</span>: Scala, Scodec, Kafka, SQL, Alexa, Travis CI,
+            Nuance Mix
+          </div>
+        </div>
+        <div class="resume-entry">
+          <div class="resume-entry-header">
+            <div>
+              <div class="resume-entry-title">Reverb Technologies</div>
+              <div class="resume-entry-organization">Backend Engineer</div>
+            </div>
+            <div class="resume-entry-date">Nov 2012–Oct 2014</div>
+          </div>
+          <div class="resume-entry-summary">
+            <ul>
+              <li>
+                <p>
+                  Developed Scala micro services supporting personalized content
+                  recommendations
+                </p>
+              </li>
+              <li>
+                <p>
+                  Authored libraries to streamline configuration,
+                  binding/validation, data access
+                </p>
+              </li>
+              <li>
+                <p>
+                  Integrated real-time updates with Twitter, Facebook, Mixpanel,
+                  internal services
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="resume-labeled-list">
+            <span>Keywords</span>: Scala, Scalaz, Scalacheck, Shapeless,
+            Scalatra, Redis, MongoDB, GitHub, Jenkins
+          </div>
+        </div>
+        <div class="resume-entry">
+          <div class="resume-entry-header">
+            <div>
+              <div class="resume-entry-title">
+                <a href="https://www.sogeti.us/">Sogeti USA</a>
+              </div>
+              <div class="resume-entry-organization">Senior Consultant</div>
+            </div>
+            <div class="resume-entry-date">Jun 2010–Nov 2012</div>
+          </div>
+          <div class="resume-entry-summary">
+            <ul>
+              <li>
+                <p>
+                  Modernized an underwriting Java/JS web app for Liberty Mutual
+                  Insurance
+                </p>
+              </li>
+              <li>
+                <p>
+                  Restructured code to be more type safe, modular, and concise
+                </p>
+              </li>
+              <li>
+                <p>Introduced unit tests and transaction management</p>
+              </li>
+              <li>
+                <p>Co-architected and solely developed a major UI redesign</p>
+              </li>
+            </ul>
+          </div>
+          <div class="resume-labeled-list">
+            <span>Keywords</span>: Java, JavaScript, Business process automation
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="resume-section" data-section="education">
+      <h2 class="resume-section-title">Education</h2>
+      <div class="resume-section-content">
+        <div class="resume-entry">
+          <div class="resume-entry-header">
+            <div>
+              <div class="resume-entry-title">
+                <a href="https://case.edu/">Case Western Reserve University</a>
+              </div>
+              <div class="resume-entry-organization">
+                Bachelor, Engineering Physics
+              </div>
+            </div>
+            <div class="resume-entry-date">Aug 2006–May 2010</div>
+          </div>
+          <div class="resume-entry-summary">
+            <p><em>Summa Cum Laude</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="resume-section" data-section="skills">
+      <h2 class="resume-section-title">Skills</h2>
+      <div class="resume-section-content">
+        <div class="resume-skill-item">
+          <div class="resume-skill-name">
+            Software Development<span class="resume-skill-level">: Expert</span>
+          </div>
+          <div>
+            <div class="resume-labeled-list">
+              <span>Keywords</span>: Unison, Haskell, Scala, JVM, Web services,
+              API design, SQL
+            </div>
+          </div>
+        </div>
+        <div class="resume-skill-item">
+          <div class="resume-skill-name">
+            Infrastructure/DevOps<span class="resume-skill-level"
+              >: Advanced</span
+            >
+          </div>
+          <div>
+            <div class="resume-labeled-list">
+              <span>Keywords</span>: Terraform, AWS, Nix, Docker, Linux,
+              Grafana, Packer
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="resume-section" data-section="projects">
+      <h2 class="resume-section-title">Open Source Projects</h2>
+      <div class="resume-section-content">
+        <div class="resume-entry">
+          <div class="resume-entry-header">
+            <div>
+              <div class="resume-entry-title">
+                <a href="https://share.unison-lang.org/@unison/cloud"
+                  >@unison/cloud</a
+                >
+              </div>
+              <div class="resume-entry-description">
+                official client for Unison Cloud
+              </div>
+            </div>
+            <div class="resume-entry-date">Sep 2021–Present</div>
+          </div>
+          <div class="resume-entry-summary">
+            <ul>
+              <li>
+                <p>
+                  Client Infrastructure as Code library for deploying services,
+                  batch jobs, and daemons
+                </p>
+              </li>
+              <li>
+                <p>
+                  Toggle a single line to deploy to Unison Cloud or a local
+                  development cluster
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="resume-labeled-list">
+            <span>Keywords</span>: Unison Cloud
+          </div>
+        </div>
+        <div class="resume-entry">
+          <div class="resume-entry-header">
+            <div>
+              <div class="resume-entry-title">
+                <a href="https://share.unison-lang.org/@unison/http"
+                  >@unison/http</a
+                >
+              </div>
+              <div class="resume-entry-description">
+                Unison HTTP client and server
+              </div>
+            </div>
+            <div class="resume-entry-date">Sep 2021–Present</div>
+          </div>
+          <div class="resume-entry-summary">
+            <ul>
+              <li>
+                <p>
+                  HTTP server supporting persistent connections and WebSockets
+                </p>
+              </li>
+              <li>
+                <p>
+                  HTTP client supporting connection pooling, WebSockets, and
+                  proxies
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="resume-labeled-list">
+            <span>Keywords</span>: Unison, HTTP
+          </div>
+        </div>
+        <div class="resume-entry">
+          <div class="resume-entry-header">
+            <div>
+              <div class="resume-entry-title">
+                <a href="https://typelevel.org/cats/">@typelevel/cats</a>
+              </div>
+              <div class="resume-entry-description">
+                abstractions for functional programming in Scala
+              </div>
+            </div>
+            <div class="resume-entry-date">Feb 2015–May 2020</div>
+          </div>
+          <div class="resume-entry-summary">
+            <ul>
+              <li>
+                <p>
+                  Co-created and maintained OSS project with hundreds of
+                  contributors
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="resume-labeled-list">
+            <span>Keywords</span>: Scala, Functional programming
+          </div>
+        </div>
+        <div class="resume-entry">
+          <div class="resume-entry-header">
+            <div>
+              <div class="resume-entry-title">
+                <a href="https://ceedubs.github.io/irrec/">irrec</a>
+              </div>
+              <div class="resume-entry-description">
+                composable regular expressions
+              </div>
+            </div>
+            <div class="resume-entry-date">Sep 2018–Oct 2021</div>
+          </div>
+          <div class="resume-entry-summary">
+            <ul>
+              <li>
+                <p>
+                  Generalized (beyond char/text) regular expression engine and
+                  API
+                </p>
+              </li>
+              <li>
+                <p>
+                  Exposes type-safe capturing API via Alternative/Applicative
+                  functors
+                </p>
+              </li>
+              <li>
+                <p>Generates random strings that match a provided regex</p>
+              </li>
+              <li>
+                <p>Interactive JavaScript regex explorer</p>
+              </li>
+            </ul>
+          </div>
+          <div class="resume-labeled-list">
+            <span>Keywords</span>: Scala/Scala.js, Regular expressions, Kleene
+            algebras
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
