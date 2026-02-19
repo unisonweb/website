@@ -25,7 +25,7 @@
     },
     {
       "name": "Rúnar Bjarnason",
-      "description": "is a fellow founder of Unison Computing, a creator of the Unison programming language, and coauthor of [Functional Programming in Scala](https://bookshop.org/p/books/functional-programming-in-scala-second-edition-michael-pilquist/e3b6935687828fcd?ean=9781617299582&next=t). An expert in functional design, he maintains Unison's standard library and over a dozen other Unison libraries. Prior to his role at Unison Computing, he helped build out the Scala functional programming ecosystem and was a regular conference speaker.",
+      "description": "is a cofounder of Unison Computing, a creator of the Unison programming language, and coauthor of [Functional Programming in Scala](https://bookshop.org/p/books/functional-programming-in-scala-second-edition-michael-pilquist/e3b6935687828fcd?ean=9781617299582&next=t). He is an expert in functional design and maintains Unison’s standard library along with more than a dozen additional Unison libraries. Before founding Unison Computing, he played a key role in building out the Scala functional programming ecosystem and was a frequent conference speaker.",
       "skills": [
         "Scala",
         "Haskell",
@@ -34,10 +34,37 @@
         "compilers",
         "distributed systems",
         "functional programming",
-        "databases"
+        "database systems"
       ],
       "base": "Boston, MA (Time Zone: EST, GMT-5)",
       "linkedin": "https://www.linkedin.com/in/runaroli/",
+      "github": null,
+      "share": null,
+      "personal": null,
+      "resume": null
+    },
+    {
+      "name": "Arya Irani",
+      "description": "is yet another founder of Unison Computing and creator of the Unison programming language. His PhD work in hybrid AI systems convinced him we should overhaul software engineering to unblock research progress. Arya leads our UCM tool team, makes the CI pipelines go brrr, and advises on our new [redacted]. In prior roles, he developed functional web services for the US Army Family Advocacy Program and Centers for Disease Control and has contributed to the Scala ecosystem (cats, shapeless, scalaz, http4s). He enjoys helping make systems faster, clearer, and more correct by construction.",
+      "skills": [
+        "functional programming",
+        "Haskell",
+        "Unison",
+        "Scala",
+        "Java",
+        "Elm",
+        "C/C++",
+        "Perl",
+        "concurrency",
+        "type-level programming",
+        "algorithm design",
+        "reinforcement learning",
+        "interactive machine learning",
+        "hybrid agentic systems",
+        "tweaking a prompt a little bit and hoping for the best"
+      ],
+      "base": "Todos Santos, BCS (Time Zone: MST, GMT-7)",
+      "linkedin": null,
       "github": null,
       "share": null,
       "personal": null,
@@ -186,17 +213,18 @@
     },
     {
       "name": "Simon Hoejberg",
-      "description": "is a Principal Frontend Engineer and designer with more than 20 years experience. He has a relentless focus on UX above everything else.\n\nThroughout his career Simon has worked on payment systems, distributed Point of Sales systems with self-healing offline support, Tufte-ian restaurant analytics, visualizations to aid in mental healthcare. At Unison, he is single-handedly responsible for the front-end development and design of [Unison Share](https://share.unison-lang.org), our code hosting platform and [UCM desktop](https://github.com/unisonweb/ucm-desktop), our companion desktop app.",
+      "description": "is a Principal Frontend Engineer and designer with more than 20 years experience. He has a relentless focus on UX above everything else. Throughout his career Simon has worked on payment processing, distributed Point of Sales systems with self-healing offline support, Tufte-ian visualizations for restaurants and to aid in mental healthcare. At Unison, he is single-handedly responsible for the front-end development and design of [Unison Share](https://share.unison-lang.org), our code hosting platform and [UCM desktop](https://github.com/unisonweb/ucm-desktop), our companion desktop app.",
       "skills": [
         "Elm",
         "Unison",
+        "Functional Programming",
         "JavaScript",
         "TypeScript",
         "React",
         "React Native",
         "HTML",
         "CSS",
-        "Data Visualizations",
+        "Visualizations",
         "UX Design"
       ],
       "base": "Seekonk, MA (Time Zone: Eastern Time, UTC-5)",
