@@ -45,7 +45,7 @@
     },
     {
       "name": "Arya Irani",
-      "description": "is yet another founder of Unison Computing and creator of the Unison programming language. His PhD work in hybrid AI systems convinced him we should overhaul software engineering to unblock research progress. Arya leads our UCM tool team, makes the CI pipelines go brrr, and advises on our new [redacted]. In prior roles, he developed functional web services for the US Army Family Advocacy Program and Centers for Disease Control and has contributed to the Scala ecosystem (cats, shapeless, scalaz, http4s). He enjoys helping make systems faster, clearer, and more correct by construction.",
+      "description": "Arya Irani is another founder of Unison Computing and co-creator of the Unison programming language. He has a PhD from Georgia Tech for research in Artificial Intelligence and blended conventional/agentic software systems and now leads AI efforts at Unison Computing, as well as the UCM tool team.\n\nPrior to Unison, he developed functional web services for the US Army Family Advocacy Program and Centers for Disease Control and has contributed to the Scala ecosystem (cats, shapeless, scalaz, http4s). He enjoys helping teams make systems faster, clearer, and more correct by construction.",
       "skills": [
         "functional programming",
         "Haskell",
@@ -191,7 +191,7 @@
     },
     {
       "name": "Stew O'Connor",
-      "description": "is an infrastructure engineer with a long and varied past of both writing software and maintaining the servers it runs on. He was responsible for programming and administering the first ever online stores for many fashion brands including Fila, Vera Wang, and Lanvin. He authored email software for poorly connected African communities that lead to him administering the first web and email presences for the government of Chad. And he managed large server deployments for Fortune 500 companies, including machine learning clusters performing content analytics for Verizon FIOS and AI workloads for inventory positioning for Target. Stew has been a long time contributor to free software. He was a Debian Developer on the FTP team which was responsible for running the apt-get repositories. He was a staff member on the Freenode IRC network, and he made significant contributions to the scalaz and cats functional programming ecosystems. At Unison, Stew helped build Unison Cloud and operating it reliably.",
+      "description": "is an infrastructure engineer with a long and varied past of both writing software and maintaining the servers it runs on. He was responsible for programming and administering the first ever online stores for many fashion brands including Fila, Vera Wang, and Lanvin. He authored email software for poorly connected African communities that lead to him administering the first web and email presences for the government of Chad. And he managed large server deployments for Fortune 500 companies, including machine learning clusters performing content analytics for Verizon FIOS and AI workloads for inventory positioning for Target.\n\nStew has been a long time contributor to free software. He was a Debian Developer on the FTP team which was responsible for running the apt-get repositories. He was a staff member on the Freenode IRC network, and he made significant contributions to the scalaz and cats functional programming ecosystems. At Unison, Stew helped build Unison Cloud and operating it reliably.",
       "skills": [
         "AWS",
         "Linux",
@@ -213,7 +213,7 @@
     },
     {
       "name": "Simon Hoejberg",
-      "description": "is a Principal Frontend Engineer and designer with more than 20 years experience. He has a relentless focus on UX above everything else. Throughout his career Simon has worked on payment processing, distributed Point of Sales systems with self-healing offline support, Tufte-ian visualizations for restaurants and to aid in mental healthcare. At Unison, he is single-handedly responsible for the front-end development and design of [Unison Share](https://share.unison-lang.org), our code hosting platform and [UCM desktop](https://github.com/unisonweb/ucm-desktop), our companion desktop app.",
+      "description": "is a Principal Frontend Engineer and designer with more than 20 years experience. He has a relentless focus on UX above everything else.\n\nThroughout his career Simon has worked on payment processing, distributed Point of Sales systems with self-healing offline support, Tufte-ian visualizations for restaurants and to aid in mental healthcare.\n\nAt Unison, he is single-handedly responsible for the front-end development and design of [Unison Share](https://share.unison-lang.org), our code hosting platform and [UCM desktop](https://github.com/unisonweb/ucm-desktop), our companion desktop app.",
       "skills": [
         "Elm",
         "Unison",
@@ -236,7 +236,7 @@
     },
     {
       "name": "Mitchell Dalvi Rosen",
-      "description": "is a highly experienced functional programmer who specializes in building performant, maintainable systems. He places a strong emphasis on user experience, ensuring software he builds is intuitive and pleasant to use. At Unison Computing, he works on the Unison Codebase Manager, a Haskell application that handles compilation, code versioning, semantic code merging, code analysis, and more. Mitchell is the author and maintainer of several open-source Haskell libraries related to concurrency, databases, and functional data structures. He also develops and maintains free and open-source applications for self-hosted and homelab environments.",
+      "description": "is a highly experienced functional programmer who specializes in building performant, maintainable systems. He places a strong emphasis on user experience, ensuring software he builds is intuitive and pleasant to use. At Unison Computing, he works on the Unison Codebase Manager, a Haskell application that handles compilation, code versioning, semantic code merging, code analysis, and more.\n\nMitchell is the author and maintainer of several open-source Haskell libraries related to concurrency, databases, and functional data structures. He also develops and maintains free and open-source applications for self-hosted and homelab environments.",
       "skills": [
         "Haskell",
         "Unison",
