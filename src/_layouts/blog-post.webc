@@ -38,7 +38,6 @@
     <link webc:keep rel="stylesheet" href="/css/styles.css" />
     <link rel="alternate" href="/feed.xml" type="application/atom+xml" title="Unison Language | Whats New?" />
     <style @raw="getBundle('css')" webc:keep></style>
-    <script webc:keep defer data-domain="unison-lang.org" src="https://plausible.io/js/plausible.js"></script>
   </head>
   <body>
     <main id="blog-post">
