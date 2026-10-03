@@ -1,4 +1,4 @@
-docs.gadts = {{
+docs.fundamentals.dataTypes.gadts = {{
 # Generalized algebraic data types (GADTs)
 
 This guide builds on [pattern matching](/fundamentals/controlFlow/patternMatching).
@@ -175,7 +175,10 @@ the input is valid. No runtime conversion is needed.
 
 ## Next steps
 
-[Indexed abilities](/indexedAbilities) use the same idea for ability
+The [data-type reference](/languageReference/userDefinedDataTypes)
+summarizes both forms of data declaration.
+
+[Indexed abilities](/fundamentals/abilities/indexedAbilities) use the same idea for ability
 operations: an operation can fix an ability's index, and handling that
 operation refines the index within the handler branch.
 }}

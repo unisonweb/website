@@ -1,8 +1,0 @@
-docs._sidebar = {{
-{{ docs._sidebarWithoutIndexedTypes }}
-
-# Indexed types
-
-- [GADTs](/gadts)
-- [Indexed abilities](/indexedAbilities)
-}}

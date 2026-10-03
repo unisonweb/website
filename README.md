@@ -18,9 +18,13 @@ index of the language documentation.
 
 Browse the Unison Docs that power the website here: https://share.unison-lang.org/@unison/website/code/main/latest
 
-The GADT and indexed-ability guides live in `docs/*.u` as Unison `Doc`
-definitions. `docs-to-html.md` loads them and extends the documentation sidebar
-in the temporary codebase used by `transcript.fork`, before exporting HTML.
+The GADT and indexed-ability content lives in `docs/*.u` as Unison `Doc`
+definitions. The tutorials belong to Language fundamentals, under Data types
+and Abilities, with summaries in the existing language reference pages.
+`docs-to-html.md` loads these definitions into the temporary codebase used by
+`transcript.fork`, before exporting HTML. `build.mjs` appends the reference
+summaries to their existing pages and adds tutorial links to the existing
+sidebar groups.
 Edit these source files rather than the generated files in `src/docs`.
 The examples require a UCM build with GADT support; the prose and code blocks
 can be rendered by the website's usual UCM version.

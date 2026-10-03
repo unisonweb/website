@@ -576,7 +576,7 @@ In Scala, you can add a trait and say that the existing `Floor` case class is a 
 | Subtyping                               | No.                                                                         | Yes.                                                                                    |
 | Record types                            | Yes. Single data constructor types with named fields.                       | Yes. Case classes                                                                       |
 | Typeclasses                             | No.                                                                         | Yes. Typeclasses via traits and implicit / given syntax.                                |
-| GADTs                                   | Yes. [GADTs via `type ... where`](/docs/gadts/).                               | Yes. GADTs via sealed traits and case classes                                          |
+| GADTs                                   | Yes. [GADTs via `type ... where`](/docs/fundamentals/data-types/gadts/).                               | Yes. GADTs via sealed traits and case classes                                          |
 | Higher-kinded types                     | Yes. But in the absence of typeclasses, less common.                        | Yes.                                                                                    |
 | Type aliases                            | No.                                                                         | Yes.                                                                                    |
 

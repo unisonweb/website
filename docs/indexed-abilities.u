@@ -1,4 +1,4 @@
-docs.indexedAbilities = {{
+docs.fundamentals.abilities.indexedAbilities = {{
 # Indexed abilities
 
 If abilities and handlers are new to you, start with the
@@ -7,7 +7,7 @@ If abilities and handlers are new to you, start with the
 An ability can have type parameters, and each operation can specify a
 different value for those parameters in its ability requirement. These
 parameters act as **indices**, just as they do in
-[generalized algebraic data types](/gadts).
+[generalized algebraic data types](/fundamentals/dataTypes/gadts).
 
 This lets the type of an ability describe which operations a computation can
 request. When a handler matches an operation, Unison refines the index within
@@ -117,6 +117,9 @@ with the emitted value if the first request is an `Eff` operation.
 
 ## Related documentation
 
-See [GADTs](/gadts) for type annotations, structured indices, equality
+The [ability-declaration reference](/languageReference/abilityDeclaration)
+summarizes declaration syntax and index refinement.
+
+See [GADTs](/fundamentals/dataTypes/gadts) for type annotations, structured indices, equality
 witnesses, and exhaustiveness checking for data constructors.
 }}
