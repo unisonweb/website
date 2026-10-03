@@ -1,0 +1,181 @@
+docs.gadts = {{
+# Generalized algebraic data types (GADTs)
+
+This guide builds on [pattern matching](/fundamentals/controlFlow/patternMatching).
+
+A generalized algebraic data type lets each constructor specify the type of
+value it constructs. Different constructors can choose different arguments to
+the same type. These arguments are called **indices**: they record information
+that Unison can use when checking your program.
+
+For example, `Expr a` can represent an expression whose result has type `a`.
+A natural-number expression has type `Expr Nat`, and a boolean expression has type
+`Expr Boolean`.
+
+## Declaring a GADT
+
+Use `type ... where` and give each constructor its full type:
+
+```unison
+type Expr a where
+  NatLit : Nat -> Expr Nat
+  BoolLit : Boolean -> Expr Boolean
+  Add : Expr Nat -> Expr Nat -> Expr Nat
+  If : Expr Boolean -> Expr a -> Expr a -> Expr a
+```
+
+`NatLit` fixes the index to `Nat`, while `BoolLit` fixes it to `Boolean`.
+`Add` accepts two natural-number expressions and constructs another one.
+`If` works at any index, but its two alternatives must have the same index.
+
+An ordinary declaration such as `type Box a = Box a` gives its constructor
+the result type `Box a`. The `where` form lets you write the result type
+explicitly for each constructor. You can still use `structural` and `unique`
+to choose how Unison identifies the type.
+
+The constructor types rule out invalid expressions before evaluation. For
+example, this fails to typecheck because `Add` requires `Expr Nat` arguments:
+
+```unison
+-- Does not typecheck:
+badExpr = Add (NatLit 1) (BoolLit true)
+```
+
+## Pattern matching refines the index
+
+When you match a constructor, Unison learns more about the index within that
+branch. This lets an evaluator return a value of exactly the type described
+by its input:
+
+```unison
+eval : Expr a -> a
+eval = cases
+  NatLit n -> n
+  BoolLit b -> b
+  Add x y -> eval x + eval y
+  If c t f -> if eval c then eval t else eval f
+```
+
+In the `NatLit` branch, `a` is known to be `Nat`, so returning `n` is valid.
+In the `BoolLit` branch, `a` is `Boolean`, so returning `b` is valid. Each
+refinement applies only within its branch.
+
+```unison
+example : Nat
+example = eval (If (BoolLit true) (Add (NatLit 1) (NatLit 2)) (NatLit 0))
+
+> example
+-- 3
+```
+
+### When to add a type annotation
+
+If a match relies on index refinement, Unison needs to know the type of the
+value being matched before checking the branches. A function signature such
+as `eval : Expr a -> a` supplies that information.
+
+Without a signature, the following definition fails to typecheck: Unison
+cannot infer a common result type from the `Nat` and `Boolean` branches.
+
+```unison
+-- Does not typecheck:
+evalNoSig = cases
+  NatLit n -> n
+  BoolLit b -> b
+  Add x y -> evalNoSig x + evalNoSig y
+  If c t f -> if evalNoSig c then evalNoSig t else evalNoSig f
+```
+
+Add the signature `evalNoSig : Expr a -> a` to fix it. In typechecking
+terminology, the type of the value being matched must be **principal**: known
+rather than guessed from the patterns.
+
+A match that does not rely on refinement can still have its type inferred:
+
+```unison
+isLiteral = cases
+  NatLit _ -> true
+  BoolLit _ -> true
+  Add _ _ -> false
+  If _ _ _ -> false
+```
+
+Here every branch returns `Boolean`, so Unison infers `Expr a -> Boolean`.
+
+## Structured indices
+
+Indices can be compound types. Matching a constructor can reveal the
+structure of an index, including the types of its components:
+
+```unison
+type Two a where
+  One : Nat -> Two Nat
+  Pair : Two x -> Two y -> Two (x, y)
+
+evalTwo : Two a -> a
+evalTwo = cases
+  One n -> n
+  Pair l r -> (evalTwo l, evalTwo r)
+
+> evalTwo (Pair (One 1) (One 2))
+-- (1, 2)
+```
+
+In the `Pair` branch, the result index is a tuple `(x, y)`. Evaluating the two
+components produces an `x` and a `y`, which form that tuple.
+
+## Impossible cases can be omitted
+
+Unison's exhaustiveness checker uses the index to decide which constructors
+can occur. A function accepting `Expr Nat` does not need a `BoolLit` case:
+
+```unison
+isNatLiteral : Expr Nat -> Boolean
+isNatLiteral = cases
+  NatLit _ -> true
+  Add _ _ -> false
+  If _ _ _ -> false
+```
+
+`BoolLit` constructs `Expr Boolean`, so it cannot be passed to this function.
+`If` can construct `Expr Nat`, so that case is still required.
+
+The checker also tracks equalities across arguments that share an index:
+
+```unison
+type Tagged a where
+  IsNat : Tagged Nat
+  IsBool : Tagged Boolean
+
+agree : Tagged a -> Tagged a -> Boolean
+agree = cases
+  IsNat, IsNat -> true
+  IsBool, IsBool -> true
+```
+
+The mixed cases are impossible because both arguments must have the same
+index. This match is exhaustive.
+
+## Equality witnesses
+
+A constructor can require two indices to be equal. A value of `Equ a b`
+below is evidence that `a` and `b` are the same type:
+
+```unison
+type Equ a b where
+  Refl : Equ a a
+
+coerce : Equ a b -> a -> b
+coerce = cases
+  Refl -> (x -> x)
+```
+
+Matching `Refl` establishes that `a` equals `b` within the branch, so returning
+the input is valid. No runtime conversion is needed.
+
+## Next steps
+
+[Indexed abilities](/indexedAbilities) use the same idea for ability
+operations: an operation can fix an ability's index, and handling that
+operation refines the index within the handler branch.
+}}

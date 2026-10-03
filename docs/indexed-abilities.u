@@ -1,0 +1,122 @@
+docs.indexedAbilities = {{
+# Indexed abilities
+
+If abilities and handlers are new to you, start with the
+[abilities guide](/fundamentals/abilities).
+
+An ability can have type parameters, and each operation can specify a
+different value for those parameters in its ability requirement. These
+parameters act as **indices**, just as they do in
+[generalized algebraic data types](/gadts).
+
+This lets the type of an ability describe which operations a computation can
+request. When a handler matches an operation, Unison refines the index within
+that branch.
+
+## Declaring an indexed ability
+
+Use the usual `ability ... where` syntax, writing the indexed ability
+explicitly in each operation's type:
+
+```unison
+unique ability Eff a where
+  emitNat : Nat ->{Eff Nat} ()
+  emitBool : Boolean ->{Eff Boolean} ()
+```
+
+`emitNat` requires `Eff Nat`, while `emitBool` requires `Eff Boolean`.
+Both operations return `()`. The index describes the type of value being
+emitted; it is independent of the operation's return type.
+
+An operation requiring `Eff a` would leave the index general. Here the
+concrete indices restrict which operation can occur: a computation with only
+the `Eff Nat` ability can call `emitNat`, but cannot call `emitBool`.
+
+## Handling refines the index
+
+A handler can be general in the ability's index while returning a value
+whose type depends on that index:
+
+```unison
+collect : Request {Eff a} r -> Optional a
+collect = cases
+  { _ } -> None
+  { emitNat n -> _ } -> Some n
+  { emitBool b -> _ } -> Some b
+```
+
+`Request {Eff a} r` is the input to a handler for `Eff a`, where the handled
+computation returns `r` if it completes normally. The signature makes the
+relationship between the ability index and the handler's result explicit.
+
+In the `emitNat` branch, Unison knows `a` is `Nat`, so `Some n` has the
+required type `Optional a`. In the `emitBool` branch, `a` is `Boolean`.
+The `{ _ }` branch handles normal completion, where no emitted value is
+available, and returns `None`.
+
+```unison
+collectedNat : Optional Nat
+collectedNat = handle emitNat 42 with collect
+
+collectedBool : Optional Boolean
+collectedBool = handle emitBool true with collect
+
+> collectedNat
+-- Some 42
+
+> collectedBool
+-- Some true
+```
+
+The `_` after `->` in each operation pattern discards the continuation. This
+handler returns the first emitted value and stops the handled computation;
+it does not accumulate a sequence of values. To continue a computation, bind
+and call its continuation as in an ordinary ability handler. The
+continuation is checked using the index refined in that branch.
+
+## A concrete index rules out operations
+
+When a handler fixes the index to a concrete type, it only needs to handle
+operations that can occur at that index:
+
+```unison
+onlyNat : Request {Eff Nat} r -> Nat
+onlyNat = cases
+  { _ } -> 0
+  { emitNat n -> _ } -> n
+
+> handle emitNat 42 with onlyNat
+-- 42
+```
+
+This handler is exhaustive without an `emitBool` branch because `emitBool`
+requires `Eff Boolean`. The normal-completion branch is still needed; here
+it returns `0`.
+
+## Handling several abilities
+
+A handler can accept more than one ability. Refining one ability's index
+leaves the other abilities unchanged:
+
+```unison
+unique ability Log where
+  log : Text ->{Log} ()
+
+collectWithLog : Request {Eff a, Log} r -> Optional a
+collectWithLog = cases
+  { _ } -> None
+  { log _ -> _ } -> None
+  { emitNat n -> _ } -> Some n
+  { emitBool b -> _ } -> Some b
+```
+
+The `emitNat` and `emitBool` branches refine the index of `Eff`. The `log`
+branch does not refine it. Like `collect`, this example discards the
+continuations: it returns `None` if the first request is `log`, and `Some`
+with the emitted value if the first request is an `Eff` operation.
+
+## Related documentation
+
+See [GADTs](/gadts) for type annotations, structured indices, equality
+witnesses, and exhaustiveness checking for data constructors.
+}}
