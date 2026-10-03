@@ -3,6 +3,16 @@ main#docs {
   margin: auto;
 }
 
+main#docs .unison-doc {
+  max-width: 100%;
+}
+
+main#docs .source.code::before {
+  position: static;
+  display: block;
+  text-align: right;
+}
+
 main#docs #toggle-index {
   position: absolute;
   width: 2rem;
