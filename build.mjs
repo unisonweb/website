@@ -249,32 +249,6 @@ function transformdocsSidebar(_src, dest) {
 
   let dom = new JSDOM(content);
 
-  // Keep the local tutorials in the existing language-guide groups.
-  const document = dom.window.document;
-  for (const [after, href, label] of [
-    [
-      "/docs/fundamentals/data-types/record-types",
-      "/docs/fundamentals/data-types/gadts",
-      "GADTs",
-    ],
-    [
-      "/docs/fundamentals/abilities/writing-abilities",
-      "/docs/fundamentals/abilities/indexed-abilities",
-      "Indexed abilities",
-    ],
-  ]) {
-    if (document.querySelector(`a[href="${href}"]`)) continue;
-    const previous = document.querySelector(`a[href="${after}"]`);
-    if (!previous)
-      throw new Error(`Missing documentation sidebar link: ${after}`);
-    const item = document.createElement("li");
-    const link = document.createElement("a");
-    link.href = href;
-    link.textContent = label;
-    item.append(link);
-    previous.closest("li").after(item);
-  }
-
   const section = dom.window.document.querySelector("section > section");
   section?.classList.add("welcome");
 
@@ -291,7 +265,7 @@ function transformdocsSidebar(_src, dest) {
   fs.writeFileSync(dest, content);
 }
 
-function transformdocsFile(src, dest, includeFrontMatter = true) {
+function transformdocsFile(_src, dest, includeFrontMatter = true) {
   let frontmatter = null;
 
   if (includeFrontMatter) {
@@ -302,35 +276,11 @@ function transformdocsFile(src, dest, includeFrontMatter = true) {
     };
   }
 
-  let rawContent = fs.readFileSync(dest, { encoding: "utf-8" });
-  const referenceAdditions = {
-    "user-defined-data-types.html": "userDefinedDataTypes/_gadts.html",
-    "ability-declaration.html": "abilityDeclaration/_indexedAbilities.html",
-  };
-  const addition = referenceAdditions[path.basename(dest)];
-  if (path.dirname(dest) === "src/docs/language-reference" && addition) {
-    const original = matter(rawContent);
-    const dom = new JSDOM(original.content);
-    const extra = new JSDOM(
-      fs.readFileSync(path.join(path.dirname(src), addition), "utf-8")
-    );
-    // A standalone Doc starts at h1; embed its title as a subsection.
-    for (const heading of extra.window.document.querySelectorAll("h1")) {
-      const subheading = extra.window.document.createElement("h2");
-      subheading.id = heading.id;
-      subheading.append(...heading.childNodes);
-      heading.replaceWith(subheading);
-    }
-    dom.window.document
-      .querySelector(".unison-doc > section")
-      .append(...extra.window.document.querySelector(".unison-doc").childNodes);
-    rawContent = matter.stringify(
-      dom.window.document.body.innerHTML,
-      original.data
-    );
-  }
-
-  const content = updateContent(frontmatter, "/docs", rawContent);
+  const content = updateContent(
+    frontmatter,
+    "/docs",
+    fs.readFileSync(dest, { encoding: "utf-8" })
+  );
 
   fs.writeFileSync(dest, content);
 }
