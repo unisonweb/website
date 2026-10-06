@@ -25,6 +25,8 @@ PR's are gratefully accepted through the regular [Unison code contribution workf
 
 ## Setup for running locally and deployment
 
+Use Unison 1.5.0 or later.
+
 Ensure all dependencies are installed by running `npm install` (node v17+
 recommended).
 
