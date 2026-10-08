@@ -9,6 +9,7 @@ const leftArrow = fs.readFileSync("./src/assets/icon-arrow-left.svg");
 const rightArrow = fs.readFileSync("./src/assets/icon-arrow-right.svg");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginWebc = require("@11ty/eleventy-plugin-webc");
+const hljs = require("highlight.js");
 
 function titleCase(str) {
   return str
@@ -50,7 +51,14 @@ function next(link) {
   return paginationItem("next", link);
 }
 
-module.exports = function (config) {
+module.exports = async function (config) {
+  // Syntax highlighting for markdown code blocks. Uses the same languages and
+  // markup as build.mjs does for Unison Docs, so the existing CSS applies.
+  const { default: hljsUnison } = await import("./hljs-unison.mjs");
+  const { default: hljsUcm } = await import("./hljs-ucm.mjs");
+  hljs.registerLanguage("unison", hljsUnison);
+  hljs.registerLanguage("ucm", hljsUcm);
+
   // Exclusively use .eleventyignore, to make sure src/docs are used as source
   config.setUseGitIgnore(false);
 
@@ -162,6 +170,15 @@ module.exports = function (config) {
     html: true,
     breaks: true,
     linkify: true,
+    highlight: (code, lang) => {
+      lang = (lang || "").trim().split(/\s+/)[0];
+      const known = lang && hljs.getLanguage(lang);
+      const html = hljs.highlight(code, {
+        language: known ? lang : "plaintext",
+      }).value;
+      if (!known) lang = "";
+      return `<pre class="rich source code ${lang}"><code><span class="word">${html}</span></code></pre>`;
+    },
   })
     .use(markdownItAnchor, {
       permalink: markdownItAnchor.permalink.headerLink(),

@@ -82,3 +82,60 @@
   width: min(100%, 50rem);
   margin: auto;
 }
+
+/* Posts authored in markdown (see _layouts/blog-post-md.njk) */
+
+#blog-post .unison-doc.markdown-post {
+  margin-top: 2rem;
+}
+
+/* Links in markdown posts: same as .named-link in unison-doc.css */
+
+#blog-post .unison-doc.markdown-post a:not(.header-anchor),
+#blog-post .unison-doc.markdown-post a:not(.header-anchor):visited {
+  color: var(--color-doc-link);
+}
+#blog-post .unison-doc.markdown-post a:not(.header-anchor):active {
+  color: var(--color-doc-link-active);
+}
+#blog-post .unison-doc.markdown-post a:not(.header-anchor):hover {
+  color: var(--color-doc-link-hover);
+  text-decoration: none;
+}
+
+/* Table of contents ([[toc]]) in markdown posts, as in compare-lang */
+
+#blog-post .unison-doc.markdown-post .toc {
+  margin-bottom: 1.5rem;
+}
+#blog-post .unison-doc.markdown-post .toc ul {
+  list-style-type: none;
+  padding-left: 1rem;
+}
+#blog-post .unison-doc.markdown-post .toc > ul {
+  padding-left: 0;
+  margin-left: 0;
+}
+#blog-post .unison-doc.markdown-post .toc li {
+  margin: 0;
+}
+#blog-post .unison-doc.markdown-post .toc a {
+  text-decoration: underline;
+}
+
+/* Collapsible callout in markdown posts:
+   <details class="callout"><summary>Title</summary> ...markdown... </details> */
+
+#blog-post .unison-doc.markdown-post details.callout {
+  display: block;
+}
+#blog-post .unison-doc.markdown-post details.callout > summary {
+  font-weight: 600;
+  cursor: pointer;
+}
+#blog-post .unison-doc.markdown-post details.callout[open] > summary {
+  margin-bottom: 0.75rem;
+}
+#blog-post .unison-doc.markdown-post details.callout > :last-child {
+  margin-bottom: 0;
+}
