@@ -3,7 +3,7 @@ tags: blog
 layout: blog-post-md.njk
 permalink: blog/unison-cloud-open-source/
 title: Unison Cloud is now open source
-summary: Unison Cloud is open source, MIT licensed. 
+summary: Unison Cloud is open source, MIT licensed. We think this tech will be more useful to the world as an open source technology and hope that people build great things with it. 
 date: 2026-10-08
 featuredImage: /assets/unison-services-preview.svg
 authors:
@@ -13,7 +13,7 @@ categories:
   - cloud
 # Draft: unlisted from the blog index and feeds, but reachable at the permalink.
 # Delete the next line (or set it to false) when the post is ready to publish.
-eleventyExcludeFromCollections: true
+eleventyExcludeFromCollections: false
 ---
 
 
