@@ -71,98 +71,191 @@
   );
 
   // -- Search ----------------------------------------------------------------
-
-  const searchClient = algoliasearch(
-    "ITKVRJJI7M",
-    "8a59b2585e45a15548391e3f2a8ab05b"
-  );
-
-  const { autocomplete, getAlgoliaResults } =
-    window["@algolia/autocomplete-js"];
-
-  autocomplete({
-    debug: true,
-    container: "#autocomplete-input",
-    panelContainer: "#autocomplete-panel",
-    placeholder: "Search",
-    detachedMediaQuery: "none",
-    getSources({ query }) {
-      return [
-        {
-          sourceId: "docs",
-          getItems() {
-            return getAlgoliaResults({
-              searchClient,
-              queries: [
-                {
-                  indexName: "docs",
-                  query,
-                  params: {
-                    hitsPerPage: 9,
-                    attributesToSnippet: ["title:15", "content:14"],
-                    snippetEllipsisText: "…",
-                  },
-                },
-              ],
-            });
-          },
-          templates: {
-            item({ item, components, createElement }) {
-              return createElement(
-                "a",
-                { className: "match", href: item.url },
-                createElement(
-                  "div",
-                  { className: "match-title" },
-                  components.Snippet({ hit: item, attribute: "title" })
-                ),
-                createElement(
-                  "div",
-                  { className: "match-content" },
-                  components.Snippet({ hit: item, attribute: "content" })
-                )
-              );
-            },
-          },
-          getItemUrl({ item }) {
-            return item.url;
-          },
-        },
-      ];
-    },
-  });
+  // Client-side search over the page headings in /search.json, generated at
+  // build time. (Replaces the previous Algolia-powered search.)
 
   const $autocomplete = one("#autocomplete");
   const $searchButton = one("#search-button");
   const $body = one("body");
 
-  one(".aa-InputWrapperPrefix").innerHTML =
-    $searchButton.querySelector(".icon").outerHTML;
+  if ($autocomplete && $searchButton) {
+    let searchIndex = null;
+    let searchIndexPromise = null;
 
-  $searchButton.addEventListener("click", () => {
-    if ($autocomplete.classList.contains("show-search")) {
-      hideSearch();
-    } else {
-      showSearch();
+    function loadSearchIndex() {
+      if (!searchIndexPromise) {
+        searchIndexPromise = fetch("/search.json")
+          .then((res) => res.json())
+          .then((entries) => {
+            searchIndex = entries;
+          });
+      }
+      return searchIndexPromise;
     }
-  });
 
-  function showSearch() {
-    $autocomplete.classList.add("show-search");
-    $autocomplete.querySelector("input").focus();
-    const overlay = document.createElement("div");
-    overlay.classList.add("modal-overlay", "soft-overlay");
-    overlay.addEventListener("click", hideSearch);
-    $body.appendChild(overlay);
-    $body.classList.add("modal-open");
+    function escapeHtml(text) {
+      return text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function highlight(text, words) {
+      const pattern = words
+        .map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+        .join("|");
+      if (!pattern) return escapeHtml(text);
+      const re = new RegExp(`(${pattern})`, "gi");
+      return escapeHtml(text).replace(re, "<mark>$1</mark>");
+    }
+
+    function search(query) {
+      const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+      if (!searchIndex || words.length === 0) return [];
+      const results = [];
+      for (const entry of searchIndex) {
+        const title = entry.title.toLowerCase();
+        const heading = (entry.heading || "").toLowerCase();
+        const snippet = (entry.snippet || "").toLowerCase();
+        let score = 0;
+        let matches = true;
+        for (const word of words) {
+          const inTitle = title.includes(word);
+          const inHeading = heading.includes(word);
+          const inSnippet = snippet.includes(word);
+          if (!inTitle && !inHeading && !inSnippet) {
+            matches = false;
+            break;
+          }
+          score += (inTitle ? 3 : 0) + (inHeading ? 2 : 0) + (inSnippet ? 1 : 0);
+        }
+        if (matches) results.push({ score, entry });
+      }
+      results.sort((a, b) => b.score - a.score);
+      return results.slice(0, 9).map((r) => r.entry);
+    }
+
+    const $inputWrap = one("#autocomplete-input");
+    const $panel = one("#autocomplete-panel");
+
+    const $form = document.createElement("div");
+    $form.className = "search-form";
+
+    const $icon = document.createElement("div");
+    $icon.className = "search-icon";
+    $icon.innerHTML = $searchButton.querySelector(".icon").outerHTML;
+
+    const $input = document.createElement("input");
+    $input.type = "search";
+    $input.placeholder = "Search";
+    $input.setAttribute("autocomplete", "off");
+    $input.setAttribute("spellcheck", "false");
+
+    $form.appendChild($icon);
+    $form.appendChild($input);
+    $inputWrap.appendChild($form);
+
+    const $results = document.createElement("div");
+    $results.className = "search-results";
+    $panel.appendChild($results);
+
+    let currentResults = [];
+    let selectedIndex = -1;
+
+    function renderResults(query) {
+      currentResults = query.trim() ? search(query) : [];
+      selectedIndex = -1;
+      $results.innerHTML = "";
+      const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+      if (currentResults.length === 0) {
+        if (query.trim()) {
+          const empty = document.createElement("div");
+          empty.className = "search-empty";
+          empty.textContent = "No results.";
+          $results.appendChild(empty);
+        }
+        return;
+      }
+      for (const entry of currentResults) {
+        const link = document.createElement("a");
+        link.className = "match";
+        link.href = entry.url;
+        const label = entry.heading
+          ? `${entry.title} › ${entry.heading}`
+          : entry.title;
+        const title = document.createElement("div");
+        title.className = "match-title";
+        title.innerHTML = highlight(label, words);
+        link.appendChild(title);
+        if (entry.snippet) {
+          const content = document.createElement("div");
+          content.className = "match-content";
+          content.innerHTML = highlight(entry.snippet, words);
+          link.appendChild(content);
+        }
+        link.addEventListener("click", hideSearch);
+        $results.appendChild(link);
+      }
+    }
+
+    function setSelected(index) {
+      selectedIndex = index;
+      [...$results.querySelectorAll(".match")].forEach((el, i) => {
+        if (i === index) el.setAttribute("aria-selected", "true");
+        else el.removeAttribute("aria-selected");
+      });
+    }
+
+    $input.addEventListener("input", () => renderResults($input.value));
+
+    $input.addEventListener("keydown", (ev) => {
+      if (ev.key === "ArrowDown") {
+        ev.preventDefault();
+        setSelected(Math.min(selectedIndex + 1, currentResults.length - 1));
+      } else if (ev.key === "ArrowUp") {
+        ev.preventDefault();
+        setSelected(Math.max(selectedIndex - 1, 0));
+      } else if (ev.key === "Enter") {
+        if (selectedIndex >= 0 && currentResults[selectedIndex]) {
+          window.location.href = currentResults[selectedIndex].url;
+          hideSearch();
+        }
+      } else if (ev.key === "Escape") {
+        hideSearch();
+      }
+    });
+
+    $searchButton.addEventListener("click", () => {
+      if ($autocomplete.classList.contains("show-search")) {
+        hideSearch();
+      } else {
+        showSearch();
+      }
+    });
+
+    function showSearch() {
+      $autocomplete.classList.add("show-search");
+      loadSearchIndex();
+      $input.focus();
+      const overlay = document.createElement("div");
+      overlay.classList.add("modal-overlay", "soft-overlay");
+      overlay.addEventListener("click", hideSearch);
+      $body.appendChild(overlay);
+      $body.classList.add("modal-open");
+    }
+
+    function hideSearch() {
+      $autocomplete.classList.remove("show-search");
+      $input.blur();
+      $input.value = "";
+      renderResults("");
+      const overlay = one(".modal-overlay");
+      if (overlay) overlay.remove();
+      $body.classList.remove("modal-open");
+    }
   }
 
-  function hideSearch() {
-    $autocomplete.classList.remove("show-search");
-    $autocomplete.querySelector("input").blur();
-    one(".modal-overlay").remove();
-    $body.classList.remove("modal-open");
-  }
 
   // API
   window.U = {
