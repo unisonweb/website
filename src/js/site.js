@@ -158,6 +158,7 @@
 
     const $results = document.createElement("div");
     $results.className = "search-results";
+    $results.hidden = true;
     $panel.appendChild($results);
 
     let currentResults = [];
@@ -170,13 +171,17 @@
       const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
       if (currentResults.length === 0) {
         if (query.trim()) {
+          $results.hidden = false;
           const empty = document.createElement("div");
           empty.className = "search-empty";
           empty.textContent = "No results.";
           $results.appendChild(empty);
+        } else {
+          $results.hidden = true;
         }
         return;
       }
+      $results.hidden = false;
       for (const entry of currentResults) {
         const link = document.createElement("a");
         link.className = "match";
