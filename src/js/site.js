@@ -74,68 +74,88 @@
   // Client-side search over the page headings in /search.json, generated at
   // build time. (Replaces the previous Algolia-powered search.)
 
+  const escapeHtml = (text) =>
+    text
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+
+  const highlight = (text, words) => {
+    const pattern = words
+      .map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+      .join("|");
+    if (!pattern) return escapeHtml(text);
+    const re = new RegExp(`(${pattern})`, "gi");
+    return escapeHtml(text).replace(re, "<mark>$1</mark>");
+  };
+
+  const search = (entries, query) => {
+    const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+    if (!entries || words.length === 0) return [];
+    return entries
+      .reduce((results, entry) => {
+        const title = entry.title.toLowerCase();
+        const heading = (entry.heading || "").toLowerCase();
+        const snippet = (entry.snippet || "").toLowerCase();
+        const score = words.reduce((total, word) => {
+          if (total === null) return null;
+          const inTitle = title.includes(word);
+          const inHeading = heading.includes(word);
+          const inSnippet = snippet.includes(word);
+          if (!inTitle && !inHeading && !inSnippet) return null;
+          return total + (inTitle ? 3 : 0) + (inHeading ? 2 : 0) + (inSnippet ? 1 : 0);
+        }, 0);
+        if (score !== null) results.push({ score, entry });
+        return results;
+      }, [])
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 9)
+      .map(({ entry }) => entry);
+  };
+
+  const renderResults = (container, entries, query, onSelect) => {
+    container.innerHTML = "";
+    const trimmed = query.trim();
+    if (entries.length === 0) {
+      container.hidden = !trimmed;
+      if (trimmed) {
+        const empty = document.createElement("div");
+        empty.className = "search-empty";
+        empty.textContent = "No results.";
+        container.appendChild(empty);
+      }
+      return;
+    }
+    container.hidden = false;
+    const words = trimmed.toLowerCase().split(/\s+/).filter(Boolean);
+    entries.forEach((entry) => {
+      const link = document.createElement("a");
+      link.className = "match";
+      link.href = entry.url;
+      link.addEventListener("click", onSelect);
+      const label = entry.heading
+        ? `${entry.title} › ${entry.heading}`
+        : entry.title;
+      const title = document.createElement("div");
+      title.className = "match-title";
+      title.innerHTML = highlight(label, words);
+      link.appendChild(title);
+      if (entry.snippet) {
+        const content = document.createElement("div");
+        content.className = "match-content";
+        content.innerHTML = highlight(entry.snippet, words);
+        link.appendChild(content);
+      }
+      container.appendChild(link);
+    });
+  };
+
   const $autocomplete = one("#autocomplete");
   const $searchButton = one("#search-button");
   const $body = one("body");
 
   if ($autocomplete && $searchButton) {
-    let searchIndex = null;
-    let searchIndexPromise = null;
-
-    function loadSearchIndex() {
-      if (!searchIndexPromise) {
-        searchIndexPromise = fetch("/search.json")
-          .then((res) => res.json())
-          .then((entries) => {
-            searchIndex = entries;
-          });
-      }
-      return searchIndexPromise;
-    }
-
-    function escapeHtml(text) {
-      return text
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;");
-    }
-
-    function highlight(text, words) {
-      const pattern = words
-        .map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
-        .join("|");
-      if (!pattern) return escapeHtml(text);
-      const re = new RegExp(`(${pattern})`, "gi");
-      return escapeHtml(text).replace(re, "<mark>$1</mark>");
-    }
-
-    function search(query) {
-      const words = query.toLowerCase().split(/\s+/).filter(Boolean);
-      if (!searchIndex || words.length === 0) return [];
-      const results = [];
-      for (const entry of searchIndex) {
-        const title = entry.title.toLowerCase();
-        const heading = (entry.heading || "").toLowerCase();
-        const snippet = (entry.snippet || "").toLowerCase();
-        let score = 0;
-        let matches = true;
-        for (const word of words) {
-          const inTitle = title.includes(word);
-          const inHeading = heading.includes(word);
-          const inSnippet = snippet.includes(word);
-          if (!inTitle && !inHeading && !inSnippet) {
-            matches = false;
-            break;
-          }
-          score += (inTitle ? 3 : 0) + (inHeading ? 2 : 0) + (inSnippet ? 1 : 0);
-        }
-        if (matches) results.push({ score, entry });
-      }
-      results.sort((a, b) => b.score - a.score);
-      return results.slice(0, 9).map((r) => r.entry);
-    }
-
     const $inputWrap = one("#autocomplete-input");
     const $panel = one("#autocomplete-panel");
 
@@ -161,71 +181,86 @@
     $results.hidden = true;
     $panel.appendChild($results);
 
+    let entriesPromise;
+    const loadEntries = () => {
+      if (!entriesPromise) {
+        entriesPromise = fetch("/search.json").then((res) => res.json());
+      }
+      return entriesPromise;
+    };
+
     let currentResults = [];
-    let selectedIndex = -1;
+    // Maybe<number> encoded as a list: [] means no selection, [i] is the
+    // selected result index.
+    let selectedIndex = [];
 
-    function renderResults(query) {
-      currentResults = query.trim() ? search(query) : [];
-      selectedIndex = -1;
-      $results.innerHTML = "";
-      const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
-      if (currentResults.length === 0) {
-        if (query.trim()) {
-          $results.hidden = false;
-          const empty = document.createElement("div");
-          empty.className = "search-empty";
-          empty.textContent = "No results.";
-          $results.appendChild(empty);
-        } else {
-          $results.hidden = true;
-        }
-        return;
-      }
-      $results.hidden = false;
-      for (const entry of currentResults) {
-        const link = document.createElement("a");
-        link.className = "match";
-        link.href = entry.url;
-        const label = entry.heading
-          ? `${entry.title} › ${entry.heading}`
-          : entry.title;
-        const title = document.createElement("div");
-        title.className = "match-title";
-        title.innerHTML = highlight(label, words);
-        link.appendChild(title);
-        if (entry.snippet) {
-          const content = document.createElement("div");
-          content.className = "match-content";
-          content.innerHTML = highlight(entry.snippet, words);
-          link.appendChild(content);
-        }
-        link.addEventListener("click", hideSearch);
-        $results.appendChild(link);
-      }
-    }
+    const hideSearch = () => {
+      $autocomplete.classList.remove("show-search");
+      $input.blur();
+      $input.value = "";
+      currentResults = [];
+      selectedIndex = [];
+      renderResults($results, [], "", hideSearch);
+      const overlay = one(".modal-overlay");
+      if (overlay) overlay.remove();
+      $body.classList.remove("modal-open");
+    };
 
-    function setSelected(index) {
-      selectedIndex = index;
+    const showSearch = () => {
+      $autocomplete.classList.add("show-search");
+      loadEntries();
+      $input.focus();
+      const overlay = document.createElement("div");
+      overlay.classList.add("modal-overlay", "soft-overlay");
+      overlay.addEventListener("click", hideSearch);
+      $body.appendChild(overlay);
+      $body.classList.add("modal-open");
+    };
+
+    const selectResult = (index) => {
+      selectedIndex = [index];
       [...$results.querySelectorAll(".match")].forEach((el, i) => {
         if (i === index) el.setAttribute("aria-selected", "true");
         else el.removeAttribute("aria-selected");
       });
-    }
+    };
 
-    $input.addEventListener("input", () => renderResults($input.value));
+    const updateResults = (query) => {
+      loadEntries().then((entries) => {
+        currentResults = search(entries, query);
+        selectedIndex = [];
+        renderResults($results, currentResults, query, hideSearch);
+      });
+    };
+
+    $input.addEventListener("input", () => updateResults($input.value));
 
     $input.addEventListener("keydown", (ev) => {
       if (ev.key === "ArrowDown") {
         ev.preventDefault();
-        setSelected(Math.min(selectedIndex + 1, currentResults.length - 1));
+        if (selectedIndex.length === 0) {
+          selectResult(0);
+        } else {
+          selectedIndex.forEach((selected) => {
+            selectResult(Math.min(selected + 1, currentResults.length - 1));
+          });
+        }
       } else if (ev.key === "ArrowUp") {
         ev.preventDefault();
-        setSelected(Math.max(selectedIndex - 1, 0));
-      } else if (ev.key === "Enter") {
-        if (selectedIndex >= 0 && currentResults[selectedIndex]) {
-          window.location.href = currentResults[selectedIndex].url;
-          hideSearch();
+        if (selectedIndex.length === 0) {
+          selectResult(0);
+        } else {
+          selectedIndex.forEach((selected) => {
+            selectResult(Math.max(selected - 1, 0));
+          });
         }
+      } else if (ev.key === "Enter") {
+        selectedIndex.forEach((selected) => {
+          if (currentResults[selected]) {
+            window.location.href = currentResults[selected].url;
+            hideSearch();
+          }
+        });
       } else if (ev.key === "Escape") {
         hideSearch();
       }
@@ -238,27 +273,6 @@
         showSearch();
       }
     });
-
-    function showSearch() {
-      $autocomplete.classList.add("show-search");
-      loadSearchIndex();
-      $input.focus();
-      const overlay = document.createElement("div");
-      overlay.classList.add("modal-overlay", "soft-overlay");
-      overlay.addEventListener("click", hideSearch);
-      $body.appendChild(overlay);
-      $body.classList.add("modal-open");
-    }
-
-    function hideSearch() {
-      $autocomplete.classList.remove("show-search");
-      $input.blur();
-      $input.value = "";
-      renderResults("");
-      const overlay = one(".modal-overlay");
-      if (overlay) overlay.remove();
-      $body.classList.remove("modal-open");
-    }
   }
 
 
