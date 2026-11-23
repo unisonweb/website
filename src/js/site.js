@@ -151,11 +151,13 @@
     });
   };
 
-  const $autocomplete = one("#autocomplete");
-  const $searchButton = one("#search-button");
-  const $body = one("body");
-
-  if ($autocomplete && $searchButton) {
+  // Entry point for the search UI. No-ops on pages without the docs sidebar
+  // markup (site.js is loaded on every page).
+  const initSearch = () => {
+    const $autocomplete = one("#autocomplete");
+    const $searchButton = one("#search-button");
+    if (!$autocomplete || !$searchButton) return;
+    const $body = one("body");
     const $inputWrap = one("#autocomplete-input");
     const $panel = one("#autocomplete-panel");
 
@@ -273,7 +275,9 @@
         showSearch();
       }
     });
-  }
+  };
+
+  initSearch();
 
 
   // API
