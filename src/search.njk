@@ -1,0 +1,12 @@
+---
+permalink: /search.json
+---
+[
+{%- for d in collections.docs -%}
+{%- set entries = d.templateContent | searchEntries(d.url, d.data.title) -%}
+{%- for e in entries -%}
+{{ e | jsonify | safe }}{%- if not loop.last -%},{%- endif -%}
+{%- endfor -%}
+{%- if not loop.last -%},{%- endif -%}
+{%- endfor -%}
+]

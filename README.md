@@ -51,8 +51,6 @@ Note that this requires being setup in Netlify with the correct access.
 
 - `npm run deploy:prod` will deploy the website to production on https://unison-lang.org.
 
-After the deploy to Netlify has succeeded, update the algolia search index by
-going to https://unison-lang.org/algolia.json and saving the json file.
-
-Then go to the "docs" index in Algolia, clear it (removing all records), and
-upload the downloaded json file.
+Search is client-side: at build time, a `/search.json` index is generated from
+page headings and first paragraphs, and the site searches it in the browser.
+No external search service is involved.

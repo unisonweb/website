@@ -147,6 +147,46 @@ module.exports = async function (config) {
     return JSON.stringify(text);
   });
 
+  // Search index entries for a docs page: one entry per page, and one per
+  // heading (h2/h3) with a short snippet of the first paragraph after it.
+  // The client-side search (see src/js/site.js) searches over /search.json,
+  // which is built from these entries.
+  config.addFilter("searchEntries", (html, url, title) => {
+    const clean = (text) =>
+      text
+        .replaceAll(/<code>.*?<\/code>/gs, " ")
+        .replace(/<.*?>/g, " ")
+        .replace(/\\/g, "")
+        .replace(/\t/g, " ")
+        .replace(/\n/g, " ")
+        .replace(/[ ]{2,}/g, " ")
+        .replace(/"/g, "")
+        .replaceAll("-&gt;", "->")
+        .replaceAll("&lt;-", "<-")
+        .trim();
+
+    const firstParagraph = (html) => {
+      const m = html.match(/<p>(.*?)<\/p>/s);
+      return m ? clean(m[1]).substring(0, 200) : "";
+    };
+
+    const entries = [
+      { title, heading: "", url, snippet: firstParagraph(html) },
+    ];
+
+    const headingRe = /<h([23]) id="([^"]+)">(.*?)<\/h\1>/gs;
+    let m;
+    while ((m = headingRe.exec(html)) !== null) {
+      entries.push({
+        title,
+        heading: clean(m[3]),
+        url: url + "#" + m[2],
+        snippet: firstParagraph(html.slice(m.index + m[0].length)),
+      });
+    }
+    return entries;
+  });
+
   // Parsing and formatting in UTC basically means we retain the date of a non
   // timezoned date.
   config.addFilter("formatDate", (date) =>

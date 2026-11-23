@@ -71,98 +71,214 @@
   );
 
   // -- Search ----------------------------------------------------------------
+  // Client-side search over the page headings in /search.json, generated at
+  // build time. (Replaces the previous Algolia-powered search.)
 
-  const searchClient = algoliasearch(
-    "ITKVRJJI7M",
-    "8a59b2585e45a15548391e3f2a8ab05b"
-  );
+  const escapeHtml = (text) =>
+    text
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
 
-  const { autocomplete, getAlgoliaResults } =
-    window["@algolia/autocomplete-js"];
+  const highlight = (text, words) => {
+    const pattern = words
+      .map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+      .join("|");
+    if (!pattern) return escapeHtml(text);
+    const re = new RegExp(`(${pattern})`, "gi");
+    return escapeHtml(text).replace(re, "<mark>$1</mark>");
+  };
 
-  autocomplete({
-    debug: true,
-    container: "#autocomplete-input",
-    panelContainer: "#autocomplete-panel",
-    placeholder: "Search",
-    detachedMediaQuery: "none",
-    getSources({ query }) {
-      return [
-        {
-          sourceId: "docs",
-          getItems() {
-            return getAlgoliaResults({
-              searchClient,
-              queries: [
-                {
-                  indexName: "docs",
-                  query,
-                  params: {
-                    hitsPerPage: 9,
-                    attributesToSnippet: ["title:15", "content:14"],
-                    snippetEllipsisText: "…",
-                  },
-                },
-              ],
-            });
-          },
-          templates: {
-            item({ item, components, createElement }) {
-              return createElement(
-                "a",
-                { className: "match", href: item.url },
-                createElement(
-                  "div",
-                  { className: "match-title" },
-                  components.Snippet({ hit: item, attribute: "title" })
-                ),
-                createElement(
-                  "div",
-                  { className: "match-content" },
-                  components.Snippet({ hit: item, attribute: "content" })
-                )
-              );
-            },
-          },
-          getItemUrl({ item }) {
-            return item.url;
-          },
-        },
-      ];
-    },
-  });
+  const search = (entries, query) => {
+    const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+    if (!entries || words.length === 0) return [];
+    return entries
+      .reduce((results, entry) => {
+        const title = entry.title.toLowerCase();
+        const heading = (entry.heading || "").toLowerCase();
+        const snippet = (entry.snippet || "").toLowerCase();
+        const score = words.reduce((total, word) => {
+          if (total === null) return null;
+          const inTitle = title.includes(word);
+          const inHeading = heading.includes(word);
+          const inSnippet = snippet.includes(word);
+          if (!inTitle && !inHeading && !inSnippet) return null;
+          return total + (inTitle ? 3 : 0) + (inHeading ? 2 : 0) + (inSnippet ? 1 : 0);
+        }, 0);
+        if (score !== null) results.push({ score, entry });
+        return results;
+      }, [])
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 9)
+      .map(({ entry }) => entry);
+  };
 
-  const $autocomplete = one("#autocomplete");
-  const $searchButton = one("#search-button");
-  const $body = one("body");
-
-  one(".aa-InputWrapperPrefix").innerHTML =
-    $searchButton.querySelector(".icon").outerHTML;
-
-  $searchButton.addEventListener("click", () => {
-    if ($autocomplete.classList.contains("show-search")) {
-      hideSearch();
-    } else {
-      showSearch();
+  const renderResults = (container, entries, query, onSelect) => {
+    container.innerHTML = "";
+    const trimmed = query.trim();
+    if (entries.length === 0) {
+      container.hidden = !trimmed;
+      if (trimmed) {
+        const empty = document.createElement("div");
+        empty.className = "search-empty";
+        empty.textContent = "No results.";
+        container.appendChild(empty);
+      }
+      return;
     }
-  });
+    container.hidden = false;
+    const words = trimmed.toLowerCase().split(/\s+/).filter(Boolean);
+    entries.forEach((entry) => {
+      const link = document.createElement("a");
+      link.className = "match";
+      link.href = entry.url;
+      link.addEventListener("click", onSelect);
+      const label = entry.heading
+        ? `${entry.title} › ${entry.heading}`
+        : entry.title;
+      const title = document.createElement("div");
+      title.className = "match-title";
+      title.innerHTML = highlight(label, words);
+      link.appendChild(title);
+      if (entry.snippet) {
+        const content = document.createElement("div");
+        content.className = "match-content";
+        content.innerHTML = highlight(entry.snippet, words);
+        link.appendChild(content);
+      }
+      container.appendChild(link);
+    });
+  };
 
-  function showSearch() {
-    $autocomplete.classList.add("show-search");
-    $autocomplete.querySelector("input").focus();
-    const overlay = document.createElement("div");
-    overlay.classList.add("modal-overlay", "soft-overlay");
-    overlay.addEventListener("click", hideSearch);
-    $body.appendChild(overlay);
-    $body.classList.add("modal-open");
-  }
+  // Entry point for the search UI. No-ops on pages without the docs sidebar
+  // markup (site.js is loaded on every page).
+  const initSearch = () => {
+    const $autocomplete = one("#autocomplete");
+    const $searchButton = one("#search-button");
+    if (!$autocomplete || !$searchButton) return;
+    const $body = one("body");
+    const $inputWrap = one("#autocomplete-input");
+    const $panel = one("#autocomplete-panel");
 
-  function hideSearch() {
-    $autocomplete.classList.remove("show-search");
-    $autocomplete.querySelector("input").blur();
-    one(".modal-overlay").remove();
-    $body.classList.remove("modal-open");
-  }
+    const $form = document.createElement("div");
+    $form.className = "search-form";
+
+    const $icon = document.createElement("div");
+    $icon.className = "search-icon";
+    $icon.innerHTML = $searchButton.querySelector(".icon").outerHTML;
+
+    const $input = document.createElement("input");
+    $input.type = "search";
+    $input.placeholder = "Search";
+    $input.setAttribute("autocomplete", "off");
+    $input.setAttribute("spellcheck", "false");
+
+    $form.appendChild($icon);
+    $form.appendChild($input);
+    $inputWrap.appendChild($form);
+
+    const $results = document.createElement("div");
+    $results.className = "search-results";
+    $results.hidden = true;
+    $panel.appendChild($results);
+
+    let entriesPromise;
+    const loadEntries = () => {
+      if (!entriesPromise) {
+        entriesPromise = fetch("/search.json").then((res) => res.json());
+      }
+      return entriesPromise;
+    };
+
+    let currentResults = [];
+    // Maybe<number> encoded as a list: [] means no selection, [i] is the
+    // selected result index.
+    let selectedIndex = [];
+
+    const hideSearch = () => {
+      $autocomplete.classList.remove("show-search");
+      $input.blur();
+      $input.value = "";
+      currentResults = [];
+      selectedIndex = [];
+      renderResults($results, [], "", hideSearch);
+      const overlay = one(".modal-overlay");
+      if (overlay) overlay.remove();
+      $body.classList.remove("modal-open");
+    };
+
+    const showSearch = () => {
+      $autocomplete.classList.add("show-search");
+      loadEntries();
+      $input.focus();
+      const overlay = document.createElement("div");
+      overlay.classList.add("modal-overlay", "soft-overlay");
+      overlay.addEventListener("click", hideSearch);
+      $body.appendChild(overlay);
+      $body.classList.add("modal-open");
+    };
+
+    const selectResult = (index) => {
+      selectedIndex = [index];
+      [...$results.querySelectorAll(".match")].forEach((el, i) => {
+        if (i === index) el.setAttribute("aria-selected", "true");
+        else el.removeAttribute("aria-selected");
+      });
+    };
+
+    const updateResults = (query) => {
+      loadEntries().then((entries) => {
+        currentResults = search(entries, query);
+        selectedIndex = [];
+        renderResults($results, currentResults, query, hideSearch);
+      });
+    };
+
+    $input.addEventListener("input", () => updateResults($input.value));
+
+    $input.addEventListener("keydown", (ev) => {
+      if (ev.key === "ArrowDown") {
+        ev.preventDefault();
+        if (selectedIndex.length === 0) {
+          selectResult(0);
+        } else {
+          selectedIndex.forEach((selected) => {
+            selectResult(Math.min(selected + 1, currentResults.length - 1));
+          });
+        }
+      } else if (ev.key === "ArrowUp") {
+        ev.preventDefault();
+        if (selectedIndex.length === 0) {
+          selectResult(0);
+        } else {
+          selectedIndex.forEach((selected) => {
+            selectResult(Math.max(selected - 1, 0));
+          });
+        }
+      } else if (ev.key === "Enter") {
+        selectedIndex.forEach((selected) => {
+          if (currentResults[selected]) {
+            window.location.href = currentResults[selected].url;
+            hideSearch();
+          }
+        });
+      } else if (ev.key === "Escape") {
+        hideSearch();
+      }
+    });
+
+    $searchButton.addEventListener("click", () => {
+      if ($autocomplete.classList.contains("show-search")) {
+        hideSearch();
+      } else {
+        showSearch();
+      }
+    });
+  };
+
+  initSearch();
+
 
   // API
   window.U = {

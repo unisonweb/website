@@ -217,12 +217,7 @@ main#docs .where-to-next h2 {
   flex-direction: column;
 }
 
-#autocomplete.show-search #autocomplete-search li {
-  width: var(--autocomplete-width);
-  list-style-type: none;
-}
-
-#autocomplete.show-search #autocomplete-search .aa-Form {
+#autocomplete.show-search #autocomplete-search .search-form {
   display: flex;
   flex-direction: row;
   background: var(--color-gray-lighten-60);
@@ -231,21 +226,18 @@ main#docs .where-to-next h2 {
   align-items: center;
 }
 
-#autocomplete.show-search #autocomplete-search .aa-InputWrapperPrefix {
+#autocomplete.show-search #autocomplete-search .search-icon {
   position: absolute;
+  pointer-events: none;
 }
 
-#autocomplete.show-search #autocomplete-search .icon-search {
+#autocomplete.show-search #autocomplete-search .search-icon .icon-search {
   font-size: 1.5rem;
   line-height: 3rem;
   margin-left: 1rem;
   margin-right: 0.75rem;
   margin-top: -3px;
   color: var(--color-modal-subtle-fg);
-}
-
-#autocomplete.show-search #autocomplete-search .aa-InputWrapper {
-  height: 3rem;
 }
 
 #autocomplete.show-search #autocomplete-search input {
@@ -259,6 +251,7 @@ main#docs .where-to-next h2 {
   font-size: var(--font-size-base);
   font-weight: bold;
   appearance: none !important;
+  border: none;
 }
 #autocomplete.show-search #autocomplete-search input::placeholder {
   font-weight: normal;
@@ -284,8 +277,9 @@ main#docs .where-to-next h2 {
   color: var(--color-blue-2);
 }
 
-#autocomplete.show-search #autocomplete-panel .aa-Panel {
+#autocomplete.show-search #autocomplete-panel .search-results {
   border-top: 1px solid var(--color-modal-inner-border);
+  padding-bottom: 0.75rem;
 }
 
 #autocomplete.show-search #autocomplete-search .match {
@@ -297,7 +291,7 @@ main#docs .where-to-next h2 {
   border-radius: var(--border-radius-base);
 }
 
-#autocomplete.show-search #autocomplete-search [aria-selected="true"] .match {
+#autocomplete.show-search #autocomplete-search .match[aria-selected="true"] {
   background: var(--color-gray-lighten-55);
 }
 #autocomplete.show-search #autocomplete-search .match:hover {
@@ -317,11 +311,11 @@ main#docs .where-to-next h2 {
   line-height: 1.5rem;
 }
 
-/* removing some default algolia ui */
-#autocomplete-search .aa-SubmitButton,
-#autocomplete-search .aa-ClearButton {
-  display: none;
+#autocomplete.show-search #autocomplete-search .search-empty {
+  padding: 0.75rem;
+  color: var(--color-modal-subtle-fg);
 }
+
 
 @media only screen and (max-width: 1439px) {
   main#docs #main-content {
